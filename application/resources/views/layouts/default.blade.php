@@ -35,7 +35,7 @@
 
         <div class="wrapper">
         
-        <nav id="sidebar" class="active">
+        <nav id="sidebar" class="">
             <div class="sidebar-header bg-lightblue">
                 <div class="logo">
                 <a href="/" class="simple-text">
@@ -100,7 +100,7 @@
             </ul>
         </nav>
 
-        <div id="body" class="active">
+        <div id="body" class="">
             <nav class="navbar navbar-expand-lg navbar-light bg-lightblue">
                 <div class="container-fluid">
 

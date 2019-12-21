@@ -14,29 +14,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name=".env" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.env">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" column="21" selection-start-line="18" selection-start-column="21" selection-end-line="18" selection-end-column="21" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="f8c882b0f2f046883c7ba746a213de5c39499dfd.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/storage/framework/views/f8c882b0f2f046883c7ba746a213de5c39499dfd.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="155" column="18" selection-start-line="155" selection-start-column="18" selection-end-line="155" selection-end-column="18" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/UserController.php">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
       <file leaf-file-name="FieldsController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/FieldsController.php">
           <provider selected="true" editor-type-id="text-editor">
@@ -55,7 +32,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SchedulesController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="SchedulesController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/SchedulesController.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="232">
@@ -64,20 +41,59 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="default.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/layouts/default.blade.php">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/index.html">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="clock.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/clock.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="232">
-              <caret line="154" column="18" selection-start-line="154" selection-start-column="18" selection-end-line="154" selection-end-column="18" />
+            <state relative-caret-position="406">
+              <caret line="65" column="41" selection-start-line="65" selection-start-column="33" selection-end-line="65" selection-end-column="41" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="personal.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/layouts/personal.blade.php">
+      <file leaf-file-name="ClockController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ClockController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="232">
-              <caret line="126" column="18" selection-start-line="126" selection-start-column="18" selection-end-line="126" selection-end-column="18" />
+            <state relative-caret-position="2730">
+              <caret line="195" column="63" lean-forward="true" selection-start-line="195" selection-start-column="63" selection-end-line="195" selection-end-column="63" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="modal-add-user.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/admin/modals/modal-add-user.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-675" />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="default.blade.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/resources/views/layouts/default.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="123">
+              <caret line="37" column="33" selection-start-line="37" selection-start-column="33" selection-end-line="37" selection-end-column="33" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="script.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/assets/js/script.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="12" column="4" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="clock.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/layouts/clock.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="7" column="54" lean-forward="true" selection-start-line="7" selection-start-column="11" selection-end-line="7" selection-end-column="54" />
             </state>
           </provider>
         </entry>
@@ -87,18 +103,25 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>activation required</find>
+      <find>timezone</find>
+      <find>Earl</find>
+      <find>$ip</find>
       <find>$request-&gt;sh</find>
+      <find>menu</find>
+      <find>slidesidebar</find>
+      <find>id=&quot;body</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/resources/views/layouts/default.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/layouts/personal.blade.php" />
         <option value="$PROJECT_DIR$/storage/framework/views/f8c882b0f2f046883c7ba746a213de5c39499dfd.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/FieldsController.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/RolesController.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/SchedulesController.php" />
+        <option value="$PROJECT_DIR$/resources/views/layouts/clock.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/layouts/default.blade.php" />
       </list>
     </option>
   </component>
@@ -240,6 +263,24 @@
               <item name="Controllers" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="Admin" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
+            <path>
+              <item name="application" type="b2602c69:ProjectViewProjectNode" />
+              <item name="application" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="resources" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="application" type="b2602c69:ProjectViewProjectNode" />
+              <item name="application" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="resources" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="application" type="b2602c69:ProjectViewProjectNode" />
+              <item name="application" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="resources" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="layouts" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -274,16 +315,15 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1576901962204</updated>
-      <workItem from="1576901963317" duration="1355000" />
+      <workItem from="1576901963317" duration="3199000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1355000" />
+    <option name="totallyTimeSpent" value="3199000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="811" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
@@ -317,13 +357,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="18" column="21" selection-start-line="18" selection-start-column="21" selection-end-line="18" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/layouts/default.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
-          <caret line="154" column="18" selection-start-line="154" selection-start-column="18" selection-end-line="154" selection-end-column="18" />
         </state>
       </provider>
     </entry>
@@ -362,6 +395,56 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="232">
           <caret line="94" column="13" selection-start-line="94" selection-start-column="13" selection-end-line="94" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/index.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/layouts/clock.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="54" lean-forward="true" selection-start-line="7" selection-start-column="11" selection-end-line="7" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/clock.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="406">
+          <caret line="65" column="41" selection-start-line="65" selection-start-column="33" selection-end-line="65" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ClockController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2730">
+          <caret line="195" column="63" lean-forward="true" selection-start-line="195" selection-start-column="63" selection-end-line="195" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/modals/modal-add-user.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-675" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="237">
+          <caret line="134" column="4" selection-start-line="134" selection-start-column="4" selection-end-line="134" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/assets/js/script.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="12" column="4" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/layouts/default.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="123">
+          <caret line="37" column="33" selection-start-line="37" selection-start-column="33" selection-end-line="37" selection-end-column="33" />
         </state>
       </provider>
     </entry>

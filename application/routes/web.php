@@ -19,6 +19,8 @@
 |
 */
 
+use Illuminate\Support\Facades\Route;
+
 Route::group(['middleware' => 'auth'], function () {
 
 	Route::group(['middleware' => 'checkstatus'], function () {
@@ -89,6 +91,14 @@ Route::group(['middleware' => 'auth'], function () {
 			Route::get('schedules/delete/{id}', 'Admin\SchedulesController@delete');
 			Route::get('schedules/archive/{id}', 'Admin\SchedulesController@archive');
 
+            /*
+            |--------------------------------------------------------------------------
+            | Employee Task Manager
+            |--------------------------------------------------------------------------
+            */
+            Route::get('taskmanager', 'Admin\TasksController@index')->name('taskmanager');
+            Route::post('task/add', 'Admin\TasksController@add');
+            Route::get('task/edit/{id}','Admin\TasksController@edit');
 
 			/*
 			|--------------------------------------------------------------------------
@@ -202,6 +212,10 @@ Route::group(['middleware' => 'auth'], function () {
 			Route::get('fields/leavetype/leave-groups/delete/{id}',  'Admin\FieldsController@deleteLeaveGroups');
 
 
+			// Common Taks
+            Route::get('fields/common_task', 'Admin\FieldsController@common_task')->name('common_task');
+            Route::post('fields/common_task/add', 'Admin\FieldsController@addCommonTask');
+
 			/*
 			|--------------------------------------------------------------------------
 			| Exports : Employee data 
@@ -253,6 +267,9 @@ Route::group(['middleware' => 'auth'], function () {
 			Route::get('personal/schedules/view', 'Personal\PersonalSchedulesController@index');
 			Route::get('get/personal/schedules', 'Personal\PersonalSchedulesController@getPS');
 
+			// tasks
+            Route::get('personal/tasks/view', 'Personal\PersonalTasksController@index');
+
 			// leaves 
 			Route::get('personal/leaves/view', 'Personal\PersonalLeavesController@index')->name('viewPersonalLeave');
 			Route::get('personal/leaves/edit/{id}', 'Personal\PersonalLeavesController@edit');
@@ -270,6 +287,8 @@ Route::group(['middleware' => 'auth'], function () {
 			Route::get('personal/update-password', 'Personal\PersonalAccountController@viewPassword')->name('changePass');
 			Route::post('personal/update/user', 'Personal\PersonalAccountController@updateUser');
 			Route::post('personal/update/password', 'Personal\PersonalAccountController@updatePassword');
+
+
 		});
 
 	});
@@ -282,5 +301,8 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 Route::view('permission-denied', 'errors.permission-denied')->name('denied');
 Route::view('account-disabled', 'errors.account-disabled')->name('disabled');
 Route::view('account-not-found', 'errors.account-not-found')->name('notfound');
+
+//Routes for webcam
+Route::view('camlogin', 'auth/camlogin');
 
 

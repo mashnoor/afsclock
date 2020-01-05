@@ -54,8 +54,7 @@
 								</div>
 							</div>
 							<button type="submit" class="ui green button large fluid">SIGN IN</button>
-							<br>
-							Download free scripts <a href="https://daviruzsystems.com" target="_blank">Da-viruz Systems</a>
+							
 						</form>
 					</div>
 				</div>

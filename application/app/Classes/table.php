@@ -103,4 +103,10 @@ Class table {
     	return $settings;
    	}
 
+   	public static function common_task()
+    {
+        $common_tasks = DB::table('tbl_common_tasks');
+        return $common_tasks;
+    }
+
 }

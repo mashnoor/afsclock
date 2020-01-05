@@ -19,6 +19,9 @@ class PersonalDashboardController extends Controller
 {
     public function index() 
     {
+        $data = table::settings()->where('id', 1)->first();
+        $tz = $data->timezone;
+
         $id = \Auth::user()->reference;
         $sm = date('m/01/Y');
         $em = date('m/31/Y');
@@ -41,7 +44,7 @@ class PersonalDashboardController extends Controller
         $la = table::attendance()->where([['reference', $id], ['status_timein', 'Late Arrival']])->whereBetween('date', [$sm, $em])->count();
         $ed = table::attendance()->where([['reference', $id], ['status_timeout', 'Early Departure']])->whereBetween('date', [$sm, $em])->count();
 
-        return view('personal.personal-dashboard', compact('cs', 'ps', 'al', 'pl', 'ald', 'a', 'la', 'ed'));
+        return view('personal.personal-dashboard', compact('cs', 'ps', 'al', 'pl', 'ald', 'a', 'la', 'ed', 'tz'));
     }
 }
 

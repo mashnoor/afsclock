@@ -65,6 +65,14 @@
                     <p>My Schedules</p>
                 </a>
             </li>
+
+            <li class="">
+                <a href="{{ url('personal/tasks/view') }}">
+                    <i class="ui icon tasks"></i>
+                    <p>My Tasks</p>
+                </a>
+            </li>
+
             <li class="">
                 <a href="{{ url('personal/leaves/view') }}">
                     <i class="ui icon calendar plus outline"></i>

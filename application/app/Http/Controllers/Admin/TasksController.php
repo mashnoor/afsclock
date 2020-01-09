@@ -8,6 +8,7 @@ use App\Task;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 
 class TasksController extends Controller
 {
@@ -20,12 +21,52 @@ class TasksController extends Controller
         return view('admin.taskmanager', compact('tasks', 'employee'));
     }
 
-    public function edit($id, Request $request)
+    public function edit($id)
     {
+        $task = Task::find($id);
 
-        return view('admin.edits.edit-task');
+        $e_id = Crypt::encryptString($id);
+
+
+
+
+        return view('admin.edits.edit-task', compact('task', 'e_id'));
 
     }
+
+
+    public function update(Request $request)
+    {
+        //if (permission::permitted('leaves-edit')=='fail'){ return redirect()->route('denied'); }
+        //if($request->sh == 2){return redirect()->route('leave');}
+
+        $v = $request->validate([
+            'id' => 'required|max:200',
+            'title' => 'required',
+            'description' => 'required',
+            'deadline' => 'required|date'
+        ]);
+
+        $id = Crypt::decryptString($request->id);
+
+
+        $task = Task::find($id);
+
+
+
+        $task->title = $request->title;
+        $task->description = $request->description;
+        $task->deadline = $request->deadline;
+        $task->comment = $request->comment;
+
+        $task->save();
+
+        return redirect('taskmanager')->with('success','Task has been updated!');
+
+
+
+    }
+
 
     public function add(Request $request)
     {

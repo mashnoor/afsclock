@@ -99,6 +99,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('taskmanager', 'Admin\TasksController@index')->name('taskmanager');
             Route::post('task/add', 'Admin\TasksController@add');
             Route::get('task/edit/{id}','Admin\TasksController@edit');
+            Route::post('task/update', 'Admin\TasksController@update');
 
 			/*
 			|--------------------------------------------------------------------------
@@ -268,7 +269,9 @@ Route::group(['middleware' => 'auth'], function () {
 			Route::get('get/personal/schedules', 'Personal\PersonalSchedulesController@getPS');
 
 			// tasks
-            Route::get('personal/tasks/view', 'Personal\PersonalTasksController@index');
+            Route::get('personal/tasks/view', 'Personal\PersonalTasksController@index')->name('viewPersonalTask');
+            Route::get('personal/tasks/edit/{id}', 'Personal\PersonalTasksController@edit');
+            Route::post('personal/tasks/update', 'Personal\PersonalTasksController@update');
 
 			// leaves 
 			Route::get('personal/leaves/view', 'Personal\PersonalLeavesController@index')->name('viewPersonalLeave');

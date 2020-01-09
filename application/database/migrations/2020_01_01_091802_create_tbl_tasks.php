@@ -20,9 +20,9 @@ class CreateTblTasks extends Migration
             $table->integer('assigned_by');
             $table->text('title');
             $table->longText('description');
+            $table->date('finishdate');
             $table->date('deadline');
             $table->text('comment');
-            $table->tinyInteger('done_status');
             $table->timestamps();
         });
     }

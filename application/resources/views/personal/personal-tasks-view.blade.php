@@ -15,7 +15,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <h2 class="page-title">My Schedules</h2>
+                <h2 class="page-title">My Tasks</h2>
             </div>
         </div>
 
@@ -31,6 +31,7 @@
                                 <th>Assigned By</th>
                                 <th>Title</th>
                                 <th>Deadline</th>
+                                <th>Finish Date</th>
                                 <th>Status</th>
                                 <th>Comment</th>
                                 <th class="align-right">Actions</th>
@@ -43,17 +44,31 @@
                                         <td>{{ $task->assignedBy->firstname }} {{ $task->assignedBy->lastname }}</td>
                                         <td>{{ $task->title }}</td>
                                         <td>{{ $task->deadline }}</td>
-                                        <td>
-                                            @if($task->done_status == 1)
-                                                <span class="green">Done</span>
-                                            @else
-                                                <span class="red">Pending</span>
-                                            @endif
-                                        </td>
+                                        <td>@isset($task->finishdate){{ $task->finishdate }}@endisset</td>
+                                        @php
+                                            $color = "red";
+                                            $done_status = "Pending";
+                                            if(isset($task->finishdate))
+                                                {
+
+                                                     if($task->finishdate>$task->deadline)
+                                                     {
+                                                         $done_status = "Done (Delayed)";
+                                                         $color = "red";
+                                                     }
+                                                     else
+                                                     {
+                                                         $done_status = "Done (In Time)";
+                                                         $color = "green";
+                                                     }
+                                                }
+
+                                        @endphp
+                                        <td><span class="{{ $color }}">{{ $done_status }}</span></td>
                                         <td>{{ $task->comment }}</td>
                                         <td class="align-right">
 
-                                            <a href="{{ url('/task/edit/'.$task->id) }}"
+                                            <a href="{{ url('personal/tasks/edit/'.$task->id) }}"
                                                class="ui circular basic icon button tiny"><i
                                                         class="icon edit outline"></i></a>
 

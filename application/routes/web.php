@@ -51,6 +51,8 @@ Route::group(['middleware' => 'auth'], function () {
 			Route::get('employees', 'Admin\EmployeesController@index')->name('employees');
 			Route::get('employees/new', 'Admin\EmployeesController@new');
 			Route::post('employee/add',  'Admin\EmployeesController@add');
+			Route::get('employee/faceregistration/{id}', 'Admin\EmployeesController@faceregistration');
+			Route::post('employee/registerface/{id}', 'Admin\EmployeesController@registerface');
 
 
 			/*
@@ -307,5 +309,6 @@ Route::view('account-not-found', 'errors.account-not-found')->name('notfound');
 
 //Routes for webcam
 Route::view('camlogin', 'auth/camlogin');
+
 
 

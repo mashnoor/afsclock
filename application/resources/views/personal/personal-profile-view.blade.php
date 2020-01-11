@@ -52,7 +52,7 @@
 
             <div class="col-md-8 float-left">
                 <div class="box box-success">
-                    <div class="box-header with-border">Personal Infomation</div>
+                    <div class="box-header with-border">Personal Information</div>
                     <div class="box-body employee-info">
                             <table class="tablelist">
                                 <tbody>

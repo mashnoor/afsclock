@@ -40,7 +40,7 @@
 
                     <div class="col-md-6 float-left">
                         <div class="box box-success">
-                            <div class="box-header with-border">Personal Infomation</div>
+                            <div class="box-header with-border">Personal Information</div>
                             <div class="box-body">
                                 <div class="two fields">
                                     <div class="field">

@@ -94,6 +94,9 @@
                                     </ul>
                                 </div>
                             </div>
+                            <div class="field">
+                                <a href="{{ url('employee/faceregistration') }}/{{ $u->reference }}" class="ui negative small button" name="submit">Register Faces</a>
+                            </div>
                     </div>
 
                     <div class="box-footer">

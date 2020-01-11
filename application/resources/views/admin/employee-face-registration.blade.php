@@ -27,18 +27,20 @@
             // take snapshot and get image data
             Webcam.snap(function (data_uri) {
                 // display results in page
-                $.ajax({
-                    type:'POST',
-                    url: 'http://127.0.0.1:5003/face_rec',
-                    data: {'image_data' : data_uri},
-                    success:function(data) {
-                        console.log(data);
-                    }
-                });
                 console.log(data_uri)
                 document.getElementById('results').innerHTML =
                     '<h2>Here is your image:</h2>' +
                     '<img src="' + data_uri + '"/>';
+                $.ajax({
+                    type:'POST',
+                    url: '{{ url('employee/registerface/') }}/{{ $id }}' ,
+                    data: {'_token' : '{{ csrf_token() }}', 'img_data' : data_uri},
+                    success:function(data) {
+                        console.log(data.msg);
+                    }
+                });
+
+
             });
         }
 

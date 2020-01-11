@@ -2,15 +2,598 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6edefcdd-d868-4070-9a11-2d074e32cce3" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/TasksController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/TasksController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Personal/PersonalTasksController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Personal/PersonalTasksController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_01_01_091802_create_tbl_tasks.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_01_01_091802_create_tbl_tasks.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/edits/edit-task.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/edits/edit-task.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/personal.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/personal.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/personal/personal-tasks-view.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/personal/personal-tasks-view.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/css/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/css/normalize.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/css/prettify.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/css/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/images/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/images/logo-small.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/interface/admin-add-employee.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/interface/admin-add-leave.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/interface/admin-add-schedule.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/interface/admin-add-user.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/interface/admin-attendance-smartclock.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/interface/admin-attendance.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/interface/admin-company.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/interface/admin-dashboard.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/interface/admin-delete-employee.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/interface/admin-department.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/interface/admin-edit-attendance.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/interface/admin-edit-employee.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/interface/admin-edit-leave.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/interface/admin-edit-schedule.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/interface/admin-edit-user.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/interface/admin-employees.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/interface/admin-jobtitle.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/interface/admin-leave-types.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/interface/admin-leaves.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/interface/admin-profile-dropdown.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/interface/admin-reports-employee-attendance.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/interface/admin-reports-employee-birthdays.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/interface/admin-reports-employee-leaves.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/interface/admin-reports-employee-list.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/interface/admin-reports-employee-schedules.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/interface/admin-reports-organization-demographics.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/interface/admin-reports-user-accounts.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/interface/admin-reports.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/interface/admin-schedules.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/interface/admin-settings.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/interface/admin-user-roles-add-role.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/interface/admin-user-roles-edit-permissions.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/interface/admin-user-roles-edit-role.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/interface/admin-user-roles.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/interface/admin-users.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/interface/admin-view-employee.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/interface/employee-attendance.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/interface/employee-dashboard.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/interface/employee-leave-add.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/interface/employee-leave-edit.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/interface/employee-leave-view.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/interface/employee-leave.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/interface/employee-profile-edit.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/interface/employee-profile.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/interface/employee-schedule.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/interface/employee-smart-clock.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/interface/employee-update-password.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/interface/employee-update-user.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/interface/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/js/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/js/jquery.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/js/prettify.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documentation/js/scripts.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/.htaccess" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/.env.example" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/.htaccess" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/app/Classes/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/app/Classes/permission.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/app/Classes/table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/app/Console/Kernel.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/app/Console/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/app/Exceptions/Handler.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/app/Exceptions/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/app/Http/Controllers/Admin/AttendanceController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/app/Http/Controllers/Admin/DashboardController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/app/Http/Controllers/Admin/EmployeesController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/app/Http/Controllers/Admin/ExportsController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/app/Http/Controllers/Admin/FieldsController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/app/Http/Controllers/Admin/ImportsController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/app/Http/Controllers/Admin/LeavesController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/app/Http/Controllers/Admin/ProfileController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/app/Http/Controllers/Admin/ReportsController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/app/Http/Controllers/Admin/RolesController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/app/Http/Controllers/Admin/SchedulesController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/app/Http/Controllers/Admin/SettingsController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/app/Http/Controllers/Admin/UsersController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/app/Http/Controllers/Admin/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/app/Http/Controllers/Auth/LoginController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/app/Http/Controllers/Auth/RegisterController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/app/Http/Controllers/ClockController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/app/Http/Controllers/Controller.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/app/Http/Controllers/Personal/PersonalAccountController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/app/Http/Controllers/Personal/PersonalAttendanceController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/app/Http/Controllers/Personal/PersonalDashboardController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/app/Http/Controllers/Personal/PersonalLeavesController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/app/Http/Controllers/Personal/PersonalProfileController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/app/Http/Controllers/Personal/PersonalSchedulesController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/app/Http/Controllers/Personal/PersonalSettingsController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/app/Http/Controllers/Personal/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/app/Http/Controllers/UserController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/app/Http/Controllers/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/app/Http/Kernel.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/app/Http/Middleware/Admin.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/app/Http/Middleware/Authenticate.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/app/Http/Middleware/CheckForMaintenanceMode.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/app/Http/Middleware/CheckStatus.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/app/Http/Middleware/Employee.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/app/Http/Middleware/EncryptCookies.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/app/Http/Middleware/RedirectIfAuthenticated.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/app/Http/Middleware/TrimStrings.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/app/Http/Middleware/TrustProxies.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/app/Http/Middleware/VerifyCsrfToken.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/app/Http/Middleware/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/app/Http/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/app/Permissions.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/app/Providers/AppServiceProvider.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/app/Providers/AuthServiceProvider.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/app/Providers/BroadcastServiceProvider.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/app/Providers/EventServiceProvider.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/app/Providers/RouteServiceProvider.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/app/Providers/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/app/User.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/app/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/artisan" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/bootstrap/app.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/bootstrap/cache/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/bootstrap/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/composer.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/composer.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/config/app.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/config/auth.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/config/broadcasting.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/config/cache.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/config/database.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/config/filesystems.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/config/hashing.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/config/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/config/logging.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/config/mail.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/config/queue.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/config/services.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/config/session.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/config/view.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/database.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/database/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/database/factories/UserFactory.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/database/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/database/seeds/DatabaseSeeder.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/phpunit.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/public/.htaccess" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/public/css/app.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/public/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/public/index.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/public/js/app.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/public/robots.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/public/web.config" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/js/app.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/js/bootstrap.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/js/components/ExampleComponent.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/lang/en/auth.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/lang/en/pagination.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/lang/en/passwords.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/lang/en/validation.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/sass/_variables.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/sass/app.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/admin/attendance.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/admin/dashboard.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/admin/delete-employee.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/admin/edits/edit-attendance.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/admin/edits/edit-leavegroups.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/admin/edits/edit-leaves.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/admin/edits/edit-permissions.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/admin/edits/edit-personal-info.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/admin/edits/edit-schedule.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/admin/edits/edit-user.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/admin/employee-roles.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/admin/employees.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/admin/fields/company.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/admin/fields/department.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/admin/fields/jobtitle.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/admin/fields/leave-groups.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/admin/fields/leavetype.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/admin/leaves.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/admin/modals/modal-add-leavegroup.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/admin/modals/modal-add-roles.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/admin/modals/modal-add-schedule.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/admin/modals/modal-add-user.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/admin/modals/modal-edit-role.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/admin/modals/modal-import-company.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/admin/modals/modal-import-department.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/admin/modals/modal-import-jobtitle.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/admin/modals/modal-import-leavetypes.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/admin/new-employee.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/admin/profile-view.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/admin/reports.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/admin/reports/report-employee-attendance.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/admin/reports/report-employee-birthdays.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/admin/reports/report-employee-leaves.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/admin/reports/report-employee-list.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/admin/reports/report-employee-schedule.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/admin/reports/report-organization-profile.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/admin/reports/report-user-accounts.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/admin/schedules.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/admin/settings.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/admin/template.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/admin/update-password.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/admin/update-profile.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/admin/users.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/auth/login.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/clock.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/errors/404.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/errors/account-disabled.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/errors/account-not-found.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/errors/permission-denied.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/layouts/app.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/layouts/clock.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/layouts/default.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/layouts/personal.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/personal/edits/personal-leaves-edit.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/personal/edits/personal-profile-edit.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/personal/modals/modal-request-leave.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/personal/modals/modal-view-leave.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/personal/personal-attendance-view.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/personal/personal-dashboard.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/personal/personal-leaves-view.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/personal/personal-profile-view.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/personal/personal-schedules-view.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/personal/personal-settings-view.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/personal/personal-update-password.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/resources/views/personal/personal-update-user.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/routes/api.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/routes/channels.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/routes/console.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/routes/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/routes/web.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/server.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/storage/app/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/storage/app/public/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/storage/framework/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/storage/framework/cache/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/storage/framework/cache/data/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/storage/framework/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/storage/framework/sessions/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/storage/framework/testing/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/storage/framework/views/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/storage/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/storage/logs/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/tests/CreatesApplication.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/tests/Feature/ExampleTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/tests/TestCase.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/tests/Unit/ExampleTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/tests/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/application/webpack.mix.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/css/app.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/css/auth.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/css/clock.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/css/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/css/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/faces/thumbsup.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/images/faces/default_user.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/images/faces/thumbsup.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/images/img/clock-background.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/images/img/logo-small.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/images/img/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/images/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/js/app.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/js/bootstrap.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/js/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/js/script.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/svg/403.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/svg/404.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/svg/500.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/svg/503.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/svg/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/DataTables/DataTables-1.10.18/css/dataTables.bootstrap.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/DataTables/DataTables-1.10.18/css/dataTables.bootstrap.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/DataTables/DataTables-1.10.18/css/dataTables.bootstrap4.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/DataTables/DataTables-1.10.18/css/dataTables.bootstrap4.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/DataTables/DataTables-1.10.18/css/dataTables.foundation.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/DataTables/DataTables-1.10.18/css/dataTables.foundation.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/DataTables/DataTables-1.10.18/css/dataTables.jqueryui.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/DataTables/DataTables-1.10.18/css/dataTables.jqueryui.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/DataTables/DataTables-1.10.18/css/dataTables.semanticui.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/DataTables/DataTables-1.10.18/css/dataTables.semanticui.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/DataTables/DataTables-1.10.18/css/jquery.dataTables.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/DataTables/DataTables-1.10.18/css/jquery.dataTables.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/DataTables/DataTables-1.10.18/images/sort_asc.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/DataTables/DataTables-1.10.18/images/sort_asc_disabled.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/DataTables/DataTables-1.10.18/images/sort_both.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/DataTables/DataTables-1.10.18/images/sort_desc.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/DataTables/DataTables-1.10.18/images/sort_desc_disabled.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/DataTables/DataTables-1.10.18/js/dataTables.bootstrap.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/DataTables/DataTables-1.10.18/js/dataTables.bootstrap.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/DataTables/DataTables-1.10.18/js/dataTables.bootstrap4.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/DataTables/DataTables-1.10.18/js/dataTables.bootstrap4.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/DataTables/DataTables-1.10.18/js/dataTables.foundation.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/DataTables/DataTables-1.10.18/js/dataTables.foundation.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/DataTables/DataTables-1.10.18/js/dataTables.jqueryui.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/DataTables/DataTables-1.10.18/js/dataTables.jqueryui.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/DataTables/DataTables-1.10.18/js/dataTables.semanticui.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/DataTables/DataTables-1.10.18/js/dataTables.semanticui.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/DataTables/DataTables-1.10.18/js/jquery.dataTables.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/DataTables/DataTables-1.10.18/js/jquery.dataTables.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/DataTables/Responsive-2.2.2/css/responsive.bootstrap.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/DataTables/Responsive-2.2.2/css/responsive.bootstrap.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/DataTables/Responsive-2.2.2/css/responsive.bootstrap4.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/DataTables/Responsive-2.2.2/css/responsive.bootstrap4.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/DataTables/Responsive-2.2.2/css/responsive.dataTables.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/DataTables/Responsive-2.2.2/css/responsive.dataTables.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/DataTables/Responsive-2.2.2/css/responsive.foundation.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/DataTables/Responsive-2.2.2/css/responsive.foundation.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/DataTables/Responsive-2.2.2/css/responsive.jqueryui.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/DataTables/Responsive-2.2.2/css/responsive.jqueryui.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/DataTables/Responsive-2.2.2/css/responsive.semanticui.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/DataTables/Responsive-2.2.2/css/responsive.semanticui.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/DataTables/Responsive-2.2.2/js/dataTables.responsive.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/DataTables/Responsive-2.2.2/js/dataTables.responsive.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/DataTables/Responsive-2.2.2/js/responsive.bootstrap.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/DataTables/Responsive-2.2.2/js/responsive.bootstrap.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/DataTables/Responsive-2.2.2/js/responsive.bootstrap4.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/DataTables/Responsive-2.2.2/js/responsive.bootstrap4.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/DataTables/Responsive-2.2.2/js/responsive.foundation.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/DataTables/Responsive-2.2.2/js/responsive.foundation.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/DataTables/Responsive-2.2.2/js/responsive.jqueryui.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/DataTables/Responsive-2.2.2/js/responsive.jqueryui.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/DataTables/Responsive-2.2.2/js/responsive.semanticui.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/DataTables/Responsive-2.2.2/js/responsive.semanticui.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/DataTables/datatables.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/DataTables/datatables.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/DataTables/datatables.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/DataTables/datatables.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/air-datepicker/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/air-datepicker/dist/css/datepicker.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/air-datepicker/dist/css/datepicker.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/air-datepicker/dist/js/datepicker.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/air-datepicker/dist/js/datepicker.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/air-datepicker/dist/js/i18n/datepicker.cs.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/air-datepicker/dist/js/i18n/datepicker.da.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/air-datepicker/dist/js/i18n/datepicker.de.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/air-datepicker/dist/js/i18n/datepicker.en.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/air-datepicker/dist/js/i18n/datepicker.es.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/air-datepicker/dist/js/i18n/datepicker.fi.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/air-datepicker/dist/js/i18n/datepicker.fr.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/air-datepicker/dist/js/i18n/datepicker.hu.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/air-datepicker/dist/js/i18n/datepicker.nl.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/air-datepicker/dist/js/i18n/datepicker.pl.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/air-datepicker/dist/js/i18n/datepicker.pt-BR.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/air-datepicker/dist/js/i18n/datepicker.pt.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/air-datepicker/dist/js/i18n/datepicker.ro.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/air-datepicker/dist/js/i18n/datepicker.sk.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/air-datepicker/dist/js/i18n/datepicker.zh.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/bootstrap-notify/bootstrap-notify.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/bootstrap-notify/bootstrap-notify.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/bootstrap/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/bootstrap/css/bootstrap-grid.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/bootstrap/css/bootstrap-grid.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/bootstrap/css/bootstrap-grid.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/bootstrap/css/bootstrap-grid.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/bootstrap/css/bootstrap-reboot.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/bootstrap/css/bootstrap-reboot.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/bootstrap/css/bootstrap-reboot.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/bootstrap/css/bootstrap-reboot.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/bootstrap/css/bootstrap.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/bootstrap/css/bootstrap.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/bootstrap/css/bootstrap.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/bootstrap/css/bootstrap.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/bootstrap/js/bootstrap.bundle.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/bootstrap/js/bootstrap.bundle.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/bootstrap/js/bootstrap.bundle.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/bootstrap/js/bootstrap.bundle.min.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/bootstrap/js/bootstrap.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/bootstrap/js/bootstrap.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/bootstrap/js/bootstrap.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/bootstrap/js/bootstrap.min.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/chartsjs/Chart.bundle.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/chartsjs/Chart.bundle.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/chartsjs/Chart.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/chartsjs/Chart.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/chartsjs/Chart.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/chartsjs/Chart.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/chartsjs/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/html5shiv/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/html5shiv/html5shiv-printshiv.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/html5shiv/html5shiv-printshiv.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/html5shiv/html5shiv.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/html5shiv/html5shiv.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/jquery/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/jquery/jquery-3.4.1.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/mdtimepicker/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/mdtimepicker/mdtimepicker.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/mdtimepicker/mdtimepicker.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/mdtimepicker/mdtimepicker.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/mdtimepicker/mdtimepicker.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/momentjs/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/momentjs/moment-timezone-with-data-1970-2030.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/momentjs/moment-timezone-with-data.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/momentjs/moment-with-locales.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/momentjs/moment.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/respond/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/respond/respond.matchmedia.addListener.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/respond/respond.matchmedia.addListener.src.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/respond/respond.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/respond/respond.src.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/accordion.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/accordion.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/accordion.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/accordion.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/ad.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/ad.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/api.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/api.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/breadcrumb.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/breadcrumb.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/button.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/button.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/card.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/card.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/checkbox.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/checkbox.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/checkbox.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/checkbox.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/colorize.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/colorize.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/comment.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/comment.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/container.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/container.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/dimmer.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/dimmer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/dimmer.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/dimmer.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/divider.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/divider.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/dropdown.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/dropdown.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/dropdown.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/dropdown.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/embed.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/embed.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/embed.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/embed.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/feed.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/feed.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/flag.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/flag.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/form.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/form.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/form.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/form.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/grid.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/grid.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/header.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/header.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/icon.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/icon.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/image.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/image.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/input.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/input.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/item.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/item.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/label.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/label.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/list.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/list.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/loader.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/loader.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/menu.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/menu.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/message.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/message.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/modal.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/modal.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/modal.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/modal.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/nag.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/nag.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/nag.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/nag.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/placeholder.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/placeholder.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/popup.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/popup.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/popup.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/popup.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/progress.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/progress.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/progress.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/progress.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/rail.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/rail.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/rating.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/rating.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/rating.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/rating.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/reset.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/reset.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/reveal.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/reveal.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/search.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/search.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/search.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/search.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/segment.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/segment.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/shape.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/shape.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/shape.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/shape.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/sidebar.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/sidebar.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/sidebar.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/sidebar.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/site.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/site.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/site.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/site.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/state.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/state.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/statistic.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/statistic.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/step.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/step.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/sticky.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/sticky.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/sticky.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/sticky.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/tab.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/tab.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/tab.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/tab.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/table.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/table.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/transition.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/transition.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/transition.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/transition.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/video.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/video.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/video.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/video.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/visibility.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/visibility.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/visit.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/components/visit.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/package.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/semantic.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/semantic.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/semantic.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/semantic.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/themes/default/assets/fonts/brand-icons.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/themes/default/assets/fonts/brand-icons.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/themes/default/assets/fonts/brand-icons.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/themes/default/assets/fonts/brand-icons.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/themes/default/assets/fonts/brand-icons.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/themes/default/assets/fonts/icons.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/themes/default/assets/fonts/icons.otf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/themes/default/assets/fonts/icons.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/themes/default/assets/fonts/icons.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/themes/default/assets/fonts/icons.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/themes/default/assets/fonts/icons.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/themes/default/assets/fonts/outline-icons.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/themes/default/assets/fonts/outline-icons.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/themes/default/assets/fonts/outline-icons.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/themes/default/assets/fonts/outline-icons.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/themes/default/assets/fonts/outline-icons.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/assets/vendor/semantic-ui/themes/default/assets/images/flags.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/index.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/readme.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/robots.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appfiles/web.config" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/EmployeesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/EmployeesController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/database.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/database.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/edits/edit-personal-info.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/edits/edit-personal-info.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/edits/edit-user.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/edits/edit-user.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/modals/modal-add-user.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/modals/modal-add-user.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/auth/camlogin.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/camlogin.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/personal/personal-profile-view.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/personal/personal-profile-view.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,92 +604,76 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/resources/views/personal/personal-tasks-view.blade.php">
+      <file leaf-file-name="7YO0nCyAu1.png" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/assets/faces/7YO0nCyAu1.png">
+          <provider selected="true" editor-type-id="images" />
+        </entry>
+      </file>
+      <file leaf-file-name="DcJmJTrP6D.png" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/assets/faces/DcJmJTrP6D.png">
+          <provider selected="true" editor-type-id="images" />
+        </entry>
+      </file>
+      <file leaf-file-name="HfYA5Rm9Vz.png" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/assets/faces/HfYA5Rm9Vz.png">
+          <provider selected="true" editor-type-id="images" />
+        </entry>
+      </file>
+      <file leaf-file-name="iKs0UIEcid.png" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/assets/faces/iKs0UIEcid.png">
+          <provider selected="true" editor-type-id="images" />
+        </entry>
+      </file>
+      <file leaf-file-name="EmployeeFace.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/EmployeeFace.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="17" column="47" selection-start-line="17" selection-start-column="47" selection-end-line="17" selection-end-column="47" />
+            <state relative-caret-position="135">
+              <caret line="9" column="40" selection-start-line="9" selection-start-column="40" selection-end-line="9" selection-end-column="40" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/personal/edits/personal-task-edit.blade.php">
+      <file leaf-file-name=".env" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.env">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="48">
-              <caret line="3" column="20" selection-start-line="3" selection-start-column="16" selection-end-line="3" selection-end-column="20" />
+            <state relative-caret-position="225">
+              <caret line="15" column="49" lean-forward="true" selection-start-line="15" selection-start-column="10" selection-end-line="15" selection-end-column="49" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Personal/PersonalTasksController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="275">
-              <caret line="45" selection-start-line="45" selection-end-line="45" />
-              <folding>
-                <element signature="e#49#85#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AttendanceController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="400">
-              <caret line="84" column="30" lean-forward="true" selection-start-line="84" selection-start-column="30" selection-end-line="84" selection-end-column="30" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/admin/attendance.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-624" />
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/database/migrations/2020_01_01_091802_create_tbl_tasks.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="320">
-              <caret line="22" column="39" selection-start-line="22" selection-start-column="39" selection-end-line="22" selection-end-column="39" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+      <file leaf-file-name="web.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/web.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="338">
-              <caret line="271" column="111" selection-start-line="271" selection-start-column="95" selection-end-line="271" selection-end-column="111" />
+            <state relative-caret-position="383">
+              <caret line="53" column="49" selection-start-line="53" selection-start-column="24" selection-end-line="53" selection-end-column="49" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/TasksController.php">
+      <file leaf-file-name="employee-face-registration.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/admin/employee-face-registration.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="243">
-              <caret line="51" lean-forward="true" selection-start-line="51" selection-end-line="51" />
-              <folding>
-                <element signature="e#46#82#0#PHP" expanded="true" />
-              </folding>
+            <state relative-caret-position="445">
+              <caret line="40" column="19" lean-forward="true" selection-start-line="33" selection-start-column="16" selection-end-line="40" selection-end-column="19" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/personal/edits/personal-leaves-edit.blade.php">
-          <provider selected="true" editor-type-id="text-editor" />
+      <file leaf-file-name="camlogin.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/auth/camlogin.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="138">
+              <caret line="19" column="24" lean-forward="true" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
+            </state>
+          </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/personal/personal-leaves-view.blade.php">
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="208">
-              <caret line="85" column="78" selection-start-line="85" selection-start-column="57" selection-end-line="85" selection-end-column="78" />
+            <state relative-caret-position="150">
+              <caret line="10" column="21" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -149,6 +716,9 @@
       <find>dataTables-example</find>
       <find>login</find>
       <find>e_id</find>
+      <find>unix</find>
+      <find>DB_SC</find>
+      <find>jqu</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -166,14 +736,12 @@
         <option value="$PROJECT_DIR$/resources/views/personal/personal-dashboard.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/auth/weblogin.blade.php.html" />
         <option value="$PROJECT_DIR$/resources/views/auth/weblogin.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/auth/camlogin.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/auth/login.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/fields/common_tasks.blade.php" />
         <option value="$PROJECT_DIR$/app/Classes/table.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/FieldsController.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/fields/common_task.blade.php" />
         <option value="$PROJECT_DIR$/app/Tasks.php" />
-        <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/SchedulesController.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/modals/modal-add-schedule.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/TasksController.php" />
@@ -186,12 +754,36 @@
         <option value="$PROJECT_DIR$/resources/views/layouts/personal.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/TasksController.php" />
         <option value="$PROJECT_DIR$/database/migrations/2020_01_01_091802_create_tbl_tasks.php" />
-        <option value="$PROJECT_DIR$/routes/web.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Personal/PersonalTasksController.php" />
         <option value="$PROJECT_DIR$/resources/views/personal/edits/personal-task-edit.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/personal/personal-tasks-view.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/layouts/app.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/personal/personal-profile-view.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/admin/edits/edit-personal-info.blade.php" />
+        <option value="$PROJECT_DIR$/config/database.php" />
+        <option value="$PROJECT_DIR$/.env" />
+        <option value="$PROJECT_DIR$/database/migrations/2020_01_10_161813_create_tbl_employee_faces.php" />
+        <option value="$PROJECT_DIR$/app/EmployeeFace.php" />
+        <option value="$PROJECT_DIR$/resources/views/admin/employee-face-registration.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/admin/modals/modal-add-user.blade.php" />
+        <option value="$PROJECT_DIR$/routes/web.php" />
+        <option value="$PROJECT_DIR$/resources/views/admin/edits/edit-user.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/EmployeesController.php" />
+        <option value="$PROJECT_DIR$/resources/views/auth/camlogin.blade.php" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths>
+      <path value="$PROJECT_DIR$/package.json" />
+    </packageJsonPaths>
   </component>
   <component name="PhpServers">
     <servers />
@@ -275,9 +867,9 @@
       <path value="$PROJECT_DIR$/vendor/jakub-onderka/php-console-color" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="53" />
-    <option name="y" value="23" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="4" />
+    <option name="y" value="34" />
     <option name="width" value="1386" />
     <option name="height" value="788" />
   </component>
@@ -292,136 +884,111 @@
           <expand>
             <path>
               <item name="application" type="b2602c69:ProjectViewProjectNode" />
-              <item name="application" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="application" type="b2602c69:ProjectViewProjectNode" />
-              <item name="application" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="application" type="b2602c69:ProjectViewProjectNode" />
-              <item name="application" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Classes" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Http" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="application" type="b2602c69:ProjectViewProjectNode" />
-              <item name="application" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Http" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Http" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Controllers" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="application" type="b2602c69:ProjectViewProjectNode" />
-              <item name="application" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Http" type="462c0819:PsiDirectoryNode" />
-              <item name="Controllers" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Http" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Controllers" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Admin" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="application" type="b2602c69:ProjectViewProjectNode" />
-              <item name="application" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Http" type="462c0819:PsiDirectoryNode" />
-              <item name="Controllers" type="462c0819:PsiDirectoryNode" />
-              <item name="Admin" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="public" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="application" type="b2602c69:ProjectViewProjectNode" />
-              <item name="application" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Http" type="462c0819:PsiDirectoryNode" />
-              <item name="Controllers" type="462c0819:PsiDirectoryNode" />
-              <item name="Auth" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="public" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="assets" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="application" type="b2602c69:ProjectViewProjectNode" />
-              <item name="application" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Http" type="462c0819:PsiDirectoryNode" />
-              <item name="Controllers" type="462c0819:PsiDirectoryNode" />
-              <item name="Personal" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="public" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="assets" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="faces" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="application" type="b2602c69:ProjectViewProjectNode" />
-              <item name="application" type="462c0819:PsiDirectoryNode" />
-              <item name="database" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="resources" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="application" type="b2602c69:ProjectViewProjectNode" />
-              <item name="application" type="462c0819:PsiDirectoryNode" />
-              <item name="database" type="462c0819:PsiDirectoryNode" />
-              <item name="migrations" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="resources" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="application" type="b2602c69:ProjectViewProjectNode" />
-              <item name="application" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="resources" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="admin" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="application" type="b2602c69:ProjectViewProjectNode" />
-              <item name="application" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="resources" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="admin" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="edits" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="application" type="b2602c69:ProjectViewProjectNode" />
-              <item name="application" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="resources" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="admin" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="modals" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="application" type="b2602c69:ProjectViewProjectNode" />
-              <item name="application" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="resources" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="auth" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="application" type="b2602c69:ProjectViewProjectNode" />
-              <item name="application" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="resources" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="layouts" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="application" type="b2602c69:ProjectViewProjectNode" />
-              <item name="application" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="resources" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="personal" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="application" type="b2602c69:ProjectViewProjectNode" />
-              <item name="application" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="auth" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="application" type="b2602c69:ProjectViewProjectNode" />
-              <item name="application" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="layouts" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="application" type="b2602c69:ProjectViewProjectNode" />
-              <item name="application" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="personal" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="application" type="b2602c69:ProjectViewProjectNode" />
-              <item name="application" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="personal" type="462c0819:PsiDirectoryNode" />
-              <item name="edits" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="application" type="b2602c69:ProjectViewProjectNode" />
-              <item name="application" type="462c0819:PsiDirectoryNode" />
-              <item name="routes" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="routes" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
           </expand>
           <select />
@@ -437,15 +1004,16 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resources/views/admin" />
+      <recent name="C:\xampp\htdocs\afsclock\application\public\assets\js" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\afsclock\application\app\Http\Controllers\Personal" />
       <recent name="C:\xampp\htdocs\afsclock\application\app\Http\Controllers\Admin" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\afsclock\application\public\assets\js" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -480,368 +1048,238 @@
       <workItem from="1577885601930" duration="1700000" />
       <workItem from="1577911637650" duration="11195000" />
       <workItem from="1578253171774" duration="7447000" />
+      <workItem from="1578581443259" duration="113000" />
+      <workItem from="1578581644465" duration="927000" />
+      <workItem from="1578662259668" duration="300000" />
+      <workItem from="1578685192412" duration="7274000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="36777000" />
+    <option name="totallyTimeSpent" value="45391000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="4" y="34" width="1386" height="788" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.28895614" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3289689" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24531025" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="9" />
-      <window_info anchor="bottom" id="Version Control" order="10" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
+      <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Version Control" order="10" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Terminal" order="9" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3289689" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/public/assets/js/webcam.min.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/clock.blade.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/layouts/default.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="928">
-          <caret line="58" selection-start-line="58" selection-end-line="59" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ClockController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1360">
-          <caret line="98" column="91" selection-start-line="98" selection-start-column="91" selection-end-line="98" selection-end-column="91" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/app.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/bootstrap.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/auth/camlogin.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="18" column="23" selection-start-line="18" selection-start-column="23" selection-end-line="18" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/platform-impl.jar!/resources/html5-schema/html5/web-forms.rnc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="322" column="16" selection-start-line="322" selection-start-column="16" selection-end-line="322" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Classes/permission.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="14" column="6" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Permissions.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/fields/department.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="704">
-          <caret line="44" column="52" selection-end-line="106" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/fields/common_task.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1296">
-          <caret line="81" column="120" selection-start-line="81" selection-start-column="120" selection-end-line="81" selection-end-column="120" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/seeds/DatabaseSeeder.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/factories/UserFactory.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/modals/modal-import-department.blade.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/User.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/FieldsController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1411">
-          <caret line="332" column="61" selection-start-line="332" selection-start-column="61" selection-end-line="332" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/UsersController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-384" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/modals/modal-add-user.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="15" column="25" lean-forward="true" selection-end-line="85" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/DashboardController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-683" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.env">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16">
-          <caret line="1" column="19" selection-start-line="1" selection-start-column="19" selection-end-line="1" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/modals/modal-add-schedule.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="387">
-          <caret line="85" column="33" lean-forward="true" selection-start-line="85" selection-start-column="33" selection-end-line="85" selection-end-column="33" />
-          <folding>
-            <element signature="n#style#0;n#div#6;n#div#5;n#form#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Classes/table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="15" column="33" selection-start-line="15" selection-start-column="27" selection-end-line="15" selection-end-column="33" />
-          <folding>
-            <element signature="e#6#230#0#PHP" expanded="true" />
-          </folding>
+        <state relative-caret-position="420">
+          <caret line="28" column="35" lean-forward="true" selection-start-line="28" selection-start-column="35" selection-end-line="28" selection-end-column="35" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/layouts/default.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="80" column="43" selection-start-line="80" selection-start-column="43" selection-end-line="80" selection-end-column="43" />
+        <state relative-caret-position="315">
+          <caret line="48" selection-start-line="48" selection-end-line="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.env.example">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/personal/personal-tasks-view.blade.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/personal/personal-update-user.blade.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/personal/personal-schedules-view.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-825" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/personal/personal-leaves-view.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2381" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/attendance.blade.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/dashboard.blade.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/employee-roles.blade.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/employees.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="30" column="28" lean-forward="true" selection-start-line="30" selection-start-column="28" selection-end-line="30" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/edits/edit-personal-info.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-445">
+          <caret line="54" column="51" lean-forward="true" selection-start-line="54" selection-start-column="51" selection-end-line="54" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/assets/faces/68433.JPG">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/database.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="416">
+          <caret line="49" column="43" selection-start-line="49" selection-start-column="34" selection-end-line="49" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2020_01_01_091802_create_tbl_tasks.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="26" column="11" lean-forward="true" selection-start-line="16" selection-start-column="8" selection-end-line="26" selection-end-column="11" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/People.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="13" column="62" selection-start-line="13" selection-start-column="62" selection-end-line="13" selection-end-column="62" />
+        <state relative-caret-position="135">
+          <caret line="9" column="34" lean-forward="true" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="34" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/SchedulesController.php">
+    <entry file="file://$PROJECT_DIR$/public/assets/images/faces/default_user.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/assets/images/faces/thumbsup.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/layouts/clock.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1120">
-          <caret line="18" column="44" selection-start-line="18" selection-start-column="34" selection-end-line="18" selection-end-column="44" />
-          <folding>
-            <element signature="e#269#276#0#PHP" expanded="true" />
-          </folding>
+        <state relative-caret-position="333">
+          <caret line="47" column="45" selection-start-line="47" selection-start-column="42" selection-end-line="47" selection-end-column="45" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/modals/modal-add-task.blade.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/modals/modal-add-user.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="259">
-          <caret line="31" column="69" selection-start-line="31" selection-start-column="69" selection-end-line="31" selection-end-column="69" />
+        <state relative-caret-position="1215">
+          <caret line="81" column="25" selection-start-line="81" selection-start-column="25" selection-end-line="81" selection-end-column="25" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Personal/PersonalAttendanceController.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/personal/personal-profile-view.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1">
-          <folding>
-            <element signature="e#272#279#0#PHP" expanded="true" />
-          </folding>
+        <state relative-caret-position="394">
+          <caret line="172" column="23" lean-forward="true" selection-start-line="172" selection-start-column="23" selection-end-line="172" selection-end-column="23" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/personal/personal-schedules-view.blade.php">
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/UsersController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-768" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/assets/faces/image.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2020_01_10_161813_create_tbl_employee_faces.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
-          <caret line="15" column="33" selection-end-line="177" selection-end-column="16" />
+          <caret line="18" column="31" selection-start-line="18" selection-end-line="19" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/schedules.blade.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/edits/edit-user.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="896">
-          <caret line="60" column="55" selection-start-line="60" selection-start-column="36" selection-end-line="60" selection-end-column="55" />
+        <state relative-caret-position="447">
+          <caret line="97" column="119" selection-start-line="97" selection-start-column="119" selection-end-line="97" selection-end-column="119" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/taskmanager.blade.php">
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/EmployeesController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="704">
-          <caret line="74" column="33" selection-start-line="50" selection-start-column="23" selection-end-line="74" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Personal/PersonalDashboardController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="23" selection-start-line="23" selection-end-line="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/auth/login.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="346">
-          <caret line="22" column="82" selection-start-line="22" selection-end-line="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="37" column="9" selection-start-line="37" selection-start-column="9" selection-end-line="37" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-432" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/edits/edit-attendance.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="20" lean-forward="true" selection-end-line="158" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/edits/edit-leaves.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="768">
-          <caret line="84" column="99" selection-start-line="84" selection-start-column="95" selection-end-line="84" selection-end-column="99" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/edits/edit-schedule.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="752">
-          <caret line="47" column="30" selection-start-line="44" selection-start-column="22" selection-end-line="47" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/LeavesController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="40" column="59" selection-start-line="40" selection-start-column="46" selection-end-line="40" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/edits/edit-task.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="75" lean-forward="true" selection-end-line="98" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/personal/personal-leaves-view.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="85" column="78" selection-start-line="85" selection-start-column="57" selection-end-line="85" selection-end-column="78" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/layouts/personal.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="69" column="47" selection-start-line="69" selection-start-column="47" selection-end-line="69" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Task.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="11" column="23" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/personal/edits/personal-leaves-edit.blade.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/TasksController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="51" lean-forward="true" selection-start-line="51" selection-end-line="51" />
+        <state relative-caret-position="481">
+          <caret line="107" column="30" selection-start-line="107" selection-start-column="30" selection-end-line="107" selection-end-column="30" />
           <folding>
-            <element signature="e#46#82#0#PHP" expanded="true" />
+            <element signature="e#269#290#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/attendance.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-624" />
-      </provider>
+    <entry file="file://$PROJECT_DIR$/public/assets/faces/7YO0nCyAu1.png">
+      <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2020_01_01_091802_create_tbl_tasks.php">
+    <entry file="file://$PROJECT_DIR$/public/assets/faces/DcJmJTrP6D.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/assets/faces/HfYA5Rm9Vz.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/assets/faces/iKs0UIEcid.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/EmployeeFace.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="22" column="39" selection-start-line="22" selection-start-column="39" selection-end-line="22" selection-end-column="39" />
+        <state relative-caret-position="135">
+          <caret line="9" column="40" selection-start-line="9" selection-start-column="40" selection-end-line="9" selection-end-column="40" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AttendanceController.php">
+    <entry file="file://$PROJECT_DIR$/.env">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="84" column="30" lean-forward="true" selection-start-line="84" selection-start-column="30" selection-end-line="84" selection-end-column="30" />
+        <state relative-caret-position="225">
+          <caret line="15" column="49" lean-forward="true" selection-start-line="15" selection-start-column="10" selection-end-line="15" selection-end-column="49" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/web.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
-          <caret line="271" column="111" selection-start-line="271" selection-start-column="95" selection-end-line="271" selection-end-column="111" />
+        <state relative-caret-position="383">
+          <caret line="53" column="49" selection-start-line="53" selection-start-column="24" selection-end-line="53" selection-end-column="49" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Personal/PersonalTasksController.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/employee-face-registration.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="45" selection-start-line="45" selection-end-line="45" />
-          <folding>
-            <element signature="e#49#85#0#PHP" expanded="true" />
-          </folding>
+        <state relative-caret-position="445">
+          <caret line="40" column="19" lean-forward="true" selection-start-line="33" selection-start-column="16" selection-end-line="40" selection-end-column="19" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/personal/edits/personal-task-edit.blade.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/auth/camlogin.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="3" column="20" selection-start-line="3" selection-start-column="16" selection-end-line="3" selection-end-column="20" />
+        <state relative-caret-position="138">
+          <caret line="19" column="24" lean-forward="true" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/personal/personal-tasks-view.blade.php">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="17" column="47" selection-start-line="17" selection-start-column="47" selection-end-line="17" selection-end-column="47" />
+        <state relative-caret-position="150">
+          <caret line="10" column="21" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
         </state>
       </provider>
     </entry>

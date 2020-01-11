@@ -1,7 +1,8 @@
 <div class="ui modal medium add">
     <div class="header">Add New User</div>
     <div class="content">
-        <form id="add_user_form" action="{{ url('users/register') }}" class="ui form add-user" method="post" accept-charset="utf-8">
+        <form id="add_user_form" action="{{ url('users/register') }}" class="ui form add-user" method="post"
+              accept-charset="utf-8">
             @csrf
             <div class="field">
                 <label>Employee</label>
@@ -9,8 +10,9 @@
                     <option value="">Select Employee</option>
                     @isset($employees)
                         @foreach ($employees as $data)
-                        <option value="{{ $data->lastname }}, {{ $data->firstname }}" data-e="{{ $data->emailaddress }}"
-                            data-ref="{{ $data->id }}">{{ $data->lastname }}, {{ $data->firstname }}</option>
+                            <option value="{{ $data->lastname }}, {{ $data->firstname }}"
+                                    data-e="{{ $data->emailaddress }}"
+                                    data-ref="{{ $data->id }}">{{ $data->lastname }}, {{ $data->firstname }}</option>
                         @endforeach
                     @endisset
                 </select>
@@ -76,10 +78,17 @@
                     </ul>
                 </div>
             </div>
+            <div class="field">
+                <a href="" class="ui positive approve small button" type="submit" name="submit"><i class="ui checkmark icon"></i>
+                    Register
+                </a>
+            </div>
     </div>
     <div class="actions">
         <input type="hidden" value="" name="ref">
-        <button class="ui positive approve small button" type="submit" name="submit"><i class="ui checkmark icon"></i> Register</button>
+        <button class="ui positive approve small button" type="submit" name="submit"><i class="ui checkmark icon"></i>
+            Register
+        </button>
         <button class="ui grey cancel small button" type="button"><i class="ui times icon"></i> Cancel</button>
     </div>
     </form>

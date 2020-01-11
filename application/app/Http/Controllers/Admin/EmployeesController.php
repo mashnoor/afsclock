@@ -8,6 +8,7 @@
 * Website: https://github.com/brianluna/smarttimesheet
 */
 namespace App\Http\Controllers\admin;
+use App\EmployeeFace;
 use DB;
 use App\Classes\table;
 use App\Classes\permission;
@@ -77,6 +78,37 @@ class EmployeesController extends Controller
 
 	    return view('admin.new-employee', compact('company', 'department', 'jobtitle', 'employees', 'leavegroup'));
 	}
+
+	public function faceregistration($id)
+    {
+
+        return view('admin.employee-face-registration', compact('id'));
+
+    }
+
+    function generateRandomString($length = 10) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
+    }
+    public function registerface($id, Request $request)
+    {
+        $image_name = $this->generateRandomString() . ".png";
+        $img_data = $request->img_data;
+        $imageContent = file_get_contents($img_data);
+        $destinationPath = public_path() . '/assets/faces/' . $image_name;
+        file_put_contents($destinationPath, $imageContent);
+        $employeeFace = new EmployeeFace();
+        $employeeFace->reference = $id;
+        $employeeFace->image_name = $image_name;
+        $employeeFace->save();
+        $msg = "This is a simple message.";
+        return response()->json(array('msg'=> $msg), 200);
+    }
 	
     public function add(Request $request)
     {

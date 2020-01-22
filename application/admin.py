@@ -56,10 +56,10 @@ def encrypt(string):
 def get_images_with_tag():
     connection = pymysql.connect(host='127.0.0.1',
                                  user='root',
-                                 password='root',
+                                 password='Kslapp@c107#',
                                  db='timesheet',
                                  charset='utf8mb4',
-                                 unix_socket='/Applications/MAMP/tmp/mysql/mysql.sock',
+                                 #unix_socket='/Applications/MAMP/tmp/mysql/mysql.sock',
                                  cursorclass=pymysql.cursors.DictCursor)
 
     try:
@@ -139,4 +139,4 @@ def face_recognition():
 
 
 # print(get_images_with_tag())
-app.run(port=5003, debug=True)
+app.run(port=5002, debug=True)

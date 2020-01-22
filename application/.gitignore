@@ -10,3 +10,4 @@ yarn-error.log
 ../.idea/
 public/assets/faces/*
 .idea/workspace.xml
+.env

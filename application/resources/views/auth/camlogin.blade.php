@@ -29,7 +29,7 @@
                 // display results in page
                 $.ajax({
                     type:'POST',
-                    url: 'http://127.0.0.1:5003/face_rec',
+                    url: 'http://103.115.24.9:5002/face_rec',
                     data: {'image_data' : data_uri},
                     success:function(data) {
                         console.log(data);

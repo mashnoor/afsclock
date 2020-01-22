@@ -65,12 +65,12 @@ def get_images_with_tag():
     try:
         with connection.cursor() as cursor:
             # Create a new record
-            sql = "SELECT reference, image_name FROM tbl_employee_faces"
+            sql = SELECT image_name, users.idno FROM tbl_employee_faces INNER JOIN users ON tbl_employee_faces.reference=users.reference "
             cursor.execute(sql)
             results = cursor.fetchall()
             result_list = []
             for result in results:
-                result_list.append((str(result['reference']), url + result['image_name']))
+                result_list.append((str(result['idno']), url + result['image_name']))
 
 
     finally:

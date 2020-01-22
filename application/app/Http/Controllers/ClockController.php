@@ -25,7 +25,7 @@ class ClockController extends Controller
         $cc = $data->clock_comment;
         $tz = $data->timezone;
 
-        return view('clock', compact('cc', 'tz'));
+        return view('clock_cam', compact('cc', 'tz'));
     }
 
     public function add(Request $request)

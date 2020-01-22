@@ -121,7 +121,7 @@ class EmployeesController extends Controller
 			// 'mi' => 'required|alpha_dash_space|max:155',
 			// 'age' => 'required|digits_between:0,199|max:3',
 			// 'gender' => 'required|alpha|max:155',
-			'emailaddress' => 'required|email|max:155',
+			//'emailaddress' => 'required|email|max:155',
 			// 'civilstatus' => 'required|alpha|max:155',
 			// 'height' => 'required|digits_between:0,299|max:3',
 			// 'weight' => 'required|digits_between:0,999|max:3',

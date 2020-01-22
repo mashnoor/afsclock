@@ -17,7 +17,6 @@
     <script type="text/javascript">
         Webcam.set({
             width: 320,
-            force_flash: true,
             height: 240,
             image_format: 'jpeg',
             jpeg_quality: 90

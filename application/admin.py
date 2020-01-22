@@ -65,7 +65,7 @@ def get_images_with_tag():
     try:
         with connection.cursor() as cursor:
             # Create a new record
-            sql = SELECT image_name, users.idno FROM tbl_employee_faces INNER JOIN users ON tbl_employee_faces.reference=users.reference "
+            sql = "SELECT image_name, users.idno FROM tbl_employee_faces INNER JOIN users ON tbl_employee_faces.reference=users.reference"
             cursor.execute(sql)
             results = cursor.fetchall()
             result_list = []

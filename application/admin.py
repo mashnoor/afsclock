@@ -54,7 +54,7 @@ def encrypt(string):
 
 
 def get_images_with_tag():
-    connection = pymysql.connect(host='0.0.0.0',
+    connection = pymysql.connect(host='127.0.0.1',
                                  user='root',
                                  password='Kslapp@c107#',
                                  db='timesheet',
@@ -139,4 +139,4 @@ def face_recognition():
 
 
 # print(get_images_with_tag())
-app.run(port=5002, debug=True)
+app.run(port=5002, debug=True, host='0.0.0.0')

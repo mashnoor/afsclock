@@ -102,7 +102,7 @@ class EmployeesController extends Controller
 		//$destinationPath = public_path() . '/assets/faces/';
 		//$file->move($destinationPath, $name);
 
-        $image_name = $this->generateRandomString() . ".png";
+        $image_name = $this->generateRandomString() . ".jpg";
 		$img_data = $request->img_data;
 		$img_data = str_replace('data:image/jpeg;base64,', '', $img_data);
 		$img_data = str_replace(' ', '+', $img_data);

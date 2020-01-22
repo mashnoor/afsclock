@@ -97,11 +97,22 @@ class EmployeesController extends Controller
     }
     public function registerface($id, Request $request)
     {
+
+		//$name = $request->file('image')->getClientOriginalName();
+		//$destinationPath = public_path() . '/assets/faces/';
+		//$file->move($destinationPath, $name);
+
         $image_name = $this->generateRandomString() . ".png";
-        $img_data = $request->img_data;
-        $imageContent = file_get_contents($img_data);
+		$img_data = $request->img_data;
+		$img_data = str_replace('data:image/jpeg;base64,', '', $img_data);
+		$img_data = str_replace(' ', '+', $img_data);
+
+		$img_data = base64_decode($img_data);
+
+		//$imageContent = file_get_contents($img_data);
+		
         $destinationPath = public_path() . '/assets/faces/' . $image_name;
-        file_put_contents($destinationPath, $imageContent);
+        file_put_contents($destinationPath, $img_data);
         $employeeFace = new EmployeeFace();
         $employeeFace->reference = $id;
         $employeeFace->image_name = $image_name;

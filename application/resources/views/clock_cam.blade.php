@@ -45,7 +45,7 @@
                                 @endif
                             @endisset
                             <div class="inline field">
-                                <input class="enter_idno uppercase" name="idno" value="" type="text"
+                                <input class="enter_idno uppercase" disabled name="idno" value="" type="text"
                                        placeholder="ENTER YOUR ID" required="">
                                 <button id="btnclockin" type="button" class="ui positive large icon button">Confirm
                                 </button>

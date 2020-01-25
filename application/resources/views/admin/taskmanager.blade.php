@@ -42,6 +42,7 @@
                             <th>Employee</th>
                             <th>Title</th>
                             <th>Deadline</th>
+                            <th>Finish Date</th>
                             <th>Status</th>
                             <th>Comment</th>
                             <th class="align-right">Actions</th>
@@ -54,13 +55,27 @@
                                     <td>{{ $task->assignedTo->firstname }} {{ $task->assignedTo->lastname }}</td>
                                     <td>{{ $task->title }}</td>
                                     <td>{{ $task->deadline }}</td>
-                                    <td>
-                                        @if($task->done_status == 1)
-                                            <span class="green">Done</span>
-                                        @else
-                                            <span class="red">Pending</span>
-                                        @endif
-                                    </td>
+                                    <td>@isset($task->finishdate){{ $task->finishdate }}@endisset</td>
+                                    @php
+                                        $color = "red";
+                                        $done_status = "Pending";
+                                        if(isset($task->finishdate))
+                                            {
+
+                                                 if($task->finishdate>$task->deadline)
+                                                 {
+                                                     $done_status = "Done (Delayed)";
+                                                     $color = "red";
+                                                 }
+                                                 else
+                                                 {
+                                                     $done_status = "Done (In Time)";
+                                                     $color = "green";
+                                                 }
+                                            }
+
+                                    @endphp
+                                    <td><span class="{{ $color }}">{{ $done_status }}</span></td>
                                     <td>{{ $task->comment }}</td>
                                     <td class="align-right">
 

@@ -56,7 +56,7 @@ def encrypt(string):
 def get_images_with_tag():
     connection = pymysql.connect(host='127.0.0.1',
                                  user='root',
-                                 password='Kslapp@c107#',
+                                 password='Mashnoor11',
                                  db='timesheet',
                                  charset='utf8mb4',
                                  #unix_socket='/Applications/MAMP/tmp/mysql/mysql.sock',

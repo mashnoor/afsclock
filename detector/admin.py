@@ -123,10 +123,10 @@ def face_recognition():
     image_data = str(request.form.get('image_data')).replace("data:image/jpeg;base64,", "")
     # image_data = request.form.get('image_data')
     imgdata = base64.b64decode(image_data)
-    with open("tmp.png", 'wb') as f:
+    with open("/var/www/attendancekeeper/tmp.png", 'wb') as f:
         f.write(imgdata)
 
-    file = open("tmp.png", 'rb')
+    file = open("/var/www/attendancekeeper/tmp.png", 'rb')
 
     id = face_rec(file)
 

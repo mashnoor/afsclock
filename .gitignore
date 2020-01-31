@@ -14,3 +14,5 @@ public/assets/faces/*
 .idea/vcs.xml
 .idea/afsclock.iml
 public/assets/images/faces/*
+.idea/application.iml
+.idea/php.xml

@@ -8,53 +8,54 @@
 
 @section('content')
 
+
     <div class="container-fluid">
-
-        <div class="row">
-
-
-            <div class="col-md-4">
-                <div class="box box-success">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Recent Attendances</h3>
-                    </div>
-                    <div class="box-body">
-                        Hello
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="box box-success">
-                    <div class="box-body center">
-                        <h3>Current Status:</h3>
-                        <a href="#" class="btn btn-success btn-md active" role="button" aria-pressed="true">Clock In</a>
-                        <a href="#" class="btn btn-danger btn-md active" role="button" aria-pressed="true">Clock Out</a>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="box box-success">
-
-                    <div class="box-body">
-                        <div class="fixedcenter">
-                            <div class="clockwrapper">
-                                <div class="timeclock">
-                                    <span id="show_day" class="clock-text"></span>
-                                    <span id="show_time" class="clock-time"></span>
-                                    <span id="show_date" class="clock-day"></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <!---
+              <div class="row">
 
 
-        </div>
+                  <div class="col-md-4">
+                      <div class="box box-success">
+                          <div class="box-header with-border">
+                              <h3 class="box-title">Recent Attendances</h3>
+                          </div>
+                          <div class="box-body">
+                              Hello
+                          </div>
+                      </div>
+                  </div>
 
+                  <div class="col-md-4">
+                      <div class="box box-success">
+                          <div class="box-body center">
+                              <h3>Current Status:</h3>
+                              <a href="#" class="btn btn-success btn-md active" role="button" aria-pressed="true">Clock In</a>
+                              <a href="#" class="btn btn-danger btn-md active" role="button" aria-pressed="true">Clock Out</a>
+
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="col-md-4">
+                      <div class="box box-success">
+
+                          <div class="box-body">
+                              <div class="fixedcenter">
+                                  <div class="clockwrapper">
+                                      <div class="timeclock">
+                                          <span id="show_day" class="clock-text"></span>
+                                          <span id="show_time" class="clock-time"></span>
+                                          <span id="show_date" class="clock-day"></span>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+
+
+              </div>
+      --->
 
         <div class="row">
             <div class="col-md-12">

@@ -80,9 +80,9 @@
                 </a>
             </li>
             <li>
-                <a href="{{ url('personal/settings') }}">
-                    <i class="ui icon cog"></i>
-                    <p>Settings</p>
+                <a href="{{ url('clock') }}" target="_blank" class="item">
+                    <i class="ui icon clock outline"></i>
+                    <p>Clock In/Out</p>
                 </a>
             </li>
         </ul>

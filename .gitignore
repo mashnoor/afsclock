@@ -11,3 +11,5 @@ yarn-error.log
 public/assets/faces/*
 .idea/workspace.xml
 .env
+.idea/vcs.xml
+.idea/afsclock.iml

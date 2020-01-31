@@ -11,7 +11,7 @@ from phpserialize import loads, dumps
 from Crypto.Cipher import AES
 
 app = Flask(__name__)
-url = "/var/www/html/mash/afsclock/application/public/assets/faces/"
+url = "/var/www/attendancekeeper/public/assets/faces/"
 key = b'GKUE0hDEQ69y6bEaBFrehXVKlxw4G5T31/gjQ4SLD6U='
 
 

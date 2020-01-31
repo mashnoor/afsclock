@@ -139,4 +139,5 @@ def face_recognition():
 
 
 # print(get_images_with_tag())
-app.run(port=5002, debug=True, host='0.0.0.0')
+if __name__ == "__main__":
+    app.run()

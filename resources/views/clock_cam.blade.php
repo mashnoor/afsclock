@@ -177,7 +177,7 @@
                 // display results in page
                 $.ajax({
                     type: 'POST',
-                    url: 'http://172.105.127.127:5002/face_rec',
+                    url: 'https://attendancekeeper.net:5002/face_rec',
                     data: {'image_data': data_uri},
                     success: function (data) {
                         console.log(data);

@@ -7,10 +7,13 @@ import base64
 import hmac
 import hashlib
 from phpserialize import loads, dumps
+from flask_cors import CORS, cross_origin
 
 from Crypto.Cipher import AES
 
 app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 url = "/var/www/attendancekeeper/public/assets/faces/"
 key = b'GKUE0hDEQ69y6bEaBFrehXVKlxw4G5T31/gjQ4SLD6U='
 
@@ -123,10 +126,10 @@ def face_recognition():
     image_data = str(request.form.get('image_data')).replace("data:image/jpeg;base64,", "")
     # image_data = request.form.get('image_data')
     imgdata = base64.b64decode(image_data)
-    with open("/var/www/attendancekeeper/tmp.png", 'wb') as f:
+    with open(url + "tmp.png", 'wb') as f:
         f.write(imgdata)
 
-    file = open("/var/www/attendancekeeper/tmp.png", 'rb')
+    file = open(url + "tmp.png", 'rb')
 
     id = face_rec(file)
 
@@ -137,6 +140,9 @@ def face_recognition():
 
 # When debug = True, code is reloaded on the fly while saved
 
+@app.route('/')
+def hello():
+    return "hello"
 
 # print(get_images_with_tag())
 if __name__ == "__main__":

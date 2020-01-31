@@ -13,3 +13,4 @@ public/assets/faces/*
 .env
 .idea/vcs.xml
 .idea/afsclock.iml
+public/assets/images/faces/*

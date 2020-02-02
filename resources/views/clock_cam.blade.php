@@ -196,7 +196,7 @@
         function take_snapshot() {
             $('.spinner-border').removeAttr('hidden');
             $('#fetch_id').attr('hidden', true);
-            $('#fetch_msg').text("Fetching your ID. Please wait...");
+            $('#fetch_msg').text("Image captured. Fetching your ID. Please wait...");
             $('#btn_confirm').attr('hidden', true);
 
 

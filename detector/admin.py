@@ -82,31 +82,51 @@ def get_images_with_tag():
     return result_list
 
 
-def compare_faces(file1, file2):
-    # Load the jpg files into numpy arrays
-    image1 = fr.load_image_file(file1)
-    image2 = fr.load_image_file(file2)
-
-    # Get the face encodings for 1st face in each image file
-    image1_encoding = fr.face_encodings(image1)[0]
-    image2_encoding = fr.face_encodings(image2)[0]
+def compare_faces(all_image_encodings, image_encoding):
+   
 
     # Compare faces and return True / False
-    results = fr.compare_faces([image1_encoding], image2_encoding)
+    results = fr.compare_faces(all_image_encodings, image_encoding, tolerance=0.4)
+    #print(results)
+    
 
-    return results[0]
+    
+    for i in range(len(results)):
+        if results[i] == True:
+            print(i)
+            return i
+    i = -1
+    return i
+    
 
 
 def face_rec(file):
     # Each face is tuple of (Name,sample image)
     known_faces = get_images_with_tag()
+    all_ids = []
     """
     Return name for a known face, otherwise return 'Uknown'.
     """
+    all_face_encodings = []
     for name, known_file in known_faces:
-        if compare_faces(known_file, file):
-            return name
-    return 'Unknown'
+        
+        try:
+            
+            loaded_image = fr.load_image_file(known_file)
+            loaded_image_encoding =  fr.face_encodings(loaded_image)[0]
+            all_face_encodings.append(loaded_image_encoding)
+            all_ids.append(name)
+            #print(name + " - " + known_file)
+        except:
+            pass
+
+    detect_face_file = fr.load_image_file(file)
+    detect_face_file_encoding = fr.face_encodings(detect_face_file)[0]
+    get_loc = compare_faces(all_face_encodings, detect_face_file_encoding)
+    if get_loc != -1:
+        return str(all_ids[get_loc])
+    else:
+        return "-1"
 
 
 @app.route('/face_match', methods=['POST'])

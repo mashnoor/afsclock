@@ -19,6 +19,7 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('/assets/vendor/bootstrap/css/bootstrap.min.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('/assets/vendor/semantic-ui/semantic.min.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('/assets/css/clock.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('/assets/css/jquery.toast.min.css') }}">
 
         <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 
@@ -53,6 +54,7 @@
     <script src="{{ asset('/assets/vendor/momentjs/moment-timezone-with-data.js') }}"></script>
     <script src="{{ asset('/assets/vendor/semantic-ui/semantic.min.js') }}"></script>
     <script src="{{ asset('/assets/js/script.js') }}"></script>
+    <script src="{{ asset('/assets/js/jquery.toast.min.js') }}"></script>
 
     <script>
         var timezone = "@isset($tz){{ $tz }}@endisset";

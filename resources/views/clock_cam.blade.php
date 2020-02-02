@@ -3,84 +3,98 @@
 @section('content')
 
     <div class="container-fluid">
-        <div class="row">
-            <div class="col">
-                <div class="fixedcenter">
-                    <div class="clockwrapper">
-                        <div class="clockinout">
-                            <button class="btnclock timein active" data-type="timein">Time In</button>
-                            <button class="btnclock break" data-type="break">Break In/Out</button>
-                            <button class="btnclock timeout" data-type="timeout">Time Out</button>
-                        </div>
-                    </div>
-                    <div class="clockwrapper">
-                        <div class="timeclock">
-                            <span id="show_day" class="clock-text"></span>
-                            <span id="show_time" class="clock-time"></span>
-                            <span id="show_date" class="clock-day"></span>
-                        </div>
-                    </div>
+
+
+        <div class="fixedcenter">
+            <div class="clockwrapper">
+                <div class="clockinout">
+                    <button class="btnclock timein active" data-type="timein">Time In</button>
+                    <button class="btnclock break" data-type="break">Break In/Out</button>
+                    <button class="btnclock timeout" data-type="timeout">Time Out</button>
                 </div>
             </div>
-            <div class="col">
-                <div class="fixedcenter">
+            <div class="clockwrapper">
+                <br><br>
+                <span id="show_time" class="clock-time"></span><br>
+                <span id="show_date" style="color: #0c0c0c" class="clock-day"></span><br><br>
+
+            </div>
+
+            <div class="clockwrapper">
+                <center>
                     <div id="my_camera"></div>
-                    <div id="results">Your captured image will appear here...</div>
-                    <input type=button value="Take Snapshot" onClick="take_snapshot()">
-                </div>
+                </center>
+                <br>
+                <button id="fetch_id" class="ui primary small icon button" type="button" onClick="take_snapshot()">Fetch
+                    ID
+                </button>
             </div>
-        </div>
-        <div class="row">
-            <div class="fixedcenter">
 
 
-                <div class="clockwrapper">
-                    <div class="userinput">
-                        <form action="" method="get" accept-charset="utf-8" class="ui form">
-                            @isset($cc)
-                                @if($cc == 1)
-                                    <div class="inline field comment">
+            <div class="clockwrapper">
+                <div class="userinput">
+                    <form action="" method="get" accept-charset="utf-8" class="ui form">
+                        @isset($cc)
+                            @if($cc == 1)
+                                <div class="inline field comment">
                                     <textarea name="comment" class="uppercase lightblue" rows="1"
-                                              placeholder="Enter comment" value=""></textarea>
-                                    </div>
-                                @endif
-                            @endisset
-                            <div class="inline field">
-                                <input class="enter_idno uppercase" disabled name="idno" value="" type="text"
-                                       placeholder="ENTER YOUR ID" required="">
-                                <button id="btnclockin" type="button" class="ui positive large icon button">Confirm
-                                </button>
-                                <input type="hidden" id="_url" value="{{url('/')}}">
-                            </div>
-                        </form>
-                    </div>
-                </div>
+                                              placeholder="Enter comment"></textarea>
+                                </div>
+                            @endif
+                        @endisset
+                        <h3 id="fetch_msg">Place your face and click Fetch ID to proceed</h3>
+                        <div class="spinner-border" role="status" hidden>
 
-                <div class="message-after">
-                    <p>
-                        <span id="greetings">Welcome!</span>
-                        <span id="fullname"></span>
-                    </p>
-                    <p id="messagewrap">
-                        <span id="type"></span>
-                        <span id="message"></span>
-                        <span id="time"></span>
-                    </p>
+                        </div>
+                            <input class="enter_idno uppercase"  name="idno" disabled hidden  value="" type="text"
+                                   placeholder="YOUR ID" required="">
+
+
+                            <button id="btn_confirm" type="button" hidden  class="ui positive large button">Confirm
+                            </button>
+                            <input type="hidden" id="_url" value="{{url('/')}}">
+
+                    </form>
                 </div>
             </div>
-        </div>
 
+            <div class="message-after">
+                <p>
+                    <span id="greetings">Welcome!</span>
+                    <span id="fullname"></span>
+                </p>
+                <p id="messagewrap">
+                    <span id="type"></span>
+                    <span id="message"></span>
+                    <span id="time"></span>
+                </p>
+            </div>
+        </div>
     </div>
+
 
 @endsection
 
 @section('scripts')
     <script type="text/javascript" src="{{ asset('assets/js/webcam.min.js') }}"></script>
     <script type="text/javascript">
+
+        function showToast(heading, msg, icon) {
+            $.toast({
+                text : msg,
+                hideAfter : 5000,
+                position : 'bottom-center',
+                textAlign : 'center',
+                icon : icon,
+                heading: heading,
+                allowToastClose : false,
+            });
+
+        }
         // elements day, time, date
         var elTime = document.getElementById('show_time');
         var elDate = document.getElementById('show_date');
-        var elDay = document.getElementById('show_day');
+        //var elDay = document.getElementById('show_day');
 
         // time function to prevent the 1s delay
         var setTime = function () {
@@ -94,7 +108,7 @@
             elDate.innerHTML = time.format('MMMM D, YYYY');
 
             // set day in html
-            elDay.innerHTML = time.format('dddd');
+            //elDay.innerHTML = time.format('dddd');
         }
 
         setTime();
@@ -111,7 +125,7 @@
             $(this).toggleClass('active animated fadeIn');
         });
 
-        $('#btnclockin').click(function (event) {
+        $('#btn_confirm').click(function (event) {
             var url, type, idno, comment;
             url = $("#_url").val();
             type = $('.btnclock.active').data("type");
@@ -128,42 +142,40 @@
 
                 success: function (response) {
                     if (response['error'] != null) {
-                        $('.message-after').addClass('notok').hide()
-                        $('#type, #fullname').text("").hide();
-                        $('#time').html("").hide();
-                        $('.message-after').removeClass("ok");
+                        // $('.message-after').addClass('notok').hide()
+                        // $('#type, #fullname').text("").hide();
+                        // $('#time').html("").hide();
+                        // $('.message-after').removeClass("ok");
 
-                        $('#message').text(response['error']);
-                        $('#fullname').text(response['employee']);
-                        $('.message-after').slideToggle().slideDown('400');
+                        //$('#message').text(response['error']);
+                        showToast("Error!", "<h2>" + response['error'] + "</h2>", 'error');
+                        //$('#fullname').text(response['employee']);
+                        //$('.message-after').slideToggle().slideDown('400');
                     } else {
                         function type(clocktype) {
                             if (clocktype == "timein") {
                                 return "Time In";
-                            }
-                            else if(clocktype == "break_in")
-                            {
+                            } else if (clocktype == "break_in") {
                                 return "Break In";
-                            }
-                            else if(clocktype == "break_out")
-                            {
+                            } else if (clocktype == "break_out") {
                                 return "Break Out";
-                            }
-
-                            else {
+                            } else {
                                 return "Time Out";
                             }
                         }
 
-                        $('.message-after').addClass('ok').hide();
-                        $('.message-after').removeClass("notok");
-                        $('#type, #fullname, #message').text("").show();
-                        $('#time').html("").show();
+                        //$('.message-after').addClass('ok').hide();
+                        //$('.message-after').removeClass("notok");
+                        //$('#type, #fullname, #message').text("").show();
+                        //$('#time').html("").show();
 
-                        $('#type').text(type(response['type']));
-                        $('#fullname').text(response['firstname'] + ' ' + response['lastname']);
-                        $('#time').html('at ' + '<span id=clocktime>' + response['time'] + '</span>' + '.' + '<span id=clockstatus> Success!</span>');
-                        $('.message-after').slideToggle().slideDown('400');
+                        //$('#type').text(type(response['type']));
+                        //$('#fullname').text(response['firstname'] + ' ' + response['lastname']);
+                        //$('#time').html('at ' + '<span id=clocktime>' + response['time'] + '</span>' + '.' + '<span id=clockstatus> Success!</span>');
+                        //$('.message-after').slideToggle().slideDown('400');
+                        var msg = "<h2>" + type(response['type']) + ' at ' + response['time'] + "</h2>";
+                        var title = "Hello, " + response['firstname'] + ' ' + response['lastname'];
+                        showToast(title, msg, 'success');
                     }
                 }
             })
@@ -182,7 +194,11 @@
         Webcam.attach('#my_camera');
 
         function take_snapshot() {
-            // take snapshot and get image data
+            $('.spinner-border').removeAttr('hidden');
+            $('#fetch_id').attr('hidden', true);
+            $('#fetch_msg').text("Fetching your ID. Please wait...");
+            $('#btn_confirm').attr('hidden', true);
+
 
             Webcam.snap(function (data_uri) {
                 // display results in page
@@ -193,11 +209,16 @@
                     success: function (data) {
                         console.log(data);
                         $('input[name="idno"]').val(data);
+                        $('.spinner-border').attr("hidden", true);
+                        $('#fetch_msg').text("Success! Your ID is: " + data);
+                        $('#btn_confirm').attr("hidden", false);
+                        $('#fetch_id').attr('hidden', false);
+                        Webcam.attach('#my_camera');
 
                     }
                 });
-                document.getElementById('results').innerHTML =
-                    '<h2>Here is your image:</h2>' +
+                document.getElementById('my_camera').innerHTML =
+
                     '<img src="' + data_uri + '"/>';
             });
         }

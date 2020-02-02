@@ -187,6 +187,21 @@
                                             <td>Time-In</td>
                                         </tr>
                                     @endif
+                                    @if($v->break_out != null)
+                                        <tr>
+                                            <td class="name-title">{{ $v->employee }}</td>
+                                            <td>Break Out</td>
+                                            <td>@php echo e(date('h:i:s A', strtotime($v->break_out))) @endphp</td>
+                                        </tr>
+                                    @endif
+                                    @if($v->break_in != null)
+                                        <tr>
+                                            <td class="name-title">{{ $v->employee }}</td>
+                                            <td>Break In</td>
+                                            <td>@php echo e(date('h:i:s A', strtotime($v->break_in))) @endphp</td>
+                                        </tr>
+                                    @endif
+
 
                                     @if($v->timein != '' && $v->timeout != '')
                                         <tr>
@@ -197,6 +212,7 @@
                                             <td>Time-Out</td>
                                         </tr>
                                     @endif
+
 
                                     @if($v->timein != '' && $v->timeout != '')
                                         <tr>

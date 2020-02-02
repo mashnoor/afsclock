@@ -27,18 +27,59 @@ class ClockController extends Controller
 
         return view('clock_cam', compact('cc', 'tz'));
     }
+    public function test_clock()
+    {
+        $data = table::settings()->where('id', 1)->first();
+        $cc = $data->clock_comment;
+        $tz = $data->timezone;
+
+        return view('clock', compact('cc', 'tz'));
+    }
+
+
+    /***
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     *
+     *  if($type == "break")
+    {
+    $has = table::attendance()->where([['idno', $idno],['date', $date]])->exists();
+    if ($has == 1)
+    {
+    //Check if already break in
+    $doesnt_have_break = table::attendance()->where([['idno', $idno],['date', $date], ['break_in', ""]])->exists();
+    if($doesnt_have_break == 1)
+    {
+    table::attendance()->where([['idno', $idno],['date', $date]])->update(array(
+    "break_in" => $date." ".$time,
+    )
+    );
+    return response()->json([
+    "type" => $type,
+    "time" => $time,
+    "date" => $date,
+    "lastname" => $lastname,
+    "firstname" => $firstname,
+    "mi" => $mi,
+    ]);
+    }
+
+
+    }
+    }
+     */
 
     public function add(Request $request)
     {
 
-        if ($request->idno == NULL || $request->type == NULL) 
+        if ($request->idno == NULL || $request->type == NULL)
         {
             return response()->json([
                 "error" => "Please enter your ID."
             ]);
         }
 
-        if(strlen($request->idno) >= 20 || strlen($request->type) >= 20) 
+        if(strlen($request->idno) >= 20 || strlen($request->type) >= 20)
         {
             return response()->json([
                 "error" => "Invalid Employee ID."
@@ -172,7 +213,64 @@ class ClockController extends Controller
                 }
             }
         }
-  
+
+
+        if($type == "break")
+        {
+            $has = table::attendance()->where([['idno', $idno],['date', $date]])->exists();
+            if ($has == 1)
+            {
+                //Check if already break in
+                $doesnt_have_break_in = table::attendance()->where([['idno', $idno],['date', $date], ['break_in', NULL]])->exists();
+                $doesnt_have_break_out = table::attendance()->where([['idno', $idno],['date', $date], ['break_out', NULL]])->exists();
+
+                if($doesnt_have_break_in == 1)
+                {
+                    table::attendance()->where([['idno', $idno],['date', $date]])->update(array(
+                            "break_in" => $date." ".$time,
+                        )
+                    );
+                    return response()->json([
+                        "type" => "break_in",
+                        "time" => $time,
+                        "date" => $date,
+                        "lastname" => $lastname,
+                        "firstname" => $firstname,
+                        "mi" => $mi,
+                    ]);
+                }
+                else if($doesnt_have_break_out == 1)
+                {
+                    //As already break in, so its time for break out
+                    table::attendance()->where([['idno', $idno],['date', $date]])->update(array(
+                            "break_out" => $date." ".$time,
+                        )
+                    );
+                    return response()->json([
+                        "type" => "break_out",
+                        "time" => $time,
+                        "date" => $date,
+                        "lastname" => $lastname,
+                        "firstname" => $firstname,
+                        "mi" => $mi,
+                    ]);
+                }
+                else
+                {
+                    //can't break in/out
+                    $hto = table::attendance()->where([['idno', $idno],['date', $date]])->value('break_out');
+                    $hto = date('h:i A', strtotime($hto));
+                    return response()->json([
+                        "employee" => $employee,
+                        "error" => "You already break out Out today at ".$hto,
+                    ]);
+
+                }
+
+
+            }
+        }
+
         if ($type == 'timeout') 
         {
             $timeIN = table::attendance()->where([['idno', $idno], ['timeout', NULL]])->value('timein');

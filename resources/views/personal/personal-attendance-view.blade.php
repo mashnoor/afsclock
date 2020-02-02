@@ -43,6 +43,8 @@
                                 <th>Date</th>
                                 <th>Time In</th>
                                 <th>Time Out</th>
+                                <th>Break In</th>
+                                <th>Break Out</th>
                                 <th>Total Hours</th>
                                 <th>Status (In/Out)</th>
                             </tr>
@@ -54,6 +56,20 @@
                                     <td>{{ $v->date }}</td>
                                     <td>@isset($v->timein) @php echo e(date('h:i:s A', strtotime($v->timein))) @endphp @endisset</td>
                                     <td>@isset($v->timeout) @php echo e(date('h:i:s A', strtotime($v->timeout))) @endphp @endisset</td>
+                                    <td>
+                                        @isset($v->break_in)
+                                            @php $break_in_time = date('h:i:s A', strtotime($v->break_in)); @endphp
+                                            {{ $break_in_time }}
+                                        @endisset
+
+                                    </td>
+                                    <td>
+                                        @isset($v->break_out)
+                                            @php $break_out_time = date('h:i:s A', strtotime($v->break_out)); @endphp
+                                            {{ $break_out_time }}
+                                        @endisset
+
+                                    </td>
                                     <td>
                                     @isset($v->totalhours)
                                         @if($v->totalhours != null) 

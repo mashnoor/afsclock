@@ -7,6 +7,7 @@
             <div class="clockwrapper">
                 <div class="clockinout">
                     <button class="btnclock timein active" data-type="timein">Time In</button>
+                    <button class="btnclock break" data-type="break">Break In/Out</button>
                     <button class="btnclock timeout" data-type="timeout">Time Out</button>
                 </div>
             </div>
@@ -121,7 +122,17 @@
                         function type(clocktype) {
                             if (clocktype == "timein") {
                                 return "Time In";
-                            } else {
+                            }
+                            else if(clocktype == "break_in")
+                            {
+                                return "Break In";
+                            }
+                            else if(clocktype == "break_out")
+                            {
+                                return "Break Out";
+                            }
+
+                            else {
                                 return "Time Out";
                             }
                         }

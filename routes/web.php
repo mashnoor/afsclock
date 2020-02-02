@@ -20,7 +20,8 @@
 */
 
 use Illuminate\Support\Facades\Route;
-
+Route::get('clock', 'ClockController@clock');
+Route::get('test_clock', 'ClockController@test_clock');
 Route::group(['middleware' => 'auth'], function () {
 
 	Route::group(['middleware' => 'checkstatus'], function () {
@@ -29,7 +30,7 @@ Route::group(['middleware' => 'auth'], function () {
 		| Universal SmartClock 
 		|--------------------------------------------------------------------------
 		*/
-		Route::get('clock', 'ClockController@clock');
+
 		Route::post('attendance/add', 'ClockController@add'); 
 		
 

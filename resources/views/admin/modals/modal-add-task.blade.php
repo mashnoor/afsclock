@@ -29,7 +29,7 @@
             </div>
             <div class="field">
                 <label for="">Deadline</label>
-                <input type="text" placeholder="Date" name="deadline" class="airdatepicker"/>
+                <input type="text" placeholder="Date" name="deadline" class="airdatepicker" data-position="top right"/>
             </div>
 
 

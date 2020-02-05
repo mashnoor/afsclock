@@ -16,3 +16,4 @@ public/assets/faces/*
 public/assets/images/faces/*
 .idea/application.iml
 .idea/php.xml
+.idea/*

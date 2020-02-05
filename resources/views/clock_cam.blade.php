@@ -50,8 +50,12 @@
                                    placeholder="YOUR ID" required="">
 
 
+                            <div class="inline field">
                             <button id="btn_confirm" type="button" hidden  class="ui positive large button">Confirm
                             </button>
+                                <button id="btn_reset" onClick="reset_all()" type="button" hidden class="ui negative large button">Reset
+                                </button>
+                            </div>
                             <input type="hidden" id="_url" value="{{url('/')}}">
 
                     </form>
@@ -176,6 +180,12 @@
                         var msg = "<h2>" + type(response['type']) + ' at ' + response['time'] + "</h2>";
                         var title = "Hello, " + response['firstname'] + ' ' + response['lastname'];
                         showToast(title, msg, 'success');
+                        $('#fetch_id').attr('hidden', false);
+                        $('#fetch_msg').text("Place your face and click Fetch ID to proceed");
+                        $('#btn_confirm').attr('hidden', true);
+                        $('#btn_reset').attr('hidden', true);
+                        $('input[name="idno"]').val("")
+
                     }
                 }
             })
@@ -193,12 +203,21 @@
         });
         Webcam.attach('#my_camera');
 
+        function reset_all() {
+            $('#fetch_id').attr('hidden', false);
+            $('#fetch_msg').text("Place your face and click Fetch ID to proceed");
+            $('#btn_confirm').attr('hidden', true);
+            $('#btn_reset').attr('hidden', true);
+            $('input[name="idno"]').val("");
+            Webcam.attach('#my_camera');
+        }
+
         function take_snapshot() {
             $('.spinner-border').removeAttr('hidden');
             $('#fetch_id').attr('hidden', true);
             $('#fetch_msg').text("Image captured. Fetching your ID. Please wait...");
             $('#btn_confirm').attr('hidden', true);
-
+            $('#btn_reset').attr('hidden', true);
 
             Webcam.snap(function (data_uri) {
                 // display results in page
@@ -212,6 +231,7 @@
                         $('.spinner-border').attr("hidden", true);
                         $('#fetch_msg').text("Success! Your ID is: " + data);
                         $('#btn_confirm').attr("hidden", false);
+                        $('#btn_reset').attr('hidden', false);
                         $('#fetch_id').attr('hidden', false);
                         Webcam.attach('#my_camera');
 

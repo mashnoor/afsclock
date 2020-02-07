@@ -19,8 +19,7 @@ class PersonalDashboardController extends Controller
 {
     public function index() 
     {
-
-        return date("h:i:sa");
+        
         $data = table::settings()->where('id', 1)->first();
         $tz = $data->timezone;
 

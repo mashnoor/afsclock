@@ -67,6 +67,15 @@ class TasksController extends Controller
 
     }
 
+    public function delete($id)
+    {
+
+
+       Task::where('id', $id)->delete();
+
+        return redirect('taskmanager')->with('success', 'Deleted!');
+    }
+
 
     public function add(Request $request)
     {

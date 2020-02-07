@@ -1,0 +1,4 @@
+[2020-02-06 04:14:53,817] p37489 {/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/werkzeug/_internal.py:88} INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+[2020-02-06 04:14:53,818] p37489 {/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/werkzeug/_internal.py:88} INFO -  * Restarting with stat
+[2020-02-06 04:14:55,497] p37498 {/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/werkzeug/_internal.py:88} WARNING -  * Debugger is active!
+[2020-02-06 04:14:55,522] p37498 {/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/werkzeug/_internal.py:88} INFO -  * Debugger PIN: 354-255-950

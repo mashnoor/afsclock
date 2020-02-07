@@ -68,7 +68,7 @@ label {
 #sidebar {
     min-width: 220px;
     max-width: 220px;
-    background: #363d4d;
+    background: #222831;
     color: #fff;
     transition: all 0.3s;
 }
@@ -232,7 +232,7 @@ a[data-toggle="collapse"] {
 }*/
 
 .bg-lightblue {
-    background: #0096eb;
+    background: #00ADB5;
 }
 
 .btn-light-outline,
@@ -293,16 +293,16 @@ a[data-toggle="collapse"] {
     overflow: hidden;
 }
 
-.bg-aqua {
-    background-color: #F44336 !important;
+.bg-paste {
+    background-color: #00ADB5 !important;
 }
 
-.bg-orange {
-    background-color: #ffc107 !important;
+.bg-white {
+    background-color: #EEEEEE !important;
 }
 
-.bg-green {
-    background-color: #4CAF50 !important;
+.bg-ash {
+    background-color: #393E46 !important;
 }
 
 .info-box-icon i {
@@ -361,19 +361,19 @@ a[data-toggle="collapse"] {
     height: 2px;
 }
 
-.info-box .progress .progress-bar.progress-bar-aqua,
+.info-box .progress .progress-bar.progress-bar-paste,
 .progress-bar-info {
-    background-color: #F44336;
+    background-color: #00ADB5;
 }
 
-.info-box .progress .progress-bar.progress-bar-orange,
+.info-box .progress .progress-bar.progress-bar-white,
 .progress-bar-orange {
-    background-color: #ffc107;
+    background-color: #EEEEEE;
 }
 
-.info-box .progress .progress-bar.progress-bar-green,
+.info-box .progress .progress-bar.progress-bar-ash,
 .progress-bar-success {
-    background-color: #4CAF50;
+    background-color: #393E46;
 }
 
 .progress-bar {
@@ -403,7 +403,7 @@ a[data-toggle="collapse"] {
 /* _____________ new box _____________ */
 
 .box.box-success {
-    border-top-color: #22a1f9;
+    border-top-color: #00ADB5;
 }
 
 .box {

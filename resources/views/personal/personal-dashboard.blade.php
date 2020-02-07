@@ -67,12 +67,12 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="info-box">
-                    <span class="info-box-icon bg-green"><i class="ui icon clock outline"></i></span>
+                    <span class="info-box-icon bg-paste"><i class="ui icon clock outline"></i></span>
                     <div class="info-box-content">
                         <span class="info-box-text">ATTENDANCE <span class="text-hint">(Current Month)</span> </span>
                         <div class="progress-group">
                             <div class="progress sm">
-                                <div class="progress-bar progress-bar-green" style="width: 100%"></div>
+                                <div class="progress-bar progress-bar-paste" style="width: 100%"></div>
                             </div>
                             <div class="stats_d">
                                 <table style="width: 100%;">
@@ -95,12 +95,12 @@
 
             <div class="col-md-4">
                 <div class="info-box">
-                    <span class="info-box-icon bg-aqua"><i class="ui icon user circle"></i></span>
+                    <span class="info-box-icon bg-ash"><i class="ui icon user circle"></i></span>
                     <div class="info-box-content">
                         <span class="info-box-text">Present Schedule</span>
                         <div class="progress-group">
                             <div class="progress sm">
-                                <div class="progress-bar progress-bar-aqua" style="width: 100%"></div>
+                                <div class="progress-bar progress-bar-ash" style="width: 100%"></div>
                             </div>
                             <div class="stats_d">
                                 <table style="width: 100%;">

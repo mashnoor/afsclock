@@ -21,7 +21,7 @@ class ClockController extends Controller
     
     public function clock()
     {
-        return date('h:i:s A');
+     
         $data = table::settings()->where('id', 1)->first();
         $cc = $data->clock_comment;
         $tz = $data->timezone;

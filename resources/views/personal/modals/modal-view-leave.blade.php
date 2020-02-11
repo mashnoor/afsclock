@@ -13,7 +13,7 @@
         <div class="two fields">
             <div class="field">
                 <label for="">Leave From</label>
-                <input type="text" autocomplete="off" class="leavefrom readonly" value="" readonly="" />
+                <input type="text" autocomplete="nope" class="leavefrom readonly" value="" readonly="" />
             </div>
             <div class="field">
                 <label for="">Leave To</label>

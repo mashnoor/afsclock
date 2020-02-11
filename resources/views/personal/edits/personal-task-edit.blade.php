@@ -77,7 +77,7 @@
                     <div class="box-footer">
                         <input type="hidden" name="id" value="@isset($e_id){{ $e_id }}@endisset">
                         <button class="ui positive small button" type="submit" name="submit"><i class="ui checkmark icon"></i> Mark Done</button>
-                        <a class="ui grey small button" href="{{ route('viewPersonalTask') }}"><i class="ui times icon"></i> Cancel</a>
+                        <a class="ui grey small button" href="{{ url('personal/tasks/mytasks') }}"><i class="ui times icon"></i> Cancel</a>
                     </div>
                     </form>
                 </div>

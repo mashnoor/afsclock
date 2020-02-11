@@ -54,11 +54,11 @@
 
                     <div class="field">
                         <label for="">From</label>
-                        <input type="text" placeholder="Date" name="datefrom" class="airdatepicker" value="@isset($s->datefrom){{ $s->datefrom }}@endisset"/>
+                        <input type="text" placeholder="Date" autocomplete="off" name="datefrom" class="airdatepicker" value="@isset($s->datefrom){{ $s->datefrom }}@endisset"/>
                     </div>
                     <div class="field">
                         <label for="">To</label>
-                        <input type="text" placeholder="Date" name="dateto" class="airdatepicker" value="@isset($s->dateto){{ $s->dateto }}@endisset"/>
+                        <input type="text" placeholder="Date" autocomplete="off" name="dateto" class="airdatepicker" value="@isset($s->dateto){{ $s->dateto }}@endisset"/>
                     </div>
 
                     <div class="eight wide field">

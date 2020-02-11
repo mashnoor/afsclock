@@ -44,7 +44,7 @@
                             </div>
                             <div class="field">
                                 <label for="">Date</label>
-                                <input class="readonly" type="text" placeholder="Date" name="date" value="@isset($a->date){{ $a->date }}@endisset" readonly="" />
+                                <input class="readonly" autocomplete="off" type="text" placeholder="Date" name="date" value="@isset($a->date){{ $a->date }}@endisset" readonly="" />
                             </div>
                         </div>
                     @else 

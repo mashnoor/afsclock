@@ -21,7 +21,7 @@
         <div class="two fields">
             <div class="field">
                 <label for="">Leave from</label>
-                <input id="leavefrom" type="text" autocomplete="off" placeholder="Start date" name="leavefrom" class="airdatepicker uppercase" />
+                <input id="leavefrom" type="text" autocomplete="nope" placeholder="Start date" name="leavefrom" class="airdatepicker uppercase" />
             </div>
             <div class="field">
                 <label for="">Leave to</label>

@@ -21,16 +21,16 @@
         <div class="two fields">
             <div class="field">
                 <label for="">Leave from</label>
-                <input id="leavefrom" type="text" placeholder="Start date" name="leavefrom" class="airdatepicker uppercase" />
+                <input id="leavefrom" type="text" autocomplete="off" placeholder="Start date" name="leavefrom" class="airdatepicker uppercase" />
             </div>
             <div class="field">
                 <label for="">Leave to</label>
-                <input id="leaveto" type="text" placeholder="End date" name="leaveto" class="airdatepicker uppercase" />
+                <input id="leaveto" type="text" autocomplete="off" placeholder="End date" name="leaveto" class="airdatepicker uppercase" />
             </div>
         </div>
         <div class="field">
             <label for="">Return date</label>
-            <input id="returndate" type="text" placeholder="Enter Return date" name="returndate" class="airdatepicker uppercase" />
+            <input id="returndate" type="text" autocomplete="off" placeholder="Enter Return date" name="returndate" class="airdatepicker uppercase" />
         </div>
         <div class="field">
             <label>Reason</label>

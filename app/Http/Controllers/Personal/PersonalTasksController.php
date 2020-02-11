@@ -166,7 +166,7 @@ class PersonalTasksController extends Controller
 
         $task->save();
 
-        return redirect('/personal/tasks/view')->with('success','Task has been updated!');
+        return redirect('personal/tasks/mytasks')->with('success','Task has been updated!');
 
 
 

@@ -54,7 +54,7 @@
 
                             <div class="field">
                                 <label for="">Deadline</label>
-                                <input type="text" placeholder="0000-00-00" name="deadline" class="airdatepicker" value="@isset($task->deadline){{ $task->deadline }}@endisset"/>
+                                <input type="text" placeholder="0000-00-00" autocomplete="off" name="deadline" class="airdatepicker" value="@isset($task->deadline){{ $task->deadline }}@endisset"/>
                             </div>
                             <div class="fields">
                                 <div class="sixteen wide field">

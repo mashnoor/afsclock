@@ -13,16 +13,16 @@
         <div class="two fields">
             <div class="field">
                 <label for="">Leave From</label>
-                <input type="text" class="leavefrom readonly" value="" readonly="" />
+                <input type="text" autocomplete="nope" class="leavefrom readonly" value="" readonly="" />
             </div>
             <div class="field">
                 <label for="">Leave To</label>
-                <input type="text" class="leaveto readonly" value="" readonly=""/>
+                <input type="text" autocomplete="off" class="leaveto readonly" value="" readonly=""/>
             </div>
         </div>
         <div class="field">
             <label for="">Return Date</label>
-            <input type="text" class="returndate readonly" value="" readonly=""/>
+            <input type="text" autocomplete="off" class="returndate readonly" value="" readonly=""/>
         </div>
         <div class="field">
             <label>Reason</label>

@@ -99,7 +99,7 @@
                             </div>
                             <div class="field">
                                 <label>Date of Birth</label>
-                                <input type="text" name="birthday" value="@isset($person_details->birthday){{ $person_details->birthday }}@endisset" class="airdatepicker" placeholder="Date">
+                                <input type="text" name="birthday" autocomplete="off" value="@isset($person_details->birthday){{ $person_details->birthday }}@endisset" class="airdatepicker" placeholder="Date">
                             </div>
                             </div>
                             <div class="field">

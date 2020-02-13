@@ -9,6 +9,7 @@ import hashlib
 from phpserialize import loads, dumps
 from flask_cors import CORS, cross_origin
 
+import requests
 from Crypto.Cipher import AES
 import pickle
 import subprocess
@@ -20,44 +21,6 @@ url = "/var/www/attendancekeeper/public/assets/faces/"
 model_url = "/var/www/attendancekeeper/detector/"
 
 key = b'GKUE0hDEQ69y6bEaBFrehXVKlxw4G5T31/gjQ4SLD6U='
-
-
-def mcrypt_decrypt(value, iv):
-    global key
-    AES.key_size = 128
-    crypt_object = AES.new(key=key, mode=AES.MODE_CBC, IV=iv)
-    return crypt_object.decrypt(value)
-
-
-def mcrypt_encrypt(value, iv):
-    global key
-    AES.key_size = 128
-    crypt_object = AES.new(key=key, mode=AES.MODE_CBC, IV=iv)
-    return crypt_object.encrypt(value)
-
-
-def decrypt(bstring):
-    global key
-    dic = json.loads(base64.b64decode(bstring).decode())
-    mac = dic['mac']
-    value = bytes(dic['value'], 'utf-8')
-    iv = bytes(dic['iv'], 'utf-8')
-    if mac == hmac.new(key, iv + value, hashlib.sha256).hexdigest():
-        return loads(mcrypt_decrypt(base64.b64decode(value), base64.b64decode(iv))).decode()
-    return ''
-
-
-def encrypt(string):
-    global key
-    iv = os.urandom(16)
-    string = dumps(string)
-    padding = 16 - len(string) % 16
-    string += bytes(chr(padding) * padding, 'utf-8')
-    value = base64.b64encode(mcrypt_encrypt(string, iv))
-    iv = base64.b64encode(iv)
-    mac = hmac.new(key, iv + value, hashlib.sha256).hexdigest()
-    dic = {'iv': iv.decode(), 'value': value.decode(), 'mac': mac}
-    return base64.b64encode(bytes(json.dumps(dic), 'utf-8'))
 
 
 def get_images_with_tag():
@@ -84,24 +47,6 @@ def get_images_with_tag():
         connection.close()
 
     return result_list
-
-
-def compare_faces(all_image_encodings, image_encoding):
-   
-
-    # Compare faces and return True / False
-    results = fr.compare_faces(all_image_encodings, image_encoding, tolerance=0.4)
-    #print(results)
-    
-
-    
-    for i in range(len(results)):
-        if results[i] == True:
-            print(i)
-            return i
-    i = -1
-    return i
-    
 
 
 def face_rec(file):
@@ -132,18 +77,6 @@ def face_rec(file):
     else:
         return "-1"
 
-
-@app.route('/face_match', methods=['POST'])
-def face_match():
-    if request.method == 'POST':
-        # check if the post request has the file part
-        if ('file1' in request.files) and ('file2' in request.files):
-            file1 = request.files.get('file1')
-            file2 = request.files.get('file2')
-            ret = compare_faces(file1, file2)
-            resp_data = {"match": bool(ret)}  # convert numpy._bool to bool for json.dumps
-            return json.dumps(resp_data)
-
 def load_knn():
     with open(model_url + "knn.pkl", 'rb') as f:
         clf = pickle.load(f)
@@ -154,14 +87,13 @@ def load_knn():
 @app.route('/face_rec', methods=['POST'])
 def face_recognition():
     
-    
-
     image_data = str(request.form.get('image_data')).replace("data:image/jpeg;base64,", "")
     # image_data = request.form.get('image_data')
     imgdata = base64.b64decode(image_data)
     with open(url + "tmp.png", 'wb') as f:
         f.write(imgdata)
 
+    return requests.get("http://localhost:5004/get_id").text
     file = open(url + "tmp.png", 'rb')
     proc = subprocess.Popen(['python3', '/var/www/attendancekeeper/detector/classifier_knn.py'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     return(proc.communicate()[0])
@@ -177,13 +109,12 @@ def face_recognition():
     return id[0]
 
 
-# When debug = True, code is reloaded on the fly while saved
-
 @app.route('/')
 def hello():
-    return "hdfgssbhy"
+    return "blas"
+    return requests.get("http://localhost:5004/get_id").text
 
 # print(get_images_with_tag())
 if __name__ == "__main__":
-    app.run()
+    app.run(host='0.0.0.0')
     

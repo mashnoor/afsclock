@@ -52,7 +52,7 @@
                     </div>
                     <div class="field">
                         <label for="">Return Date</label>
-                        <input id="returndate" type="text" class="readonly" readonly="" value="@isset($l->returndate){{ $l->returndate }}@endisset"/>
+                        <input id="returndate" autocomplete="off" type="text" class="readonly" readonly="" value="@isset($l->returndate){{ $l->returndate }}@endisset"/>
                     </div>
                     <div class="field">
                         <label>Reason</label>

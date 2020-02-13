@@ -87,7 +87,7 @@
 
 
                                 <label>Date of Birth</label>
-                                <input type="text" name="birthday" required value="" class="airdatepicker"
+                                <input type="text" name="birthday" autocomplete="off" required value="" class="airdatepicker"
                                        data-position="top right" placeholder="Date">
                             </div>
                             <div class="field">
@@ -190,11 +190,11 @@
                             <div class="field">
                                 <label>Official Start Date*</label>
                                 <input type="text" name="startdate" required value="" class="airdatepicker uppercase"
-                                       data-position="top right" placeholder="Date">
+                                       data-position="top right" autocomplete="off" placeholder="Date">
                             </div>
                             <div class="field">
                                 <label>Date Regularized</label>
-                                <input type="text" name="dateregularized" value="" class="airdatepicker uppercase"
+                                <input type="text" name="dateregularized" value="" autocomplete="off" class="airdatepicker uppercase"
                                        data-position="top right" placeholder="Date">
                             </div>
                             <br>

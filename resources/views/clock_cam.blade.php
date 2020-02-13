@@ -196,10 +196,22 @@
 
     <script type="text/javascript">
         Webcam.set({
+            // live preview size
             width: 320,
             height: 240,
+
+            // device capture size
+            dest_width: 320,
+            dest_height: 240,
+
+            // final cropped size
+            crop_width: 320,
+            crop_height: 240,
+
+            // format and quality
             image_format: 'jpeg',
-            jpeg_quality: 90
+            jpeg_quality: 90,
+
         });
         Webcam.attach('#my_camera');
 

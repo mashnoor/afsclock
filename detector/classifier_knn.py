@@ -2,7 +2,10 @@ import sys
 import pickle
 import base64
 import face_recognition as fr
+from flask import Flask, request
 
+
+app = Flask(__name__)
 url = "/var/www/attendancekeeper/public/assets/faces/"
 model_url = "/var/www/attendancekeeper/detector/"
 
@@ -11,6 +14,7 @@ def load_knn():
         clf = pickle.load(f)
     return clf
 
+@app.route('/get_id')
 def face_recognition():
    
     clf = load_knn()
@@ -28,5 +32,6 @@ def face_recognition():
     return id[0]
 
 
-
-print(face_recognition())
+if __name__ == "__main__":
+    app.run(host='0.0.0.0')
+    

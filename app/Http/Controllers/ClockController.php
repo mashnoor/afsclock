@@ -33,8 +33,9 @@ class ClockController extends Controller
         $data = table::settings()->where('id', 1)->first();
         $cc = $data->clock_comment;
         $tz = $data->timezone;
+        $company_name = $data->company_name;
 
-        return view('clock', compact('cc', 'tz'));
+        return view('clock', compact('cc', 'tz', 'company_name'));
     }
 
 

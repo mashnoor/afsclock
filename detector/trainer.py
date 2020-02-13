@@ -32,7 +32,7 @@ def get_images_with_tag():
 
 
 def train():
-    knn_algo = "ball_tree"
+    knn_algo = "auto"
     print("Training Started...")
     known_faces = get_images_with_tag()
     all_ids = []
@@ -52,7 +52,7 @@ def train():
         except:
             pass
 
-    knn_clf = neighbors.KNeighborsClassifier(n_neighbors=int(round(math.sqrt(len(all_face_encodings)))), algorithm=knn_algo, weights='distance')
+    knn_clf = neighbors.KNeighborsClassifier(n_neighbors=int(round(math.sqrt(len(all_face_encodings)))), n_jobs=-1, algorithm=knn_algo, weights='distance')
     knn_clf.fit(all_face_encodings, all_ids)
     print("Training Finished...")
     with open("knn.pkl", 'wb') as f:

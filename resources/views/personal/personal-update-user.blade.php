@@ -1,7 +1,7 @@
 @extends('layouts.personal')
     @section('meta')
-        <title>Update Personal Account | Smart Timesheet</title>
-        <meta name="description" content="smart timesheet update personal account.">
+        <title>Update Personal Account | Attendance Keepert</title>
+        <meta name="description" content="Attendance Keepert update personal account.">
     @endsection
 
     @section('content')

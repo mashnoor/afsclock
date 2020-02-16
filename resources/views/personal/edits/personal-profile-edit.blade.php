@@ -1,8 +1,8 @@
 @extends('layouts.personal')
 
     @section('meta')
-        <title>Edit My Profile | Smart Timesheet</title>
-        <meta name="description" content="smart timesheet edit my information.">
+        <title>Edit My Profile | Attendance Keepert</title>
+        <meta name="description" content="Attendance Keepert edit my information.">
     @endsection
 
     @section('styles')

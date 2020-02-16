@@ -1,8 +1,8 @@
 @extends('layouts.personal')
 
     @section('meta')
-        <title>Edit Leave Request | Smart Timesheet</title>
-        <meta name="description" content="smart timesheet edit pending leave of absence.">
+        <title>Edit Leave Request | Attendance Keepert</title>
+        <meta name="description" content="Attendance Keepert edit pending leave of absence.">
     @endsection
 
     @section('styles')

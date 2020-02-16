@@ -2,7 +2,7 @@
 <html lang="en" class="fullscreen-bg">
 
 <head>
-	<title>Sign in | Smart Timesheet</title>
+	<title>Sign in | Attendance Keepert</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -17,7 +17,7 @@
 				<div class="auth-box">
 					<div class="content">
 						<div class="header">
-							<div class="logo align-center"><img src="{{ asset('/assets/images/img/logo-small.png') }}" alt="Smart Timesheet"></div>
+							<div class="logo align-center"><img src="{{ asset('/assets/images/img/logo-small.png') }}" alt="Attendance Keepert"></div>
 							<p class="lead">Sign in to your account</p>
 						</div>
 						<form class="form-auth-small ui form" action="{{ route('login') }}" method="POST">

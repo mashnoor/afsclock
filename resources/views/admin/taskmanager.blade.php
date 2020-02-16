@@ -1,9 +1,9 @@
 @extends('layouts.default')
 
 @section('meta')
-    <title>Task Manager | Smart Timesheet</title>
+    <title>Task Manager | Attendance Keepert</title>
     <meta name="description"
-          content="smart timesheet schedules, view all employee schedules, add schedule or shift, edit, and delete schedules.">
+          content="Attendance Keepert schedules, view all employee schedules, add schedule or shift, edit, and delete schedules.">
 @endsection
 
 @section('styles')

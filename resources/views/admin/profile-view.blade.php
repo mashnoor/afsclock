@@ -1,8 +1,8 @@
 @extends('layouts.default')
 
     @section('meta')
-        <title>Profile | Smart Timesheet</title>
-        <meta name="description" content="smart timesheet view employee profile, edit employee profile, update employee profile">
+        <title>Profile | Attendance Keepert</title>
+        <meta name="description" content="Attendance Keepert view employee profile, edit employee profile, update employee profile">
     @endsection
 
     @section('content')

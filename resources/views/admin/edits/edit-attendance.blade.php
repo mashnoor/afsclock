@@ -1,8 +1,8 @@
 @extends('layouts.default')
     
     @section('meta')
-        <title>Edit Employee Attendance | Smart Timesheet</title>
-        <meta name="description" content="smart timesheet edit employee attendance.">
+        <title>Edit Employee Attendance | Attendance Keepert</title>
+        <meta name="description" content="Attendance Keepert edit employee attendance.">
     @endsection 
 
     @section('styles')

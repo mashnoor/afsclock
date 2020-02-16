@@ -1,8 +1,8 @@
 @extends('layouts.default')
     
     @section('meta')
-        <title>Departments | Smart Timesheet</title>
-        <meta name="description" content="smart timesheet departments, view departments, and export or download departments.">
+        <title>Departments | Attendance Keepert</title>
+        <meta name="description" content="Attendance Keepert departments, view departments, and export or download departments.">
     @endsection
 
     @section('content')

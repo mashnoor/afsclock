@@ -1,8 +1,8 @@
 @extends('layouts.default')
     
     @section('meta')
-        <title>Edit Leave Groups | Smart Timesheet</title>
-        <meta name="description" content="smart timesheet edit leave groups.">
+        <title>Edit Leave Groups | Attendance Keepert</title>
+        <meta name="description" content="Attendance Keepert edit leave groups.">
     @endsection  
 
     @section('content')

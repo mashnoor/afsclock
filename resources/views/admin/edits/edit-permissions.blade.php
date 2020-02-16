@@ -1,8 +1,8 @@
 @extends('layouts.default')
     
     @section('meta')
-        <title>Edit Permissions | Attendance Keepert</title>
-        <meta name="description" content="Attendance Keepert edit user permissions.">
+        <title>Edit Permissions | Attendance Keeper</title>
+        <meta name="description" content="Attendance Keeper edit user permissions.">
     @endsection 
 
     @section('content')

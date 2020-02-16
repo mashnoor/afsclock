@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width" />
         <meta name="csrf-token" content="{{ csrf_token() }}" />
 
-        <title>Smart Clock | Attendance Keepert</title>
+        <title>Smart Clock | Attendance Keeper</title>
         <link rel="stylesheet" type="text/css" href="{{ asset('/assets/vendor/bootstrap/css/bootstrap.min.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('/assets/vendor/semantic-ui/semantic.min.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('/assets/css/clock.css') }}">

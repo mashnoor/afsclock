@@ -1,8 +1,8 @@
 @extends('layouts.personal')
 
     @section('meta')
-        <title>My Attendances | Attendance Keepert</title>
-        <meta name="description" content="Attendance Keepert my attendance, view all my attendances, and clock-in/out.">
+        <title>My Attendances | Attendance Keeper</title>
+        <meta name="description" content="Attendance Keeper my attendance, view all my attendances, and clock-in/out.">
     @endsection
 
     @section('styles')

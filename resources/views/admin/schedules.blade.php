@@ -1,8 +1,8 @@
 @extends('layouts.default')
 
     @section('meta')
-        <title>Schedules | Attendance Keepert</title>
-        <meta name="description" content="Attendance Keepert schedules, view all employee schedules, add schedule or shift, edit, and delete schedules.">
+        <title>Schedules | Attendance Keeper</title>
+        <meta name="description" content="Attendance Keeper schedules, view all employee schedules, add schedule or shift, edit, and delete schedules.">
     @endsection
 
     @section('styles')

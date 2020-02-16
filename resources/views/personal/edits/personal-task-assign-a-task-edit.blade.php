@@ -2,7 +2,7 @@
 
 @section('meta')
     <title>Edit Employee Task | Attendance Keeper</title>
-    <meta name="description" content="Attendance Keepert edit employee attendance.">
+    <meta name="description" content="Attendance Keeper edit employee attendance.">
 @endsection
 
 @section('styles')

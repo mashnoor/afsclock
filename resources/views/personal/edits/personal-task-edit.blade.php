@@ -1,8 +1,8 @@
 @extends('layouts.default')
 
 @section('meta')
-    <title>Edit Task | Attendance Keepert</title>
-    <meta name="description" content="Attendance Keepert edit employee attendance.">
+    <title>Edit Task | Attendance Keeper</title>
+    <meta name="description" content="Attendance Keeper edit employee attendance.">
 @endsection
 
 @section('styles')

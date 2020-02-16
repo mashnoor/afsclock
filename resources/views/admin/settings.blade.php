@@ -1,8 +1,8 @@
 @extends('layouts.default')
 
     @section('meta')
-        <title>General Settings | Attendance Keepert</title>
-        <meta name="description" content="Attendance Keepert settings, view and update system settings.">
+        <title>General Settings | Attendance Keeper</title>
+        <meta name="description" content="Attendance Keeper settings, view and update system settings.">
     @endsection 
     
     @section('styles')
@@ -769,8 +769,8 @@
                         <div class="col-md-12">
                             <div class="tab-content">
                                 <p class="license col-md-6" style="margin-bottom:0">
-                                    <h3 style="margin-top:0" class="ui header">Attendance Keepert: Time and Attendance Management System</h3>
-                                    <p>Attendance Keepert is a user-friendly, intuitive system that provides smoothly integrated essential HR time and attendance functionality, employee management, leave management, scheduling, time tracking, reporting and more.</p>
+                                    <h3 style="margin-top:0" class="ui header">Attendance Keeper: Time and Attendance Management System</h3>
+                                    <p>Attendance Keeper is a user-friendly, intuitive system that provides smoothly integrated essential HR time and attendance functionality, employee management, leave management, scheduling, time tracking, reporting and more.</p>
                                     <h4 class="ui header">Features</h4>
                                     <ul>
                                         <li>Employee Management (HRIS)</li>

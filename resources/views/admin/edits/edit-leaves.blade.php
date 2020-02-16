@@ -1,8 +1,8 @@
 @extends('layouts.default')
     
     @section('meta')
-        <title>Edit Leave of Absence | Attendance Keepert</title>
-        <meta name="description" content="Attendance Keepert edit employee leave of absence.">
+        <title>Edit Leave of Absence | Attendance Keeper</title>
+        <meta name="description" content="Attendance Keeper edit employee leave of absence.">
     @endsection 
 
     @section('content')

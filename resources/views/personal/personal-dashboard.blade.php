@@ -1,9 +1,9 @@
 @extends('layouts.personal')
 
 @section('meta')
-    <title>My Dashboard | Attendance Keepert</title>
+    <title>My Dashboard | Attendance Keeper</title>
     <meta name="description"
-          content="Attendance Keepert my dashboard, view recent attendance, view recent leave of absence, and view previous schedules.">
+          content="Attendance Keeper my dashboard, view recent attendance, view recent leave of absence, and view previous schedules.">
 @endsection
 
 @section('content')

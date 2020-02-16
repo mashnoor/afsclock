@@ -3,7 +3,7 @@
 @section('meta')
     <title>My Tasks | Attendnace Keeper</title>
     <meta name="description"
-          content="Attendance Keepert my schedules, view my schedule records, view present and previous schedules.">
+          content="Attendance Keeper my schedules, view my schedule records, view present and previous schedules.">
 @endsection
 
 @section('styles')

@@ -1,8 +1,8 @@
 @extends('layouts.default')
 
     @section('meta')
-        <title>Leave Groups | Attendance Keepert</title>
-        <meta name="description" content="Attendance Keepert leave groups, view leave groups, add leave groups, and edit leave groups.">
+        <title>Leave Groups | Attendance Keeper</title>
+        <meta name="description" content="Attendance Keeper leave groups, view leave groups, add leave groups, and edit leave groups.">
     @endsection
 
     @section('content')

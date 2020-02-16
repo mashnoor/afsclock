@@ -1,9 +1,9 @@
 @extends('layouts.default')
 
 @section('meta')
-    <title>Task Manager | Attendance Keepert</title>
+    <title>Task Manager | Attendance Keeper</title>
     <meta name="description"
-          content="Attendance Keepert schedules, view all employee schedules, add schedule or shift, edit, and delete schedules.">
+          content="Attendance Keeper schedules, view all employee schedules, add schedule or shift, edit, and delete schedules.">
 @endsection
 
 @section('styles')

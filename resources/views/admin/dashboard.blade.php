@@ -3,7 +3,7 @@
 @section('meta')
     <title>Dashboard | Attendance Keeper</title>
     <meta name="description"
-          content="Attendance Keepert dashboard, view recent attendance, recent leaves of absence, and newest employees">
+          content="Attendance Keeper dashboard, view recent attendance, recent leaves of absence, and newest employees">
 @endsection
 
 @section('content')

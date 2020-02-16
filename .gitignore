@@ -2,6 +2,7 @@
 /public/storage
 /storage/*.key
 /vendor
+detector/__pycache__/*
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml
@@ -9,11 +10,13 @@ npm-debug.log
 yarn-error.log
 ../.idea/
 public/assets/faces/*
+public/assets/login_faces/*
 .idea/workspace.xml
 .env
 .idea/vcs.xml
 .idea/afsclock.iml
 public/assets/images/faces/*
+
 .idea/application.iml
 .idea/php.xml
 .idea/*

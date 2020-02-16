@@ -53,7 +53,7 @@
 									</div>
 								</div>
 							</div>
-							<button type="submit" class="ui green button large fluid">SIGN IN</button>
+							<button style="background:#222831;color:white" type="submit" class="ui button large fluid">SIGN IN</button>
 							
 						</form>
 					</div>

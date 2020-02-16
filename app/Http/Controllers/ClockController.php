@@ -18,16 +18,18 @@ class ClockController extends Controller
         $data = table::settings()->where('id', 1)->first();
         $cc = $data->clock_comment;
         $tz = $data->timezone;
+        $company_name = $data->company_name;
 
-        return view('clock_cam', compact('cc', 'tz'));
+        return view('clock_cam', compact('cc', 'tz', 'company_name'));
     }
     public function test_clock()
     {
         $data = table::settings()->where('id', 1)->first();
         $cc = $data->clock_comment;
         $tz = $data->timezone;
+        $company_name = $data->company_name;
 
-        return view('clock', compact('cc', 'tz'));
+        return view('clock', compact('cc', 'tz', 'company_name'));
     }
 
 
@@ -203,6 +205,7 @@ class ClockController extends Controller
                         "lastname" => $lastname,
                         "firstname" => $firstname,
                         "mi" => $mi,
+                        "success" => "Hello, " . $firstname . " " . $lastname . ". Time In is recorded at " . $time . " on " . $date,
                     ]);
                 }
             }
@@ -231,6 +234,7 @@ class ClockController extends Controller
                         "lastname" => $lastname,
                         "firstname" => $firstname,
                         "mi" => $mi,
+                        "success" => "Hello, " . $firstname . " " . $lastname . ". Break in is recorded at " . $time . " on " . $date,
                     ]);
                 }
                 else if($doesnt_have_break_out == 1)
@@ -247,6 +251,7 @@ class ClockController extends Controller
                         "lastname" => $lastname,
                         "firstname" => $firstname,
                         "mi" => $mi,
+                        "success" => "Hello, " . $firstname . " " . $lastname . ". Break out is recorded at " . $time . " on " . $date,
                     ]);
                 }
                 else
@@ -256,7 +261,7 @@ class ClockController extends Controller
                     $hto = date('h:i A', strtotime($hto));
                     return response()->json([
                         "employee" => $employee,
-                        "error" => "You already break out Out today at ".$hto,
+                        "error" => "You already break out at ". $hto . " on " . $date,
                     ]);
 
                 }
@@ -285,7 +290,7 @@ class ClockController extends Controller
                 $hto = date('h:i A', strtotime($hto));
                 return response()->json([
                     "employee" => $employee,
-                    "error" => "You already Time Out today at ".$hto,
+                    "error" => "You already Time Out at ". $hto . " on " . $date,
                 ]);
 
             } else {
@@ -325,6 +330,7 @@ class ClockController extends Controller
                     "lastname" => $lastname,
                     "firstname" => $firstname,
                     "mi" => $mi,
+                    "success" => "Hello, " . $firstname . " " . $lastname . ". Time out is recorded at " . $time . " on " . $date,
                 ]);
             }
         }

@@ -94,23 +94,23 @@ class ReportsController extends Controller
 		$yhc = null;
 
 		foreach ($ed as $c) { $comp[] = $c->company; $dcc = array_count_values($comp); }
-		$cc = ($dcc == null) ? null : implode($dcc, ', ') . ',' ;
+		$cc = ($dcc == null) ? null : implode(', ', $dcc) . ',' ;
 
 		foreach ($ed as $d) { $dept[] = $d->department; $dpc = array_count_values($dept); }
-		$dc = ($dpc == null) ? null : implode($dpc, ', ') . ',' ;
+		$dc = ($dpc == null) ? null : implode(', ', $dpc) . ',' ;
 
 		foreach ($ed as $g) { $gender[] = $g->gender; $dgc = array_count_values($gender); }
-		$gc = ($dgc == null) ? null : implode($dgc, ', ') . ',' ;
+		$gc = ($dgc == null) ? null : implode(', ', $dgc) . ',' ;
 
 		foreach ($ed as $cs) { $civilstatus[] = $cs->civilstatus; $csc = array_count_values($civilstatus); }
-		$cg = ($csc == null) ? null : implode($csc, ', ') . ',' ;
+		$cg = ($csc == null) ? null : implode(', ', $csc) . ',' ;
 
 		foreach ($ed as $yearhired) {
 			$year[] = date("Y", strtotime($yearhired->startdate));
 			asort($year); 
 			$yhc = array_count_values($year);
 		}
-		$yc = ($yhc == null) ? null : implode($yhc, ', ') . ',' ;
+		$yc = ($yhc == null) ? null : implode(', ', $yhc) . ',' ;
 		
 		$orgProfile = table::companydata()->get();
 		table::reportviews()->where('report_id', 5)->update(array('last_viewed' => $today));

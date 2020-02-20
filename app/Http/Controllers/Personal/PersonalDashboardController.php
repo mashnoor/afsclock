@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\personal;
+use App\Task;
 use DB;
 use App\Classes\table;
 use App\Classes\permission;
@@ -38,7 +39,11 @@ class PersonalDashboardController extends Controller
         $la = table::attendance()->where([['reference', $id], ['status_timein', 'Late Arrival']])->whereBetween('date', [$sm, $em])->count();
         $ed = table::attendance()->where([['reference', $id], ['status_timeout', 'Early Departure']])->whereBetween('date', [$sm, $em])->count();
 
-        return view('personal.personal-dashboard', compact('cs', 'ps', 'al', 'pl', 'ald', 'a', 'la', 'ed', 'tz'));
+        $tasks = Task::where('reference', $id)->get();
+
+        $no_of_pending_tasks = Task::where([['reference', $id], ['finishdate', null]])->count();
+        $no_of_done_tasks = $tasks->count()-$no_of_pending_tasks;
+        return view('personal.personal-dashboard', compact('cs', 'ps', 'al', 'pl', 'ald', 'a', 'la', 'ed', 'tz', 'no_of_pending_tasks', 'no_of_done_tasks', 'tasks'));
     }
 }
 

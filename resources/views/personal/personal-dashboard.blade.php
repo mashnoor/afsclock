@@ -108,7 +108,8 @@
                                     <tr>
                                         <td>Time</td>
                                         <td>
-                                            <span class="bolder">@isset($cs->intime) {{ $cs->intime }} @endisset - @isset($cs->outime) {{ $cs->outime }} @endisset</span>
+                                            <span class="bolder">@isset($cs->intime) {{ $cs->intime }} @endisset
+                                                - @isset($cs->outime) {{ $cs->outime }} @endisset</span>
                                         </td>
                                     </tr>
                                     <tr>
@@ -129,7 +130,7 @@
                 <div class="info-box">
                     <span class="info-box-icon bg-orange"><i class="ui icon home"></i></span>
                     <div class="info-box-content">
-                        <span class="info-box-text">LEAVES OF ABSENCE</span>
+                        <span class="info-box-text">MY TASKS</span>
                         <div class="progress-group">
                             <div class="progress sm">
                                 <div class="progress-bar progress-bar-orange" style="width: 100%"></div>
@@ -138,12 +139,12 @@
                                 <table style="width: 100%;">
                                     <tbody>
                                     <tr>
-                                        <td>Approved</td>
-                                        <td><span class="bolder">@isset($al){{ $al }}@endisset</span></td>
+                                        <td>Done</td>
+                                        <td><span class="bolder">@isset($no_of_done_tasks){{ $no_of_done_tasks }}@endisset</span></td>
                                     </tr>
                                     <tr>
                                         <td>Pending</td>
-                                        <td><span class="bolder">@isset($pl){{ $pl }}@endisset</span></td>
+                                        <td><span class="bolder">@isset($no_of_pending_tasks){{ $no_of_pending_tasks }}@endisset</span></td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -272,7 +273,7 @@
             <div class="col-md-4">
                 <div class="box box-success">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Recent Leaves of Absence</h3>
+                        <h3 class="box-title">Latest pending tasks</h3>
                         <div class="box-tools pull-right">
                             <button type="button" class="btn btn-box-tool" data-widget="remove"><i
                                         class="fa fa-times"></i></button>
@@ -282,28 +283,16 @@
                         <table class="table table-striped nobordertop">
                             <thead>
                             <tr>
-                                <th class="text-left">Description</th>
-                                <th class="text-left">Date</th>
+                                <th class="text-left">Title</th>
+                                <th class="text-left">Deadline</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @isset($ald)
-                                @foreach($ald as $l)
+                            @isset($tasks)
+                                @foreach($tasks as $task)
                                     <tr>
-                                        <td>{{ $l->type }}</td>
-                                        <td>
-                                            @php
-                                                $fd = date('M', strtotime($l->leavefrom));
-                                                $td = date('M', strtotime($l->leaveto));
-
-                                                if($fd == $td){
-                                                    $var = date('M d', strtotime($l->leavefrom)) .' - '. date('d, Y', strtotime($l->leaveto));
-                                                } else {
-                                                    $var = date('M d', strtotime($l->leavefrom)) .' - '. date('M d, Y', strtotime($l->leaveto));
-                                                }
-                                            @endphp
-                                            {{ $var }}
-                                        </td>
+                                      <td>{{ $task->title }}</td>
+                                        <td>{{ $task->deadline }}</td>
                                     </tr>
                                 @endforeach
                             @endisset

@@ -12,20 +12,21 @@ class CreateTblPeopleSchedulesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('tbl_people_schedules', function(Blueprint $table)
-		{
-			$table->increments('id');
-			$table->integer('reference')->nullable();
-			$table->string('idno', 11)->nullable();
-			$table->string('employee')->nullable();
-			$table->text('intime', 65535)->nullable();
-			$table->text('outime', 65535)->nullable();
-			$table->date('datefrom')->nullable();
-			$table->date('dateto')->nullable();
-			$table->integer('hours')->nullable();
-			$table->string('restday')->nullable();
-			$table->integer('archive')->nullable();
-		});
+        if(!Schema::hasTable('tbl_people_schedules')) {
+            Schema::create('tbl_people_schedules', function (Blueprint $table) {
+                $table->increments('id');
+                $table->integer('reference')->nullable();
+                $table->string('idno', 11)->nullable();
+                $table->string('employee')->nullable();
+                $table->text('intime', 65535)->nullable();
+                $table->text('outime', 65535)->nullable();
+                $table->date('datefrom')->nullable();
+                $table->date('dateto')->nullable();
+                $table->integer('hours')->nullable();
+                $table->string('restday')->nullable();
+                $table->integer('archive')->nullable();
+            });
+        }
 	}
 
 

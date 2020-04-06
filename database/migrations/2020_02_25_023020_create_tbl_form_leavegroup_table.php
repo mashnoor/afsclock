@@ -12,14 +12,15 @@ class CreateTblFormLeavegroupTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('tbl_form_leavegroup', function(Blueprint $table)
-		{
-			$table->increments('id');
-			$table->string('leavegroup')->nullable();
-			$table->string('description')->nullable();
-			$table->string('leaveprivileges')->nullable();
-			$table->integer('status')->nullable();
-		});
+        if(!Schema::hasTable('tbl_form_leavegroup')) {
+            Schema::create('tbl_form_leavegroup', function (Blueprint $table) {
+                $table->increments('id');
+                $table->string('leavegroup')->nullable();
+                $table->string('description')->nullable();
+                $table->string('leaveprivileges')->nullable();
+                $table->integer('status')->nullable();
+            });
+        }
 	}
 
 

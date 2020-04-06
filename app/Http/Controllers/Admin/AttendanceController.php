@@ -17,7 +17,7 @@ class AttendanceController extends Controller
     {
         if (permission::permitted('attendance')=='fail'){ return redirect()->route('denied'); }
         
-        $data = table::attendance()->orderBy('date', 'desc')->get();
+        $data = table::daily_attendance()->orderBy('created_at', 'desc')->get();
         $cc = table::settings()->value('clock_comment');
         
         return view('admin.attendance', compact('data', 'cc'));

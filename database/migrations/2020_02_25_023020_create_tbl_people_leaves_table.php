@@ -12,22 +12,23 @@ class CreateTblPeopleLeavesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('tbl_people_leaves', function(Blueprint $table)
-		{
-			$table->increments('id');
-			$table->integer('reference')->nullable();
-			$table->string('idno', 11)->nullable();
-			$table->string('employee')->nullable()->default('');
-			$table->integer('typeid')->nullable();
-			$table->string('type')->nullable()->default('');
-			$table->date('leavefrom')->nullable();
-			$table->date('leaveto')->nullable();
-			$table->date('returndate')->nullable();
-			$table->string('reason')->nullable()->default('');
-			$table->string('status')->nullable();
-			$table->string('comment')->nullable();
-			$table->integer('archived')->nullable();
-		});
+        if(!Schema::hasTable('tbl_people_leaves')) {
+            Schema::create('tbl_people_leaves', function (Blueprint $table) {
+                $table->increments('id');
+                $table->integer('reference')->nullable();
+                $table->string('idno', 11)->nullable();
+                $table->string('employee')->nullable()->default('');
+                $table->integer('typeid')->nullable();
+                $table->string('type')->nullable()->default('');
+                $table->date('leavefrom')->nullable();
+                $table->date('leaveto')->nullable();
+                $table->date('returndate')->nullable();
+                $table->string('reason')->nullable()->default('');
+                $table->string('status')->nullable();
+                $table->string('comment')->nullable();
+                $table->integer('archived')->nullable();
+            });
+        }
 	}
 
 

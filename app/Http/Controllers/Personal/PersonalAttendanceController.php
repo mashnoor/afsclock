@@ -13,7 +13,8 @@ class PersonalAttendanceController extends Controller
     public function index() 
     {
         $i = \Auth::user()->idno;
-        $a = table::attendance()->where('idno', $i)->get();
+//        $a = table::attendance()->where('idno', $i)->get();
+        $a = table::daily_attendance()->where('idno', $i)->get();
         return view('personal.personal-attendance-view', compact('a'));
     }
 
@@ -29,7 +30,11 @@ class PersonalAttendanceController extends Controller
              ->select('date', 'timein', 'timeout', 'totalhours', 'status_timein', 'status_timeout')
              ->where('idno', $id)
              ->get();
-             
+
+
+//             $data = table::attendance()->select('created_at', 'totalhours', 'status_timein', 'status_timeout')->where('idno', $id)->get();
+
+
 			return response()->json($data);
 
 		} elseif ($datefrom !== '' AND $dateto !== '') {

@@ -12,13 +12,14 @@ class CreateTblReportViewsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('tbl_report_views', function(Blueprint $table)
-		{
-			$table->increments('id');
-			$table->integer('report_id')->nullable();
-			$table->string('last_viewed')->nullable();
-			$table->text('title', 65535)->nullable();
-		});
+        if(!Schema::hasTable('tbl_report_views')) {
+            Schema::create('tbl_report_views', function (Blueprint $table) {
+                $table->increments('id');
+                $table->integer('report_id')->nullable();
+                $table->string('last_viewed')->nullable();
+                $table->text('title', 65535)->nullable();
+            });
+        }
 	}
 
 

@@ -43,33 +43,37 @@
                                 <th>Date</th>
                                 <th>Time In</th>
                                 <th>Time Out</th>
-                                <th>Break In</th>
-                                <th>Break Out</th>
+{{--                                <th>Break In</th>--}}
+{{--                                <th>Break Out</th>--}}
+
                                 <th>Total Hours</th>
+                                <th>Break Duration</th>
                                 <th>Status (In/Out)</th>
+                                <th>More</th>
                             </tr>
                         </thead>
                         <tbody>
                             @isset($a)
                             @foreach ($a as $v)
                                 <tr>
-                                    <td>{{ $v->date }}</td>
-                                    <td>@isset($v->timein) @php echo e(date('h:i:s A', strtotime($v->timein))) @endphp @endisset</td>
-                                    <td>@isset($v->timeout) @php echo e(date('h:i:s A', strtotime($v->timeout))) @endphp @endisset</td>
-                                    <td>
-                                        @isset($v->break_in)
-                                            @php $break_in_time = date('h:i:s A', strtotime($v->break_in)); @endphp
-                                            {{ $break_in_time }}
-                                        @endisset
+{{--                                    <td> {{ $v->created_at }} </td>--}}
+                                    <td>@isset($v->created_at) @php echo e(date('d-m-Y', strtotime($v->created_at))) @endphp @endisset</td>
+                                    <td>@isset($v->created_at) @php echo e(date('h:i:s A', strtotime($v->created_at))) @endphp @endisset</td>
+                                    <td>@isset($v->created_at) @php echo e(date('h:i:s A', strtotime($v->updated_at))) @endphp @endisset</td>
+{{--                                    <td>--}}
+{{--                                        @isset($v->break_in)--}}
+{{--                                            @php $break_in_time = date('h:i:s A', strtotime($v->break_in)); @endphp--}}
+{{--                                            {{ $break_in_time }}--}}
+{{--                                        @endisset--}}
 
-                                    </td>
-                                    <td>
-                                        @isset($v->break_out)
-                                            @php $break_out_time = date('h:i:s A', strtotime($v->break_out)); @endphp
-                                            {{ $break_out_time }}
-                                        @endisset
+{{--                                    </td>--}}
+{{--                                    <td>--}}
+{{--                                        @isset($v->break_out)--}}
+{{--                                            @php $break_out_time = date('h:i:s A', strtotime($v->break_out)); @endphp--}}
+{{--                                            {{ $break_out_time }}--}}
+{{--                                        @endisset--}}
 
-                                    </td>
+{{--                                    </td>--}}
                                     <td>
                                     @isset($v->totalhours)
                                         @if($v->totalhours != null) 
@@ -93,15 +97,38 @@
                                     @endisset
                                     </td>
                                     <td>
+                                        @isset($v->total_break_hours)
+                                            @if($v->total_break_hours != null)
+                                                @php
+                                                    if(stripos($v->total_break_hours, ".") === false) {
+                                                        $h = $v->total_break_hours;
+                                                    } else {
+                                                        $HM = explode('.', $v->total_break_hours);
+                                                        $h = $HM[0];
+                                                        $m = $HM[1];
+                                                    }
+                                                @endphp
+                                            @endif
+                                            @if($v->total_break_hours != null)
+                                                @if(stripos($v->total_break_hours, ".") === false)
+                                                    {{ $h }} hr
+                                                @else
+                                                    {{ $h }} hr {{ $m }} minutes
+                                                @endif
+                                            @endif
+                                        @endisset
+                                    </td>
+                                    <td>
                                         @if($v->status_timein != '' && $v->status_timeout != '') 
                                             <span class="@if($v->status_timein == 'Late Arrival') orange @else blue @endif">{{ $v->status_timein }}</span> / 
-                                            <span class="@if($v->status_timeout == 'Early Departure') red @else green @endif">{{ $v->status_timeout }}</span> 
+                                            <span class="@if($v->status_timeout == 'Early Departure') red @else green @endif">{{ $v->status_timeout }}</span>
                                         @elseif($v->status_timein == 'Late Arrival') 
                                             <span class="orange">{{ $v->status_timein }}</span>
-                                        @else 
+                                        @else
                                             <span class="blue">{{ $v->status_timein }}</span>
                                         @endif 
                                     </td>
+                                    <td>Details</td>
                                 </tr>
                             @endforeach
                             @endisset

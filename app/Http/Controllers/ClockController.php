@@ -6,15 +6,18 @@ use Carbon\Carbon;
 use App\Classes\table;
 use App\Classes\permission;
 use App\Http\Requests;
+use http\Env\Response;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use phpDocumentor\Reflection\Types\Null_;
+use Illuminate\Database\Eloquent\Model;
 
 class ClockController extends Controller
 {
-    
+
     public function clock()
     {
-     
+
         $data = table::settings()->where('id', 1)->first();
         $cc = $data->clock_comment;
         $tz = $data->timezone;
@@ -92,9 +95,9 @@ class ClockController extends Controller
         // clock-in comment feature
         $clock_comment = table::settings()->value('clock_comment');
 
-        if ($clock_comment == 1) 
+        if ($clock_comment == 1)
         {
-            if ($request->clock_comment == NULL ) 
+            if ($request->clock_comment == NULL )
             {
                 return response()->json([
                     "error" => "Please provide your comment!"
@@ -104,21 +107,21 @@ class ClockController extends Controller
 
         // ip resriction
         $iprestriction = table::settings()->value('iprestriction');
-        if ($iprestriction != NULL) 
+        if ($iprestriction != NULL)
         {
             $ips = explode(",", $iprestriction);
 
-            if(in_array($ip, $ips) == false) 
+            if(in_array($ip, $ips) == false)
             {
                 $msge = "Whoops! You are not allowed to Clock In or Out from your IP address ".$ip;
                 return response()->json([
                     "error" => $msge,
                 ]);
             }
-        } 
+        }
 
         $employee_id = table::companydata()->where('idno', $idno)->value('reference');
-        
+
         if($employee_id == null) {
             return response()->json([
                 "error" => "You enter an invalid ID."
@@ -131,32 +134,50 @@ class ClockController extends Controller
         $mi = $emp->mi;
         $employee = mb_strtoupper($lastname.', '.$firstname.' '.$mi);
 
-        if ($type == 'timein') 
+        if ($type == 'timein')
         {
-            $has = table::attendance()->where([['idno', $idno],['date', $date]])->exists();
 
-            if ($has == 1) 
+
+
+
+
+            // ATTENDANCE TIME IN REQUEST HANDLING STARTS HERE
+
+            // Checks if the following employee has attendance record today
+            $isAttendanceToday = table::daily_attendance()->where([['idno', $idno ], ['reference', $employee_id]])->whereDate('created_at', $date)->exists();
+
+            // If exist in attendance record today
+            if($isAttendanceToday)
             {
-                $hti = table::attendance()->where([['idno', $idno],['date', $date]])->value('timein');
-                $hti = date('h:i A', strtotime($hti));
-                return response()->json([
-                    "employee" => $employee,
-                    "error" => "You already Time In today at ".$hti,
-                ]);
+                // Finds ongoing entry
+                $isOngoingEntry = table::daily_entries()->where([['reference_id', $employee_id],['end_at', NULL]])->whereDate('start_at', $date)->exists();
 
-            } else {
-                $last_in_notimeout = table::attendance()->where([['idno', $idno],['timeout', NULL]])->count();
-
-                if($last_in_notimeout >= 1)
+                if(!$isOngoingEntry)
                 {
+                   // Creates attendance time in
+                   DB::table('daily_entries')->insert(['reference_id' => $employee_id, 'start_at' => Carbon::now()]);
                     return response()->json([
-                        "error" => "Please clock-out from your last Clock In."
+                        "employee" => $employee,
+                        "success" => "Done! Welcome back",
                     ]);
+                }
+                else{
+                    return response()->json([
+                        "employee" => $employee,
+                        "error" => "You already Time In today at . Because I found you in already entry list",
+                    ]);
+                }
+            }
+            else{
+                // Creates attendance time in
+               $attendanceToday = DB::table('daily_attendance')->insert(['idno' => $idno, 'reference' => $employee_id, 'employee' => $employee, 'totalhours' => 0, 'total_break_hours' => 0,'created_at' => Carbon::now()]);
 
-                } else {
+                // Creates attendance time in
+                DB::table('daily_entries')->insert(['reference_id' => $employee_id, 'start_at' => Carbon::now()]);
 
-                    $sched_in_time = table::schedules()->where([['idno', $idno], ['archive', 0]])->value('intime');
-                    
+
+                $sched_in_time = table::schedules()->where([['idno', $idno], ['archive', 0]])->value('intime');
+
                     if($sched_in_time == NULL)
                     {
                         $status_in = "Ok";
@@ -164,7 +185,7 @@ class ClockController extends Controller
                         $sched_clock_in_time_24h = date("H.i", strtotime($sched_in_time));
                         $time_in_24h = date("H.i", strtotime($time));
 
-                        if ($time_in_24h <= $sched_clock_in_time_24h) 
+                        if ($time_in_24h <= $sched_clock_in_time_24h)
                         {
                             $status_in = 'In Time';
                         } else {
@@ -172,167 +193,399 @@ class ClockController extends Controller
                         }
                     }
 
-                    if($clock_comment == 1 && $comment != NULL) 
-                    {
-                        table::attendance()->insert([
-                            [
-                                'idno' => $idno,
-                                'reference' => $employee_id,
-                                'date' => $date,
-                                'employee' => $employee,
-                                'timein' => $date." ".$time,
-                                'status_timein' => $status_in,
-                                'comment' => $comment,
-                            ],
-                        ]);
-                    } else {
-                        table::attendance()->insert([
-                            [
-                                'idno' => $idno,
-                                'reference' => $employee_id,
-                                'date' => $date,
-                                'employee' => $employee,
-                                'timein' => $date." ".$time,
-                                'status_timein' => $status_in,
-                            ],
-                        ]);
-                    }
+                DB::table('daily_attendance')
+                    ->where('reference', $employee_id)
+                    ->whereDate('created_at', $date)
+                    ->update(['status_timein' => $status_in]);
 
-                    return response()->json([
-                        "type" => $type,
-                        "time" => $time,
-                        "date" => $date,
-                        "lastname" => $lastname,
-                        "firstname" => $firstname,
-                        "mi" => $mi,
-                        "success" => "Hello, " . $firstname . " " . $lastname . ". Time In is recorded at " . $time . " on " . $date,
-                    ]);
-                }
+
+
+                return response()->json([
+                    "employee" => $employee,
+                    "success" => "Perfect. You are successfully clocked in. Welcome to office.",
+                ]);
             }
+
+            // ATTENDANCE TIME IN REQUEST HANDLING ENDS HERE
+
+
+
+
+
+//            $has = table::attendance()->where([['idno', $idno],['date', $date]])->exists();
+//            if ($has == 1)
+//            {
+//
+//
+//                $hti = table::attendance()->where([['idno', $idno],['date', $date]])->value('timein');
+//                $hti = date('h:i A', strtotime($hti));
+//                return response()->json([
+//                    "employee" => $employee,
+//                    "error" => "You already Time In today at ".$hti,
+//                ]);
+//
+//            }
+//            else {
+//                $last_in_notimeout = table::attendance()->where([['idno', $idno],['timeout', NULL]])->count();
+//
+//                if($last_in_notimeout >= 1)
+//                {
+//                    return response()->json([
+//                        "error" => "Please clock-out from your last Clock In."
+//                    ]);
+//
+//                } else {
+//
+//                    $sched_in_time = table::schedules()->where([['idno', $idno], ['archive', 0]])->value('intime');
+//
+//                    if($sched_in_time == NULL)
+//                    {
+//                        $status_in = "Ok";
+//                    } else {
+//                        $sched_clock_in_time_24h = date("H.i", strtotime($sched_in_time));
+//                        $time_in_24h = date("H.i", strtotime($time));
+//
+//                        if ($time_in_24h <= $sched_clock_in_time_24h)
+//                        {
+//                            $status_in = 'In Time';
+//                        } else {
+//                            $status_in = 'Late Arrival';
+//                        }
+//                    }
+//
+//                    if($clock_comment == 1 && $comment != NULL)
+//                    {
+//                        table::attendance()->insert([
+//                            [
+//                                'idno' => $idno,
+//                                'reference' => $employee_id,
+//                                'date' => $date,
+//                                'employee' => $employee,
+//                                'timein' => $date." ".$time,
+//                                'status_timein' => $status_in,
+//                                'comment' => $comment,
+//                            ],
+//                        ]);
+//                    } else {
+//                        table::attendance()->insert([
+//                            [
+//                                'idno' => $idno,
+//                                'reference' => $employee_id,
+//                                'date' => $date,
+//                                'employee' => $employee,
+//                                'timein' => $date." ".$time,
+//                                'status_timein' => $status_in,
+//                            ],
+//                        ]);
+//                    }
+//
+//                    return response()->json([
+//                        "type" => $type,
+//                        "time" => $time,
+//                        "date" => $date,
+//                        "lastname" => $lastname,
+//                        "firstname" => $firstname,
+//                        "mi" => $mi,
+//                        "success" => "Hello, " . $firstname . " " . $lastname . ". Time In is recorded at " . $time . " on " . $date,
+//                    ]);
+//                }
+//            }
         }
 
 
         if($type == "break")
         {
-            $has = table::attendance()->where([['idno', $idno],['date', $date]])->exists();
-            if ($has == 1)
-            {
-                //Check if already break in
-                $doesnt_have_break_in = table::attendance()->where([['idno', $idno],['date', $date], ['break_in', NULL]])->exists();
-                $doesnt_have_break_out = table::attendance()->where([['idno', $idno],['date', $date], ['break_out', NULL]])->exists();
 
-                if($doesnt_have_break_in == 1)
-                {
-                    table::attendance()->where([['idno', $idno],['date', $date]])->update(array(
-                            "break_in" => $date." ".$time,
-                        )
-                    );
-                    return response()->json([
-                        "type" => "break_in",
-                        "time" => $time,
-                        "date" => $date,
-                        "lastname" => $lastname,
-                        "firstname" => $firstname,
-                        "mi" => $mi,
-                        "success" => "Hello, " . $firstname . " " . $lastname . ". Break in is recorded at " . $time . " on " . $date,
-                    ]);
-                }
-                else if($doesnt_have_break_out == 1)
-                {
-                    //As already break in, so its time for break out
-                    table::attendance()->where([['idno', $idno],['date', $date]])->update(array(
-                            "break_out" => $date." ".$time,
-                        )
-                    );
-                    return response()->json([
-                        "type" => "break_out",
-                        "time" => $time,
-                        "date" => $date,
-                        "lastname" => $lastname,
-                        "firstname" => $firstname,
-                        "mi" => $mi,
-                        "success" => "Hello, " . $firstname . " " . $lastname . ". Break out is recorded at " . $time . " on " . $date,
-                    ]);
-                }
-                else
-                {
-                    //can't break in/out
-                    $hto = table::attendance()->where([['idno', $idno],['date', $date]])->value('break_out');
-                    $hto = date('h:i A', strtotime($hto));
-                    return response()->json([
-                        "employee" => $employee,
-                        "error" => "You already break out at ". $hto . " on " . $date,
-                    ]);
-
-                }
+            // MULTIPLE BREAK IN AND BREAK OUT CONDITION STARTS HERE
 
 
-            }
-        }
+            // Checks if the following employee has attendance record today
+            $isAttendanceToday = table::daily_attendance()->where([['idno', $idno ], ['reference', $employee_id]])->whereDate('created_at', $date)->first();
 
-        if ($type == 'timeout') 
-        {
-            $timeIN = table::attendance()->where([['idno', $idno], ['timeout', NULL]])->value('timein');
-            $clockInDate = table::attendance()->where([['idno', $idno],['timeout', NULL]])->value('date');
-            $hasout = table::attendance()->where([['idno', $idno],['date', $date]])->value('timeout');
-            $timeOUT = date("Y-m-d h:i:s A", strtotime($date." ".$time));
 
-            if($timeIN == NULL) 
-            {
-                return response()->json([
-                    "error" => "Please Clock In before Clocking Out."
-                ]);
-            } 
 
-            if ($hasout != NULL) 
-            {
-                $hto = table::attendance()->where([['idno', $idno],['date', $date]])->value('timeout');
-                $hto = date('h:i A', strtotime($hto));
-                return response()->json([
-                    "employee" => $employee,
-                    "error" => "You already Time Out at ". $hto . " on " . $date,
-                ]);
+            if($isAttendanceToday){
 
-            } else {
-                $sched_out_time = table::schedules()->where([['idno', $idno], ['archive', 0]])->value('outime');
-                
-                if($sched_out_time == NULL) 
-                {
-                    $status_out = "Ok";
-                } else {
-                    $sched_clock_out_time_24h = date("H.i", strtotime($sched_out_time));
-                    $time_out_24h = date("H.i", strtotime($timeOUT));
-                    
-                    if($time_out_24h >= $sched_clock_out_time_24h) 
-                    {
-                        $status_out = 'On Time';
-                    } else {
-                        $status_out = 'Early Departure';
+
+                // Finds ongoing entry
+                $isOngoingEntry = table::daily_entries()->where([['reference_id', $employee_id],['end_at', NULL]])->whereDate('start_at', $date)->exists();
+
+                if ($isOngoingEntry){
+                    // Finds if there is any ongoing break
+                    $isExistingBreak = table::daily_breaks()->where([['reference_id', $employee_id], ['end_at', NULL]])->whereDate('start_at', $date)->exists();
+
+                    if ($isExistingBreak){
+                        table::daily_breaks()->where([['reference_id', $employee_id], ['end_at', NULL]])->whereDate('start_at', $date)->update(array(
+                            "end_at" => Carbon::now()
+                        ));
+
+                        $all_breaks = DB::table('daily_breaks')->whereDate('start_at', $date)->get();
+
+                        if($all_breaks){
+                            $total_hours = 0;
+                            foreach ($all_breaks as $single_break){
+                                $starttimestamp = strtotime($single_break->start_at);
+                                $endtimestamp = strtotime($single_break->end_at);
+                                $difference = round(($endtimestamp - $starttimestamp)/3600, 2);
+                                $total_hours = $total_hours + $difference;
+                            }
+
+
+                        }
+
+
+//                        $theAttendanceToday = table::daily_attendance()->where([['idno', $idno ],['reference', $employee_id]])->whereDate('created_at', $date)->first();
+
+                        $affected = DB::table('daily_attendance')
+                            ->where('id', $isAttendanceToday->id)
+                            ->update(['total_break_hours' => $total_hours]);
+
+
+                        // returns the response after break ends
+                        return response()->json([
+                            "employee" => $employee,
+                            "success" => "Done ! Welcome back after the break.",
+                        ]);
+
+                    }
+                    else{
+                        DB::table('daily_breaks')->insert(
+                            ['reference_id' => $employee_id, 'start_at' => Carbon::now()]
+                        );
+
+                        // returns the response after successful break starts
+                        return response()->json([
+                            "employee" => $employee,
+                            "success" => "Done ! Enjoy the break",
+                        ]);
+
                     }
                 }
+                else{
+                    return response()->json([
+                        "employee" => $employee,
+                        "error" => "Clock in first",
+                    ]);
+                }
 
-                $time1 = Carbon::createFromFormat("Y-m-d h:i:s A", $timeIN); 
-                $time2 = Carbon::createFromFormat("Y-m-d h:i:s A", $timeOUT); 
-                $th = $time1->diffInHours($time2);
-                $tm = floor(($time1->diffInMinutes($time2) - (60 * $th)));
-                $totalhour = $th.".".$tm;
 
-                table::attendance()->where([['idno', $idno],['date', $clockInDate]])->update(array(
-                    'timeout' => $timeOUT,
-                    'totalhours' => $totalhour,
-                    'status_timeout' => $status_out)
-                );
-                
+            }else{
                 return response()->json([
-                    "type" => $type,
-                    "time" => $time,
-                    "date" => $date,
-                    "lastname" => $lastname,
-                    "firstname" => $firstname,
-                    "mi" => $mi,
-                    "success" => "Hello, " . $firstname . " " . $lastname . ". Time out is recorded at " . $time . " on " . $date,
+                        "employee" => $employee,
+                        "error" => "Clock in first",
+                    ]);
+            }
+
+
+
+            // MULTIPLE BREAK IN AND BREAK OUT CONDITION ENDS HERE
+
+
+//            $has = table::attendance()->where([['idno', $idno],['date', $date]])->exists();
+//            if ($has == 1)
+//            {
+                //Check if already break in
+//                $doesnt_have_break_in = table::attendance()->where([['idno', $idno],['date', $date], ['break_in', NULL]])->exists();
+//                $doesnt_have_break_out = table::attendance()->where([['idno', $idno],['date', $date], ['break_out', NULL]])->exists();
+
+
+
+
+//                if($doesnt_have_break_in == 1)
+//                {
+//                    table::attendance()->where([['idno', $idno],['date', $date]])->update(array(
+//                            "break_in" => $date." ".$time,
+//                        )
+//                    );
+//                    return response()->json([
+//                        "type" => "break_in",
+//                        "time" => $time,
+//                        "date" => $date,
+//                        "lastname" => $lastname,
+//                        "firstname" => $firstname,
+//                        "mi" => $mi,
+//                        "success" => "Hello, " . $firstname . " " . $lastname . ". Break in is recorded at " . $time . " on " . $date,
+//                    ]);
+//                }
+//                else if($doesnt_have_break_out == 1)
+//                {
+//                    //As already break in, so its time for break out
+//                    table::attendance()->where([['idno', $idno],['date', $date]])->update(array(
+//                            "break_out" => $date." ".$time,
+//                        )
+//                    );
+//                    return response()->json([
+//                        "type" => "break_out",
+//                        "time" => $time,
+//                        "date" => $date,
+//                        "lastname" => $lastname,
+//                        "firstname" => $firstname,
+//                        "mi" => $mi,
+//                        "success" => "Hello, " . $firstname . " " . $lastname . ". Break out is recorded at " . $time . " on " . $date,
+//                    ]);
+//                }
+//                else
+//                {
+//                    //can't break in/out
+//                    $hto = table::attendance()->where([['idno', $idno],['date', $date]])->value('break_out');
+//                    $hto = date('h:i A', strtotime($hto));
+//                    return response()->json([
+//                        "employee" => $employee,
+//                        "error" => "You already break out at ". $hto . " on " . $date,
+//                    ]);
+//
+//                }
+
+
+//            }
+        }
+
+        if ($type == 'timeout')
+        {
+
+            // Checks if the following employee has attendance record today
+            $isAttendanceToday = table::daily_attendance()->where([['idno', $idno ],['reference', $employee_id]])->whereDate('created_at', $date)->exists();
+
+            if($isAttendanceToday){
+                // Finds ongoing entry
+                $isOngoingEntry = table::daily_entries()->where([['reference_id', $employee_id] ,['end_at', NULL]])->whereDate('start_at', $date)->exists();
+
+                if($isOngoingEntry){
+
+                    table::daily_entries()->where([['reference_id', $employee_id],['end_at', NULL]])->whereDate('start_at', $date)->update(array(
+                        "end_at" => Carbon::now(),
+                    ));
+
+
+
+
+                    $all_entries = DB::table('daily_entries')->whereDate('start_at', $date)->get();
+
+                    if ($all_entries){
+                        $total_hours = 0;
+                        foreach ($all_entries as $entry){
+                            $starttimestamp = strtotime($entry->start_at);
+                            $endtimestamp = strtotime($entry->end_at);
+                            $difference = round(($endtimestamp - $starttimestamp)/3600, 2);
+                            $total_hours = $total_hours + $difference;
+                        }
+
+
+                    }
+
+
+                    $theAttendanceToday = table::daily_attendance()->where([['idno', $idno ],['reference', $employee_id]])->whereDate('created_at', $date)->first();
+
+                    $affected = DB::table('daily_attendance')
+                        ->where('id', $theAttendanceToday->id)
+                        ->update(array(
+                            'totalhours' => $total_hours,
+                            'updated_at' => Carbon::now()
+                        ));
+
+                    $timeOUT = date("Y-m-d h:i:s A", strtotime($date." ".$time));
+
+                    $sched_out_time = table::schedules()->where([['idno', $idno], ['archive', 0]])->value('outime');
+
+                    if($sched_out_time == NULL)
+                    {
+                        $status_out = "Ok";
+                    } else {
+                        $sched_clock_out_time_24h = date("H.i", strtotime($sched_out_time));
+                        $time_out_24h = date("H.i", strtotime($timeOUT));
+
+                        if($time_out_24h >= $sched_clock_out_time_24h)
+                        {
+                            $status_out = 'On Time';
+                        } else {
+                            $status_out = 'Early Departure';
+                        }
+                    }
+
+                    DB::table('daily_attendance')
+                        ->where('id', $theAttendanceToday->id)
+                        ->update(['status_timeout' => $status_out]);
+
+
+                    return response()->json([
+                        "success" => "Successfully clock out "
+                    ]);
+
+                }else{
+                    return response()->json([
+                        "error" => "Please Clock In before Clocking Out. Ongoing entry does not exist"
+                    ]);
+                }
+            }else{
+                return response()->json([
+                    "error" => "Please Clock In before Clocking Out. Attendence does not exist"
                 ]);
             }
+
+
+
+//            $timeIN = table::attendance()->where([['idno', $idno], ['timeout', NULL]])->value('timein');
+//            $clockInDate = table::attendance()->where([['idno', $idno],['timeout', NULL]])->value('date');
+//            $hasout = table::attendance()->where([['idno', $idno],['date', $date]])->value('timeout');
+//            $timeOUT = date("Y-m-d h:i:s A", strtotime($date." ".$time));
+//
+//            if($timeIN == NULL)
+//            {
+//                return response()->json([
+//                    "error" => "Please Clock In before Clocking Out."
+//                ]);
+//            }
+//
+//            if ($hasout != NULL)
+//            {
+//                $hto = table::attendance()->where([['idno', $idno],['date', $date]])->value('timeout');
+//                $hto = date('h:i A', strtotime($hto));
+//                return response()->json([
+//                    "employee" => $employee,
+//                    "error" => "You already Time Out at ". $hto . " on " . $date,
+//                ]);
+//
+//            }
+//            else {
+//                $sched_out_time = table::schedules()->where([['idno', $idno], ['archive', 0]])->value('outime');
+//
+//                if($sched_out_time == NULL)
+//                {
+//                    $status_out = "Ok";
+//                } else {
+//                    $sched_clock_out_time_24h = date("H.i", strtotime($sched_out_time));
+//                    $time_out_24h = date("H.i", strtotime($timeOUT));
+//
+//                    if($time_out_24h >= $sched_clock_out_time_24h)
+//                    {
+//                        $status_out = 'On Time';
+//                    } else {
+//                        $status_out = 'Early Departure';
+//                    }
+//                }
+//
+//                $time1 = Carbon::createFromFormat("Y-m-d h:i:s A", $timeIN);
+//                $time2 = Carbon::createFromFormat("Y-m-d h:i:s A", $timeOUT);
+//                $th = $time1->diffInHours($time2);
+//                $tm = floor(($time1->diffInMinutes($time2) - (60 * $th)));
+//                $totalhour = $th.".".$tm;
+//
+//                table::attendance()->where([['idno', $idno],['date', $clockInDate]])->update(array(
+//                    'timeout' => $timeOUT,
+//                    'totalhours' => $totalhour,
+//                    'status_timeout' => $status_out)
+//                );
+//
+//                return response()->json([
+//                    "type" => $type,
+//                    "time" => $time,
+//                    "date" => $date,
+//                    "lastname" => $lastname,
+//                    "firstname" => $firstname,
+//                    "mi" => $mi,
+//                    "success" => "Hello, " . $firstname . " " . $lastname . ". Time out is recorded at " . $time . " on " . $date,
+//                ]);
+//            }
         }
     }
 }

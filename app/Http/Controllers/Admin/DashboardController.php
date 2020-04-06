@@ -47,8 +47,8 @@ class DashboardController extends Controller
         ->where('employmentstatus', 'Active')
         ->count();
 
-        $a = table::attendance()
-        ->latest('date')
+        $a = table::daily_attendance()
+        ->latest('created_at')
         ->take(4)
         ->get();
         

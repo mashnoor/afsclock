@@ -12,13 +12,14 @@ class CreateTblFormLeavetypeTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('tbl_form_leavetype', function(Blueprint $table)
-		{
-			$table->increments('id');
-			$table->string('leavetype')->nullable();
-			$table->string('limit')->nullable();
-			$table->string('percalendar')->nullable();
-		});
+        if(!Schema::hasTable('tbl_form_leavetype')) {
+            Schema::create('tbl_form_leavetype', function (Blueprint $table) {
+                $table->increments('id');
+                $table->string('leavetype')->nullable();
+                $table->string('limit')->nullable();
+                $table->string('percalendar')->nullable();
+            });
+        }
 	}
 
 

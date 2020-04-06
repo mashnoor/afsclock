@@ -12,11 +12,12 @@ class CreateTblFormCompanyTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('tbl_form_company', function(Blueprint $table)
-		{
-			$table->increments('id');
-			$table->string('company', 250)->nullable()->default('');
-		});
+        if(!Schema::hasTable('tbl_form_company')) {
+            Schema::create('tbl_form_company', function (Blueprint $table) {
+                $table->increments('id');
+                $table->string('company', 250)->nullable()->default('');
+            });
+        }
 	}
 
 

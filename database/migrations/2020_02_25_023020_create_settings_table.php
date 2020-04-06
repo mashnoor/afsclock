@@ -12,15 +12,16 @@ class CreateSettingsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('settings', function(Blueprint $table)
-		{
-			$table->increments('id');
-			$table->string('country')->nullable();
-			$table->string('timezone')->nullable();
-			$table->integer('clock_comment')->nullable();
-			$table->string('iprestriction', 500)->nullable();
-			$table->string('opt', 800)->nullable();
-		});
+        if(!Schema::hasTable('settings')) {
+            Schema::create('settings', function (Blueprint $table) {
+                $table->increments('id');
+                $table->string('country')->nullable();
+                $table->string('timezone')->nullable();
+                $table->integer('clock_comment')->nullable();
+                $table->string('iprestriction', 500)->nullable();
+                $table->string('opt', 800)->nullable();
+            });
+        }
 	}
 
 

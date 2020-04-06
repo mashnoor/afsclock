@@ -13,18 +13,19 @@ class CreateTblTasks extends Migration
      */
     public function up()
     {
-
-        Schema::create('tbl_tasks', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('reference');
-            $table->integer('assigned_by');
-            $table->text('title');
-            $table->longText('description');
-            $table->date('finishdate');
-            $table->date('deadline');
-            $table->text('comment');
-            $table->timestamps();
-        });
+        if(!Schema::hasTable('tbl_tasks')) {
+            Schema::create('tbl_tasks', function (Blueprint $table) {
+                $table->increments('id');
+                $table->integer('reference');
+                $table->integer('assigned_by');
+                $table->text('title');
+                $table->longText('description');
+                $table->date('finishdate');
+                $table->date('deadline');
+                $table->text('comment');
+                $table->timestamps();
+            });
+        }
     }
 
     /**

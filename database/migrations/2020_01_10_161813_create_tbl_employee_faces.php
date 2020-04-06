@@ -13,12 +13,14 @@ class CreateTblEmployeeFaces extends Migration
      */
     public function up()
     {
-        Schema::create('tbl_employee_faces', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('reference');
-            $table->string('image_name');
-            $table->timestamps();
-        });
+        if(!Schema::hasTable('tbl_employee_faces')) {
+            Schema::create('tbl_employee_faces', function (Blueprint $table) {
+                $table->increments('id');
+                $table->integer('reference');
+                $table->string('image_name');
+                $table->timestamps();
+            });
+        }
     }
 
     /**

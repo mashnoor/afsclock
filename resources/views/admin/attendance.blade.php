@@ -27,8 +27,8 @@
                             <th>Employee</th>
                             <th>Time In</th>
                             <th>Time Out</th>
-                            <th>Break In</th>
-                            <th>Break Out</th>
+{{--                            <th>Break In</th>--}}
+{{--                            <th>Break Out</th>--}}
                             <th>Total Hours</th>
                             <th>Note (In / Out)</th>
                             @isset($cc)
@@ -43,33 +43,33 @@
                         @isset($data)
                             @foreach ($data as $d)
                                 <tr>
-                                    <td>{{ $d->date }}</td>
+                                    <td>{{ $d->created_at }}</td>
                                     <td>{{ $d->employee }}</td>
-                                    <td>@php $IN = date('h:i:s A', strtotime($d->timein)); echo $IN; @endphp</td>
+                                    <td>@php $IN = date('h:i:s A', strtotime($d->created_at)); echo $IN; @endphp</td>
                                     <td>
-                                        @isset($d->timeout)
+                                        @isset($d->updated_at)
                                             @php
-                                                $OUT = date('h:i:s A', strtotime($d->timeout));
+                                                $OUT = date('h:i:s A', strtotime($d->updated_at));
                                             @endphp
-                                            @if($d->timeout != NULL)
+                                            @if($d->updated_at != NULL)
                                                 {{ $OUT }}
                                             @endif
                                         @endisset
                                     </td>
-                                    <td>
-                                        @isset($d->break_in)
-                                            @php $break_in_time = date('h:i:s A', strtotime($d->break_in)); @endphp
-                                            {{ $break_in_time }}
-                                        @endisset
+{{--                                    <td>--}}
+{{--                                        @isset($d->break_in)--}}
+{{--                                            @php $break_in_time = date('h:i:s A', strtotime($d->break_in)); @endphp--}}
+{{--                                            {{ $break_in_time }}--}}
+{{--                                        @endisset--}}
 
-                                    </td>
-                                    <td>
-                                        @isset($d->break_out)
-                                            @php $break_out_time = date('h:i:s A', strtotime($d->break_out)); @endphp
-                                            {{ $break_out_time }}
-                                        @endisset
+{{--                                    </td>--}}
+{{--                                    <td>--}}
+{{--                                        @isset($d->break_out)--}}
+{{--                                            @php $break_out_time = date('h:i:s A', strtotime($d->break_out)); @endphp--}}
+{{--                                            {{ $break_out_time }}--}}
+{{--                                        @endisset--}}
 
-                                    </td>
+{{--                                    </td>--}}
                                     <td>
                                         @isset($d->totalhours)
                                             @if($d->totalhours != null)

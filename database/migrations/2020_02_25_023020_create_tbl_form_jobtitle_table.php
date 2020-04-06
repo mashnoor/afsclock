@@ -12,12 +12,13 @@ class CreateTblFormJobtitleTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('tbl_form_jobtitle', function(Blueprint $table)
-		{
-			$table->increments('id');
-			$table->string('jobtitle', 250)->nullable()->default('');
-			$table->integer('dept_code')->nullable();
-		});
+        if(!Schema::hasTable('tbl_form_jobtitle')) {
+            Schema::create('tbl_form_jobtitle', function (Blueprint $table) {
+                $table->increments('id');
+                $table->string('jobtitle', 250)->nullable()->default('');
+                $table->integer('dept_code')->nullable();
+            });
+        }
 	}
 
 

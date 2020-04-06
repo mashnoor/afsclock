@@ -12,12 +12,13 @@ class CreateUsersRolesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('users_roles', function(Blueprint $table)
-		{
-			$table->increments('id');
-			$table->string('role_name')->nullable();
-			$table->string('state', 100)->nullable();
-		});
+        if(!Schema::hasTable('users_roles')) {
+            Schema::create('users_roles', function (Blueprint $table) {
+                $table->increments('id');
+                $table->string('role_name')->nullable();
+                $table->string('state', 100)->nullable();
+            });
+        }
 	}
 
 

@@ -28,6 +28,8 @@ class AttendanceController extends Controller
         return view('clock');
     }
 
+
+
     public function edit($id, Request $request)
     {
         if (permission::permitted('attendance-edit')=='fail'){ return redirect()->route('denied'); }
@@ -125,4 +127,20 @@ class AttendanceController extends Controller
 
         return redirect('attendance')->with('success','Employee Attendance has been updated!');
     }
+
+    public function details(Request $request){
+
+        $attendanceID = request()->attendanceID;
+
+        $theAttendance = table::daily_attendance()->where('id', $attendanceID)->first();
+
+        $theDate = date("Y-m-d", strtotime($theAttendance->created_at));
+
+        $all_entries = table::daily_entries()->where('reference_id', $theAttendance->reference)->whereDate('start_at', $theDate)->get();
+        $all_breaks = table::daily_breaks()->where('reference_id', $theAttendance->reference)->whereDate('start_at', $theDate)->get();
+
+        return response()->json( array($all_entries, $all_breaks));
+
+    }
+
 }

@@ -34,7 +34,8 @@ Route::group(['middleware' => 'auth'], function () {
 			|--------------------------------------------------------------------------
 			*/
 			Route::get('/', 'Admin\DashboardController@index');
-			Route::get('dashboard', 'Admin\DashboardController@index')->name('dashboard');	
+			Route::get('dashboard', 'Admin\DashboardController@index')->name('dashboard');
+
 
 
 			/*
@@ -73,6 +74,7 @@ Route::group(['middleware' => 'auth'], function () {
 			Route::get('attendance/edit/{id}', 'Admin\AttendanceController@edit');
 			Route::get('attendance/delete/{id}', 'Admin\AttendanceController@delete');
 			Route::post('attendance/update', 'Admin\AttendanceController@update');
+			Route::get('attendance/view/details', 'Admin\AttendanceController@details');
 
 			
 			/*
@@ -260,6 +262,7 @@ Route::group(['middleware' => 'auth'], function () {
 			// attendance 
 			Route::get('personal/attendance/view', 'Personal\PersonalAttendanceController@index');
 			Route::get('get/personal/attendance', 'Personal\PersonalAttendanceController@getPA');
+			Route::get('personal/attendance/details', 'Personal\PersonalAttendanceController@details');
 
 			// schedules 
 			Route::get('personal/schedules/view', 'Personal\PersonalSchedulesController@index');

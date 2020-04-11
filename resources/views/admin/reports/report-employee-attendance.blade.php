@@ -10,12 +10,12 @@
     @endsection
 
     @section('content')
-    
+
     <div class="container-fluid">
         <div class="row">
             <h2 class="page-title">Employee Attendance Report
                 <a href="{{ url('reports') }}" class="ui basic blue button mini offsettop5 float-right"><i class="ui icon chevron left"></i>Return</a>
-            </h2> 
+            </h2>
         </div>
 
         <div class="row">
@@ -62,14 +62,33 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @isset($empAtten)
-                            @foreach ($empAtten as $v)
+                            @isset($employeeAttendance)
+                            @foreach ($employeeAttendance as $v)
                                 <tr>
-                                    <td>{{ $v->date }}</td>
+                                    <td>@isset($v->created_at) @php echo e(date('d-m-Y', strtotime($v->created_at))) @endphp @endisset</td>
                                     <td>{{ $v->employee }}</td>
-                                    <td>@isset($v->timein)  @php echo e(date('h:i:s A', strtotime($v->timein))) @endphp @endisset</td>
-                                    <td>@isset($v->timeout) @php echo e(date('h:i:s A', strtotime($v->timeout))) @endphp @endisset</td>
-                                    <td>{{ $v->totalhours }}</td>
+                                    <td>@isset($v->created_at)  @php echo e(date('h:i:s A', strtotime($v->created_at))) @endphp @endisset</td>
+                                    <td>@isset($v->updated_at) @php echo e(date('h:i:s A', strtotime($v->updated_at))) @endphp @endisset</td>
+                                    <td>@isset($v->totalhours)
+                                        @if($v->totalhours != null)
+                                            @php
+                                                if(stripos($v->totalhours, ".") === false) {
+                                                    $h = $v->totalhours;
+                                                } else {
+                                                    $HM = explode('.', $v->totalhours);
+                                                    $h = $HM[0];
+                                                    $m = $HM[1];
+                                                }
+                                            @endphp
+                                        @endif
+                                        @if($v->totalhours != null)
+                                            @if(stripos($v->totalhours, ".") === false)
+                                                {{ $h }} hr
+                                            @else
+                                                {{ $h }} hr {{ $m }} mins
+                                            @endif
+                                        @endif
+                                    @endisset</td>
                                 </tr>
                             @endforeach
                             @endisset
@@ -82,7 +101,7 @@
     </div>
 
     @endsection
-    
+
     @section('scripts')
     <script src="{{ asset('/assets/vendor/air-datepicker/dist/js/datepicker.min.js') }}"></script>
     <script src="{{ asset('/assets/vendor/air-datepicker/dist/js/i18n/datepicker.en.js') }}"></script>
@@ -92,7 +111,7 @@
 
     $('.airdatepicker').datepicker({ language: 'en', dateFormat: 'yyyy-mm-dd' });
 
-    // transfer idno 
+    // transfer idno
     $('.ui.dropdown.getid').dropdown({ onChange: function(value, text, $selectedItem) {
         $('select[name="employee"] option').each(function() {
             if($(this).val()==value) {var id = $(this).attr('data-id');$('input[name="emp_id"]').val(id);};
@@ -114,7 +133,7 @@
                 function showdata(jsonresponse) {
                     var employee = jsonresponse;
                     var tbody = $('#dataTables-example tbody');
-                    
+
                     // clear data and destroy datatable
                     $('#dataTables-example').DataTable().destroy();
                     tbody.children('tr').remove();
@@ -127,16 +146,16 @@
                         var time_out = employee[i].timeout;
                         var t_out = time_out.split(" ");
 
-                        tbody.append("<tr>"+ 
-                                        "<td>"+employee[i].date+"</td>" + 
-                                        "<td>"+employee[i].employee+"</td>" + 
-                                        "<td>"+ t_in[1]+" "+t_in[2] +"</td>" + 
-                                        "<td>"+ t_out[1]+" "+t_out[2] +"</td>" + 
-                                        "<td>"+employee[i].totalhours+"</td>" + 
+                        tbody.append("<tr>"+
+                                        "<td>"+employee[i].date+"</td>" +
+                                        "<td>"+employee[i].employee+"</td>" +
+                                        "<td>"+ t_in[1]+" "+t_in[2] +"</td>" +
+                                        "<td>"+ t_out[1]+" "+t_out[2] +"</td>" +
+                                        "<td>"+employee[i].totalhours+"</td>" +
                                     "</tr>");
                     }
 
-                    tbody.append("<tr class='tablefooter'>"+ 
+                    tbody.append("<tr class='tablefooter'>"+
                         "<td colspan='4'><strong>TOTAL HOURS</strong></td>"+
                         "<td><strong>"+gtr.toFixed(2)+"</strong></td>"+
                         "<td class='hide'></td>"+
@@ -148,9 +167,9 @@
 
                     // initialize datatable
                     $('#dataTables-example').DataTable({responsive: true,pageLength: 15,lengthChange: false,searching: false,ordering: false});
-                }            
+                }
             }
         })
     });
     </script>
-    @endsection 
+    @endsection

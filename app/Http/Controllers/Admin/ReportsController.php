@@ -12,7 +12,7 @@ use App\Http\Controllers\Controller;
 
 class ReportsController extends Controller
 {
-	public function index() 
+	public function index()
 	{
 		if (permission::permitted('reports')=='fail'){ return redirect()->route('denied'); }
 		$lastviews = table::reportviews()->get();
@@ -20,7 +20,7 @@ class ReportsController extends Controller
     	return view('admin.reports', ['lastviews' => $lastviews]);
     }
 
-	public function empList(Request $request) 
+	public function empList(Request $request)
 	{
 		if (permission::permitted('reports')=='fail'){ return redirect()->route('denied'); }
 		//if($request->sh == 2){return redirect()->route('reports');}
@@ -31,19 +31,20 @@ class ReportsController extends Controller
 		return view('admin.reports.report-employee-list', compact('empList'));
 	}
 
-	public function empAtten(Request $request) 
+	public function empAtten(Request $request)
 	{
 		if (permission::permitted('reports')=='fail'){ return redirect()->route('denied'); }
 		//if($request->sh == 2){return redirect()->route('reports');}
 		$today = date('M, d Y');
-		$empAtten = table::attendance()->get();
+		// $empAtten = table::attendance()->get();
+		$employeeAttendance = table::daily_attendance()->get();
 		$employee = table::people()->join('tbl_company_data', 'tbl_people.id', '=', 'tbl_company_data.reference')->where('tbl_people.employmentstatus', 'Active')->get();
 		table::reportviews()->where('report_id', 2)->update(array('last_viewed' => $today));
 
-		return view('admin.reports.report-employee-attendance', compact('empAtten', 'employee'));
+		return view('admin.reports.report-employee-attendance', compact('employeeAttendance', 'employee'));
 	}
 
-	public function empLeaves(Request $request) 
+	public function empLeaves(Request $request)
 	{
 		if (permission::permitted('reports')=='fail'){ return redirect()->route('denied'); }
 		//if($request->sh == 2){return redirect()->route('reports');}
@@ -55,7 +56,7 @@ class ReportsController extends Controller
 		return view('admin.reports.report-employee-leaves', compact('empLeaves', 'employee'));
 	}
 
-	public function empSched(Request $request) 
+	public function empSched(Request $request)
 	{
 		if (permission::permitted('reports')=='fail'){ return redirect()->route('denied'); }
 		//if($request->sh == 2){return redirect()->route('reports');}
@@ -67,27 +68,27 @@ class ReportsController extends Controller
 		return view('admin.reports.report-employee-schedule', compact('empSched', 'employee'));
 	}
 
-	public function orgProfile(Request $request) 
+	public function orgProfile(Request $request)
 	{
 		if (permission::permitted('reports')=='fail'){ return redirect()->route('denied'); }
 		//if($request->sh == 2){return redirect()->route('reports');}
 		$today = date('M, d Y');
 		$ed = table::people()->join('tbl_company_data', 'tbl_people.id', '=', 'tbl_company_data.reference')->where('tbl_people.employmentstatus', 'Active')->get();
-		
+
 		$age_18_24 = table::people()->where([['age', '>=', '18'], ['age', '<=', '24']])->count();
 		$age_25_31 = table::people()->where([['age', '>=', '25'], ['age', '<=', '31']])->count();
 		$age_32_38 = table::people()->where([['age', '>=', '32'], ['age', '<=', '38']])->count();
 		$age_39_45 = table::people()->where([['age', '>=', '39'], ['age', '<=', '45']])->count();
 		$age_46_100 = table::people()->where('age', '>=', '46')->count();
-		
+
 		if($age_18_24 == null) {$age_18_24 = 0;};
 		if($age_25_31 == null) {$age_25_31 = 0;};
 		if($age_32_38 == null) {$age_32_38 = 0;};
 		if($age_39_45 == null) {$age_39_45 = 0;};
-		if($age_46_100 == null) {$age_46_100 = 0;};	
+		if($age_46_100 == null) {$age_46_100 = 0;};
 
 		$age_group = $age_18_24.','.$age_25_31.','.$age_32_38.','.$age_39_45.','.$age_46_100;
-		$dcc = null; 
+		$dcc = null;
 		$dpc = null;
 		$dgc = null;
 		$csc = null;
@@ -107,18 +108,18 @@ class ReportsController extends Controller
 
 		foreach ($ed as $yearhired) {
 			$year[] = date("Y", strtotime($yearhired->startdate));
-			asort($year); 
+			asort($year);
 			$yhc = array_count_values($year);
 		}
 		$yc = ($yhc == null) ? null : implode(', ', $yhc) . ',' ;
-		
+
 		$orgProfile = table::companydata()->get();
 		table::reportviews()->where('report_id', 5)->update(array('last_viewed' => $today));
 
 		return view('admin.reports.report-organization-profile', compact('orgProfile', 'age_group', 'gc', 'dgc', 'cg', 'csc', 'yc', 'yhc', 'dc', 'dpc', 'dcc', 'cc'));
 	}
 
-	public function empBday(Request $request) 
+	public function empBday(Request $request)
 	{
 		if (permission::permitted('reports')=='fail'){ return redirect()->route('denied'); }
 		//if($request->sh == 2){return redirect()->route('reports');}
@@ -129,7 +130,7 @@ class ReportsController extends Controller
 		return view('admin.reports.report-employee-birthdays', compact('empBday'));
 	}
 
-	public function userAccs(Request $request) 
+	public function userAccs(Request $request)
 	{
 		if (permission::permitted('reports')=='fail'){ return redirect()->route('denied'); }
 		//if($request->sh == 2){return redirect()->route('reports');}
@@ -140,20 +141,20 @@ class ReportsController extends Controller
 		return view('admin.reports.report-user-accounts', compact('userAccs'));
 	}
 
-	public function getEmpAtten(Request $request) 
+	public function getEmpAtten(Request $request)
 	{
 		if (permission::permitted('reports')=='fail'){ return redirect()->route('denied'); }
 		$id = $request->id;
 		$datefrom = $request->datefrom;
 		$dateto = $request->dateto;
-		
-		if ($id == null AND $datefrom == null AND $dateto == null) 
+
+		if ($id == null AND $datefrom == null AND $dateto == null)
 		{
 			$data = table::attendance()->select('idno', 'date', 'employee', 'timein', 'timeout', 'totalhours')->get();
 			return response()->json($data);
 		}
 
-		if($id !== null AND $datefrom == null AND $dateto == null ) 
+		if($id !== null AND $datefrom == null AND $dateto == null )
 		{
 		 	$data = table::attendance()->where('idno', $id)->select('idno', 'date', 'employee', 'timein', 'timeout', 'totalhours')->get();
 			return response()->json($data);
@@ -163,23 +164,23 @@ class ReportsController extends Controller
 		} elseif ($id == null AND $datefrom !== null AND $dateto !== null) {
 			$data = table::attendance()->whereBetween('date', [$datefrom, $dateto])->select('idno', 'date', 'employee', 'timein', 'timeout', 'totalhours')->get();
 			return response()->json($data);
-		} 
+		}
 	}
 
-	public function getEmpLeav(Request $request) 
+	public function getEmpLeav(Request $request)
 	{
 		if (permission::permitted('reports')=='fail'){ return redirect()->route('denied'); }
 		$id = $request->id;
 		$datefrom = $request->datefrom;
 		$dateto = $request->dateto;
 
-		if ($id == null AND $datefrom == null AND $dateto == null) 
+		if ($id == null AND $datefrom == null AND $dateto == null)
 		{
 			$data = table::leaves()->select('idno', 'employee', 'type', 'leavefrom', 'leaveto', 'status', 'reason')->get();
 			return response()->json($data);
 		}
 
-		if($id !== null AND $datefrom == null AND $dateto == null ) 
+		if($id !== null AND $datefrom == null AND $dateto == null )
 		{
 			$data = table::leaves()->where('idno', $id)->select('idno', 'employee', 'type', 'leavefrom', 'leaveto', 'status', 'reason')->get();
 			return response()->json($data);
@@ -189,24 +190,24 @@ class ReportsController extends Controller
 		} elseif ($id == null AND $datefrom !== null AND $dateto !== null) {
 			$data = table::leaves()->whereBetween('leavefrom', [$datefrom, $dateto])->select('idno', 'employee', 'type', 'leavefrom', 'leaveto', 'status', 'reason')->get();
 			return response()->json($data);
-		} 
+		}
 	}
 
-	public function getEmpSched(Request $request) 
+	public function getEmpSched(Request $request)
 	{
 		if (permission::permitted('reports')=='fail'){ return redirect()->route('denied'); }
 		$id = $request->id;
-		
-		if ($id == null) 
+
+		if ($id == null)
 		{
 			$data = table::schedules()->select('reference', 'employee', 'intime', 'outime', 'datefrom', 'dateto', 'hours', 'restday', 'archive')->orderBy('archive', 'ASC')->get();
 			return response()->json($data);
 		}
 
-		if($id !== null) 
+		if($id !== null)
 		{
 		 	$data = table::schedules()->where('idno', $id)->select('reference', 'employee', 'intime', 'outime', 'datefrom', 'dateto', 'hours', 'restday', 'archive')->orderBy('archive', 'ASC')->get();
 			return response()->json($data);
-		} 
+		}
 	}
 }

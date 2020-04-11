@@ -73,4 +73,21 @@ class DashboardController extends Controller
 
         return view('admin.dashboard', compact('emp_typeR', 'emp_typeT', 'emp_allActive', 'emp_leaves_pending', 'emp_leaves_approve', 'emp_leaves_all', 'emp_approved_leave', 'emp_all_type','a', 'is_online_now', 'is_offline_now'));
     }
+
+
+    public function details(Request $request){
+
+        $attendanceID = request()->attendanceID;
+
+        $theAttendance = table::daily_attendance()->where('id', $attendanceID)->first();
+
+        $theDate = date("Y-m-d", strtotime($theAttendance->created_at));
+
+        $all_entries = table::daily_entries()->where('reference_id', $theAttendance->reference)->whereDate('start_at', $theDate)->get();
+        $all_breaks = table::daily_breaks()->where('reference_id', $theAttendance->reference)->whereDate('start_at', $theDate)->get();
+
+        return response()->json( array($all_entries, $all_breaks));
+
+    }
+
 }

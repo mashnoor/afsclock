@@ -179,48 +179,48 @@
                             @isset($a)
                                 @foreach($a as $v)
 
-                                    @if($v->timein != '' && $v->timeout == '')
+                                    @if($v->created_at != '' && $v->updated_at == '')
                                         <tr>
-                                            <td>@php $date1 = date('M d, Y', strtotime($v->date)); @endphp
+                                            <td>@php $date1 = date('M d, Y', strtotime($v->created_at)); @endphp
                                                 {{ $date1 }}
                                             </td>
-                                            <td>@php echo e(date('h:i:s A', strtotime($v->timein))) @endphp</td>
+                                            <td>@php echo e(date('h:i:s A', strtotime($v->created_at))) @endphp</td>
                                             <td>Time-In</td>
                                         </tr>
                                     @endif
-                                    @if($v->break_out != null)
-                                        <tr>
-                                            <td class="name-title">{{ $v->employee }}</td>
-                                            <td>Break Out</td>
-                                            <td>@php echo e(date('h:i:s A', strtotime($v->break_out))) @endphp</td>
-                                        </tr>
-                                    @endif
-                                    @if($v->break_in != null)
-                                        <tr>
-                                            <td class="name-title">{{ $v->employee }}</td>
-                                            <td>Break In</td>
-                                            <td>@php echo e(date('h:i:s A', strtotime($v->break_in))) @endphp</td>
-                                        </tr>
-                                    @endif
+{{--                                    @if($v->break_out != null)--}}
+{{--                                        <tr>--}}
+{{--                                            <td class="name-title">{{ $v->employee }}</td>--}}
+{{--                                            <td>Break Out</td>--}}
+{{--                                            <td>@php echo e(date('h:i:s A', strtotime($v->break_out))) @endphp</td>--}}
+{{--                                        </tr>--}}
+{{--                                    @endif--}}
+{{--                                    @if($v->break_in != null)--}}
+{{--                                        <tr>--}}
+{{--                                            <td class="name-title">{{ $v->employee }}</td>--}}
+{{--                                            <td>Break In</td>--}}
+{{--                                            <td>@php echo e(date('h:i:s A', strtotime($v->break_in))) @endphp</td>--}}
+{{--                                        </tr>--}}
+{{--                                    @endif--}}
 
 
-                                    @if($v->timein != '' && $v->timeout != '')
+                                    @if($v->created_at != '' && $v->updated_at != '')
                                         <tr>
-                                            <td>@php $date2 = date('M d, Y', strtotime($v->date)); @endphp
+                                            <td>@php $date2 = date('M d, Y', strtotime($v->created_at)); @endphp
                                                 {{ $date2 }}
                                             </td>
-                                            <td>@php echo e(date('h:i:s A', strtotime($v->timeout))) @endphp</td>
+                                            <td>@php echo e(date('h:i:s A', strtotime($v->updated_at))) @endphp</td>
                                             <td>Time-Out</td>
                                         </tr>
                                     @endif
 
 
-                                    @if($v->timein != '' && $v->timeout != '')
+                                    @if($v->created_at != '' && $v->updated_at != '')
                                         <tr>
-                                            <td>@php $date3 = date('M d, Y', strtotime($v->date)); @endphp
+                                            <td>@php $date3 = date('M d, Y', strtotime($v->created_at)); @endphp
                                                 {{ $date3 }}
                                             </td>
-                                            <td>@php echo e(date('h:i:s A', strtotime($v->timein))) @endphp</td>
+                                            <td>@php echo e(date('h:i:s A', strtotime($v->updated_at))) @endphp</td>
                                             <td>Time-In</td>
                                         </tr>
                                     @endif

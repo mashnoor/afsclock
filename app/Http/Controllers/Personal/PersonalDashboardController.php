@@ -34,7 +34,7 @@ class PersonalDashboardController extends Controller
         $al = table::leaves()->where([['reference', $id], ['status', 'Approved']])->count();
         $ald = table::leaves()->where([['reference', $id], ['status', 'Approved']])->take(8)->get();
         $pl = table::leaves()->where([['reference', $id], ['status', 'Declined']])->orWhere([['reference', $id], ['status', 'Pending']])->count();
-        $a = table::attendance()->where('reference', $id)->latest('date')->take(4)->get();
+        $a = table::daily_attendance()->where('reference', $id)->latest('created_at')->take(4)->get();
 
         $la = table::attendance()->where([['reference', $id], ['status_timein', 'Late Arrival']])->whereBetween('date', [$sm, $em])->count();
         $ed = table::attendance()->where([['reference', $id], ['status_timeout', 'Early Departure']])->whereBetween('date', [$sm, $em])->count();

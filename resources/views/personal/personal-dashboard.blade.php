@@ -304,11 +304,45 @@
 
         </div>
     </div>
+    <div class="ui tiny modal pendingTask">
+        <i class="close icon"></i>
+        <div class="header">
+            <h3>You have {{ count($pending_tasks)}} pending tasks..</h3>
+        </div>
+        <div class="content">
 
+          <table class="table table-striped nobordertop">
+              <thead>
+              <tr>
+                  <th class="text-left">Title</th>
+                  <th class="text-left">Deadline</th>
+              </tr>
+              </thead>
+              <tbody>
+              @isset($pending_tasks)
+                  @foreach($pending_tasks as $task)
+                      <tr>
+                        <td>{{ $task->title }}</td>
+                          <td>{{ $task->deadline }}</td>
+                      </tr>
+                  @endforeach
+              @endisset
+              </tbody>
+          </table>
+
+        </div>
+        <div class="actions">
+
+            <div class="ui positive right labeled icon button">
+                I'm aware
+                <i class="checkmark icon"></i>
+            </div>
+        </div>
+    </div></td>
 @endsection
 
 @section('scripts')
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
         var timezone = "@isset($tz){{ $tz }}@endisset";
         var elTime = document.getElementById('show_time');
         var elDate = document.getElementById('show_date');
@@ -332,5 +366,16 @@
         setTime();
         setInterval(setTime, 1000);
 
+
+
+
+
+    </script> -->
+    <script>
+    $(document).ready(function(){
+
+      $(".pendingTask").modal('show');
+
+    });
     </script>
 @endsection

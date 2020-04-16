@@ -11,9 +11,9 @@ use App\Http\Controllers\Controller;
 
 class PersonalDashboardController extends Controller
 {
-    public function index() 
+    public function index()
     {
-        
+
         $data = table::settings()->where('id', 1)->first();
         $tz = $data->timezone;
 
@@ -22,7 +22,7 @@ class PersonalDashboardController extends Controller
         $em = date('m/31/Y');
 
         $cs = table::schedules()->where([
-            ['reference', $id], 
+            ['reference', $id],
             ['archive', '0']
         ])->first();
 
@@ -41,9 +41,10 @@ class PersonalDashboardController extends Controller
 
         $tasks = Task::where('reference', $id)->get();
 
+        $pending_tasks = Task::where([['reference', $id],['done_status', 0]])->get();
+
         $no_of_pending_tasks = Task::where([['reference', $id], ['finishdate', null]])->count();
         $no_of_done_tasks = $tasks->count()-$no_of_pending_tasks;
-        return view('personal.personal-dashboard', compact('cs', 'ps', 'al', 'pl', 'ald', 'a', 'la', 'ed', 'tz', 'no_of_pending_tasks', 'no_of_done_tasks', 'tasks'));
+        return view('personal.personal-dashboard', compact('cs', 'ps', 'al', 'pl', 'ald', 'a', 'la', 'ed', 'tz', 'no_of_pending_tasks', 'no_of_done_tasks', 'tasks', 'pending_tasks'));
     }
 }
-

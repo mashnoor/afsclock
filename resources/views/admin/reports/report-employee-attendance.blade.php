@@ -24,7 +24,7 @@
                     <form action="{{ url('export/report/attendance') }}" method="post" accept-charset="utf-8" class="ui small form form-filter" id="filterform">
                         {{ csrf_field() }}
                         <div class="inline three fields">
-                            <div class="three wide field">
+                            <!-- <div class="three wide field">
                                 <select name="employee" class="ui search dropdown getid">
                                     <option value="">Employee</option>
                                     @isset($employee)
@@ -33,7 +33,13 @@
                                         @endforeach
                                     @endisset
                                 </select>
+                            </div> -->
+
+                            <div class="seven wide field">
+                                <input id="smartsearch" type="text" name="smartsearch" value="" placeholder="Search anything" onkeyup="getEmployeeAttendance()">
                             </div>
+
+
 
                             <div class="two wide field">
                                 <input id="datefrom" type="text" name="datefrom" value="" placeholder="Start Date" class="airdatepicker">
@@ -61,7 +67,7 @@
                                 <th>Total Hours</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="report_tbody">
                             @isset($employeeAttendance)
                             @foreach ($employeeAttendance as $v)
                                 <tr>
@@ -171,5 +177,29 @@
             }
         })
     });
+
+
+
+    // Finds employee attendance for specific row.
+    function getEmployeeAttendance() {
+
+          var smartSearchFieldValue = document.getElementById('smartsearch').value;
+
+          var report_tbody = document.getElementById('report_tbody');
+
+          report_tbody.innerHTML = '';
+
+        $.get('/get/employee-report/search', {searchContent: smartSearchFieldValue}, function(data){
+
+          for (var i = 0; i < data.length; i++) {
+            report_tbody.innerHTML += "<tr><td>"+ data[0].created_at +"</td><td>"+ data[0].employee +"</td><td>"+ data[0].created_at +"</td><td>"+ data[0].created_at +"</td><td>"+ data[0].totalhours +"</td></tr>"
+          }
+
+        })
+    }
+
+
+
+
     </script>
     @endsection

@@ -31,6 +31,23 @@ class ReportsController extends Controller
 		return view('admin.reports.report-employee-list', compact('empList'));
 	}
 
+	public function employeeReportSearch(Request $request){
+		if (permission::permitted('reports')=='fail'){ return redirect()->route('denied'); }
+
+		// Data provided in the search field
+		$searchContent = request()->searchContent;
+
+		if($searchContent !== ""){
+			$searchResults = table::daily_attendance()->where('employee','LIKE','%'.$searchContent.'%')->orWhere('idno','LIKE','%'.$searchContent.'%')->get();
+		}else{
+			$searchResults = table::daily_attendance()->all();
+		}
+
+
+		return response()->json($searchResults);
+	}
+
+
 	public function empAtten(Request $request)
 	{
 		if (permission::permitted('reports')=='fail'){ return redirect()->route('denied'); }

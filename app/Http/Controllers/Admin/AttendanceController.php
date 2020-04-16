@@ -12,17 +12,17 @@ use App\Http\Controllers\Controller;
 
 class AttendanceController extends Controller
 {
-    
-    public function index() 
+
+    public function index()
     {
         if (permission::permitted('attendance')=='fail'){ return redirect()->route('denied'); }
-        
+
         $data = table::daily_attendance()->orderBy('created_at', 'desc')->get();
         $cc = table::settings()->value('clock_comment');
-        
+
         return view('admin.attendance', compact('data', 'cc'));
     }
-    
+
     public function clock()
     {
         return view('clock');
@@ -33,7 +33,7 @@ class AttendanceController extends Controller
     public function edit($id, Request $request)
     {
         if (permission::permitted('attendance-edit')=='fail'){ return redirect()->route('denied'); }
-        
+
         $a = table::attendance()->where('id', $id)->first();
         $e_id = ($a->id == null) ? 0 : Crypt::encryptString($a->id) ;
 
@@ -71,7 +71,7 @@ class AttendanceController extends Controller
         $reason = $request->reason;
 
         $sched_in_time = table::schedules()->where([
-            ['idno', '=', $idno], 
+            ['idno', '=', $idno],
             ['archive', '=', '0'],
         ])->value('intime');
 
@@ -82,7 +82,7 @@ class AttendanceController extends Controller
             $sched_clock_in_time_24h = date("H.i", strtotime($sched_in_time));
             $time_in_24h = date("H.i", strtotime($timeIN));
 
-            if ($time_in_24h <= $sched_clock_in_time_24h) 
+            if ($time_in_24h <= $sched_clock_in_time_24h)
             {
                 $status_in = 'In Time';
             } else {
@@ -91,18 +91,18 @@ class AttendanceController extends Controller
         }
 
         $sched_out_time = table::schedules()->where([
-            ['idno', '=', $idno], 
+            ['idno', '=', $idno],
             ['archive','=','0'],
         ])->value('outime');
-        
-        if($sched_out_time == null) 
+
+        if($sched_out_time == null)
         {
             $status_out = "Ok";
         } else {
             $sched_clock_out_time_24h = date("H.i", strtotime($sched_out_time));
             $time_out_24h = date("H.i", strtotime($timeOUT));
 
-            if($time_out_24h >= $sched_clock_out_time_24h) 
+            if($time_out_24h >= $sched_clock_out_time_24h)
             {
                 $status_out = 'On Time';
             } else {
@@ -110,8 +110,8 @@ class AttendanceController extends Controller
             }
         }
 
-        $t1 = Carbon::createFromFormat("Y-m-d h:i:s A", $timeIN); 
-        $t2 = Carbon::createFromFormat("Y-m-d h:i:s A", $timeOUT); 
+        $t1 = Carbon::createFromFormat("Y-m-d h:i:s A", $timeIN);
+        $t2 = Carbon::createFromFormat("Y-m-d h:i:s A", $timeOUT);
         $th = $t1->diffInHours($t2);
         $tm = floor(($t1->diffInMinutes($t2) - (60 * $th)));
         $totalhour = $th.".".$tm;
@@ -119,7 +119,7 @@ class AttendanceController extends Controller
         table::attendance()->where('id', $id)->update([
             'timein' => $timeIN,
             'timeout' => $timeOUT,
-            'reason' => $reason, 
+            'reason' => $reason,
             'totalhours' => $totalhour,
             'status_timein' => $status_in,
             'status_timeout' => $status_out,
@@ -129,6 +129,8 @@ class AttendanceController extends Controller
     }
 
     public function details(Request $request){
+
+        if (permission::permitted('attendance-edit')=='fail') { return redirect()->route('denied'); }
 
         $attendanceID = request()->attendanceID;
 

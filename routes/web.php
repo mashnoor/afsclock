@@ -21,7 +21,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::group(['middleware' => 'checkstatus'], function () {
 		/*
 		|--------------------------------------------------------------------------
-		| Universal SmartClock 
+		| Universal SmartClock
 		|--------------------------------------------------------------------------
 		*/
 
@@ -30,7 +30,7 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::group(['middleware' => 'admin'], function () {
 			/*
 			|--------------------------------------------------------------------------
-			| Dashboard 
+			| Dashboard
 			|--------------------------------------------------------------------------
 			*/
 			Route::get('/', 'Admin\DashboardController@index');
@@ -40,7 +40,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 			/*
 			|--------------------------------------------------------------------------
-			| Employees 
+			| Employees
 			|--------------------------------------------------------------------------
 			*/
 			Route::get('employees', 'Admin\EmployeesController@index')->name('employees');
@@ -52,7 +52,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 			/*
 			|--------------------------------------------------------------------------
-			| Employee Profile 
+			| Employee Profile
 			|--------------------------------------------------------------------------
 			*/
 			Route::get('profile/view/{id}', 'Admin\ProfileController@view');
@@ -67,7 +67,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 			/*
 			|--------------------------------------------------------------------------
-			| Employee Attendance 
+			| Employee Attendance
 			|--------------------------------------------------------------------------
 			*/
 			Route::get('attendance', 'Admin\AttendanceController@index')->name('attendance');
@@ -76,10 +76,10 @@ Route::group(['middleware' => 'auth'], function () {
 			Route::post('attendance/update', 'Admin\AttendanceController@update');
 			Route::get('attendance/view/details', 'Admin\AttendanceController@details');
 
-			
+
 			/*
 			|--------------------------------------------------------------------------
-			| Employee Schedules 
+			| Employee Schedules
 			|--------------------------------------------------------------------------
 			*/
 			Route::get('schedules', 'Admin\SchedulesController@index')->name('schedule');
@@ -102,18 +102,18 @@ Route::group(['middleware' => 'auth'], function () {
 
 			/*
 			|--------------------------------------------------------------------------
-			| Employee Leaves 
+			| Employee Leaves
 			|--------------------------------------------------------------------------
 			*/
 			Route::get('leaves', 'Admin\LeavesController@index')->name('leave');
 			Route::get('leaves/edit/{id}', 'Admin\LeavesController@edit');
 			Route::get('leaves/delete/{id}', 'Admin\LeavesController@delete');
 			Route::post('leaves/update', 'Admin\LeavesController@update');
-			
+
 
 			/*
 			|--------------------------------------------------------------------------
-			| Users 
+			| Users
 			|--------------------------------------------------------------------------
 			*/
 			Route::get('users', 'Admin\UsersController@index')->name('users');
@@ -127,7 +127,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 			/*
 			|--------------------------------------------------------------------------
-			| Employee Users & Roles 
+			| Employee Users & Roles
 			|--------------------------------------------------------------------------
 			*/
 			Route::get('users/roles', 'Admin\RolesController@index')->name('roles');
@@ -138,10 +138,10 @@ Route::group(['middleware' => 'auth'], function () {
 			Route::get('users/roles/permissions/edit/{id}', 'Admin\RolesController@editperm');
 			Route::post('users/roles/permissions/update', 'Admin\RolesController@updateperm');
 
-			
+
 			/*
 			|--------------------------------------------------------------------------
-			| Update User 
+			| Update User
 			|--------------------------------------------------------------------------
 			*/
 			Route::get('update-profile', 'Admin\ProfileController@viewProfile')->name('updateProfile');
@@ -152,7 +152,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 			/*
 			|--------------------------------------------------------------------------
-			| Reports 
+			| Reports
 			|--------------------------------------------------------------------------
 			*/
 			Route::get('reports', 'Admin\ReportsController@index')->name('reports');
@@ -168,11 +168,12 @@ Route::group(['middleware' => 'auth'], function () {
 			Route::get('get/employee-attendance', 'Admin\ReportsController@getEmpAtten');
 			Route::get('get/employee-leaves', 'Admin\ReportsController@getEmpLeav');
 			Route::get('get/employee-schedules', 'Admin\ReportsController@getEmpSched');
+			Route::get('get/employee-report/search', 'Admin\ReportsController@employeeReportSearch');
 
 
 			/*
 			|--------------------------------------------------------------------------
-			| Settings 
+			| Settings
 			|--------------------------------------------------------------------------
 			*/
 			Route::get('settings', 'Admin\SettingsController@index')->name('settings');
@@ -183,7 +184,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 			/*
 			|--------------------------------------------------------------------------
-			| Application Shortcuts 
+			| Application Shortcuts
 			|--------------------------------------------------------------------------
 			*/
 			// Company
@@ -218,7 +219,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 			/*
 			|--------------------------------------------------------------------------
-			| Exports : Employee data 
+			| Exports : Employee data
 			|--------------------------------------------------------------------------
 			*/
 			// export
@@ -226,7 +227,7 @@ Route::group(['middleware' => 'auth'], function () {
 			Route::get('export/fields/department', 'Admin\ExportsController@department');
 			Route::get('export/fields/jobtitle', 'Admin\ExportsController@jobtitle');
 			Route::get('export/fields/leavetypes', 'Admin\ExportsController@leavetypes');
-			
+
 			// import
 			Route::post('import/fields/company', 'Admin\ImportsController@importCompany');
 			Route::post('import/fields/department', 'Admin\ImportsController@importDepartment');
@@ -235,7 +236,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 			// import options
 			Route::post('import/options', 'Admin\ImportsController@opt');
-			
+
 			// reports export
 			Route::get('export/report/employees', 'Admin\ExportsController@employeeList');
 			Route::post('export/report/attendance', 'Admin\ExportsController@attendanceReport');
@@ -251,20 +252,20 @@ Route::group(['middleware' => 'auth'], function () {
 			| Employee Frontend : Dashboard, Profile, Attendance, Schedules, Leaves, Settings
 			|--------------------------------------------------------------------------
 			*/
-			// dashboard 
+			// dashboard
 			Route::get('personal/dashboard', 'Personal\PersonalDashboardController@index');
 
-			// profile 
+			// profile
 			Route::get('personal/profile/view', 'Personal\PersonalProfileController@index')->name('myProfile');
 			Route::get('personal/profile/edit/', 'Personal\PersonalProfileController@profileEdit');
 			Route::post('personal/profile/update', 'Personal\PersonalProfileController@profileUpdate');
 
-			// attendance 
+			// attendance
 			Route::get('personal/attendance/view', 'Personal\PersonalAttendanceController@index');
 			Route::get('get/personal/attendance', 'Personal\PersonalAttendanceController@getPA');
 			Route::get('personal/attendance/details', 'Personal\PersonalAttendanceController@details');
 
-			// schedules 
+			// schedules
 			Route::get('personal/schedules/view', 'Personal\PersonalSchedulesController@index');
 			Route::get('get/personal/schedules', 'Personal\PersonalSchedulesController@getPS');
 
@@ -280,7 +281,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::post('personal/tasks/assignatask/update', 'Personal\PersonalTasksController@update_assignATask');
 
 
-			// leaves 
+			// leaves
 			Route::get('personal/leaves/view', 'Personal\PersonalLeavesController@index')->name('viewPersonalLeave');
 			Route::get('personal/leaves/edit/{id}', 'Personal\PersonalLeavesController@edit');
 			Route::post('personal/leaves/update', 'Personal\PersonalLeavesController@update');
@@ -289,10 +290,10 @@ Route::group(['middleware' => 'auth'], function () {
 			Route::get('get/personal/leaves', 'Personal\PersonalLeavesController@getPL');
 			Route::get('view/personal/leave', 'Personal\PersonalLeavesController@viewPL');
 
-			// settings 
+			// settings
 			Route::get('personal/settings', 'Personal\PersonalSettingsController@index');
 
-			// user 
+			// user
 			Route::get('personal/update-user', 'Personal\PersonalAccountController@viewUser')->name('changeUser');
 			Route::get('personal/update-password', 'Personal\PersonalAccountController@viewPassword')->name('changePass');
 			Route::post('personal/update/user', 'Personal\PersonalAccountController@updateUser');
@@ -314,6 +315,3 @@ Route::view('account-not-found', 'errors.account-not-found')->name('notfound');
 
 //Routes for webcam
 Route::view('camlogin', 'auth/camlogin');
-
-
-

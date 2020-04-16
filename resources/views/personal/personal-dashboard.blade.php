@@ -142,9 +142,9 @@
                                         <td>Done</td>
                                         <td><span class="bolder">@isset($no_of_done_tasks){{ $no_of_done_tasks }}@endisset</span></td>
                                     </tr>
-                                    <tr>
+                                    <tr class="text-danger">
                                         <td>Pending</td>
-                                        <td><span class="bolder">@isset($no_of_pending_tasks){{ $no_of_pending_tasks }}@endisset</span></td>
+                                        <td><span class="bolder ">@isset($no_of_pending_tasks){{ $no_of_pending_tasks }}@endisset</span></td>
                                     </tr>
                                     </tbody>
                                 </table>

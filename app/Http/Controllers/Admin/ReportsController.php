@@ -31,20 +31,34 @@ class ReportsController extends Controller
 		return view('admin.reports.report-employee-list', compact('empList'));
 	}
 
+
+
+	// Smart employee attendance report search.
+	// Performs ajax request from "report employee attendance" view.
 	public function employeeReportSearch(Request $request){
 		if (permission::permitted('reports')=='fail'){ return redirect()->route('denied'); }
 
 		// Data provided in the search field
 		$searchContent = request()->searchContent;
+		$datefrom = request()->datefrom;
+		$dateto = request()->dateto;
 
-		if($searchContent !== ""){
+		// If there exist search content data only.
+		// Date range data are not available.
+		if($searchContent !== "" && $datefrom == "" && $dateto == ""){
 			$searchResults = table::daily_attendance()->where('employee','LIKE','%'.$searchContent.'%')->orWhere('idno','LIKE','%'.$searchContent.'%')->get();
-		}else{
+		}
+		// When all the variable values available, executes this block.
+		elseif ($searchContent !== "" && $datefrom !== "" && $dateto !== "") {
+			$searchResults = table::daily_attendance()->where('employee','LIKE','%'.$searchContent.'%')->whereBetween('created_at', [$datefrom, $dateto])->orWhere('idno','LIKE','%'.$searchContent.'%')->whereBetween('created_at', [$datefrom, $dateto])->get();
+		}
+		// Else performs this block.
+		else{
 			$searchResults = table::daily_attendance()->all();
 		}
 
-
 		return response()->json($searchResults);
+
 	}
 
 

@@ -144,7 +144,7 @@
                                     </tr>
                                     <tr class="text-danger">
                                         <td>Pending</td>
-                                        <td><span class="bolder ">@isset($no_of_pending_tasks){{ $no_of_pending_tasks }}@endisset</span></td>
+                                        <td><span class="bolder " id="pending_task_count">@isset($no_of_pending_tasks){{ $no_of_pending_tasks }}@endisset</span></td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -291,7 +291,7 @@
                             @isset($tasks)
                                 @foreach($tasks as $task)
                                     <tr>
-                                      <td>{{ $task->title }}</td>
+                                      <td onload="pending_task_reminder()">{{ $task->title }}</td>
                                         <td>{{ $task->deadline }}</td>
                                     </tr>
                                 @endforeach
@@ -304,6 +304,11 @@
 
         </div>
     </div>
+
+
+
+
+
     <div class="ui tiny modal pendingTask">
         <i class="close icon"></i>
         <div class="header">
@@ -339,6 +344,8 @@
             </div>
         </div>
     </div></td>
+
+
 @endsection
 
 @section('scripts')
@@ -366,16 +373,20 @@
         setTime();
         setInterval(setTime, 1000);
 
-
-
-
-
     </script> -->
     <script>
+
+
+
+
+    // The pending tasks modal. Only shows up if there exists pending tasks.
     $(document).ready(function(){
-
-      $(".pendingTask").modal('show');
-
+      var pCount = document.getElementById("pending_task_count").textContent;
+      var pCountInt = parseInt(pCount);
+      if(pCountInt){
+        $(".pendingTask").modal('show');
+      }
     });
+
     </script>
 @endsection

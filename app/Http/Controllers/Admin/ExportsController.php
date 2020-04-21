@@ -11,8 +11,8 @@ use Storage;
 
 class ExportsController extends Controller
 {
-		
-	function company(Request $request) 
+
+	function company(Request $request)
 	{
 		if (permission::permitted('company')=='fail'){ return redirect()->route('denied'); }
 		//if($request->sh == 2){return redirect()->route('company');}
@@ -25,7 +25,7 @@ class ExportsController extends Controller
 
 		Storage::put($file, '', 'private');
 
-		foreach ($c as $d) 
+		foreach ($c as $d)
 		{
 		    Storage::prepend($file, $d->id .','. $d->company);
 		}
@@ -35,7 +35,7 @@ class ExportsController extends Controller
 		return Storage::download($file);
     }
 
-	function department(Request $request) 
+	function department(Request $request)
 	{
 		if (permission::permitted('departments')=='fail'){ return redirect()->route('denied'); }
 		//if($request->sh == 2){return redirect()->route('department');}
@@ -48,7 +48,7 @@ class ExportsController extends Controller
 
 		Storage::put($file, '', 'private');
 
-		foreach ($d as $i) 
+		foreach ($d as $i)
 		{
 		    Storage::prepend($file, $i->id .','. $i->department);
 		}
@@ -58,7 +58,7 @@ class ExportsController extends Controller
 		return Storage::download($file);
     }
 
-	function jobtitle(Request $request) 
+	function jobtitle(Request $request)
 	{
 		if (permission::permitted('jobtitles')=='fail'){ return redirect()->route('denied'); }
 		//if($request->sh == 2){return redirect()->route('jobtitle');}
@@ -71,7 +71,7 @@ class ExportsController extends Controller
 
 		Storage::put($file, '', 'private');
 
-		foreach ($j as $d) 
+		foreach ($j as $d)
 		{
 		    Storage::prepend($file, $d->id .','. $d->jobtitle .','. $d->dept_code);
 		}
@@ -81,11 +81,11 @@ class ExportsController extends Controller
 		return Storage::download($file);
     }
 
-	function leavetypes(Request $request) 
+	function leavetypes(Request $request)
 	{
 		if (permission::permitted('leavetypes')=='fail'){ return redirect()->route('denied'); }
 		//if($request->sh == 2){return redirect()->route('leavetype');}
-		
+
 		$l = table::leavetypes()->get();
 
 		$date = date('Y-m-d');
@@ -94,7 +94,7 @@ class ExportsController extends Controller
 
 		Storage::put($file, '', 'private');
 
-		foreach ($l as $d) 
+		foreach ($l as $d)
 		{
 		    Storage::prepend($file, $d->id .','. $d->leavetype .','. $d->limit .','. $d->percalendar);
 		}
@@ -104,7 +104,7 @@ class ExportsController extends Controller
 		return Storage::download($file);
     }
 
-	function employeeList() 
+	function employeeList()
 	{
 		if (permission::permitted('reports')=='fail'){ return redirect()->route('denied'); }
 
@@ -116,7 +116,7 @@ class ExportsController extends Controller
 
 		Storage::put($file, '', 'private');
 
-		foreach ($p as $d) 
+		foreach ($p as $d)
 		{
 		    Storage::prepend($file, $d->id .','. $d->lastname.' '.$d->firstname.' '.$d->mi .','. $d->age .','. $d->gender .','. $d->civilstatus .','. $d->mobileno .','. $d->emailaddress .','. $d->employmenttype .','. $d->employmentstatus);
 		}
@@ -126,100 +126,100 @@ class ExportsController extends Controller
 		return Storage::download($file);
 	}
 
-	function attendanceReport(Request $request) 
+	function attendanceReport(Request $request)
 	{
 		if (permission::permitted('reports')=='fail'){ return redirect()->route('denied'); }
 		$id = $request->emp_id;
 		$datefrom = $request->datefrom;
 		$dateto = $request->dateto;
 
-		if ($id == null AND $datefrom == null AND $dateto == null) 
+		if ($id == null AND $datefrom == null AND $dateto == null)
 		{
-			$data = table::attendance()->get();
+			$data = table::daily_attendance()->get();
 			$date = date('Y-m-d');
 			$time = date('h-i-sa');
 			$file = 'attendance-reports-'.$date.'T'.$time.'.csv';
 
 			Storage::put($file, '', 'private');
 
-			foreach ($data as $d) 
+			foreach ($data as $d)
 			{
-				Storage::prepend($file, $d->id .','. $d->idno .','. $d->date .','. '"'.$d->employee.'"' .','. $d->timein .','. $d->timeout .','. $d->totalhours .','. $d->status_timein .','. $d->status_timeout);
+				Storage::prepend($file, $d->id .','. $d->idno .','. $d->created_at .','. '"'.$d->employee.'"' .','. $d->timein .','. $d->timeout .','. $d->totalhours .','. $d->status_timein .','. $d->status_timeout);
 			}
 
 			Storage::prepend($file, '"ID"' .','. 'IDNO' .','. 'DATE' .','. 'EMPLOYEE' .','. 'TIME IN' .','. 'TIME OUT' .','. 'TOTAL HOURS' .','. 'STATUS-IN' .','. 'STATUS-OUT');
-			
+
 			return Storage::download($file);
 		}
 
-		if ($id !== null AND $datefrom !== null AND $dateto !== null) 
+		if ($id !== null AND $datefrom !== null AND $dateto !== null)
 		{
-			$data = table::attendance()->where('idno', $id)->whereBetween('date', [$datefrom, $dateto])->get();
+			$data = table::daily_attendance()->where('idno', $id)->whereBetween('created_at', [$datefrom, $dateto])->get();
 			$date = date('Y-m-d');
 			$time = date('h-i-sa');
 			$file = 'attendance-reports-'.$date.'T'.$time.'.csv';
 
 			Storage::put($file, '', 'private');
 
-			foreach ($data as $d) 
+			foreach ($data as $d)
 			{
-				Storage::prepend($file, $d->id .','. $d->idno .','. $d->date .','. '"'.$d->employee.'"' .','. $d->timein .','. $d->timeout .','. $d->totalhours .','. $d->status_timein .','. $d->status_timeout);
+				Storage::prepend($file, $d->id .','. $d->idno .','. $d->created_at .','. '"'.$d->employee.'"' .','. $d->timein .','. $d->timeout .','. $d->totalhours .','. $d->status_timein .','. $d->status_timeout);
 			}
 
 			Storage::prepend($file, '"ID"' .','. 'IDNO' .','. 'DATE' .','. 'EMPLOYEE' .','. 'TIME IN' .','. 'TIME OUT' .','. 'TOTAL HOURS' .','. 'STATUS-IN' .','. 'STATUS-OUT');
-			
+
 			return Storage::download($file);
 		}
 
-		if($id !== null AND $datefrom == null AND $dateto == null ) 
+		if($id !== null AND $datefrom == null AND $dateto == null )
 		{
-			$data = table::attendance()->where('idno', $id)->get();
+			$data = table::daily_attendance()->where('idno', $id)->get();
 			$date = date('Y-m-d');
 			$time = date('h-i-sa');
 			$file = 'attendance-reports-'.$date.'T'.$time.'.csv';
 
 			Storage::put($file, '', 'private');
 
-			foreach ($data as $d) 
+			foreach ($data as $d)
 			{
-				Storage::prepend($file, $d->id .','. $d->idno .','. $d->date .','. '"'.$d->employee.'"' .','. $d->timein .','. $d->timeout .','. $d->totalhours .','. $d->status_timein .','. $d->status_timeout);
+				Storage::prepend($file, $d->id .','. $d->idno .','. $d->created_at .','. '"'.$d->employee.'"' .','. $d->timein .','. $d->timeout .','. $d->totalhours .','. $d->status_timein .','. $d->status_timeout);
 			}
 
 			Storage::prepend($file, '"ID"' .','. 'IDNO' .','. 'DATE' .','. 'EMPLOYEE' .','. 'TIME IN' .','. 'TIME OUT' .','. 'TOTAL HOURS' .','. 'STATUS-IN' .','. 'STATUS-OUT');
-			
+
 			return Storage::download($file);
-		} 
+		}
 
-		if ($id == null AND $datefrom !== null AND $dateto !== null) 
+		if ($id == null AND $datefrom !== null AND $dateto !== null)
 		{
-			$data = table::attendance()->whereBetween('date', [$datefrom, $dateto])->get();
+			$data = table::daily_attendance()->whereBetween('created_at', [$datefrom, $dateto])->get();
 			$date = date('Y-m-d');
 			$time = date('h-i-sa');
 			$file = 'attendance-reports-'.$date.'T'.$time.'.csv';
 
 			Storage::put($file, '', 'private');
 
-			foreach ($data as $d) 
+			foreach ($data as $d)
 			{
-				Storage::prepend($file, $d->id .','. $d->idno .','. $d->date .','. '"'.$d->employee.'"' .','. $d->timein .','. $d->timeout .','. $d->totalhours .','. $d->status_timein .','. $d->status_timeout);
+				Storage::prepend($file, $d->id .','. $d->idno .','. $d->created_at .','. '"'.$d->employee.'"' .','. $d->timein .','. $d->timeout .','. $d->totalhours .','. $d->status_timein .','. $d->status_timeout);
 			}
 
 			Storage::prepend($file, '"ID"' .','. 'IDNO' .','. 'DATE' .','. 'EMPLOYEE' .','. 'TIME IN' .','. 'TIME OUT' .','. 'TOTAL HOURS' .','. 'STATUS-IN' .','. 'STATUS-OUT');
-			
+
 			return Storage::download($file);
 		}
 
 		return redirect('reports/employee-attendance')->with('error', 'Whoops! Please provide date range or select employee.');
 	}
 
-	function leavesReport(Request $request) 
+	function leavesReport(Request $request)
 	{
 		if (permission::permitted('reports')=='fail'){ return redirect()->route('denied'); }
 		$id = $request->emp_id;
 		$datefrom = $request->datefrom;
 		$dateto = $request->dateto;
 
-		if ($id == null AND $datefrom == null AND $dateto == null) 
+		if ($id == null AND $datefrom == null AND $dateto == null)
 		{
 			$data = table::leaves()->get();
 			$date = date('Y-m-d');
@@ -228,17 +228,17 @@ class ExportsController extends Controller
 
 			Storage::put($file, '', 'private');
 
-			foreach ($data as $d) 
+			foreach ($data as $d)
 			{
 				Storage::prepend($file, $d->id .','. $d->idno .','. '"'.$d->employee.'"' .','. $d->type .','. $d->leavefrom .','. $d->leaveto .','. $d->reason .','. $d->status);
 			}
 
 			Storage::prepend($file, '"ID"' .','. 'IDNO' .','. 'EMPLOYEE' .','. 'TYPE' .','. 'LEAVE FROM' .','. 'LEAVE TO' .','. 'REASON' .','. 'STATUS');
-			
+
 			return Storage::download($file);
 		}
 
-		if ($id !== null AND $datefrom !== null AND $dateto !== null) 
+		if ($id !== null AND $datefrom !== null AND $dateto !== null)
 		{
 			$data = table::leaves()->where('idno', $id)->whereBetween('leavefrom', [$datefrom, $dateto])->get();
 			$date = date('Y-m-d');
@@ -247,17 +247,17 @@ class ExportsController extends Controller
 
 			Storage::put($file, '', 'private');
 
-			foreach ($data as $d) 
+			foreach ($data as $d)
 			{
 				Storage::prepend($file, $d->id .','. $d->idno .','. '"'.$d->employee.'"' .','. $d->type .','. $d->leavefrom .','. $d->leaveto .','. $d->reason .','. $d->status);
 			}
 
 			Storage::prepend($file, '"ID"' .','. 'IDNO' .','. 'EMPLOYEE' .','. 'TYPE' .','. 'LEAVE FROM' .','. 'LEAVE TO' .','. 'REASON' .','. 'STATUS');
-			
+
 			return Storage::download($file);
 		}
 
-		if($id !== null AND $datefrom == null AND $dateto == null ) 
+		if($id !== null AND $datefrom == null AND $dateto == null )
 		{
 			$data = table::leaves()->where('idno', $id)->get();
 			$date = date('Y-m-d');
@@ -266,17 +266,17 @@ class ExportsController extends Controller
 
 			Storage::put($file, '', 'private');
 
-			foreach ($data as $d) 
+			foreach ($data as $d)
 			{
 				Storage::prepend($file, $d->id .','. $d->idno .','. '"'.$d->employee.'"' .','. $d->type .','. $d->leavefrom .','. $d->leaveto .','. $d->reason .','. $d->status);
 			}
 
 			Storage::prepend($file, '"ID"' .','. 'IDNO' .','. 'EMPLOYEE' .','. 'TYPE' .','. 'LEAVE FROM' .','. 'LEAVE TO' .','. 'REASON' .','. 'STATUS');
-			
-			return Storage::download($file);
-		} 
 
-		if ($id == null AND $datefrom !== null AND $dateto !== null) 
+			return Storage::download($file);
+		}
+
+		if ($id == null AND $datefrom !== null AND $dateto !== null)
 		{
 			$data = table::leaves()->whereBetween('leavefrom', [$datefrom, $dateto])->get();
 			$date = date('Y-m-d');
@@ -285,20 +285,20 @@ class ExportsController extends Controller
 
 			Storage::put($file, '', 'private');
 
-			foreach ($data as $d) 
+			foreach ($data as $d)
 			{
 				Storage::prepend($file, $d->id .','. $d->idno .','. '"'.$d->employee.'"' .','. $d->type .','. $d->leavefrom .','. $d->leaveto .','. $d->reason .','. $d->status);
 			}
 
 			Storage::prepend($file, '"ID"' .','. 'IDNO' .','. 'EMPLOYEE' .','. 'TYPE' .','. 'LEAVE FROM' .','. 'LEAVE TO' .','. 'REASON' .','. 'STATUS');
-			
+
 			return Storage::download($file);
 		}
 
 		return redirect('reports/employee-leaves')->with('error', 'Whoops! Please provide date range or select employee.');
 	}
 
-	function birthdaysReport() 
+	function birthdaysReport()
 	{
 		if (permission::permitted('reports')=='fail'){ return redirect()->route('denied'); }
 		$c = table::people()->join('tbl_company_data', 'tbl_people.id', '=', 'tbl_company_data.reference')->get();
@@ -309,7 +309,7 @@ class ExportsController extends Controller
 
 		Storage::put($file, '', 'private');
 
-		foreach ($c as $d) 
+		foreach ($c as $d)
 		{
 		    Storage::prepend($file, $d->idno .','. $d->lastname.' '.$d->firstname.' '.$d->mi .','. $d->department .','. $d->jobposition .','. $d->birthday .','. $d->mobileno);
 		}
@@ -319,7 +319,7 @@ class ExportsController extends Controller
 		return Storage::download($file);
 	}
 
-	function accountReport() 
+	function accountReport()
 	{
 		if (permission::permitted('reports')=='fail'){ return redirect()->route('denied'); }
 		$u = table::users()->get();
@@ -330,9 +330,9 @@ class ExportsController extends Controller
 
 		Storage::put($file, '', 'private');
 
-		foreach ($u as $a) 
+		foreach ($u as $a)
 		{
-			if($a->acc_type == 2) 
+			if($a->acc_type == 2)
 			{
 				$a_type = 'Admin';
 			} else {
@@ -345,12 +345,12 @@ class ExportsController extends Controller
 		}
 	}
 
-	function scheduleReport(Request $request) 
+	function scheduleReport(Request $request)
 	{
 		if (permission::permitted('reports')=='fail'){ return redirect()->route('denied'); }
 		$id = $request->emp_id;
 
-		if ($id == null) 
+		if ($id == null)
 		{
 			$data = table::schedules()->get();
 			$date = date('Y-m-d');
@@ -359,17 +359,17 @@ class ExportsController extends Controller
 
 			Storage::put($file, '', 'private');
 
-			foreach ($data as $d) 
+			foreach ($data as $d)
 			{
 				Storage::prepend($file, $d->idno .',"'. $d->employee .'",'. $d->intime .','. '"'.$d->outime.'"' .','. $d->datefrom .','. $d->dateto .','. $d->hours .',"'. $d->restday .'",'. $d->archive);
 			}
 
 			Storage::prepend($file, '"IDNO"' .','. 'EMPLOYEE' .','. 'START TIME' .','. 'OFF TIME' .','. 'DATE FROM' .','. 'DATE TO' .','. 'HOURS' .','. 'RESTDAY' .','. 'STATUS');
-			
+
 			return Storage::download($file);
 		}
 
-		if ($id !== null) 
+		if ($id !== null)
 		{
 			$data = table::schedules()->where('idno', $id)->get();
 			$date = date('Y-m-d');
@@ -378,13 +378,13 @@ class ExportsController extends Controller
 
 			Storage::put($file, '', 'private');
 
-			foreach ($data as $d) 
+			foreach ($data as $d)
 			{
 				Storage::prepend($file, $d->idno .',"'. $d->employee .'",'. $d->intime .','. '"'.$d->outime.'"' .','. $d->datefrom .','. $d->dateto .','. $d->hours .',"'. $d->restday .'",'. $d->archive);
 			}
 
 			Storage::prepend($file, '"IDNO"' .','. 'EMPLOYEE' .','. 'START TIME' .','. 'OFF TIME' .','. 'DATE FROM' .','. 'DATE TO' .','. 'HOURS' .','. 'RESTDAY' .','. 'STATUS');
-			
+
 			return Storage::download($file);
 		}
 

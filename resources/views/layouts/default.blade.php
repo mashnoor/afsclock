@@ -169,6 +169,8 @@
     </div>
 </div>
 
+
+
 <script src="{{ asset('/assets/vendor/jquery/jquery-3.4.1.min.js') }}"></script>
 <script src="{{ asset('/assets/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('/assets/vendor/semantic-ui/semantic.min.js') }}"></script>
@@ -204,6 +206,8 @@
 @endif
 
 @yield('scripts')
+
+
 
 </body>
 </html>

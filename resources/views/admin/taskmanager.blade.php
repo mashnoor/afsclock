@@ -9,6 +9,8 @@
 @section('styles')
     <link href="{{ asset('/assets/vendor/mdtimepicker/mdtimepicker.min.css') }}" rel="stylesheet">
     <link href="{{ asset('/assets/vendor/air-datepicker/dist/css/datepicker.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('/assets/vendor/datetimepicker/datetimepicker.css') }}" rel="stylesheet">
+
     <style>
         /* .ui.active.modal {position: relative !important;} */
         .datepicker {
@@ -102,8 +104,11 @@
     <script src="{{ asset('/assets/vendor/air-datepicker/dist/js/datepicker.min.js') }}"></script>
     <script src="{{ asset('/assets/vendor/air-datepicker/dist/js/i18n/datepicker.en.js') }}"></script>
     <script src="{{ asset('/assets/vendor/mdtimepicker/mdtimepicker.min.js') }}"></script>
+    <script src="{{ asset('/assets/vendor/datetimepicker/datetimepicker.js') }}"></script>
 
     <script type="text/javascript">
+
+        $('#datetimepicker').datetimepicker();
 
         $('.jtimepicker').mdtimepicker({format: 'h:mm:ss tt', hourPadding: true});
         $('.airdatepicker').datepicker({language: 'en', dateFormat: 'yyyy-mm-dd'});

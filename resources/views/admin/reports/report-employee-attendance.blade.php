@@ -52,10 +52,14 @@
                             </div>
 
                             <input type="hidden" name="emp_id" value="">
-                            <button id="btnfilter" class="ui icon button positive small inline-button"><i class="ui icon filter alternate"></i> Filter</button>
+                            <a id="filterButton" class="ui icon button positive small inline-button" onclick="getEmployeeAttendance()"><i class="ui icon filter alternate"></i> Filter Data</a>
+
+                            <!-- <button id="btnfilter" class="ui icon button positive small inline-button"><i class="ui icon filter alternate"></i> Filter</button> -->
                             <button type="submit" name="submit" class="ui icon button blue small inline-button"><i class="ui icon download"></i> Download</button>
                         </div>
                     </form>
+
+
 
                     <table width="100%" class="table table-striped table-hover" id="dataTables-example" data-order='[[ 0, "desc" ]]'>
                         <thead>
@@ -124,7 +128,7 @@
         });
     }});
 
-    $('#btnfilter').click(function(event) {
+    $('#btnfilterNone').click(function(event) {
         event.preventDefault();
         var emp_id = $('input[name="emp_id"]').val();
         var date_from = $('#datefrom').val();
@@ -184,12 +188,16 @@
     function getEmployeeAttendance() {
 
           var smartSearchFieldValue = document.getElementById('smartsearch').value;
+          var datefrom = document.getElementById('datefrom').value;
+          var dateto = document.getElementById('dateto').value;
+
+
 
           var report_tbody = document.getElementById('report_tbody');
 
           report_tbody.innerHTML = '';
 
-        $.get('/get/employee-report/search', {searchContent: smartSearchFieldValue}, function(data){
+        $.get('/get/employee-report/search', {searchContent: smartSearchFieldValue, datefrom:datefrom, dateto:dateto}, function(data){
 
           for (var i = 0; i < data.length; i++) {
             report_tbody.innerHTML += "<tr><td>"+ data[0].created_at +"</td><td>"+ data[0].employee +"</td><td>"+ data[0].created_at +"</td><td>"+ data[0].created_at +"</td><td>"+ data[0].totalhours +"</td></tr>"

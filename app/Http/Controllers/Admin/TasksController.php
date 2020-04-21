@@ -86,7 +86,7 @@ class TasksController extends Controller
             'employee' => 'required',
             'title' => 'required',
             'description' => 'required',
-            'deadline' => 'required|date',
+            'deadline' => 'required',
         ]);
 
         $id = $request->id;

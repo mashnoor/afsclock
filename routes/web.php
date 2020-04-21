@@ -255,6 +255,8 @@ Route::group(['middleware' => 'auth'], function () {
 			// dashboard
 			Route::get('personal/dashboard', 'Personal\PersonalDashboardController@index');
 
+			Route::get('personal/dashboard/task_reminder', 'Personal\PersonalDashboardController@task_reminder');
+
 			// profile
 			Route::get('personal/profile/view', 'Personal\PersonalProfileController@index')->name('myProfile');
 			Route::get('personal/profile/edit/', 'Personal\PersonalProfileController@profileEdit');

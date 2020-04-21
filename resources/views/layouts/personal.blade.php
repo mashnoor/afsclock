@@ -136,6 +136,42 @@
     </div>
 </div>
 
+<div class="ui tiny modal reminderModal">
+    <i class="close icon"></i>
+    <div class="header">
+        <h3>Hey Deadline is arriving soon for the following task..</h3>
+    </div>
+    <div class="content">
+
+      <table class="table table-striped nobordertop">
+          <thead>
+          <tr>
+              <th class="text-left">Title</th>
+              <th class="text-left">Deadline</th>
+          </tr>
+          </thead>
+          <tbody id="task_info_table">
+
+
+          </tbody>
+      </table>
+
+    </div>
+    <div class="actions">
+
+        <div class="ui positive right labeled icon button">
+            I'm aware
+            <i class="checkmark icon"></i>
+        </div>
+    </div>
+</div></td>
+
+<audio id="bellSound">
+  <source src="{{ asset('/assets/audio/bell.mp3') }}" type="audio/mpeg">
+</audio>
+
+
+
 <script src="{{ asset('/assets/vendor/jquery/jquery-3.4.1.min.js') }}"></script>
 <script src="{{ asset('/assets/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('/assets/vendor/semantic-ui/semantic.min.js') }}"></script>
@@ -162,6 +198,44 @@
 @endif
 
 @yield('scripts')
+
+<script type="text/javascript">
+
+
+
+function taskReminderMonitor(){
+  var reference_id = {{Auth::user()->reference}};
+  reference_id = parseInt(reference_id);
+  if (reference_id) {
+    console.log('Current reference id : ', reference_id);
+
+    $.get('/personal/dashboard/task_reminder', {reference_id:reference_id}, function(data){
+
+      if (data != "") {
+        console.log('Pending task data', data.title);
+
+        var task_info_table = document.getElementById('task_info_table');
+
+
+
+        task_info_table.innerHTML = "<tr><td>"+ data.title +"</td><td>"+ data.deadline +"</td></tr>";
+
+        $(".reminderModal").modal('show');
+
+        var bellSound = document.getElementById("bellSound");
+        bellSound.play();
+      }
+
+    })
+
+  }
+}
+
+taskReminderMonitor();
+
+
+
+</script>
 
 </body>
 </html>

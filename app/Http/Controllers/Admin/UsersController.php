@@ -43,21 +43,21 @@ class UsersController extends Controller
 
         $ref = $request->ref;
         $name = $request->name;
-    	$email = $request->email;
-		$role_id = $request->role_id;
-		$acc_type = $request->acc_type;
-		$password = $request->password;
-		$password_confirmation = $request->password_confirmation;
-		$status = $request->status;
+      	$email = $request->email;
+    		$role_id = $request->role_id;
+    		$acc_type = $request->acc_type;
+    		$password = $request->password;
+    		$password_confirmation = $request->password_confirmation;
+    		$status = $request->status;
 
-        if ($password != $password_confirmation) 
+        if ($password != $password_confirmation)
         {
             return redirect('users')->with('error', 'Whoops! Password confirmation does not match!');
         }
 
         $is_user_exist = table::users()->where('email', $email)->count();
 
-        if($is_user_exist >= 1) 
+        if($is_user_exist >= 1)
         {
             return redirect('users')->with('error', 'Whoops! this user already exist');
         }
@@ -80,10 +80,10 @@ class UsersController extends Controller
     	return redirect('/users')->with('success','New User has been added.');
     }
 
-    public function edit($id) 
+    public function edit($id)
     {
         if (permission::permitted('users-edit')=='fail'){ return redirect()->route('denied'); }
-        
+
         $u = table::users()->where('id', $id)->first();
         $r = table::roles()->get();
         $e_id = ($u->reference == null) ? 0 : Crypt::encryptString($u->reference) ;
@@ -91,7 +91,7 @@ class UsersController extends Controller
         return view('admin.edits.edit-user', compact('u', 'r', 'e_id'));
     }
 
-    public function update(Request $request) 
+    public function update(Request $request)
     {
         if (permission::permitted('users-edit')=='fail'){ return redirect()->route('denied'); }
         //if($request->sh == 2){return redirect()->route('users');}
@@ -110,14 +110,14 @@ class UsersController extends Controller
         $password_confirmation = $request->password_confirmation;
         $status = $request->status;
 
-        if ($password !== null && $password_confirmation !== null) 
+        if ($password !== null && $password_confirmation !== null)
         {
             $v = $request->validate([
                 'password' => 'required|min:8|max:100',
                 'password_confirmation' => 'required|min:8|max:100',
             ]);
 
-            if ($password != $password_confirmation) 
+            if ($password != $password_confirmation)
             {
                 return redirect('users')->with('error', 'Whoops! Password confirmation does not match!');
             }
@@ -136,7 +136,7 @@ class UsersController extends Controller
             ]);
         }
 
-    	return redirect('users')->with('success','User Account has been updated!');       
+    	return redirect('users')->with('success','User Account has been updated!');
     }
 
     public function delete($id, Request $request)

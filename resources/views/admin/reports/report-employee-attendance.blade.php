@@ -35,6 +35,8 @@
                                 </select>
                             </div> -->
 
+                            <input id="EmployeeIDhiddenField" type="hidden" name="emp_id">
+
                             <div class="seven wide field">
                                 <input id="smartsearch" type="text" name="smartsearch" value="" placeholder="Search anything" onkeyup="getEmployeeAttendance()">
                             </div>
@@ -51,7 +53,7 @@
                                 <i class="ui icon calendar alternate outline calendar-icon"></i>
                             </div>
 
-                            <input type="hidden" name="emp_id" value="">
+                            <!-- <input type="hidden" name="emp_id" value=""> -->
                             <a id="filterButton" class="ui icon button positive small inline-button" onclick="getEmployeeAttendance()"><i class="ui icon filter alternate"></i> Filter Data</a>
 
                             <!-- <button id="btnfilter" class="ui icon button positive small inline-button"><i class="ui icon filter alternate"></i> Filter</button> -->
@@ -198,6 +200,14 @@
           report_tbody.innerHTML = '';
 
         $.get('/get/employee-report/search', {searchContent: smartSearchFieldValue, datefrom:datefrom, dateto:dateto}, function(data){
+
+
+
+          if (data[0]) {
+            document.getElementById("EmployeeIDhiddenField").value = data[0].reference
+            console.log('The reference id is : ', data[0].reference);
+          }
+
 
           for (var i = 0; i < data.length; i++) {
             report_tbody.innerHTML += "<tr><td>"+ data[0].created_at +"</td><td>"+ data[0].employee +"</td><td>"+ data[0].created_at +"</td><td>"+ data[0].created_at +"</td><td>"+ data[0].totalhours +"</td></tr>"

@@ -9,6 +9,20 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Arr;
+
+
+class Activity {
+
+    public function __construct($datetime, $label)
+    {
+        $this->datetime = $datetime;
+        $this->label = $label;
+    }
+
+}
+
 
 class PersonalDashboardController extends Controller
 {
@@ -46,7 +60,32 @@ class PersonalDashboardController extends Controller
 
         $no_of_pending_tasks = Task::where([['reference', $id], ['finishdate', null]])->count();
         $no_of_done_tasks = $tasks->count()-$no_of_pending_tasks;
-        return view('personal.personal-dashboard', compact('cs', 'ps', 'al', 'pl', 'ald', 'a', 'la', 'ed', 'tz', 'no_of_pending_tasks', 'no_of_done_tasks', 'tasks', 'pending_tasks'));
+
+        $recent_entries = table::daily_entries()->where('reference', $id)->latest('start_at')->take(4)->get();
+        $recent_breaks = table::daily_breaks()->where('reference', $id)->latest('start_at')->take(4)->get();
+
+
+        $activity_collection = collect([]);
+
+        foreach ($recent_entries as $r_e) {
+          $activity_collection->push(new Activity($r_e->start_at, 'Clock In'));
+          $activity_collection->push(new Activity($r_e->end_at, 'Clock Out'));
+        }
+
+        foreach ($recent_breaks as $r_b) {
+          $activity_collection->push(new Activity($r_b->start_at, 'Break In'));
+          $activity_collection->push(new Activity($r_b->end_at, 'Break Out'));
+        }
+
+
+        $sortedActivities = Arr::sort($activity_collection, function($activity)
+        {return $activity->datetime;});
+
+        // dd($sortedActivities);
+
+
+
+        return view('personal.personal-dashboard', compact('cs', 'ps', 'al', 'pl', 'ald', 'a', 'la', 'ed', 'tz', 'no_of_pending_tasks', 'no_of_done_tasks', 'tasks', 'pending_tasks', 'sortedActivities'));
     }
 
 

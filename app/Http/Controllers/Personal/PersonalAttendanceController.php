@@ -10,43 +10,43 @@ use App\Http\Controllers\Controller;
 
 class PersonalAttendanceController extends Controller
 {
-    public function index() 
+    public function index()
     {
         $i = \Auth::user()->idno;
 //        $a = table::attendance()->where('idno', $i)->get();
         $a = table::daily_attendance()->where('idno', $i)->get();
 
         $employee_reference_id = \Auth::user()->reference;
-        $all_entries = table::daily_entries()->where('reference_id', $employee_reference_id)->get();
+        $all_entries = table::daily_entries()->where('reference', $employee_reference_id)->get();
 
-        $all_breaks = table::daily_breaks()->where('reference_id', $employee_reference_id)->get();
+        $all_breaks = table::daily_breaks()->where('reference', $employee_reference_id)->get();
         return view('personal.personal-attendance-view', compact('a', 'all_entries', 'all_breaks'));
     }
 
 
     public function details(Request $request){
-        
+
         $attendanceID = request()->attendanceID;
 
         $theAttendance = table::daily_attendance()->where('id', $attendanceID)->first();
 
         $theDate = date("Y-m-d", strtotime($theAttendance->created_at));
 
-        $all_entries = table::daily_entries()->where('reference_id', $theAttendance->reference)->whereDate('start_at', $theDate)->get();
-        $all_breaks = table::daily_breaks()->where('reference_id', $theAttendance->reference)->whereDate('start_at', $theDate)->get();
+        $all_entries = table::daily_entries()->where('reference', $theAttendance->reference)->whereDate('start_at', $theDate)->get();
+        $all_breaks = table::daily_breaks()->where('reference', $theAttendance->reference)->whereDate('start_at', $theDate)->get();
 
         return response()->json( array($all_entries, $all_breaks));
 
     }
 
 
-    public function getPA(Request $request) 
+    public function getPA(Request $request)
     {
 		$id = \Auth::user()->idno;
 		$datefrom = $request->datefrom;
 		$dateto = $request->dateto;
-		
-        if($datefrom == '' || $dateto == '' ) 
+
+        if($datefrom == '' || $dateto == '' )
         {
              $data = table::attendance()
              ->select('date', 'timein', 'timeout', 'totalhours', 'status_timein', 'status_timeout')
@@ -70,4 +70,3 @@ class PersonalAttendanceController extends Controller
         }
 	}
 }
-

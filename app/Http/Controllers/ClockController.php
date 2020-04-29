@@ -150,12 +150,12 @@ class ClockController extends Controller
             if($isAttendanceToday)
             {
                 // Finds ongoing entry
-                $isOngoingEntry = table::daily_entries()->where([['reference_id', $employee_id],['end_at', NULL]])->whereDate('start_at', $date)->exists();
+                $isOngoingEntry = table::daily_entries()->where([['reference', $employee_id],['end_at', NULL]])->whereDate('start_at', $date)->exists();
 
                 if(!$isOngoingEntry)
                 {
                    // Creates attendance time in
-                   DB::table('daily_entries')->insert(['reference_id' => $employee_id, 'start_at' => Carbon::now()]);
+                   DB::table('daily_entries')->insert(['reference' => $employee_id, 'start_at' => Carbon::now()]);
                     return response()->json([
                         "employee" => $employee,
                         "success" => "Done! Welcome back",
@@ -173,7 +173,7 @@ class ClockController extends Controller
                $attendanceToday = DB::table('daily_attendance')->insert(['idno' => $idno, 'reference' => $employee_id, 'employee' => $employee, 'totalhours' => 0, 'total_break_hours' => 0,'created_at' => Carbon::now()]);
 
                 // Creates attendance time in
-                DB::table('daily_entries')->insert(['reference_id' => $employee_id, 'start_at' => Carbon::now()]);
+                DB::table('daily_entries')->insert(['reference' => $employee_id, 'start_at' => Carbon::now()]);
 
 
                 $sched_in_time = table::schedules()->where([['idno', $idno], ['archive', 0]])->value('intime');
@@ -308,14 +308,14 @@ class ClockController extends Controller
 
 
                 // Finds ongoing entry
-                $isOngoingEntry = table::daily_entries()->where([['reference_id', $employee_id],['end_at', NULL]])->whereDate('start_at', $date)->exists();
+                $isOngoingEntry = table::daily_entries()->where([['reference', $employee_id],['end_at', NULL]])->whereDate('start_at', $date)->exists();
 
                 if ($isOngoingEntry){
                     // Finds if there is any ongoing break
-                    $isExistingBreak = table::daily_breaks()->where([['reference_id', $employee_id], ['end_at', NULL]])->whereDate('start_at', $date)->exists();
+                    $isExistingBreak = table::daily_breaks()->where([['reference', $employee_id], ['end_at', NULL]])->whereDate('start_at', $date)->exists();
 
                     if ($isExistingBreak){
-                        table::daily_breaks()->where([['reference_id', $employee_id], ['end_at', NULL]])->whereDate('start_at', $date)->update(array(
+                        table::daily_breaks()->where([['reference', $employee_id], ['end_at', NULL]])->whereDate('start_at', $date)->update(array(
                             "end_at" => Carbon::now()
                         ));
 
@@ -350,7 +350,7 @@ class ClockController extends Controller
                     }
                     else{
                         DB::table('daily_breaks')->insert(
-                            ['reference_id' => $employee_id, 'start_at' => Carbon::now()]
+                            ['reference' => $employee_id, 'start_at' => Carbon::now()]
                         );
 
                         // returns the response after successful break starts
@@ -448,11 +448,11 @@ class ClockController extends Controller
 
             if($isAttendanceToday){
                 // Finds ongoing entry
-                $isOngoingEntry = table::daily_entries()->where([['reference_id', $employee_id] ,['end_at', NULL]])->whereDate('start_at', $date)->exists();
+                $isOngoingEntry = table::daily_entries()->where([['reference', $employee_id] ,['end_at', NULL]])->whereDate('start_at', $date)->exists();
 
                 if($isOngoingEntry){
 
-                    table::daily_entries()->where([['reference_id', $employee_id],['end_at', NULL]])->whereDate('start_at', $date)->update(array(
+                    table::daily_entries()->where([['reference', $employee_id],['end_at', NULL]])->whereDate('start_at', $date)->update(array(
                         "end_at" => Carbon::now(),
                     ));
 

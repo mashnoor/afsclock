@@ -41,6 +41,17 @@ class UsersController extends Controller
             //'status' => 'required|boolean|max:1',
         //]);
 
+        $this->validate($request,[
+           'ref' => 'required|max:100',
+            'name' => 'required|max:100',
+            'email' => 'required|email|max:100',
+            'role_id' => 'required|digits_between:1,99|max:2',
+            'acc_type' => 'required|digits_between:1,99|max:2',
+            'password' => 'required|min:8|max:100',
+            'password_confirmation' => 'required|min:8|max:100',
+            'status' => 'required|boolean|max:1',
+        ]);
+
         $ref = $request->ref;
         $name = $request->name;
       	$email = $request->email;

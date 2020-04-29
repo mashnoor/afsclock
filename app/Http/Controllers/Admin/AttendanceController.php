@@ -138,8 +138,8 @@ class AttendanceController extends Controller
 
         $theDate = date("Y-m-d", strtotime($theAttendance->created_at));
 
-        $all_entries = table::daily_entries()->where('reference_id', $theAttendance->reference)->whereDate('start_at', $theDate)->get();
-        $all_breaks = table::daily_breaks()->where('reference_id', $theAttendance->reference)->whereDate('start_at', $theDate)->get();
+        $all_entries = table::daily_entries()->where('reference', $theAttendance->reference)->whereDate('start_at', $theDate)->get();
+        $all_breaks = table::daily_breaks()->where('reference', $theAttendance->reference)->whereDate('start_at', $theDate)->get();
 
         return response()->json( array($all_entries, $all_breaks));
 

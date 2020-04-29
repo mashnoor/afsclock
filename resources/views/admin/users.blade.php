@@ -3,7 +3,7 @@
     @section('meta')
         <title>Users | Attendance Keeper</title>
         <meta name="description" content="Attendance Keeper users, view all users, add, edit, delete users.">
-    @endsection 
+    @endsection
 
     @section('content')
     @include('admin.modals.modal-add-user')
@@ -51,7 +51,7 @@
                                 <td> @if($val->acc_type == 2) Admin @else Employee @endif </td>
                                 <td>
                                     <span>
-                                    @if($val->status == '1') 
+                                    @if($val->status == '1')
                                         Enabled
                                     @else
                                         Disabled
@@ -70,7 +70,7 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
 
     @endsection

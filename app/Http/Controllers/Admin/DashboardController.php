@@ -7,25 +7,42 @@ use App\Classes\permission;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Arr;
+use App\User;
+
+
+class Activity {
+
+    public function __construct($employee, $datetime, $label)
+    {
+        $this->employee = $employee;
+        $this->datetime = $datetime;
+        $this->label = $label;
+    }
+
+}
+
+
 
 class DashboardController extends Controller
 {
 
-    public function index(Request $request) 
+    public function index(Request $request)
     {
         if (permission::permitted('dashboard')=='fail'){ return redirect()->route('denied'); }
-        
+
         $datenow = date('m/d/Y');
         //$sh = $request->sh;
 
         $is_online = table::attendance()->where('date', $datenow)->pluck('idno');
         $is_online_arr = json_decode(json_encode($is_online), true);
-        $is_online_now = count($is_online); 
+        $is_online_now = count($is_online);
 
         $emp_ids = table::companydata()->pluck('idno');
-        $emp_ids_arr = json_decode(json_encode($emp_ids), true); 
+        $emp_ids_arr = json_decode(json_encode($emp_ids), true);
         $is_offline_now = count(array_diff($emp_ids_arr, $is_online_arr));
-        
+
 		$emp_all_type = table::people()
         ->join('tbl_company_data', 'tbl_people.id', '=', 'tbl_company_data.reference')
         ->where('tbl_people.employmentstatus', 'Active')
@@ -51,7 +68,7 @@ class DashboardController extends Controller
         ->latest('created_at')
         ->take(4)
         ->get();
-        
+
         $emp_approved_leave = table::leaves()
         ->where('status', 'Approved')
         ->orderBy('leavefrom', 'desc')
@@ -71,7 +88,32 @@ class DashboardController extends Controller
         ->orWhere('status', 'Pending')
         ->count();
 
-        return view('admin.dashboard', compact('emp_typeR', 'emp_typeT', 'emp_allActive', 'emp_leaves_pending', 'emp_leaves_approve', 'emp_leaves_all', 'emp_approved_leave', 'emp_all_type','a', 'is_online_now', 'is_offline_now'));
+
+        $recent_entries = table::daily_entries()->latest('start_at')->take(6)->get();
+        $recent_breaks = table::daily_breaks()->latest('start_at')->take(6)->get();
+
+
+        $activity_collection = collect([]);
+
+        foreach ($recent_entries as $r_e) {
+          $user = User::find($r_e->reference);
+          $activity_collection->push(new Activity($user->name, $r_e->start_at, 'Clock In'));
+          $activity_collection->push(new Activity($user->name ,$r_e->end_at, 'Clock Out'));
+        }
+
+        foreach ($recent_breaks as $r_b) {
+          $user = User::find($r_b->reference);
+          $activity_collection->push(new Activity($user->name, $r_b->start_at, 'Break In'));
+          $activity_collection->push(new Activity($user->name, $r_b->end_at, 'Break Out'));
+        }
+
+
+        $sortedActivities = Arr::sort($activity_collection, function($activity)
+        {return $activity->datetime;});
+
+        // dd($sortedActivities);
+
+        return view('admin.dashboard', compact('emp_typeR', 'emp_typeT', 'emp_allActive', 'emp_leaves_pending', 'emp_leaves_approve', 'emp_leaves_all', 'emp_approved_leave', 'emp_all_type','a', 'is_online_now', 'is_offline_now', 'sortedActivities'));
     }
 
 

@@ -29,7 +29,12 @@
             </div>
             <div class="field">
                 <label for="">Deadline</label>
-                <input type="text" placeholder="Date" autocomplete="off" name="deadline" class="airdatepicker" data-position="top right"/>
+                <!-- <input type="text" placeholder="Date" autocomplete="off" name="deadline" class="airdatepicker" data-position="top right"/> -->
+                <div class="form-group">
+
+                    <input type='text' id="datetimepicker" name="deadline" class="form-control" />
+
+                </div>
             </div>
 
 

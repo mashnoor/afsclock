@@ -16,7 +16,7 @@ class CreateDailyEntriesTable extends Migration
         if(!Schema::hasTable('daily_entries')) {
             Schema::create('daily_entries', function (Blueprint $table) {
                 $table->bigIncrements('id');
-                $table->string('reference_id', 11)->nullable()->default('');
+                $table->string('reference', 11)->nullable()->default('');
                 $table->timestamp('start_at')->nullable();
                 $table->timestamp('end_at')->nullable();
             });

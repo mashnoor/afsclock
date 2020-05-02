@@ -51,6 +51,9 @@
                     <span id="time"></span>
                 </p>
             </div>
+
+            <p id="message_status"></p>
+
         </div>
 
     </div>
@@ -109,6 +112,7 @@
                 headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
 
                 success: function (response) {
+
                     if (response['error'] != null) {
                         $('.message-after').addClass('notok').hide()
                         $('#type, #fullname').text("").hide();
@@ -136,6 +140,7 @@
                                 return "Time Out";
                             }
                         }
+
 
                         $('.message-after').addClass('ok').hide();
                         $('.message-after').removeClass("notok");

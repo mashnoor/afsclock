@@ -212,6 +212,8 @@
 
     </div>
 
+    <span id="_url" style="display: none;">{{url('/')}}</span>
+
 @endsection
 
 @section('scripts')
@@ -237,6 +239,7 @@
         });
 
 
+
         // Finds attendance details for specific row.
         function getAttendanceDetails(attendanceID) {
 
@@ -245,8 +248,10 @@
             var EntryTbody = document.getElementById("entry_tbody");
             var BreakTbody = document.getElementById("break_tbody");
 
+            var url = document.getElementById('_url').textContent;
 
-            $.get('/personal/attendance/details', { attendanceID: attendanceID }, function(data){
+
+            $.get(url+'/personal/attendance/details', { attendanceID: attendanceID }, function(data){
 
                 EntryTbody.innerHTML = "";
                 BreakTbody.innerHTML = "";

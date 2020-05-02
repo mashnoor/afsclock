@@ -170,9 +170,9 @@
   <source src="{{ asset('/assets/audio/bell.mp3') }}" type="audio/mpeg">
 </audio>
 
+<span id="_url" style="display: none;">{{url('/')}}</span>
 
 
-<span onload="reminder()"></span>
 
 <script src="{{ asset('/assets/vendor/jquery/jquery-3.4.1.min.js') }}"></script>
 <script src="{{ asset('/assets/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
@@ -209,12 +209,13 @@ function taskReminderMonitor(){
   var reference_id = {{Auth::user()->reference}};
   reference_id = parseInt(reference_id);
   if (reference_id) {
-    console.log('Current reference id : ', reference_id);
 
-    $.get('/personal/dashboard/task_reminder', {reference_id:reference_id}, function(data){
+    var url = document.getElementById('_url').textContent;
+
+    $.get( url+'/personal/dashboard/task_reminder', {reference_id:reference_id}, function(data){
 
       if (data != "") {
-        console.log('Pending task data', data.title);
+
 
         var task_info_table = document.getElementById('task_info_table');
 

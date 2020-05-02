@@ -204,6 +204,7 @@ class ClockController extends Controller
                     "employee" => $employee,
                     "success" => "Perfect. You are successfully clocked in. Welcome to office.",
                 ]);
+
             }
 
             // ATTENDANCE TIME IN REQUEST HANDLING ENDS HERE

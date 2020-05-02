@@ -112,6 +112,8 @@
 
     </div>
 
+    <span id="_url" style="display: none;">{{url('/')}}</span>
+
     @endsection
 
     @section('scripts')
@@ -193,13 +195,13 @@
           var datefrom = document.getElementById('datefrom').value;
           var dateto = document.getElementById('dateto').value;
 
-
+          var url = document.getElementById('_url').textContent;
 
           var report_tbody = document.getElementById('report_tbody');
 
           report_tbody.innerHTML = '';
 
-        $.get('/get/employee-report/search', {searchContent: smartSearchFieldValue, datefrom:datefrom, dateto:dateto}, function(data){
+        $.get(url+'/get/employee-report/search', {searchContent: smartSearchFieldValue, datefrom:datefrom, dateto:dateto}, function(data){
 
 
 

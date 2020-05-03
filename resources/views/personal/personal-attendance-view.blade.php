@@ -128,8 +128,8 @@
                                             <span class="blue">{{ $v->status_timein }}</span>
                                         @endif
                                     </td>
-                                    <td><button class="ui button yellow create_btn" type="button" id="attendance-details" onclick="getAttendanceDetails('{{$v->id}}')">Details</button>
-                                        <div class="ui modal test">
+                                    <td><button class="ui button yellow create_btn" type="button"  id="attendance-details" onclick="getAttendanceDetails('{{$v->id}}')">Details</button>
+                                        <div class="ui modal test" name="md{{$v->id}}">
                                             <i class="close icon"></i>
                                             <div class="header">
                                                 <h3>Attendance Details</h3>
@@ -280,21 +280,31 @@
     });
 
 
-    // Attendance Details modal
-    $(function(){
-        $("#attendance-details").click(function(e){
-            $(".test").modal('show');
-        });
-        $(".test").modal({
-            closable: true
-        });
+    // // Attendance Details modal
+    // $(function(){
+    //
+    //     $("#attendance-details").click(function(e){
+    //
+    //         $("div[name='abc']").modal('show');
+    //     });
+    //     $(".test").modal({
+    //         closable: true
+    //     });
+    //
+    // });
 
-    });
+
+
 
     // Finds attendance details for specific row.
     function getAttendanceDetails(attendanceID) {
 
-        console.log("Inside the get attendance details. With the parameter " + attendanceID );
+      console.log('The attendance id number is : ', attendanceID);
+
+      $( document ).ready(function() {
+        $("div[name="+"md"+attendanceID+"]").modal('show');
+      });
+
 
         var EntryTbody = document.getElementById("entry_tbody");
         var BreakTbody = document.getElementById("break_tbody");
@@ -303,6 +313,8 @@
 
         $.get( url +'/personal/attendance/details', { attendanceID: attendanceID }, function(data){
 
+            console.log(data);
+
             EntryTbody.innerHTML = "";
             BreakTbody.innerHTML = "";
 
@@ -310,26 +322,56 @@
             var entries = data[0];
             var breaks = data[1];
 
+            console.log(entries);
+
             for(i = 0; i <= entries.length; i++){
                 if(entries[i]){
+                    var end_time = "";
+                    if (entries[i].end_at) {
+                      end_time = entries[i].end_at;
+                      var res = end_time.split(" ");
+                      end_time = res[1];
+                    }else {
+                      end_time = "Ongoing";
+                    }
+
+                    var start_time = entries[i].start_at;
+                    var res = start_time.split(" ");
+                    start_time = res[1];
 
                     EntryTbody.innerHTML += "<tr>" +
-                        "<td>"+ entries[i].start_at +"</td>" +
-                        "<td>" + entries[i].end_at + "</td>"
+                        "<td>"+ start_time +"</td>" +
+                        "<td>" + end_time + "</td>"
                         +"</tr>";
                 }
 
             }
+
 
 
             for(i = 0; i <= breaks.length; i++){
                 if(breaks[i]){
+                  var end_time = "";
+                  if (breaks[i].end_at) {
+                    end_time = breaks[i].end_at;
+                    var res = end_time.split(" ");
+                    end_time = res[1];
+                  }else {
+                    end_time = "Ongoing";
+                  }
+
+                  var start_time = entries[i].start_at;
+                  var res = start_time.split(" ");
+                  start_time = res[1];
+
                     BreakTbody.innerHTML += "<tr>" +
-                        "<td>"+ breaks[i].start_at +"</td>" +
-                        "<td>" + breaks[i].end_at + "</td>"
+                        "<td>"+ start_time +"</td>" +
+                        "<td>" + end_time + "</td>"
                         +"</tr>";
                 }
             }
+
+
 
 
         })

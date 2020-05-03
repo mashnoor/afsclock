@@ -137,10 +137,6 @@ class ClockController extends Controller
         if ($type == 'timein')
         {
 
-
-
-
-
             // ATTENDANCE TIME IN REQUEST HANDLING STARTS HERE
 
             // Checks if the following employee has attendance record today
@@ -156,15 +152,21 @@ class ClockController extends Controller
                 {
                    // Creates attendance time in
                    DB::table('daily_entries')->insert(['reference' => $employee_id, 'start_at' => Carbon::now()]);
-                    return response()->json([
-                        "employee" => $employee,
-                        "success" => "Done! Welcome back",
-                    ]);
+
+                   return response()->json([
+                                          "type" => 'timein',
+                                          "time" => $time,
+                                          "date" => $date,
+                                          "lastname" => $firstname,
+                                          "firstname" => $lastname,
+                                          "mi" => $mi,
+                                          "success" => "Hello, " . $firstname . " " . $lastname . ". Time In is recorded at " . $time . " on " . $date,
+                                      ]);
                 }
                 else{
                     return response()->json([
                         "employee" => $employee,
-                        "error" => "You already Time In today at . Because I found you in already entry list",
+                        "error" => "You already Time In today.",
                     ]);
                 }
             }
@@ -199,11 +201,16 @@ class ClockController extends Controller
                     ->update(['status_timein' => $status_in]);
 
 
-
                 return response()->json([
-                    "employee" => $employee,
-                    "success" => "Perfect. You are successfully clocked in. Welcome to office.",
-                ]);
+                                       "type" => 'timein',
+                                       "time" => $time,
+                                       "date" => $date,
+                                       "lastname" => $firstname,
+                                       "firstname" => $lastname,
+                                       "mi" => $mi,
+                                       "success" => "Hello, " . $firstname . " " . $lastname . ". Time In is recorded at " . $time . " on " . $date,
+                                   ]);
+
 
             }
 
@@ -320,33 +327,57 @@ class ClockController extends Controller
                             "end_at" => Carbon::now()
                         ));
 
-                        $all_breaks = DB::table('daily_breaks')->whereDate('start_at', $date)->get();
+                        $all_breaks = DB::table('daily_breaks')->where('reference', $employee_id)->whereDate('start_at', $date)->get();
+
 
                         if($all_breaks){
+                            // $total_working_hour = 0;
+                            $toal_break_minute = 0;
                             $total_hours = 0;
-                            foreach ($all_breaks as $single_break){
-                                $starttimestamp = strtotime($single_break->start_at);
-                                $endtimestamp = strtotime($single_break->end_at);
-                                $difference = round(($endtimestamp - $starttimestamp)/3600, 2);
-                                $total_hours = $total_hours + $difference;
+                            $toal_break_minute_new = 0;
+
+                            foreach ($all_breaks as $break) {
+                              $time1 = Carbon::parse($break->start_at);
+                              $time2 = Carbon::parse($break->end_at);
+
+                              $th = $time1->diffInHours($time2);
+                              $tm = floor(($time1->diffInMinutes($time2) - (60 * $th)));
+                              $totalhour = $th.".".$tm;
+
+
+                              $total_hours += $th;
+                              $toal_break_minute_new += $tm;
+
                             }
 
+                            $total_break_hour = $total_hours.".".$toal_break_minute_new;
 
                         }
 
 
 //                        $theAttendanceToday = table::daily_attendance()->where([['idno', $idno ],['reference', $employee_id]])->whereDate('created_at', $date)->first();
 
+
                         $affected = DB::table('daily_attendance')
                             ->where('id', $isAttendanceToday->id)
-                            ->update(['total_break_hours' => $total_hours]);
+                            ->update(['total_break_hours' => $total_break_hour]);
 
 
                         // returns the response after break ends
+                        // return response()->json([
+                        //     "employee" => $employee,
+                        //     "success" => "Done ! Welcome back after the break.",
+                        // ]);
+
                         return response()->json([
-                            "employee" => $employee,
-                            "success" => "Done ! Welcome back after the break.",
-                        ]);
+                                               "type" => 'break_out',
+                                               "time" => $time,
+                                               "date" => $date,
+                                               "lastname" => $firstname,
+                                               "firstname" => $lastname,
+                                               "mi" => $mi,
+                                               "success" => "Hello, " . $firstname . " " . $lastname . ". Break Out is recorded at " . $time . " on " . $date,
+                                           ]);
 
                     }
                     else{
@@ -355,10 +386,20 @@ class ClockController extends Controller
                         );
 
                         // returns the response after successful break starts
+                        // return response()->json([
+                        //     "employee" => $employee,
+                        //     "success" => "Done ! Enjoy the break",
+                        // ]);
+
                         return response()->json([
-                            "employee" => $employee,
-                            "success" => "Done ! Enjoy the break",
-                        ]);
+                                               "type" => 'break_in',
+                                               "time" => $time,
+                                               "date" => $date,
+                                               "lastname" => $firstname,
+                                               "firstname" => $lastname,
+                                               "mi" => $mi,
+                                               "success" => "Hello, " . $firstname . " " . $lastname . ". Break In is recorded at " . $time . " on " . $date,
+                                           ]);
 
                     }
                 }
@@ -458,18 +499,37 @@ class ClockController extends Controller
                     ));
 
 
-
-
-                    $all_entries = DB::table('daily_entries')->whereDate('start_at', $date)->get();
+                    $all_entries = DB::table('daily_entries')->where('reference', $employee_id)->whereDate('start_at', $date)->get();
 
                     if ($all_entries){
+                        // $total_hours = 0;
+                        // foreach ($all_entries as $entry){
+                        //     $starttimestamp = strtotime($entry->start_at);
+                        //     $endtimestamp = strtotime($entry->end_at);
+                        //     $difference = ($endtimestamp - $starttimestamp)/3600;
+                        //     $total_hours = $total_hours + $difference;
+                        // }
+
+                        // $total_working_hour = 0;
+                        $toal_working_minute = 0;
                         $total_hours = 0;
-                        foreach ($all_entries as $entry){
-                            $starttimestamp = strtotime($entry->start_at);
-                            $endtimestamp = strtotime($entry->end_at);
-                            $difference = round(($endtimestamp - $starttimestamp)/3600, 2);
-                            $total_hours = $total_hours + $difference;
+                        $toal_working_minute_new = 0;
+
+                        foreach ($all_entries as $entry) {
+                          $time1 = Carbon::parse($entry->start_at);
+                          $time2 = Carbon::parse($entry->end_at);
+
+                          $th = $time1->diffInHours($time2);
+                          $tm = floor(($time1->diffInMinutes($time2) - (60 * $th)));
+                          $totalhour = $th.".".$tm;
+
+
+                          $total_hours += $th;
+                          $toal_working_minute_new += $tm;
+
                         }
+
+                        $total_working_hour = $total_hours.".".$toal_working_minute_new;
 
 
                     }
@@ -480,7 +540,7 @@ class ClockController extends Controller
                     $affected = DB::table('daily_attendance')
                         ->where('id', $theAttendanceToday->id)
                         ->update(array(
-                            'totalhours' => $total_hours,
+                            'totalhours' => $total_working_hour,
                             'updated_at' => Carbon::now()
                         ));
 
@@ -508,9 +568,19 @@ class ClockController extends Controller
                         ->update(['status_timeout' => $status_out]);
 
 
+                    // return response()->json([
+                    //     "success" => "Successfully clock out "
+                    // ]);
+
                     return response()->json([
-                        "success" => "Successfully clock out "
-                    ]);
+                                           "type" => 'timeout',
+                                           "time" => $time,
+                                           "date" => $date,
+                                           "lastname" => $firstname,
+                                           "firstname" => $lastname,
+                                           "mi" => $mi,
+                                           "success" => "Hello, " . $firstname . " " . $lastname . ". Time Out is recorded at " . $time . " on " . $date,
+                                       ]);
 
                 }else{
                     return response()->json([

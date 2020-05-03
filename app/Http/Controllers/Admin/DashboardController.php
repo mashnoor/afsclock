@@ -14,6 +14,10 @@ use App\User;
 
 class Activity {
 
+    public $employee = '';
+    public $datetime = '';
+    public $label = '';
+
     public function __construct($employee, $datetime, $label)
     {
         $this->employee = $employee;
@@ -97,14 +101,23 @@ class DashboardController extends Controller
 
         foreach ($recent_entries as $r_e) {
           $user = User::find($r_e->reference);
-          $activity_collection->push(new Activity($user->name, $r_e->start_at, 'Clock In'));
-          $activity_collection->push(new Activity($user->name ,$r_e->end_at, 'Clock Out'));
+          if ($r_e->start_at) {
+            $activity_collection->push(new Activity($user->name, $r_e->start_at, 'Clock In'));
+          }
+          if ($r_e->end_at) {
+            $activity_collection->push(new Activity($user->name ,$r_e->end_at, 'Clock Out'));
+          }
         }
 
         foreach ($recent_breaks as $r_b) {
           $user = User::find($r_b->reference);
-          $activity_collection->push(new Activity($user->name, $r_b->start_at, 'Break In'));
-          $activity_collection->push(new Activity($user->name, $r_b->end_at, 'Break Out'));
+          if ($r_b->start_at) {
+            $activity_collection->push(new Activity($user->name, $r_b->start_at, 'Break In'));
+          }
+          if ($r_b->end_at) {
+            $activity_collection->push(new Activity($user->name, $r_b->end_at, 'Break Out'));
+
+          }
         }
 
 

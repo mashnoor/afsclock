@@ -15,6 +15,9 @@ use Illuminate\Support\Arr;
 
 class Activity {
 
+    public $datetime ='';
+    public $label = '';
+
     public function __construct($datetime, $label)
     {
         $this->datetime = $datetime;
@@ -68,13 +71,21 @@ class PersonalDashboardController extends Controller
         $activity_collection = collect([]);
 
         foreach ($recent_entries as $r_e) {
-          $activity_collection->push(new Activity($r_e->start_at, 'Clock In'));
-          $activity_collection->push(new Activity($r_e->end_at, 'Clock Out'));
+          if ($r_e->start_at) {
+            $activity_collection->push(new Activity($r_e->start_at, 'Clock In'));
+          }
+          if ($r_e->end_at) {
+            $activity_collection->push(new Activity($r_e->end_at, 'Clock Out'));
+          }
         }
 
         foreach ($recent_breaks as $r_b) {
-          $activity_collection->push(new Activity($r_b->start_at, 'Break In'));
-          $activity_collection->push(new Activity($r_b->end_at, 'Break Out'));
+          if ($r_b->start_at) {
+            $activity_collection->push(new Activity($r_b->start_at, 'Break In'));
+          }
+          if ($r_b->end_at) {
+            $activity_collection->push(new Activity($r_b->end_at, 'Break Out'));
+          }
         }
 
 

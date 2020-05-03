@@ -35,6 +35,7 @@ class PersonalAttendanceController extends Controller
         $all_entries = table::daily_entries()->where('reference', $theAttendance->reference)->whereDate('start_at', $theDate)->get();
         $all_breaks = table::daily_breaks()->where('reference', $theAttendance->reference)->whereDate('start_at', $theDate)->get();
 
+
         return response()->json( array($all_entries, $all_breaks));
 
     }

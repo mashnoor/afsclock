@@ -233,13 +233,19 @@
             $('#btn_reset').attr('hidden', true);
 
             var url = document.getElementById('site_url').textContent;
+            // console.log(url);
+            var res = url.split("/");
+
+            // console.log(res[3]);
+
+            var companyName = res[3];
 
             Webcam.snap(function (data_uri) {
                 // display results in page
                 $.ajax({
                     type: 'POST',
 
-                    url: 'https://attendancekeeper.net:5009/face_rec/{{ $company_name }}',
+                    url: 'https://attendancekeeper.net:5009/face_rec/' + companyName,
                     data: {'image_data': data_uri},
                     success: function (data) {
                         console.log(data);

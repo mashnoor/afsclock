@@ -16,6 +16,7 @@ class CreateDailyBreaksTable extends Migration
         if(!Schema::hasTable('daily_breaks')) {
             Schema::create('daily_breaks', function (Blueprint $table) {
                 $table->bigIncrements('id');
+                $table->string('attendance_id', 20);
                 $table->string('reference', 11)->nullable()->default('');
                 $table->timestamp('start_at')->nullable();
                 $table->timestamp('end_at')->nullable();

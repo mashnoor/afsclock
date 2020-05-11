@@ -30,7 +30,7 @@
 {{--                            <th>Break In</th>--}}
 {{--                            <th>Break Out</th>--}}
                             <th>Total Hours</th>
-                            <th>Break Duration</th>
+                            <!-- <th>Break Duration</th> -->
                             <th>Note (In / Out)</th>
                             @isset($cc)
                                 @if($cc == 1)
@@ -44,15 +44,15 @@
                         @isset($data)
                             @foreach ($data as $d)
                                 <tr>
-                                    <td>@isset($d->created_at) @php echo e(date('d-m-Y', strtotime($d->created_at))) @endphp @endisset</td>
+                                    <td>@isset($d->timein) @php echo e(date('d-m-Y', strtotime($d->timein))) @endphp @endisset</td>
                                     <td>{{ $d->employee }}</td>
-                                    <td>@php $IN = date('h:i:s A', strtotime($d->created_at)); echo $IN; @endphp</td>
+                                    <td>@php $IN = date('h:i:s A', strtotime($d->timein)); echo $IN; @endphp</td>
                                     <td>
-                                        @isset($d->updated_at)
+                                        @isset($d->timeout)
                                             @php
-                                                $OUT = date('h:i:s A', strtotime($d->updated_at));
+                                                $OUT = date('h:i:s A', strtotime($d->timeout));
                                             @endphp
-                                            @if($d->updated_at != NULL)
+                                            @if($d->timeout != NULL)
                                                 {{ $OUT }}
                                             @endif
                                         @endisset
@@ -93,8 +93,8 @@
                                             @endif
                                         @endisset
                                     </td>
-                                    <td>
-                                        @isset($d->total_break_hours)
+                                    <!-- <td> -->
+                                        <!-- @isset($d->total_break_hours)
                                             @if($d->total_break_hours != null)
                                                 @php
                                                     if(stripos($d->total_break_hours, ".") === false) {
@@ -113,8 +113,8 @@
                                                     {{ $h }} hr {{ $m }} mins
                                                 @endif
                                             @endif
-                                        @endisset
-                                    </td>
+                                        @endisset -->
+                                    <!-- </td> -->
                                     <td>
                                         @if($d->status_timein != null OR $d->status_timeout != null)
                                             <span class="@if($d->status_timein == 'Late Arrival') orange @else blue @endif">{{ $d->status_timein }}</span>
@@ -135,12 +135,13 @@
                                         @endif
                                     @endisset
                                     <td class="align-right">
+                                      <button class="ui circular basic icon button tiny" type="button" id="attendance-details" onclick="getAttendanceDetails('{{$d->id}}')"><i class="list ul icon"></i></button>
+
                                         <a href="{{ url('/attendance/edit/'.$d->id) }}"
                                            class="ui circular basic icon button tiny"><i class="edit outline icon"></i></a>
                                         <a href="{{ url('/attendance/delete/'.$d->id) }}"
                                            class="ui circular basic icon button tiny"><i
                                                     class="trash alternate outline icon"></i></a>
-                                    <button class="ui button yellow create_btn" type="button" id="attendance-details" onclick="getAttendanceDetails('{{$d->id}}')">Details</button>
                                         <div class="ui modal test" name="md{{$d->id}}">
                                             <i class="close icon"></i>
                                             <div class="header">
@@ -152,27 +153,15 @@
                                                   <div class="row">
                                                     <div class="column">
                                                       <h5>Employee Name : {{ $d->employee }}</h5>
-                                                      <h5>Date : @isset($d->created_at) @php echo e(date('d-m-Y', strtotime($d->created_at))) @endphp @endisset</h5>
+                                                      <h5>Date : @isset($d->timein) @php echo e(date('d-m-Y', strtotime($d->timein))) @endphp @endisset</h5>
                                                     </div>
-
+                                                    <div class="column">
+                                                      <h4 id="breakHour{{$d->id}}" style="text-align: center; font-size: 20px;"></h4>
+                                                    </div>
                                                   </div>
 
                                                     <div class="row">
-                                                        <div class="column">
-                                                            <h3>Clock In/Out</h3>
-                                                            <table width="100%" class="table table-bordered table-hover" id="dataTables-example" data-order='[[ 0, "desc" ]]'>
-                                                                <thead>
-                                                                <tr>
-                                                                    <th>In</th>
-                                                                    <th>Out</th>
-                                                                </tr>
-                                                                </thead>
-                                                                <tbody id="entry_tbody">
 
-                                                                </tbody>
-
-                                                            </table>
-                                                        </div>
                                                         <div class="column">
                                                             <h3>Break In/Out</h3>
                                                             <table width="100%" class="table table-bordered table-hover" id="dataTables-example" data-order='[[ 0, "desc" ]]'>
@@ -182,13 +171,14 @@
                                                                     <th>Out</th>
                                                                 </tr>
                                                                 </thead>
-                                                                <tbody id="break_tbody">
+                                                                <tbody id="break_tbody{{$d->id}}">
 
                                                                 </tbody>
 
                                                             </table>
                                                         </div>
                                                     </div>
+
 
                                                 </div>
                                             </div>
@@ -248,26 +238,36 @@
           });
 
 
-            var EntryTbody = document.getElementById("entry_tbody");
-            var BreakTbody = document.getElementById("break_tbody");
+            var BreakTbody = document.getElementById("break_tbody"+attendanceID);
 
             var url = document.getElementById('_url').textContent;
 
 
-            $.get(url+'/personal/attendance/details', { attendanceID: attendanceID }, function(data){
+            $.get(url + '/personal/attendance/details', { attendanceID: attendanceID }, function(data){
 
-                EntryTbody.innerHTML = "";
                 BreakTbody.innerHTML = "";
 
-                var entries = data[0];
-                var breaks = data[1];
+                var breaks = data[0];
+                var break_hour = data[1];
 
-                for(i = 0; i <= entries.length; i++){
-                    if(entries[i]){
+                var break_hour_element = document.getElementById("breakHour"+attendanceID);
+                break_hour_element.innerHTML = "";
+
+                if (break_hour > 0) {
+                  var res_hr = break_hour.split(".");
+                  break_hour_element.innerHTML += ""+ res_hr[0] +" hour "+ res_hr[1] + " minutes";
+                }else{
+                  break_hour_element.innerHTML += "Did not take a break.";
+                }
+
+                if (breaks) {
+
+                  for(i = 0; i <= breaks.length; i++){
+                      if(breaks[i]){
+
                         var end_time = "";
-
-                        if (entries[i].end_at) {
-                          end_time = entries[i].end_at;
+                        if (breaks[i].end_at) {
+                          end_time = breaks[i].end_at;
                           var res = end_time.split(" ");
                           end_time = res[1];
                         }
@@ -275,49 +275,22 @@
                           end_time = "Ongoing";
                         }
 
-                        var start_time = entries[i].start_at;
+                        var start_time = breaks[i].start_at;
                         var res = start_time.split(" ");
                         start_time = res[1];
 
-
-                        EntryTbody.innerHTML += "<tr>" +
-                            "<td>" + start_time + "</td>" +
-                            "<td>" + end_time + "</td>"
-                            +"</tr>";
-                    }
+                          BreakTbody.innerHTML += "<tr>" +
+                              "<td>"+ start_time +"</td>" +
+                              "<td>" + end_time + "</td>"
+                              +"</tr>";
+                      }
+                  }
+                }else{
 
                 }
-
-
-                for(i = 0; i <= breaks.length; i++){
-                    if(breaks[i]){
-
-                      var end_time = "";
-                      if (breaks[i].end_at) {
-                        end_time = breaks[i].end_at;
-                        var res = end_time.split(" ");
-                        end_time = res[1];
-                      }
-                      else {
-                        end_time = "Ongoing";
-                      }
-
-                      var start_time = breaks[i].start_at;
-                      var res = start_time.split(" ");
-                      start_time = res[1];
-
-                        BreakTbody.innerHTML += "<tr>" +
-                            "<td>"+ start_time +"</td>" +
-                            "<td>" + end_time + "</td>"
-                            +"</tr>";
-                    }
-                }
-
-
             })
 
-
-        }
+          }
 
 
     </script>

@@ -47,7 +47,7 @@
 {{--                                <th>Break Out</th>--}}
 
                                 <th>Total Hours</th>
-                                <th>Break Duration</th>
+                                <!-- <th>Break Duration</th> -->
                                 <th>Status (In/Out)</th>
                                 <th>More</th>
                             </tr>
@@ -57,9 +57,9 @@
                             @foreach ($a as $v)
                                 <tr>
 {{--                                    <td> {{ $v->created_at }} </td>--}}
-                                    <td>@isset($v->created_at) @php echo e(date('d-m-Y', strtotime($v->created_at))) @endphp @endisset</td>
-                                    <td>@isset($v->created_at) @php echo e(date('h:i:s A', strtotime($v->created_at))) @endphp @endisset</td>
-                                    <td>@isset($v->created_at) @php echo e(date('h:i:s A', strtotime($v->updated_at))) @endphp @endisset</td>
+                                    <td>@isset($v->date) @php echo e(date('d-m-Y', strtotime($v->timein))) @endphp @endisset</td>
+                                    <td>@isset($v->timein) @php echo e(date('h:i:s A', strtotime($v->timein))) @endphp @endisset</td>
+                                    <td>@isset($v->timeout) @php echo e(date('h:i:s A', strtotime($v->timeout))) @endphp @endisset</td>
 {{--                                    <td>--}}
 {{--                                        @isset($v->break_in)--}}
 {{--                                            @php $break_in_time = date('h:i:s A', strtotime($v->break_in)); @endphp--}}
@@ -96,7 +96,7 @@
                                         @endif
                                     @endisset
                                     </td>
-                                    <td>
+                                    <!-- <td>
                                         @isset($v->total_break_hours)
                                             @if($v->total_break_hours != null)
                                                 @php
@@ -117,7 +117,8 @@
                                                 @endif
                                             @endif
                                         @endisset
-                                    </td>
+                                    </td> -->
+
                                     <td>
                                         @if($v->status_timein != '' && $v->status_timeout != '')
                                             <span class="@if($v->status_timein == 'Late Arrival') orange @else blue @endif">{{ $v->status_timein }}</span> /
@@ -128,7 +129,9 @@
                                             <span class="blue">{{ $v->status_timein }}</span>
                                         @endif
                                     </td>
-                                    <td><button class="ui button yellow create_btn" type="button"  id="attendance-details" onclick="getAttendanceDetails('{{$v->id}}')">Details</button>
+                                    <td>
+                                      <button class="ui circular basic icon button tiny" type="button" id="attendance-details" onclick="getAttendanceDetails('{{$v->id}}')"><i class="list ul icon"></i></button>
+
                                         <div class="ui modal test" name="md{{$v->id}}">
                                             <i class="close icon"></i>
                                             <div class="header">
@@ -139,26 +142,12 @@
                                                   <div class="row">
                                                     <div class="column">
                                                       <h5>Employee Name : {{ $v->employee }}</h5>
-                                                      <h5>Date : @isset($v->created_at) @php echo e(date('d-m-Y', strtotime($v->created_at))) @endphp @endisset</h5>
+                                                      <h5>Date : @isset($v->timein) @php echo e(date('d-m-Y', strtotime($v->timein))) @endphp @endisset</h5>
                                                     </div>
 
                                                   </div>
                                                     <div class="row">
-                                                        <div class="column">
-                                                            <h3>Clock In/Out</h3>
-                                                            <table width="100%" class="table table-bordered table-hover" id="dataTables-example" data-order='[[ 0, "desc" ]]'>
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th>In</th>
-                                                                        <th>Out</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody id="entry_tbody">
 
-                                                                </tbody>
-
-                                                            </table>
-                                                        </div>
                                                         <div class="column">
                                                             <h3>Break In/Out</h3>
                                                             <table width="100%" class="table table-bordered table-hover" id="dataTables-example" data-order='[[ 0, "desc" ]]'>
@@ -168,11 +157,14 @@
                                                                     <th>Out</th>
                                                                 </tr>
                                                                 </thead>
-                                                                <tbody id="break_tbody">
+                                                                <tbody id="break_tbody{{$v->id}}">
 
                                                                 </tbody>
 
                                                             </table>
+                                                        </div>
+                                                        <div class="column">
+                                                          <h4 id="breakHour{{$v->id}}" style="text-align: center; font-size: 20px;"></h4>
                                                         </div>
                                                 </div>
 
@@ -299,86 +291,64 @@
     // Finds attendance details for specific row.
     function getAttendanceDetails(attendanceID) {
 
-      console.log('The attendance id number is : ', attendanceID);
-
       $( document ).ready(function() {
         $("div[name="+"md"+attendanceID+"]").modal('show');
       });
 
 
-        var EntryTbody = document.getElementById("entry_tbody");
-        var BreakTbody = document.getElementById("break_tbody");
+        var BreakTbody = document.getElementById("break_tbody"+attendanceID);
+
         var url = document.getElementById('_url').textContent;
 
 
-        $.get( url +'/personal/attendance/details', { attendanceID: attendanceID }, function(data){
+        $.get(url + '/personal/attendance/details', { attendanceID: attendanceID }, function(data){
 
-            console.log(data);
-
-            EntryTbody.innerHTML = "";
             BreakTbody.innerHTML = "";
 
+            var breaks = data[0];
+            var break_hour = data[1];
 
-            var entries = data[0];
-            var breaks = data[1];
+            var break_hour_element = document.getElementById("breakHour"+attendanceID);
+            break_hour_element.innerHTML = "";
 
-            console.log(entries);
+            if (break_hour > 0) {
+              var res_hr = break_hour.split(".");
+              break_hour_element.innerHTML += ""+ res_hr[0] +" hour "+ res_hr[1] + " minutes";
+            }else{
+              break_hour_element.innerHTML += "Did not take a break.";
+            }
 
-            for(i = 0; i <= entries.length; i++){
-                if(entries[i]){
+            if (breaks) {
+
+              for(i = 0; i <= breaks.length; i++){
+                  if(breaks[i]){
+
                     var end_time = "";
-                    if (entries[i].end_at) {
-                      end_time = entries[i].end_at;
+                    if (breaks[i].end_at) {
+                      end_time = breaks[i].end_at;
                       var res = end_time.split(" ");
                       end_time = res[1];
-                    }else {
+                    }
+                    else {
                       end_time = "Ongoing";
                     }
 
-                    var start_time = entries[i].start_at;
+                    var start_time = breaks[i].start_at;
                     var res = start_time.split(" ");
                     start_time = res[1];
 
-                    EntryTbody.innerHTML += "<tr>" +
-                        "<td>"+ start_time +"</td>" +
-                        "<td>" + end_time + "</td>"
-                        +"</tr>";
-                }
-
-            }
-
-
-
-            for(i = 0; i <= breaks.length; i++){
-                if(breaks[i]){
-                  var end_time = "";
-                  if (breaks[i].end_at) {
-                    end_time = breaks[i].end_at;
-                    var res = end_time.split(" ");
-                    end_time = res[1];
-                  }else {
-                    end_time = "Ongoing";
+                      BreakTbody.innerHTML += "<tr>" +
+                          "<td>"+ start_time +"</td>" +
+                          "<td>" + end_time + "</td>"
+                          +"</tr>";
                   }
+              }
+            }else{
 
-                  var start_time = entries[i].start_at;
-                  var res = start_time.split(" ");
-                  start_time = res[1];
-
-                    BreakTbody.innerHTML += "<tr>" +
-                        "<td>"+ start_time +"</td>" +
-                        "<td>" + end_time + "</td>"
-                        +"</tr>";
-                }
             }
-
-
-
-
         })
 
-
-    }
-
+      }
 
     </script>
     @endsection

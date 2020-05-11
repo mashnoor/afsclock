@@ -68,8 +68,8 @@ class DashboardController extends Controller
         ->where('employmentstatus', 'Active')
         ->count();
 
-        $a = table::daily_attendance()
-        ->latest('created_at')
+        $a = table::attendance()
+        ->latest('timein')
         ->take(4)
         ->get();
 
@@ -93,19 +93,19 @@ class DashboardController extends Controller
         ->count();
 
 
-        $recent_entries = table::daily_entries()->latest('start_at')->take(6)->get();
+        // $recent_entries = table::daily_entries()->latest('start_at')->take(6)->get();
         $recent_breaks = table::daily_breaks()->latest('start_at')->take(6)->get();
 
 
         $activity_collection = collect([]);
 
-        foreach ($recent_entries as $r_e) {
+        foreach ($a as $r_e) {
           $user = User::find($r_e->reference);
-          if ($r_e->start_at) {
-            $activity_collection->push(new Activity($user->name, $r_e->start_at, 'Clock In'));
+          if ($r_e->timein) {
+            $activity_collection->push(new Activity($user->name, $r_e->timein, 'Clock In'));
           }
-          if ($r_e->end_at) {
-            $activity_collection->push(new Activity($user->name ,$r_e->end_at, 'Clock Out'));
+          if ($r_e->timeout) {
+            $activity_collection->push(new Activity($user->name ,$r_e->timeout, 'Clock Out'));
           }
         }
 
@@ -131,6 +131,7 @@ class DashboardController extends Controller
 
 
     public function details(Request $request){
+      if (permission::permitted('dashboard')=='fail'){ return redirect()->route('denied'); }
 
         $attendanceID = request()->attendanceID;
 
@@ -142,6 +143,14 @@ class DashboardController extends Controller
         $all_breaks = table::daily_breaks()->where('reference_id', $theAttendance->reference)->whereDate('start_at', $theDate)->get();
 
         return response()->json( array($all_entries, $all_breaks));
+
+    }
+
+    public function realtime_webcam_data(Request $request){
+      if (permission::permitted('dashboard')=='fail'){ return redirect()->route('denied'); }
+
+      $webcam_data = table::webcam_table()->get();
+      return view('admin.webcam_data', compact('webcam_data'));
 
     }
 

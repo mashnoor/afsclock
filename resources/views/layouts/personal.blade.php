@@ -128,7 +128,7 @@
             @yield('content')
         </div>
 
-        <input type="hidden" id="_url" value="{{url('/')}}">
+        <!-- <input type="hidden" id="_url" value="{{url('/')}}"> -->
         <script>
             //var y = '@isset($var){{$var}}@endisset';
             //var d = {"t":"Activation required!","b":"You need to activate this app otherwise you can't use some features.","a":"You only have 30 days trial to use this app."}
@@ -212,7 +212,7 @@ function taskReminderMonitor(){
 
     var url = document.getElementById('_url').textContent;
 
-    $.get( url+'/personal/dashboard/task_reminder', {reference_id:reference_id}, function(data){
+    $.get( url + '/personal/dashboard/task_reminder', {reference_id:reference_id}, function(data){
 
       if (data != "") {
 

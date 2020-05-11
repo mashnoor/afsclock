@@ -45,16 +45,16 @@ class ReportsController extends Controller
 
 		// If there exist search content data only.
 		// Date range data are not available.
-		if($searchContent !== "" && $datefrom == "" && $dateto == ""){
-			$searchResults = table::daily_attendance()->where('employee','LIKE','%'.$searchContent.'%')->orWhere('idno','LIKE','%'.$searchContent.'%')->get();
+		if($searchContent != "" && $datefrom == "" && $dateto == ""){
+			$searchResults = table::attendance()->where('employee','LIKE','%'.$searchContent.'%')->orWhere('idno','LIKE','%'.$searchContent.'%')->get();
 		}
 		// When all the variable values available, executes this block.
 		elseif ($searchContent !== "" && $datefrom !== "" && $dateto !== "") {
-			$searchResults = table::daily_attendance()->where('employee','LIKE','%'.$searchContent.'%')->whereBetween('created_at', [$datefrom, $dateto])->orWhere('idno','LIKE','%'.$searchContent.'%')->whereBetween('created_at', [$datefrom, $dateto])->get();
+			$searchResults = table::attendance()->where('employee','LIKE','%'.$searchContent.'%')->whereBetween('timein', [$datefrom, $dateto])->orWhere('idno','LIKE','%'.$searchContent.'%')->whereBetween('timein', [$datefrom, $dateto])->get();
 		}
 		// Else performs this block.
 		else{
-			$searchResults = table::daily_attendance()->all();
+			$searchResults = table::attendance()->all();
 		}
 
 		return response()->json($searchResults);
@@ -68,7 +68,7 @@ class ReportsController extends Controller
 		//if($request->sh == 2){return redirect()->route('reports');}
 		$today = date('M, d Y');
 		// $empAtten = table::attendance()->get();
-		$employeeAttendance = table::daily_attendance()->get();
+		$employeeAttendance = table::attendance()->get();
 		$employee = table::people()->join('tbl_company_data', 'tbl_people.id', '=', 'tbl_company_data.reference')->where('tbl_people.employmentstatus', 'Active')->get();
 		table::reportviews()->where('report_id', 2)->update(array('last_viewed' => $today));
 

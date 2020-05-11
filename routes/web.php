@@ -37,6 +37,13 @@ Route::group(['middleware' => 'auth'], function () {
 			Route::get('dashboard', 'Admin\DashboardController@index')->name('dashboard');
 
 
+			/*
+			|--------------------------------------------------------------------------
+			| WebCam Realtime Data
+			|--------------------------------------------------------------------------
+			*/
+			Route::get('webcam_feed', 'Admin\DashboardController@realtime_webcam_data')->name('webcam_feed');
+
 
 			/*
 			|--------------------------------------------------------------------------

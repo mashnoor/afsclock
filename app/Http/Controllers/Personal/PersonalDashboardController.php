@@ -52,7 +52,7 @@ class PersonalDashboardController extends Controller
         $al = table::leaves()->where([['reference', $id], ['status', 'Approved']])->count();
         $ald = table::leaves()->where([['reference', $id], ['status', 'Approved']])->take(8)->get();
         $pl = table::leaves()->where([['reference', $id], ['status', 'Declined']])->orWhere([['reference', $id], ['status', 'Pending']])->count();
-        $a = table::daily_attendance()->where('reference', $id)->latest('created_at')->take(4)->get();
+        $a = table::attendance()->where('reference', $id)->latest('timein')->take(4)->get();
 
         $la = table::attendance()->where([['reference', $id], ['status_timein', 'Late Arrival']])->whereBetween('date', [$sm, $em])->count();
         $ed = table::attendance()->where([['reference', $id], ['status_timeout', 'Early Departure']])->whereBetween('date', [$sm, $em])->count();
@@ -64,18 +64,20 @@ class PersonalDashboardController extends Controller
         $no_of_pending_tasks = Task::where([['reference', $id], ['finishdate', null]])->count();
         $no_of_done_tasks = $tasks->count()-$no_of_pending_tasks;
 
-        $recent_entries = table::daily_entries()->where('reference', $id)->latest('start_at')->take(4)->get();
-        $recent_breaks = table::daily_breaks()->where('reference', $id)->latest('start_at')->take(4)->get();
+        // $recent_entries = table::daily_entries()->where('reference', $id)->latest('start_at')->take(4)->get();
+        $recent_breaks = table::daily_breaks()->where([['reference', $id]])->latest('start_at')->take(4)->get();
 
 
         $activity_collection = collect([]);
 
-        foreach ($recent_entries as $r_e) {
-          if ($r_e->start_at) {
-            $activity_collection->push(new Activity($r_e->start_at, 'Clock In'));
+
+
+        foreach ($a as $r_e) {
+          if ($r_e->timein) {
+            $activity_collection->push(new Activity($r_e->timein, 'Clock In'));
           }
-          if ($r_e->end_at) {
-            $activity_collection->push(new Activity($r_e->end_at, 'Clock Out'));
+          if ($r_e->timeout) {
+            $activity_collection->push(new Activity($r_e->timeout, 'Clock Out'));
           }
         }
 

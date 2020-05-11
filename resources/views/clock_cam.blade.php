@@ -76,6 +76,7 @@
         </div>
     </div>
 
+<span id="site_url" style="display: none;">{{url('/')}}</span>
 
 @endsection
 
@@ -231,10 +232,13 @@
             $('#btn_confirm').attr('hidden', true);
             $('#btn_reset').attr('hidden', true);
 
+            var url = document.getElementById('site_url').textContent;
+
             Webcam.snap(function (data_uri) {
                 // display results in page
                 $.ajax({
                     type: 'POST',
+
                     url: 'https://attendancekeeper.net:5009/face_rec/{{ $company_name }}',
                     data: {'image_data': data_uri},
                     success: function (data) {

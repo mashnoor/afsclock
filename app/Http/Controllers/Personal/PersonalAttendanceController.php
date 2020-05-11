@@ -7,14 +7,15 @@ use App\Classes\permission;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 
 class PersonalAttendanceController extends Controller
 {
     public function index()
     {
         $i = \Auth::user()->idno;
-//        $a = table::attendance()->where('idno', $i)->get();
-        $a = table::daily_attendance()->where('idno', $i)->get();
+       $a = table::attendance()->where('idno', $i)->get();
+        // $a = table::daily_attendance()->where('idno', $i)->get();
 
         $employee_reference_id = \Auth::user()->reference;
         $all_entries = table::daily_entries()->where('reference', $employee_reference_id)->get();
@@ -23,21 +24,37 @@ class PersonalAttendanceController extends Controller
         return view('personal.personal-attendance-view', compact('a', 'all_entries', 'all_breaks'));
     }
 
-
     public function details(Request $request){
 
         $attendanceID = request()->attendanceID;
 
-        $theAttendance = table::daily_attendance()->where('id', $attendanceID)->first();
+        if ($attendanceID) {
+          $all_breaks = table::daily_breaks()->where('attendance_id', $attendanceID)->get();
 
-        $theDate = date("Y-m-d", strtotime($theAttendance->created_at));
+          $total_working_hour = 0;
+          $total_hours = 0;
+          $toal_working_minute_new = 0;
 
-        $all_entries = table::daily_entries()->where('reference', $theAttendance->reference)->whereDate('start_at', $theDate)->get();
-        $all_breaks = table::daily_breaks()->where('reference', $theAttendance->reference)->whereDate('start_at', $theDate)->get();
+          foreach ($all_breaks as $break) {
+            $time1 = Carbon::parse($break->start_at);
+            $time2 = Carbon::parse($break->end_at);
+
+            $th = $time1->diffInHours($time2);
+            $tm = floor(($time1->diffInMinutes($time2) - (60 * $th)));
+            // $totalhour = $th.".".$tm;
+
+            $total_hours += $th;
+            $toal_working_minute_new += $tm;
+
+          }
+
+          $total_working_hour = $total_hours.".".$toal_working_minute_new;
 
 
-        return response()->json( array($all_entries, $all_breaks));
-
+          return response()->json([$all_breaks, $total_working_hour]);
+        }else {
+          return response()->json();
+        }
     }
 
 

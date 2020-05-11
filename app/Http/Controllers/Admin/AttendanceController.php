@@ -17,7 +17,7 @@ class AttendanceController extends Controller
     {
         if (permission::permitted('attendance')=='fail'){ return redirect()->route('denied'); }
 
-        $data = table::daily_attendance()->orderBy('created_at', 'desc')->get();
+        $data = table::attendance()->orderBy('timein', 'desc')->get();
         $cc = table::settings()->value('clock_comment');
 
         return view('admin.attendance', compact('data', 'cc'));
@@ -134,14 +134,16 @@ class AttendanceController extends Controller
 
         $attendanceID = request()->attendanceID;
 
-        $theAttendance = table::daily_attendance()->where('id', $attendanceID)->first();
+        return response()->json($attendanceID);
 
-        $theDate = date("Y-m-d", strtotime($theAttendance->created_at));
+        $theAttendance = table::attendance()->where('id', $attendanceID)->first();
 
-        $all_entries = table::daily_entries()->where('reference', $theAttendance->reference)->whereDate('start_at', $theDate)->get();
-        $all_breaks = table::daily_breaks()->where('reference', $theAttendance->reference)->whereDate('start_at', $theDate)->get();
+        if ($theAttendance) {
+          $all_breaks = table::daily_breaks()->where([['reference', $theAttendance->reference],['attendance_id', $theAttendance->id]])->get();
 
-        return response()->json( array($all_entries, $all_breaks));
+        }
+
+        return response()->json( $all_breaks);
 
     }
 

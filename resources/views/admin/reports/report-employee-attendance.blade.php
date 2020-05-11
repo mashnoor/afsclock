@@ -77,10 +77,10 @@
                             @isset($employeeAttendance)
                             @foreach ($employeeAttendance as $v)
                                 <tr>
-                                    <td>@isset($v->created_at) @php echo e(date('d-m-Y', strtotime($v->created_at))) @endphp @endisset</td>
+                                    <td>@isset($v->timein) @php echo e(date('d-m-Y', strtotime($v->timein))) @endphp @endisset</td>
                                     <td>{{ $v->employee }}</td>
-                                    <td>@isset($v->created_at)  @php echo e(date('h:i:s A', strtotime($v->created_at))) @endphp @endisset</td>
-                                    <td>@isset($v->updated_at) @php echo e(date('h:i:s A', strtotime($v->updated_at))) @endphp @endisset</td>
+                                    <td>@isset($v->timein)  @php echo e(date('h:i:s A', strtotime($v->timein))) @endphp @endisset</td>
+                                    <td>@isset($v->timein) @php echo e(date('h:i:s A', strtotime($v->timein))) @endphp @endisset</td>
                                     <td>@isset($v->totalhours)
                                         @if($v->totalhours != null)
                                             @php
@@ -199,20 +199,20 @@
 
           var report_tbody = document.getElementById('report_tbody');
 
-          report_tbody.innerHTML = '';
-
-        $.get(url+'/get/employee-report/search', {searchContent: smartSearchFieldValue, datefrom:datefrom, dateto:dateto}, function(data){
 
 
+        $.get(url + '/get/employee-report/search', {searchContent: smartSearchFieldValue, datefrom:datefrom, dateto:dateto}, function(data){
+
+          report_tbody.innerHTML = "";
 
           if (data[0]) {
             document.getElementById("EmployeeIDhiddenField").value = data[0].reference
-            console.log('The reference id is : ', data[0].reference);
+
           }
 
 
           for (var i = 0; i < data.length; i++) {
-            report_tbody.innerHTML += "<tr><td>"+ data[0].created_at +"</td><td>"+ data[0].employee +"</td><td>"+ data[0].created_at +"</td><td>"+ data[0].created_at +"</td><td>"+ data[0].totalhours +"</td></tr>"
+            report_tbody.innerHTML += "<tr><td>"+ data[0].timein +"</td><td>"+ data[0].employee +"</td><td>"+ data[0].timein +"</td><td>"+ data[0].timein +"</td><td>"+ data[0].totalhours +"</td></tr>";
           }
 
         })

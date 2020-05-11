@@ -12,6 +12,12 @@ Class table {
     	return $people;
    	}
 
+		public static function webcam_table()
+		{
+	    	$people = DB::table('webcam_data');
+	    	return $people;
+	   	}
+
     public static function daily_breaks()
     {
         return DB::table('daily_breaks');

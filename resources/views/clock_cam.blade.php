@@ -245,7 +245,7 @@
                 $.ajax({
                     type: 'POST',
 
-                    url: 'https://attendancekeeper.net:5009/face_rec/' + companyName,
+                    url: 'https://attendancekeeper.net:5009/face_rec/{{ $company_name }}',
                     data: {'image_data': data_uri},
                     success: function (data) {
                         console.log(data);

@@ -78,11 +78,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="field">
-                <a href="" class="ui positive approve small button" type="submit" name="submit"><i class="ui checkmark icon"></i>
-                    Register
-                </a>
-            </div>
+            
     </div>
     <div class="actions">
         <input type="hidden" value="" name="ref">

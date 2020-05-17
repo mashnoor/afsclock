@@ -18,6 +18,14 @@ Class table {
 	    	return $people;
 	   	}
 
+		public static function sch_template(){
+			return DB::table('schedule_template');
+		}
+
+		public static function new_schedule(){
+			return DB::table('schedules');
+		}
+
     public static function daily_breaks()
     {
         return DB::table('daily_breaks');

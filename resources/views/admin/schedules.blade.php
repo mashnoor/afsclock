@@ -17,11 +17,12 @@
 
     @section('content')
     @include('admin.modals.modal-add-schedule')
-    
+
     <div class="container-fluid">
         <div class="row">
             <h2 class="page-title">Schedules
                 <button class="ui positive button mini offsettop5 btn-add float-right"><i class="ui icon plus"></i>Add</button>
+                <a href="schedules/templates" class="button blue float-right ui mini"><i class="ui icon th list"></i>Schedule Templates</a>
             </h2>
         </div>
 
@@ -52,14 +53,14 @@
                                 <td>@php echo e(date('D, M d, Y', strtotime($sched->datefrom))) @endphp</td>
                                 <td>@php echo e(date('D, M d, Y', strtotime($sched->dateto))) @endphp</td>
                                 <td>
-                                    @if($sched->archive == '0') 
+                                    @if($sched->archive == '0')
                                         <span class="green">Present</span>
                                     @else
                                         <span class="teal">Previous</span>
                                     @endif
                                 </td>
                                 <td class="align-right">
-                                    @if($sched->archive == '0') 
+                                    @if($sched->archive == '0')
                                         <a href="{{ url('/schedules/edit/'.$sched->id) }}" class="ui circular basic icon button tiny"><i class="icon edit outline"></i></a>
                                         <a href="{{ url('/schedules/delete/'.$sched->id) }}" class="ui circular basic icon button tiny"><i class="icon trash alternate outline"></i></a>
                                         <a href="{{ url('/schedules/archive/'.$sched->id) }}" class="ui circular basic icon button tiny"><i class="icon archive"></i></a>
@@ -75,11 +76,11 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
 
     @endsection
-    
+
     @section('scripts')
     <script src="{{ asset('/assets/vendor/air-datepicker/dist/js/datepicker.min.js') }}"></script>
     <script src="{{ asset('/assets/vendor/air-datepicker/dist/js/i18n/datepicker.en.js') }}"></script>
@@ -97,4 +98,4 @@
         });
     }});
     </script>
-    @endsection 
+    @endsection

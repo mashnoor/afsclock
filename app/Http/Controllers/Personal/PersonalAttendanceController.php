@@ -18,10 +18,10 @@ class PersonalAttendanceController extends Controller
         // $a = table::daily_attendance()->where('idno', $i)->get();
 
         $employee_reference_id = \Auth::user()->reference;
-        $all_entries = table::daily_entries()->where('reference', $employee_reference_id)->get();
+        // $all_entries = table::daily_entries()->where('reference', $employee_reference_id)->get();
 
         $all_breaks = table::daily_breaks()->where('reference', $employee_reference_id)->get();
-        return view('personal.personal-attendance-view', compact('a', 'all_entries', 'all_breaks'));
+        return view('personal.personal-attendance-view', compact('a', 'all_breaks'));
     }
 
     public function details(Request $request){

@@ -1,20 +1,28 @@
 <div class="ui modal add medium">
-    <div class="header">Add New Schedule</div>
+    <div class="header">Assign Schedule to Employee</div>
     <div class="content">
-        <form id="add_schedule_form" action="{{ url('schedules/add') }}" class="ui form" method="post" accept-charset="utf-8">
+        <form id="add_schedule_form" action="{{ url('schedules/template/assign') }}" class="ui form my-5" method="post" accept-charset="utf-8">
         @csrf
             <div class="field">
-                <label>Employee</label>
+                <h4>Employee</h4>
                 <select class="ui search dropdown getid uppercase" name="employee">
                     <option value="">Select Employee</option>
                     @isset($employee)
                         @foreach ($employee as $data)
-                            <option value="{{ $data->lastname }}, {{ $data->firstname }}" data-id="{{ $data->id }}">{{ $data->lastname }}, {{ $data->firstname }}</option>
+                            <option value="{{ $data->id }}" data-id="{{ $data->id }}">{{ $data->lastname }}, {{ $data->firstname }}</option>
+                        @endforeach
+                    @endisset
+                </select>
+                <h4 class="mt-5">Schedule Template</h4>
+                <select class="ui search dropdown getid uppercase" name="template">
+                    @isset($sch_templates)
+                        @foreach ($sch_templates as $data)
+                            <option value="{{ $data->id }}" data-id="{{ $data->id }}">{{ $data->name }}</option>
                         @endforeach
                     @endisset
                 </select>
             </div>
-            <div class="two fields">
+            <!-- <div class="two fields">
                 <div class="field">
                     <label for="">Start time</label>
                     <input type="text" placeholder="00:00:00 AM" name="intime" class="jtimepicker" />
@@ -23,8 +31,8 @@
                     <label for="">Off time</label>
                     <input type="text" placeholder="00:00:00 PM" name="outime" class="jtimepicker" />
                 </div>
-            </div>
-            <div class="field">
+            </div> -->
+            <!-- <div class="field">
                 <label for="">From</label>
                 <input type="text" placeholder="Date" name="datefrom" id="datefrom" class="airdatepicker" />
             </div>
@@ -35,8 +43,8 @@
             <div class="eight wide field">
                 <label for="">Total hours</label>
                 <input type="number" placeholder="0" name="hours" />
-            </div>
-           <div class="grouped fields field">
+            </div> -->
+           <!-- <div class="grouped fields field">
                 <label>Choose Rest day(s)</label>
                 <div class="field">
                     <div class="ui checkbox sunday">
@@ -87,13 +95,13 @@
                         <li class=""></li>
                     </ul>
                 </div>
-            </div>
+            </div> -->
         </div>
-            
+
         <div class="actions">
             <input type="hidden" name="id" value="">
             <button class="ui positive small button" type="submit" name="submit"><i class="ui checkmark icon"></i> Save</button>
             <button class="ui grey small button cancel" type="button"><i class="ui times icon"></i> Cancel</button>
         </div>
-        </form>  
+        </form>
 </div>

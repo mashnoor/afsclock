@@ -9,6 +9,23 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use App\Http\Controllers\Controller;
+use App\User;
+
+
+class AssignedSchedule {
+
+    public $employee = '';
+    public $template = '';
+    public $created_at = '';
+
+    public function __construct($employee, $template, $created_at)
+    {
+        $this->employee = $employee;
+        $this->template = $template;
+        $this->created_at = $created_at;
+    }
+
+}
 
 class SchedulesController extends Controller
 {
@@ -18,9 +35,50 @@ class SchedulesController extends Controller
 
         $employee = table::people()->get();
         $schedules = table::schedules()->get();
+        $sch_templates = table::sch_template()->get();
 
-        return view('admin.schedules', compact('employee', 'schedules'));
+        $active_schedules = table::new_schedule()->where('active_status', 1 )->get();
+
+        $active_schedule_collection = collect([]);
+
+        foreach ($active_schedules as $a_shcedule) {
+          $user = User::find($a_shcedule->reference);
+          $template = table::sch_template()->where('id', $a_shcedule->schedule_id)->first();
+          $active_schedule_collection->push(new AssignedSchedule($user->name, $template->name, $a_shcedule->created_at));
+        }
+
+        return view('admin.schedules', compact('employee', 'schedules', 'sch_templates','active_schedule_collection'));
     }
+
+    // Assign Template to Employee
+    public function assign_template(Request $request){
+      // Checks user permission
+      if (permission::permitted('schedules')=='fail'){ return redirect()->route('denied'); }
+
+      $reference = $request->employee;
+
+      $template = $request->template;
+
+      $existing_schedule = table::new_schedule()->where([['reference', $reference],['schedule_id', $template], ['active_status', 1]])->first();
+
+      if ($existing_schedule) {
+        return redirect('/schedules')->with('error', 'This schedule is already assigned.');
+      }
+      else {
+        $current_schedule = table::new_schedule()->where([['reference', $reference],['active_status', 1]])->first();
+        if ($current_schedule) {
+          table::new_schedule()->where('id', $current_schedule->id)->update(['active_status' => 0,]);
+        }
+
+        DB::table('schedules')->insert(['reference' => $reference, 'schedule_id' => $template, 'active_status' => 1,'created_at' => Carbon::now() ]);;
+        return redirect('/schedules')->with('success', 'Schedule Successfully Assigned.');
+
+      }
+
+
+
+    }
+
 
     // Schedule temlate page
     public function templates(){
@@ -93,7 +151,7 @@ class SchedulesController extends Controller
 
       DB::table('schedule_template')->insert(['name' => $name,'saturday' => $saturday, 'sunday' => $sunday, 'monday' => $monday, 'tuesday' => $tuesday, 'wednesday' => $wednesday, 'thursday' => $thursday, 'friday' => $friday, 'break_allowence' => $break_allowence, 'restdays' => $restday, 'created_at' => Carbon::now() ]);;
 
-      return redirect('/schedules/templates')->with('success', 'Schedule has been created Successfully!');;
+      return redirect('/schedules/templates')->with('success', 'Schedule has been created Successfully!');
 
     }
 

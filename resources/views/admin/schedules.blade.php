@@ -21,12 +21,33 @@
     <div class="container-fluid">
         <div class="row">
             <h2 class="page-title">Schedules
-                <button class="ui positive button mini offsettop5 btn-add float-right"><i class="ui icon plus"></i>Add</button>
+                <button class="ui positive button mini offsettop5 btn-add float-right"><i class="ui icon plus"></i>Assign Schedule</button>
                 <a href="schedules/templates" class="button blue float-right ui mini"><i class="ui icon th list"></i>Schedule Templates</a>
             </h2>
         </div>
 
         <div class="row">
+          <table class="ui celled table">
+            <thead>
+              <tr><th>Employee</th>
+              <th>Schedule</th>
+              <th>Assigned Date</th>
+            </tr></thead>
+            <tbody>
+              @isset($active_schedule_collection)
+                @foreach ($active_schedule_collection as $sched)
+                  <tr>
+                    <td data-label="Name">{{$sched->employee}}</td>
+                    <td data-label="Age">{{$sched->template}}</td>
+                    <td data-label="Job">{{$sched->created_at}}</td>
+                  </tr>
+                @endforeach
+              @endisset
+            </tbody>
+          </table>
+        </div>
+
+        <!-- <div class="row">
             <div class="box box-success">
                 <div class="box-body">
                     <table width="100%" class="table table-striped table-hover" id="dataTables-example" data-order='[[ 6, "asc" ]]'>
@@ -75,7 +96,7 @@
                     </table>
                 </div>
             </div>
-        </div>
+        </div> -->
 
     </div>
 

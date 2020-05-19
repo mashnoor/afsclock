@@ -238,16 +238,27 @@ class ClockController extends Controller
 
                } else {
 
-                   $sched_in_time = table::schedules()->where([['idno', $idno], ['archive', 0]])->value('intime');
+                   // $sched_in_time = table::schedules()->where([['idno', $idno], ['archive', 0]])->value('intime');
 
-                   if($sched_in_time == NULL)
+                   $assigned_schedule_id = table::new_schedule()->where([['reference', $employee_id],['active_status', 1]] )->value('schedule_id');
+                   $schedule_template = table::sch_template()->where('id', $assigned_schedule_id)->first();
+
+                   $today = Carbon::now();
+                   $day = strtolower($today->isoFormat('dddd'));
+
+                   $day_today = $schedule_template->$day;
+                   $str_arr = explode ("-", $day_today);
+                   $in_time = $str_arr[0];
+                   $out_time = $str_arr[1];
+
+                   if($in_time == NULL)
                    {
                        $status_in = "Ok";
                    } else {
-                       $sched_clock_in_time_24h = date("H.i", strtotime($sched_in_time));
+                       // $sched_clock_in_time_24h = date("H.i", strtotime($sched_in_time));
                        $time_in_24h = date("H.i", strtotime($time));
 
-                       if ($time_in_24h <= $sched_clock_in_time_24h)
+                       if ($time_in_24h <= $in_time)
                        {
                            $status_in = 'In Time';
                        } else {
@@ -266,6 +277,7 @@ class ClockController extends Controller
                                'timein' => $date." ".$time,
                                'status_timein' => $status_in,
                                'comment' => $comment,
+                               'schedule_id' => $assigned_schedule_id,
                            ],
                        ]);
                    } else {
@@ -277,6 +289,7 @@ class ClockController extends Controller
                                'employee' => $employee,
                                'timein' => $date." ".$time,
                                'status_timein' => $status_in,
+                               'schedule_id' => $assigned_schedule_id,
                            ],
                        ]);
                    }
@@ -540,14 +553,25 @@ class ClockController extends Controller
            else {
                $sched_out_time = table::schedules()->where([['idno', $idno], ['archive', 0]])->value('outime');
 
-               if($sched_out_time == NULL)
+               $assigned_schedule_id = table::new_schedule()->where([['reference', $employee_id],['active_status', 1]] )->value('schedule_id');
+               $schedule_template = table::sch_template()->where('id', $assigned_schedule_id)->first();
+
+               $today = Carbon::now();
+               $day = strtolower($today->isoFormat('dddd'));
+
+               $day_today = $schedule_template->$day;
+               $str_arr = explode ("-", $day_today);
+               $in_time = $str_arr[0];
+               $out_time = $str_arr[1];
+
+               if($out_time == NULL)
                {
                    $status_out = "Ok";
                } else {
-                   $sched_clock_out_time_24h = date("H.i", strtotime($sched_out_time));
+                   // $sched_clock_out_time_24h = date("H.i", strtotime($sched_out_time));
                    $time_out_24h = date("H.i", strtotime($timeOUT));
 
-                   if($time_out_24h >= $sched_clock_out_time_24h)
+                   if($time_out_24h >= $out_time)
                    {
                        $status_out = 'On Time';
                    } else {

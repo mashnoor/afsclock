@@ -87,6 +87,19 @@ class SchedulesController extends Controller
 
       $templates = table::sch_template()->get();
 
+
+      foreach ($templates as $template) {
+        $today = Carbon::now();
+        $day = strtolower($today->isoFormat('dddd'));
+
+        $saturday = $template->$day;
+        $str_arr = explode ("-", $saturday);
+        $in_time = $str_arr[0];
+        $out_time = $str_arr[1];
+
+        dd($in_time, $out_time, $day);
+      }
+
       // dd($templates);
 
       return view('admin.schedule_templates', compact('templates'));

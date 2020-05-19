@@ -28,6 +28,7 @@ class CreateTblPeopleAttendanceTable extends Migration {
                 $table->string('status_timeout')->nullable()->default('');
                 $table->string('reason')->nullable()->default('');
                 $table->string('comment')->nullable();
+								$table->string('schedule_id');
             });
         }
 	}

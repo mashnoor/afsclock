@@ -19,7 +19,7 @@
         <p>Manage existing schedule and create new templates.</p>
       </div>
       <div class="col-4">
-        <a href="/schedules/templates/create" class="ui button blue float-right"><i class="ui icon plus square outline"></i> Create Template</a>
+        <a href="{{ url('schedules/templates/create')}}" class="ui button blue float-right"><i class="ui icon plus square outline"></i> Create Template</a>
       </div>
     </div>
 

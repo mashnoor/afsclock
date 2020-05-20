@@ -97,7 +97,7 @@ class SchedulesController extends Controller
         $in_time = $str_arr[0];
         $out_time = $str_arr[1];
 
-        dd($in_time, $out_time, $day);
+        // dd($in_time, $out_time, $day);
       }
 
       // dd($templates);

@@ -15,7 +15,7 @@
       <h1>Create Schedule Template</h1>
       <p>Fill up to the form below to create a schedule template.</p>
 
-      <form id="add_schedule_form" action="/schedules/templates/add" class="ui form my-5" method="post" accept-charset="utf-8">
+      <form id="add_schedule_form" action="{{ url('schedules/templates/add') }}" class="ui form my-5" method="post" accept-charset="utf-8">
           @csrf
 
           <div class="field">

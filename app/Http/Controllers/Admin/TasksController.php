@@ -6,9 +6,29 @@ use App\Http\Controllers\Controller;
 use App\People;
 use App\Task;
 use Illuminate\Http\Request;
-
+use App\Classes\table;
+use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
+use App\Classes\permission;
+
+class TasksHistory{
+
+    public $id = '';
+    public $datetime ='';
+    public $reason = '';
+    public $new_deadline = '';
+
+
+    public function __construct($id, $datetime, $reason, $new_deadline)
+    {
+        $this->id = $id;
+        $this->datetime = $datetime;
+        $this->reason = $reason;
+        $this->new_deadline = $new_deadline;
+    }
+
+}
 
 class TasksController extends Controller
 {
@@ -105,9 +125,32 @@ class TasksController extends Controller
         $task->done_status = 0;
 
         $task->save();
-
-
-
         return redirect('taskmanager')->with('success', 'Task assigned successfully!');
+    }
+
+
+    public function task_details($id){
+      if (permission::permitted('dashboard')=='fail'){ return redirect()->route('denied'); }
+      $task = Task::find($id);
+
+      $task_history = collect([]);
+
+
+        $extended_deadlines = table::task_extension()->where('task_id', $task->id)->get();
+
+        $assigned_to = User::find($task->reference);
+        $assigned_by = User::find($task->assigned_by);
+
+        // dd($extended_deadlines);
+
+        if ($extended_deadlines) {
+          foreach ($extended_deadlines as $data) {
+            $task_history->push(new TasksHistory($task->id, $data->created_at, $data->reason, $data->new_deadline));
+          }
+        }
+
+        // dd($task_history);
+
+      return view('admin.task_details', compact('task', 'task_history', 'assigned_to', 'assigned_by'));
     }
 }

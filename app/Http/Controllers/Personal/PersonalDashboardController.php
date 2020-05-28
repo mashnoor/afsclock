@@ -11,7 +11,26 @@ use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Arr;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 
+class Tasks{
+
+    public $id = '';
+    public $assigned_to ='';
+    public $original_deadline = '';
+    public $deadline = '';
+
+
+    public function __construct($id, $assigned_to, $deadline, $original_deadline)
+    {
+        $this->id = $id;
+        $this->assigned_to = $assigned_to;
+        $this->original_deadline = $original_deadline;
+        $this->deadline = $deadline;
+    }
+
+}
 
 class Activity {
 
@@ -95,10 +114,27 @@ class PersonalDashboardController extends Controller
         {return $activity->datetime;});
 
         // dd($sortedActivities);
+        $current_user = Auth::user();
 
+        // dd($current_user->name);
 
+        $tasks = Task::where('assigned_by', $current_user->id)->get();
 
-        return view('personal.personal-dashboard', compact('cs', 'ps', 'al', 'pl', 'ald', 'a', 'la', 'ed', 'tz', 'no_of_pending_tasks', 'no_of_done_tasks', 'tasks', 'pending_tasks', 'sortedActivities'));
+        $task_collection = collect([]);
+
+        foreach($tasks as $task){
+          $extended_task = table::task_extension()->where('task_id', $task->id)->latest('new_deadline')->first();
+
+          $user = User::find($task->reference);
+
+          if ($extended_task) {
+            $task_collection->push(new Tasks($task->id, $user->name, $extended_task->new_deadline, $task->deadline));
+          }
+        }
+
+        // dd($task_collection);
+
+        return view('personal.personal-dashboard', compact('cs', 'ps', 'al', 'pl', 'ald', 'a', 'la', 'ed', 'tz', 'no_of_pending_tasks', 'no_of_done_tasks', 'tasks', 'pending_tasks', 'sortedActivities','task_collection'));
     }
 
 

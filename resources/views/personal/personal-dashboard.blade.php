@@ -94,6 +94,7 @@
             </div>
 
             <div class="col-md-4">
+
                 <div class="info-box">
                     <span class="info-box-icon bg-ash"><i class="ui icon user circle"></i></span>
                     <div class="info-box-content">
@@ -194,6 +195,38 @@
             </div>
 
             <div class="col-md-4">
+              <div class="col bg-light box box-success">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Task Deadline Tracker</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i
+                                    class="fa fa-times"></i></button>
+                    </div>
+                </div>
+                <table class="table responsive nobordertop">
+                    <thead>
+                    <tr>
+                        <th class="text-left">Employee Name</th>
+                        <th class="text-left">Original Deadline</th>
+                        <th class="text-left">New Deadline</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @isset($task_collection)
+                        @foreach ($task_collection as $data)
+                            <tr>
+                                <td class="text-left name-title">{{ $data->assigned_to }}
+                                    </td>
+                                <td class="text-left">@php echo e(date('M d, Y', strtotime($data->original_deadline))) @endphp</td>
+                                <td class="text-left">@php echo e(date('M d, Y', strtotime($data->deadline))) @endphp</td>
+                                <td><a href="{{ url('personal/tassk/details/'.$data->id) }}" class="ui circular basic icon button tiny"><i class="icon align justify "></i></a></td>
+                            </tr>
+                        @endforeach
+                    @endisset
+                    </tbody>
+                </table>
+              </div>
                 <div class="box box-success">
                     <div class="box-header with-border">
                         <h3 class="box-title">Previous Schedules</h3>

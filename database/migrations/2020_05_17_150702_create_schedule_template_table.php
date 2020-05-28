@@ -13,6 +13,7 @@ class CreateScheduleTemplateTable extends Migration
      */
     public function up()
     {
+        if(!Schema::hasTable('schedule_template')) {
         Schema::create('schedule_template', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
@@ -27,6 +28,7 @@ class CreateScheduleTemplateTable extends Migration
             $table->string('break_allowence');
             $table->timestamps();
         });
+      }
     }
 
     /**

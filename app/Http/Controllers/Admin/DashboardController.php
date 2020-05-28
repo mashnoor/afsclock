@@ -10,7 +10,25 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Arr;
 use App\User;
+use App\Task;
 
+class Tasks{
+
+    public $id = '';
+    public $assigned_to ='';
+    public $original_deadline = '';
+    public $deadline = '';
+
+
+    public function __construct($id, $assigned_to, $deadline, $original_deadline)
+    {
+        $this->id = $id;
+        $this->assigned_to = $assigned_to;
+        $this->original_deadline = $original_deadline;
+        $this->deadline = $deadline;
+    }
+
+}
 
 class Activity {
 
@@ -126,7 +144,23 @@ class DashboardController extends Controller
 
         // dd($sortedActivities);
 
-        return view('admin.dashboard', compact('emp_typeR', 'emp_typeT', 'emp_allActive', 'emp_leaves_pending', 'emp_leaves_approve', 'emp_leaves_all', 'emp_approved_leave', 'emp_all_type','a', 'is_online_now', 'is_offline_now', 'sortedActivities'));
+        $tasks = Task::all();
+
+        $task_collection = collect([]);
+
+        foreach($tasks as $task){
+          $extended_task = table::task_extension()->where('task_id', $task->id)->latest('new_deadline')->first();
+
+          $user = User::find($task->reference);
+
+          if ($extended_task) {
+            $task_collection->push(new Tasks($task->id, $user->name, $extended_task->new_deadline, $task->deadline));
+          }
+        }
+
+        // dd($task_collection);
+
+        return view('admin.dashboard', compact('emp_typeR', 'emp_typeT', 'emp_allActive', 'emp_leaves_pending', 'emp_leaves_approve', 'emp_leaves_all', 'emp_approved_leave', 'emp_all_type','a', 'is_online_now', 'is_offline_now', 'sortedActivities', 'task_collection'));
     }
 
 

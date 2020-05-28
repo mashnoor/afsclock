@@ -52,6 +52,8 @@
                                 </div>
                             </div>
 
+                            
+
                             <div class="field">
                                 <label for="">Deadline</label>
                                 <input type="text" placeholder="0000-00-00" class="readonly" readonly="" value="@isset($task->deadline){{ $task->deadline }}@endisset"/>

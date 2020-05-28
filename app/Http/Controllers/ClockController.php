@@ -419,7 +419,7 @@ class ClockController extends Controller
 
         if ($type == 'timeout')
         {
-
+          
             // // Checks if the following employee has attendance record today
             // $isAttendanceToday = table::daily_attendance()->where([['idno', $idno ],['reference', $employee_id]])->whereDate('created_at', $date)->exists();
             //

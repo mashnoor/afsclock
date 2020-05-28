@@ -32,16 +32,17 @@
                                 <th>Title</th>
                                 <th>Deadline</th>
                                 <th>Finish Date</th>
+
                                 <th>Status</th>
                                 <th>Comment</th>
                                 <th class="align-right">Actions</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @isset($tasks)
-                                @foreach ($tasks as $task)
+                            @isset($task_collection)
+                                @foreach ($task_collection as $task)
                                     <tr>
-                                        <td>{{ $task->assignedBy->firstname }} {{ $task->assignedBy->lastname }}</td>
+                                        <td>{{ $task->assigned_by }}</td>
                                         <td>{{ $task->title }}</td>
                                         <td>{{ $task->deadline }}</td>
                                         <td>@isset($task->finishdate){{ $task->finishdate }}@endisset</td>
@@ -64,6 +65,7 @@
                                                 }
 
                                         @endphp
+                                        
                                         <td><span class="{{ $color }}">{{ $done_status }}</span></td>
                                         <td>{{ $task->comment }}</td>
                                         <td class="align-right">
@@ -71,6 +73,10 @@
                                             <a href="{{ url('personal/tasks/edit/'.$task->id) }}"
                                                class="ui circular basic icon button tiny"><i
                                                         class="icon edit outline"></i></a>
+
+                                            <a href="{{ url('personal/extend-deadline/'.$task->id) }}"
+                                                           class="ui circular basic icon button tiny"><i
+                                                                    class="icon calendar outline"></i></a>
 
                                         </td>
                                     </tr>

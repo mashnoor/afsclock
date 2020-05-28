@@ -12,10 +12,14 @@ Class table {
     	return $people;
    	}
 
+		public static function task_extension(){
+			return DB::table('task_extension');
+		}
+
 		public static function webcam_table()
 		{
-	    	$people = DB::table('webcam_data');
-	    	return $people;
+	    	$webcam_table = DB::table('webcam_data');
+	    	return $webcam_table;
 	   	}
 
 		public static function sch_template(){

@@ -84,6 +84,7 @@
                                         <a href="{{ url('personal/tasks/assignatask/edit/'.$task->id) }}"
                                            class="ui circular basic icon button tiny"><i
                                                     class="icon edit outline"></i></a>
+
                                         <a href="{{ url('/task/delete/'.$task->id) }}"
                                            class="ui circular basic icon button tiny"><i
                                                     class="icon trash alternate outline"></i></a></td>

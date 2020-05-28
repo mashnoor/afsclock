@@ -5,9 +5,54 @@ namespace App\Http\Controllers\personal;
 use App\Http\Controllers\Controller;
 use App\People;
 use App\Task;
+use App\Classes\table;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
+use App\User;
+
+
+class TasksHistory{
+
+    public $id = '';
+    public $datetime ='';
+    public $reason = '';
+    public $new_deadline = '';
+
+
+    public function __construct($id, $datetime, $reason, $new_deadline)
+    {
+        $this->id = $id;
+        $this->datetime = $datetime;
+        $this->reason = $reason;
+        $this->new_deadline = $new_deadline;
+    }
+
+}
+
+class Tasks{
+
+    public $id = '';
+    public $assigned_by ='';
+    public $title = '';
+    public $deadline = '';
+    public $finish_date = '';
+    public $status = '';
+    public $comment = '';
+
+    public function __construct($id, $assigned_by, $title, $deadline, $finish_date, $status, $comment)
+    {
+        $this->id = $id;
+        $this->assigned_by = $assigned_by;
+        $this->title = $title;
+        $this->deadline = $deadline;
+        $this->finish_date = $finish_date;
+        $this->status = $status;
+        $this->comment = $comment;
+    }
+
+}
 
 class PersonalTasksController extends Controller
 {
@@ -23,10 +68,7 @@ class PersonalTasksController extends Controller
         $task = Task::find($id);
         $e_id = Crypt::encryptString($id);
 
-
-
         return view('personal.edits.personal-task-edit', compact('task', 'e_id'));
-
 
     }
 
@@ -35,7 +77,27 @@ class PersonalTasksController extends Controller
     public function myTasks()
     {
         $tasks = Task::where('reference', Auth::user()->reference)->get();
-        return view('personal.personal-my-tasks', compact('tasks'));
+
+        $task_collection = collect([]);
+
+        foreach($tasks as $task){
+          $extended_task = table::task_extension()->where('task_id', $task->id)->latest('new_deadline')->first();
+
+          $assigned_by = $task->assignedBy->firstname . " " . $task->assignedBy->lastname;
+
+
+          if ($extended_task) {
+
+            $task_collection->push(new Tasks($task->id, $assigned_by, $task->title, $extended_task->new_deadline, $task->finishdate, $task->status, $task->comment));
+          }
+          else {
+            $task_collection->push(new Tasks($task->id, $assigned_by, $task->title, $task->deadline, $task->finishdate, $task->status, $task->comment));
+          }
+        }
+
+
+
+        return view('personal.personal-my-tasks', compact('tasks', 'task_collection'));
 
     }
 
@@ -168,8 +230,58 @@ class PersonalTasksController extends Controller
 
         return redirect('personal/tasks/mytasks')->with('success','Task has been updated!');
 
+    }
 
 
+    public function extend_deadline($id){
+      $task = Task::find($id);
+      return view('personal.personal-tasks-extend-deadline', compact('task'));
+    }
+
+
+    public function update_deadline(Request $request){
+
+
+
+      $v = $request->validate([
+          'reason' => 'required',
+          'new_deadline' => 'required',
+      ]);
+
+      $task_id = $request->task_id;
+      $new_deadline = $request->new_deadline;
+      $reason = $request->reason;
+
+      table::task_extension()->insert(
+          ['task_id' => $task_id, 'new_deadline' => $new_deadline, 'reason' => $reason, 'created_at' => Carbon::now()]
+      );
+
+
+      return redirect('personal/tasks/mytasks')->with('success','Task has been updated!');
+    }
+
+
+    public function task_details($id){
+
+      $task = Task::find($id);
+
+      $task_history = collect([]);
+
+
+        $extended_deadlines = table::task_extension()->where('task_id', $task->id)->get();
+
+        $assigned_to = User::find($task->reference);
+        $assigned_by = User::find($task->assigned_by);
+
+        // dd($extended_deadlines);
+
+        if ($extended_deadlines) {
+          foreach ($extended_deadlines as $data) {
+            $task_history->push(new TasksHistory($task->id, $data->created_at, $data->reason, $data->new_deadline));
+          }
+        }
+
+      return view('personal.task_details', compact('task', 'task_history', 'assigned_to', 'assigned_by'));
     }
 
 }

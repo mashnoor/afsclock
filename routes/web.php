@@ -110,6 +110,9 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('task/edit/{id}','Admin\TasksController@edit');
             Route::get('task/delete/{id}','Admin\TasksController@delete');
             Route::post('task/update', 'Admin\TasksController@update');
+						Route::get('task/details/{id}', 'Admin\TasksController@task_details');
+
+
 
 			/*
 			|--------------------------------------------------------------------------
@@ -283,6 +286,7 @@ Route::group(['middleware' => 'auth'], function () {
 			Route::get('get/personal/schedules', 'Personal\PersonalSchedulesController@getPS');
 
 			// tasks
+						Route::get('personal/tassk/details/{id}', 'Personal\PersonalTasksController@task_details');
             Route::get('personal/tasks/manager', 'Personal\PersonalTasksController@index');
             Route::get('personal/tasks/mytasks', 'Personal\PersonalTasksController@myTasks');
             Route::get('personal/tasks/assignatask', 'Personal\PersonalTasksController@assignATask');
@@ -292,7 +296,8 @@ Route::group(['middleware' => 'auth'], function () {
             Route::post('personal/tasks/add', 'Personal\PersonalTasksController@add');
             Route::get('personal/tasks/assignatask/edit/{id}','Personal\PersonalTasksController@edit_assignATask');
             Route::post('personal/tasks/assignatask/update', 'Personal\PersonalTasksController@update_assignATask');
-
+						Route::get('personal/extend-deadline/{id}', 'Personal\PersonalTasksController@extend_deadline');
+						Route::post('personal/update-deadline', 'Personal\PersonalTasksController@update_deadline');
 
 			// leaves
 			Route::get('personal/leaves/view', 'Personal\PersonalLeavesController@index')->name('viewPersonalLeave');

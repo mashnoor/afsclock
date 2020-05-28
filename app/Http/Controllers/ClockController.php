@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use DB;
+use App\Task;
 use Carbon\Carbon;
 use App\Classes\table;
 use App\Classes\permission;
@@ -11,6 +12,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use phpDocumentor\Reflection\Types\Null_;
 use Illuminate\Database\Eloquent\Model;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class ClockController extends Controller
 {
@@ -419,7 +422,7 @@ class ClockController extends Controller
 
         if ($type == 'timeout')
         {
-          
+
             // // Checks if the following employee has attendance record today
             // $isAttendanceToday = table::daily_attendance()->where([['idno', $idno ],['reference', $employee_id]])->whereDate('created_at', $date)->exists();
             //
@@ -527,6 +530,93 @@ class ClockController extends Controller
             //         "error" => "Please Clock In before Clocking Out. Attendence does not exist"
             //     ]);
             // }
+            $current_user = Auth::user();
+
+            $tasks = Task::where([['reference', $current_user->id ],['done_status', 0]])->get();
+
+            if ($tasks) {
+              return response()->json([
+                  "pending_task_error" => "Please Clock In before Clocking Out."
+              ]);
+            }
+
+
+           $timeIN = table::attendance()->where([['idno', $idno], ['timeout', NULL]])->value('timein');
+           $clockInDate = table::attendance()->where([['idno', $idno],['timeout', NULL]])->value('date');
+           $hasout = table::attendance()->where([['idno', $idno],['date', $date]])->value('timeout');
+           $timeOUT = date("Y-m-d h:i:s A", strtotime($date." ".$time));
+
+           if($timeIN == NULL)
+           {
+               return response()->json([
+                   "error" => "Please Clock In before Clocking Out."
+               ]);
+           }
+
+           if ($hasout != NULL)
+           {
+               $hto = table::attendance()->where([['idno', $idno],['date', $date]])->value('timeout');
+               $hto = date('h:i A', strtotime($hto));
+               return response()->json([
+                   "employee" => $employee,
+                   "error" => "You already Time Out at ". $hto . " on " . $date,
+               ]);
+
+           }
+           else {
+               $sched_out_time = table::schedules()->where([['idno', $idno], ['archive', 0]])->value('outime');
+
+               $assigned_schedule_id = table::new_schedule()->where([['reference', $employee_id],['active_status', 1]] )->value('schedule_id');
+               $schedule_template = table::sch_template()->where('id', $assigned_schedule_id)->first();
+
+               $today = Carbon::now();
+               $day = strtolower($today->isoFormat('dddd'));
+
+               $day_today = $schedule_template->$day;
+               $str_arr = explode ("-", $day_today);
+               $in_time = $str_arr[0];
+               $out_time = $str_arr[1];
+
+               if($out_time == NULL)
+               {
+                   $status_out = "Ok";
+               } else {
+                   // $sched_clock_out_time_24h = date("H.i", strtotime($sched_out_time));
+                   $time_out_24h = date("H.i", strtotime($timeOUT));
+
+                   if($time_out_24h >= $out_time)
+                   {
+                       $status_out = 'On Time';
+                   } else {
+                       $status_out = 'Early Departure';
+                   }
+               }
+
+               $time1 = Carbon::createFromFormat("Y-m-d h:i:s A", $timeIN);
+               $time2 = Carbon::createFromFormat("Y-m-d h:i:s A", $timeOUT);
+               $th = $time1->diffInHours($time2);
+               $tm = floor(($time1->diffInMinutes($time2) - (60 * $th)));
+               $totalhour = $th.".".$tm;
+
+               table::attendance()->where([['idno', $idno],['date', $clockInDate]])->update(array(
+                   'timeout' => $timeOUT,
+                   'totalhours' => $totalhour,
+                   'status_timeout' => $status_out)
+               );
+
+               return response()->json([
+                   "type" => $type,
+                   "time" => $time,
+                   "date" => $date,
+                   "lastname" => $lastname,
+                   "firstname" => $firstname,
+                   "mi" => $mi,
+                   "success" => "Hello, " . $firstname . " " . $lastname . ". Time out is recorded at " . $time . " on " . $date,
+               ]);
+           }
+        }
+        if ($type == 'force_timeout')
+        {
 
            $timeIN = table::attendance()->where([['idno', $idno], ['timeout', NULL]])->value('timein');
            $clockInDate = table::attendance()->where([['idno', $idno],['timeout', NULL]])->value('date');

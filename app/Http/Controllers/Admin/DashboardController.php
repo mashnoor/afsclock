@@ -19,7 +19,6 @@ class Tasks{
     public $original_deadline = '';
     public $deadline = '';
 
-
     public function __construct($id, $assigned_to, $deadline, $original_deadline)
     {
         $this->id = $id;

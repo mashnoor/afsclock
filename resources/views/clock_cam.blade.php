@@ -78,6 +78,28 @@
 
 <span id="site_url" style="display: none;">{{url('/')}}</span>
 
+
+	  <div class="ui modal tiny test" name="testing">
+      <i class="close icon"></i>
+      <div class="header">
+        Attention
+      </div>
+      <div class=" content">
+        <h3>You have pending tasks. Please task necessary actions before Clock Out.</h3>
+      </div>
+      <div class="actions">
+        <div class="ui danger deny button">
+          Cancel
+        </div>
+
+        <a class="ui positive button" href="{{ url('personal/tasks/mytasks') }}">My Tasks</a>
+
+        <button class="btnclock timeout ui button yellow approve" data-type="force_timeout">Time Out Anyway</button>
+
+
+      </div>
+    </div>
+
 @endsection
 
 @section('scripts')
@@ -156,7 +178,17 @@
                         showToast("Error!", "<h2>" + response['error'] + "</h2>", 'error');
                         //$('#fullname').text(response['employee']);
                         //$('.message-after').slideToggle().slideDown('400');
-                    } else {
+                    }
+                    else if (response['pending_task_error']) {
+                      console.log('You can not clock out without taking necessary actions to pending tasks.');
+
+                      $( document ).ready(function() {
+                        $("div[name="+"testing").modal('show');
+                      });
+
+
+                    }
+                     else {
                         function type(clocktype) {
                             if (clocktype == "timein") {
                                 return "Time In";

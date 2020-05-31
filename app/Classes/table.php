@@ -12,6 +12,18 @@ Class table {
     	return $people;
    	}
 
+		public static function salary_types(){
+			return DB::table('salary_types');
+		}
+
+		public static function holidays(){
+			return DB::table('holidays');
+		}
+
+		public static function employee_salary(){
+			return DB::table('employee_salary');
+		}
+
 		public static function task_extension(){
 			return DB::table('task_extension');
 		}

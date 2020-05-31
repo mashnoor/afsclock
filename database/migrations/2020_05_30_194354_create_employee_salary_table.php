@@ -16,9 +16,10 @@ class CreateEmployeeSalaryTable extends Migration
         if(!Schema::hasTable('employee_salary')) {
         Schema::create('employee_salary', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('reference', 11);
-            $table->string('salary_type', 2);
-            $table->string('gross_salary', 10);
+            $table->integer('reference');
+            $table->integer('salary_type')->default(1);
+            $table->string('gross_salary', 10)->default('');
+            $table->string('currency', 5)->default('');
             $table->timestamps();
         });
       }

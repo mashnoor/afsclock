@@ -44,6 +44,21 @@ Route::group(['middleware' => 'auth'], function () {
 			*/
 			Route::get('webcam_feed', 'Admin\DashboardController@realtime_webcam_data')->name('webcam_feed');
 
+			/*
+			|--------------------------------------------------------------------------
+			| Salary
+			|--------------------------------------------------------------------------
+			*/
+
+			Route::get('admin/salary', 'SalaryController@salary');
+			Route::get('admin/salary_types', 'SalaryController@salary_types');
+			Route::post('admin/add_salary_types', 'SalaryController@add_salary_types');
+			Route::get('admin/delete_salary_type/{id}', 'SalaryController@delete_salary_type');
+			Route::get('admin/employee_salary', 'SalaryController@employee_salary');
+			Route::post('admin/add_employee_salary', 'SalaryController@add_employee_salary');
+			Route::get('admin/holidays', 'SalaryController@holidays');
+			Route::post('admin/add_holidays', 'SalaryController@add_holidays');
+
 
 			/*
 			|--------------------------------------------------------------------------

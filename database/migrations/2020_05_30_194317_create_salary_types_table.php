@@ -16,7 +16,7 @@ class CreateSalaryTypesTable extends Migration
         if(!Schema::hasTable('salary_types')) {
         Schema::create('salary_types', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
+            $table->string('type');
             $table->timestamps();
         });
       }

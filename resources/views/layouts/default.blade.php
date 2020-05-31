@@ -105,6 +105,12 @@
                 <p>Webcam Data</p>
               </a>
             </li>
+            <li>
+              <a href="{{ url('admin/salary') }}">
+                <i class="ui icon dollar sign"></i>
+                <p>Salary</p>
+              </a>
+            </li>
         </ul>
     </nav>
 

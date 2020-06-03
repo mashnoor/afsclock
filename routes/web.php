@@ -69,7 +69,7 @@ Route::group(['middleware' => 'auth'], function () {
 			Route::get('admin/holidays', 'SalaryController@holidays');
 			Route::post('admin/add_holidays', 'SalaryController@add_holidays');
 			Route::get('admin/edit_holidays/{id}', 'SalaryController@edit_holidays');
-			Route::post('admin/update_holidays/{id}', 'SalaryController@update_holidays');
+			Route::post('admin/update_holidays/', 'SalaryController@update_holidays');
 			Route::get('admin/delete_holidays/{id}', 'SalaryController@delete_holidays');
 
 			Route::post('admin/calculate_salary', 'SalaryController@calculate_salary');

@@ -187,7 +187,7 @@ class SalaryController extends Controller
 
       $existing_holiday = table::holidays()->where('month', $month)->first();
       if ($existing_holiday) {
-        return redirect(url('admin/holidays'))->with('success', 'The follwing month already exist!');
+        return redirect(url('admin/holidays'))->with('error', 'The follwing month already exist!');
       }else
       {
         table::holidays()->insert(['month'=>$month,'dates' => $dates]);
@@ -201,6 +201,29 @@ class SalaryController extends Controller
       table::holidays()->delete($id);
       return redirect(url('admin/holidays'))->with('success', 'Holidays have been deleted!');
     }
+
+    // public function edit_holidays($id)
+    // {
+    //   $holiday = table::holidays()->where('id', $id)->first();
+    //
+    //   return view('admin.edit_holidays', compact('holiday'));
+    // }
+    //
+    // public function update_holidays(Request $request)
+    // {
+    //
+    //   $month = $request->month;
+    //   $dates = $request->dates;
+    //
+    //   $holiday = table::holidays()->where('month', $month)->first();
+    //   if ($holiday)
+    //   {
+    //     table::holidays()->where('month' , $month)->update(array('dates' => $dates));
+    //     return redirect(url('admin/holidays'))->with('success', 'Holidays have been deleted!');
+    //   }else{
+    //     return redirect(url('admin/holidays'))->with('error', 'Holiday month does not exist!');
+    //   }
+    // }
 
     // Salary Calculation
     public function calculate_salary(Request $request)

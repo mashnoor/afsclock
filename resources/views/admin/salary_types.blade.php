@@ -19,7 +19,7 @@
           @csrf
           <div class="field">
             <label>Salary Type Name</label>
-            <input type="text" name="type_name" placeholder="Type the salary type name. e.g: hourly, monthly">
+            <input type="text" name="type_name" placeholder="Type the salary type name. e.g: hourly, monthly" required>
           </div>
 
 
@@ -40,7 +40,7 @@
               <tr>
                 <td data-label="Name">{{$salary_type->type}}</td>
                 <td data-label="Age">
-                  <a href="{{ url('admin/salary_types') }}" class="ui circular basic icon button tiny"><i class="icon edit outline"></i></a>
+                  <a href="{{ url('admin/edit_salary_types/'.$salary_type->id) }}" class="ui circular basic icon button tiny"><i class="icon edit outline"></i></a>
                   <a href="{{ url('admin/delete_salary_type/'.$salary_type->id) }}" class="ui circular basic icon button tiny"><i class="icon trash "></i></a>
                 </td>
               </tr>

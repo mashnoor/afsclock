@@ -20,13 +20,14 @@ class CreateTblPeopleLeavesTable extends Migration {
                 $table->string('employee')->nullable()->default('');
                 $table->integer('typeid')->nullable();
                 $table->string('type')->nullable()->default('');
-                $table->date('leavefrom')->nullable();
-                $table->date('leaveto')->nullable();
-                $table->date('returndate')->nullable();
+								$table->timestamp('leavefrom')->nullable();
+                $table->timestamp('leaveto')->nullable();
+								$table->timestamp('returndate')->nullable();
                 $table->string('reason')->nullable()->default('');
                 $table->string('status')->nullable();
                 $table->string('comment')->nullable();
                 $table->integer('archived')->nullable();
+								$table->timestamps();
             });
         }
 	}

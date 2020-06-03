@@ -11,7 +11,7 @@ use App\Http\Controllers\Controller;
 
 class PersonalLeavesController extends Controller
 {
-    public function index() 
+    public function index()
     {
         $i = \Auth::user()->idno;
         $ref = \Auth::user()->reference;
@@ -20,14 +20,16 @@ class PersonalLeavesController extends Controller
         $lp = table::companydata()->where('reference', $ref)->value('leaveprivilege');
         $r = table::leavegroup()->where('id', $lp)->value('leaveprivileges');
         $rights = explode(",", $r);
-        
+
         $lt = table::leavetypes()->get();
         $lg = table::leavegroup()->get();
-        
+
+        // dd($lt);
+        // dd($rights);
         return view('personal.personal-leaves-view', compact('l', 'lt', 'lg', 'lp', 'rights'));
     }
 
-    public function requestL(Request $request) 
+    public function requestL(Request $request)
     {
         //if($request->sh == 2){return redirect()->route('viewPersonalLeave');}
 
@@ -50,7 +52,7 @@ class PersonalLeavesController extends Controller
         $id = \Auth::user()->reference;
         $idno = \Auth::user()->idno;
         $q = table::people()->where('id', $id)->select('firstname', 'mi', 'lastname')->first();
-        
+
         table::leaves()->insert([
             'reference' => $id,
             'idno' => $idno,
@@ -67,7 +69,7 @@ class PersonalLeavesController extends Controller
         return redirect('personal/leaves/view')->with('success', 'Leave request sent!');
     }
 
-    public function getPL(Request $request) 
+    public function getPL(Request $request)
     {
         $id = \Auth::user()->reference;
         $datefrom = date("Y-m-d", strtotime($request->datefrom));
@@ -77,8 +79,8 @@ class PersonalLeavesController extends Controller
             $data = table::leaves()->where('reference', $id)->get();
 
             return response()->json($data);
-        } 
-        
+        }
+
         if ($datefrom !== null AND $dateto !== null) {
             $data = table::leaves()
                                     ->where('reference', $id)
@@ -90,7 +92,7 @@ class PersonalLeavesController extends Controller
         }
     }
 
-    public function viewPL(Request $request) 
+    public function viewPL(Request $request)
     {
         $id = $request->id;
         $view = table::leaves()->where('id', $id)->first();
@@ -101,7 +103,7 @@ class PersonalLeavesController extends Controller
         return response()->json($view);
     }
 
-    public function edit($id, Request $request) 
+    public function edit($id, Request $request)
     {
         $l = table::leaves()->where('id', $id)->first();
         $lt = table::leavetypes()->get();
@@ -146,11 +148,10 @@ class PersonalLeavesController extends Controller
     public function delete($id, Request $request)
     {
         //if($request->sh == 2){return redirect()->route('viewPersonalLeave');}
-        
+
         table::leaves()->where('id', $id)->delete();
 
         return redirect('personal/leaves/view')->with('success','Leave has been deleted!');
     }
 
 }
-

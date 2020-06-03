@@ -5,6 +5,7 @@
         @csrf
         <div class="field">
             <label>Leave Type</label>
+            
             <select class="ui dropdown uppercase getid" name="type">
                 <option value="">Select Type</option>
                 @isset($lt)
@@ -18,6 +19,7 @@
                 @endisset
             </select>
         </div>
+
         <div class="two fields">
             <div class="field">
                 <label for="">Leave from</label>

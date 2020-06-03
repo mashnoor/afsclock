@@ -51,13 +51,29 @@ Route::group(['middleware' => 'auth'], function () {
 			*/
 
 			Route::get('admin/salary', 'SalaryController@salary');
+
 			Route::get('admin/salary_types', 'SalaryController@salary_types');
 			Route::post('admin/add_salary_types', 'SalaryController@add_salary_types');
+			Route::get('admin/edit_salary_types/{id}', 'SalaryController@edit_salary_types');
+			Route::post('admin/update_salary_types', 'SalaryController@update_salary_types');
 			Route::get('admin/delete_salary_type/{id}', 'SalaryController@delete_salary_type');
+
+
 			Route::get('admin/employee_salary', 'SalaryController@employee_salary');
 			Route::post('admin/add_employee_salary', 'SalaryController@add_employee_salary');
+			Route::get('admin/edit_employee_salary/{id}', 'SalaryController@edit_employee_salary');
+			Route::post('admin/update_employee_salary/{id}', 'SalaryController@update_employee_salary');
+			Route::get('admin/delete_employee_salary/{id}', 'SalaryController@delete_employee_salary');
+
+
 			Route::get('admin/holidays', 'SalaryController@holidays');
 			Route::post('admin/add_holidays', 'SalaryController@add_holidays');
+			Route::get('admin/edit_holidays/{id}', 'SalaryController@edit_holidays');
+			Route::post('admin/update_holidays/{id}', 'SalaryController@update_holidays');
+			Route::get('admin/delete_holidays/{id}', 'SalaryController@delete_holidays');
+
+			Route::post('admin/calculate_salary', 'SalaryController@calculate_salary');
+
 
 
 			/*

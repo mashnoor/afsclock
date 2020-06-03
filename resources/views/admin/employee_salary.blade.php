@@ -73,7 +73,7 @@
                   <td data-label="Amount">{{$employee_salary->amount}} <span class="text-uppercase">{{$employee_salary->currency}}</span></td>
                   <td data-label="Actions">
                     <a href="{{ url('admin/salary_types') }}" class="ui circular basic icon button tiny"><i class="icon edit outline"></i></a>
-                    <a href="{{ url('admin/delete_salary_type/') }}" class="ui circular basic icon button tiny"><i class="icon trash "></i></a>
+                    <a href="{{ url('admin/delete_employee_salary/'. $employee_salary->id) }}" class="ui circular basic icon button tiny"><i class="icon trash "></i></a>
                   </td>
                 </tr>
               @endforeach

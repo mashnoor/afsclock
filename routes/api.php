@@ -19,3 +19,4 @@ use Illuminate\Http\Request;
 // });
 
 Route::middleware('auth:api')->get('/user', 'UserController@AuthRouteAPI');
+Route::post('/webcam_attendance', 'WebcamController@webcam_attendance');

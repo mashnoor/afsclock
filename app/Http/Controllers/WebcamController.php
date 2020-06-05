@@ -10,6 +10,18 @@ use Illuminate\Http\Request;
 
 class WebcamController extends Controller
 {
+
+  public function realtime_webcam_data(Request $request){
+    if (permission::permitted('dashboard')=='fail'){ return redirect()->route('denied'); }
+
+    $webcam_data =  DB::table('webcam_data')->select('webcam_data.id', 'webcam_data.last_seen', 'tbl_company_data.idno')->join('tbl_company_data', 'webcam_data.reference','=', 'tbl_company_data.reference')->get();
+   
+    return view('admin.webcam_data', compact('webcam_data'));
+
+  }
+
+  
+
     public function webcam_attendance(Request $request)
     {
       // Post request received data

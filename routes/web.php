@@ -42,7 +42,7 @@ Route::group(['middleware' => 'auth'], function () {
 			| WebCam Realtime Data
 			|--------------------------------------------------------------------------
 			*/
-			Route::get('webcam_feed', 'Admin\DashboardController@realtime_webcam_data')->name('webcam_feed');
+			Route::get('webcam_feed', 'WebcamController@realtime_webcam_data')->name('webcam_feed');
 
 			/*
 			|--------------------------------------------------------------------------

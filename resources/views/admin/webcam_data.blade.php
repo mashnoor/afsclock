@@ -11,7 +11,7 @@
 <table class="ui celled table">
   <thead>
     <tr><th>ID</th>
-    <th>Reference ID</th>
+    <th>User ID</th>
     <th>Last Seen</th>
   </tr></thead>
   <tbody>
@@ -19,7 +19,7 @@
         @foreach ($webcam_data as $d)
           <tr>
             <td>{{$d->id}}</td>
-            <td>{{$d->reference}}</td>
+            <td>{{$d->idno}}</td>
             <td>{{$d->last_seen}}</td>
           </tr>
     @endforeach

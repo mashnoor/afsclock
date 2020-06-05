@@ -116,26 +116,31 @@ class DashboardController extends Controller
 
         $activity_collection = collect([]);
 
-        foreach ($a as $r_e) {
-          $user = User::find($r_e->reference);
-          if ($r_e->timein) {
-            $activity_collection->push(new Activity($user->name, $r_e->timein, 'Clock In'));
-          }
-          if ($r_e->timeout) {
-            $activity_collection->push(new Activity($user->name ,$r_e->timeout, 'Clock Out'));
+        if ($a) {
+          foreach ($a as $r_e) {
+            $user = User::find($r_e->reference);
+            if ($r_e->timein) {
+              $activity_collection->push(new Activity($user->name, $r_e->timein, 'Clock In'));
+            }
+            if ($r_e->timeout) {
+              $activity_collection->push(new Activity($user->name ,$r_e->timeout, 'Clock Out'));
+            }
           }
         }
 
-        foreach ($recent_breaks as $r_b) {
-          $user = User::find($r_b->reference);
-          if ($r_b->start_at) {
-            $activity_collection->push(new Activity($user->name, $r_b->start_at, 'Break In'));
-          }
-          if ($r_b->end_at) {
-            $activity_collection->push(new Activity($user->name, $r_b->end_at, 'Break Out'));
+        if ($recent_breaks) {
+          foreach ($recent_breaks as $r_b) {
+            $user = User::find($r_b->reference);
+            if ($r_b->start_at) {
+              $activity_collection->push(new Activity($user->name, $r_b->start_at, 'Break In'));
+            }
+            if ($r_b->end_at) {
+              $activity_collection->push(new Activity($user->name, $r_b->end_at, 'Break Out'));
 
+            }
           }
         }
+
 
 
         $sortedActivities = Arr::sort($activity_collection, function($activity)
@@ -147,15 +152,19 @@ class DashboardController extends Controller
 
         $task_collection = collect([]);
 
-        foreach($tasks as $task){
-          $extended_task = table::task_extension()->where('task_id', $task->id)->latest('new_deadline')->first();
+        if ($tasks) {
+          foreach($tasks as $task){
+            $extended_task = table::task_extension()->where('task_id', $task->id)->latest('new_deadline')->first();
 
-          $user = User::find($task->reference);
+            $user = User::find($task->reference);
 
-          if ($extended_task) {
-            $task_collection->push(new Tasks($task->id, $user->name, $extended_task->new_deadline, $task->deadline));
+            if ($extended_task) {
+              $task_collection->push(new Tasks($task->id, $user->name, $extended_task->new_deadline, $task->deadline));
+            }
           }
         }
+
+
 
         // dd($task_collection);
 

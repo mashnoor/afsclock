@@ -74,9 +74,6 @@ class SchedulesController extends Controller
         return redirect('/schedules')->with('success', 'Schedule Successfully Assigned.');
 
       }
-
-
-
     }
 
 

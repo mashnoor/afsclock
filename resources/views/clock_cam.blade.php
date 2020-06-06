@@ -180,7 +180,7 @@
                         //$('.message-after').slideToggle().slideDown('400');
                     }
                     else if (response['pending_task_error']) {
-                      console.log('You can not clock out without taking necessary actions to pending tasks.');
+                      // console.log('You can not clock out without taking necessary actions to pending tasks.');
 
                       $( document ).ready(function() {
                         $("div[name="+"testing").modal('show');

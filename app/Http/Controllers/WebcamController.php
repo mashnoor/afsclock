@@ -15,12 +15,12 @@ class WebcamController extends Controller
     if (permission::permitted('dashboard')=='fail'){ return redirect()->route('denied'); }
 
     $webcam_data =  DB::table('webcam_data')->select('webcam_data.id', 'webcam_data.last_seen', 'tbl_company_data.idno')->join('tbl_company_data', 'webcam_data.reference','=', 'tbl_company_data.reference')->get();
-   
+
     return view('admin.webcam_data', compact('webcam_data'));
 
   }
 
-  
+
 
     public function webcam_attendance(Request $request)
     {
@@ -85,7 +85,7 @@ class WebcamController extends Controller
         $fresh_attendance = table::attendance()->where('reference', $reference)->whereDate('timein', $lastseen_date)->exists();
 
         if(!$fresh_attendance){
-          $user = User::find($reference);
+          $user = User::find('reference', $reference)->first();
 
           $assigned_schedule_id = table::new_schedule()->where([['reference', $reference],['active_status', 1]] )->value('schedule_id');
           $schedule_template = table::sch_template()->where('id', $assigned_schedule_id)->first();
@@ -143,7 +143,7 @@ class WebcamController extends Controller
 
         $existing_attendance = table::attendance()->where('reference', $reference)->whereNotNull('timein')->orderBy('id', 'desc')->first();
 
-        $user = User::find($reference);
+        $user = User::find('reference',$reference)->first();
 
         // If there exist ongoing attendace
         if ($existing_attendance)

@@ -118,7 +118,7 @@ class DashboardController extends Controller
 
         if ($a) {
           foreach ($a as $r_e) {
-            $user = User::where('reference', $r_e->reference);
+            $user = User::where('reference', $r_e->reference)->first();
             if ($r_e->timein) {
               $activity_collection->push(new Activity($user->name, $r_e->timein, 'Clock In'));
             }
@@ -130,7 +130,7 @@ class DashboardController extends Controller
 
         if ($recent_breaks) {
           foreach ($recent_breaks as $r_b) {
-            $user = User::where('reference',$r_b->reference);
+            $user = User::where('reference',$r_b->reference)->first();
             if ($r_b->start_at) {
               $activity_collection->push(new Activity($user->name, $r_b->start_at, 'Break In'));
             }
@@ -156,7 +156,7 @@ class DashboardController extends Controller
           foreach($tasks as $task){
             $extended_task = table::task_extension()->where('task_id', $task->id)->latest('new_deadline')->first();
 
-            $user = User::where('reference', $task->reference);
+            $user = User::where('reference', $task->reference)->first();
 
             if ($extended_task) {
               $task_collection->push(new Tasks($task->id, $user->name, $extended_task->new_deadline, $task->deadline));

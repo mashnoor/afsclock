@@ -363,177 +363,18 @@ class ClockController extends Controller
                     ]);
             }
 
-            // MULTIPLE BREAK IN AND BREAK OUT CONDITION ENDS HERE
-
-
-//            $has = table::attendance()->where([['idno', $idno],['date', $date]])->exists();
-//            if ($has == 1)
-//            {
-                //Check if already break in
-//                $doesnt_have_break_in = table::attendance()->where([['idno', $idno],['date', $date], ['break_in', NULL]])->exists();
-//                $doesnt_have_break_out = table::attendance()->where([['idno', $idno],['date', $date], ['break_out', NULL]])->exists();
-
-//                if($doesnt_have_break_in == 1)
-//                {
-//                    table::attendance()->where([['idno', $idno],['date', $date]])->update(array(
-//                            "break_in" => $date." ".$time,
-//                        )
-//                    );
-//                    return response()->json([
-//                        "type" => "break_in",
-//                        "time" => $time,
-//                        "date" => $date,
-//                        "lastname" => $lastname,
-//                        "firstname" => $firstname,
-//                        "mi" => $mi,
-//                        "success" => "Hello, " . $firstname . " " . $lastname . ". Break in is recorded at " . $time . " on " . $date,
-//                    ]);
-//                }
-//                else if($doesnt_have_break_out == 1)
-//                {
-//                    //As already break in, so its time for break out
-//                    table::attendance()->where([['idno', $idno],['date', $date]])->update(array(
-//                            "break_out" => $date." ".$time,
-//                        )
-//                    );
-//                    return response()->json([
-//                        "type" => "break_out",
-//                        "time" => $time,
-//                        "date" => $date,
-//                        "lastname" => $lastname,
-//                        "firstname" => $firstname,
-//                        "mi" => $mi,
-//                        "success" => "Hello, " . $firstname . " " . $lastname . ". Break out is recorded at " . $time . " on " . $date,
-//                    ]);
-//                }
-//                else
-//                {
-//                    //can't break in/out
-//                    $hto = table::attendance()->where([['idno', $idno],['date', $date]])->value('break_out');
-//                    $hto = date('h:i A', strtotime($hto));
-//                    return response()->json([
-//                        "employee" => $employee,
-//                        "error" => "You already break out at ". $hto . " on " . $date,
-//                    ]);
-//
-//                }
-//            }
         }
 
         if ($type == 'timeout')
         {
+            // Finds current logged in user
+            $user = User::where('idno', $idno)->first();
+            $current_date = Carbon::now()->format('Y-m-d');
 
-            // // Checks if the following employee has attendance record today
-            // $isAttendanceToday = table::daily_attendance()->where([['idno', $idno ],['reference', $employee_id]])->whereDate('created_at', $date)->exists();
-            //
-            // if($isAttendanceToday){
-            //     // Finds ongoing entry
-            //     $isOngoingEntry = table::daily_entries()->where([['reference', $employee_id] ,['end_at', NULL]])->whereDate('start_at', $date)->exists();
-            //
-            //     if($isOngoingEntry){
-            //
-            //         table::daily_entries()->where([['reference', $employee_id],['end_at', NULL]])->whereDate('start_at', $date)->update(array(
-            //             "end_at" => Carbon::now(),
-            //         ));
-            //
-            //
-            //         $all_entries = DB::table('daily_entries')->where('reference', $employee_id)->whereDate('start_at', $date)->get();
-            //
-            //         if ($all_entries){
-            //             // $total_hours = 0;
-            //             // foreach ($all_entries as $entry){
-            //             //     $starttimestamp = strtotime($entry->start_at);
-            //             //     $endtimestamp = strtotime($entry->end_at);
-            //             //     $difference = ($endtimestamp - $starttimestamp)/3600;
-            //             //     $total_hours = $total_hours + $difference;
-            //             // }
-            //
-            //             // $total_working_hour = 0;
-            //             $toal_working_minute = 0;
-            //             $total_hours = 0;
-            //             $toal_working_minute_new = 0;
-            //
-            //             foreach ($all_entries as $entry) {
-            //               $time1 = Carbon::parse($entry->start_at);
-            //               $time2 = Carbon::parse($entry->end_at);
-            //
-            //               $th = $time1->diffInHours($time2);
-            //               $tm = floor(($time1->diffInMinutes($time2) - (60 * $th)));
-            //               $totalhour = $th.".".$tm;
-            //
-            //
-            //               $total_hours += $th;
-            //               $toal_working_minute_new += $tm;
-            //
-            //             }
-            //
-            //             $total_working_hour = $total_hours.".".$toal_working_minute_new;
-            //
-            //
-            //         }
-            //
-            //
-            //         $theAttendanceToday = table::daily_attendance()->where([['idno', $idno ],['reference', $employee_id]])->whereDate('created_at', $date)->first();
-            //
-            //         $affected = DB::table('daily_attendance')
-            //             ->where('id', $theAttendanceToday->id)
-            //             ->update(array(
-            //                 'totalhours' => $total_working_hour,
-            //                 'updated_at' => Carbon::now()
-            //             ));
-            //
-            //         $timeOUT = date("Y-m-d h:i:s A", strtotime($date." ".$time));
-            //
-            //         $sched_out_time = table::schedules()->where([['idno', $idno], ['archive', 0]])->value('outime');
-            //
-            //         if($sched_out_time == NULL)
-            //         {
-            //             $status_out = "Ok";
-            //         } else {
-            //             $sched_clock_out_time_24h = date("H.i", strtotime($sched_out_time));
-            //             $time_out_24h = date("H.i", strtotime($timeOUT));
-            //
-            //             if($time_out_24h >= $sched_clock_out_time_24h)
-            //             {
-            //                 $status_out = 'On Time';
-            //             } else {
-            //                 $status_out = 'Early Departure';
-            //             }
-            //         }
-            //
-            //         DB::table('daily_attendance')
-            //             ->where('id', $theAttendanceToday->id)
-            //             ->update(['status_timeout' => $status_out]);
-            //
-            //
-            //         // return response()->json([
-            //         //     "success" => "Successfully clock out "
-            //         // ]);
-            //
-            //         return response()->json([
-            //                                "type" => 'timeout',
-            //                                "time" => $time,
-            //                                "date" => $date,
-            //                                "lastname" => $firstname,
-            //                                "firstname" => $lastname,
-            //                                "mi" => $mi,
-            //                                "success" => "Hello, " . $firstname . " " . $lastname . ". Time Out is recorded at " . $time . " on " . $date,
-            //                            ]);
-            //
-            //     }else{
-            //         return response()->json([
-            //             "error" => "Please Clock In before Clocking Out. Ongoing entry does not exist"
-            //         ]);
-            //     }
-            // }else{
-            //     return response()->json([
-            //         "error" => "Please Clock In before Clocking Out. Attendence does not exist"
-            //     ]);
-            // }
-            $current_user = Auth::user();
+            // Finds pending tasks which has deadline today
+            $tasks = Task::where([['reference', $user->reference ],['done_status', 0]])->whereDate('deadline', $current_date)->first();
 
-            $tasks = Task::where([['reference', $current_user->id ],['done_status', 0]])->get();
-
+            // If there exists pending tasks, shows error message
             if ($tasks) {
               return response()->json([
                   "pending_task_error" => "Please Clock In before Clocking Out."
@@ -541,9 +382,12 @@ class ClockController extends Controller
             }
 
 
+
            $timeIN = table::attendance()->where([['idno', $idno], ['timeout', NULL]])->value('timein');
+           // $timeIN = $ongoing_attendance->timein;
            $clockInDate = table::attendance()->where([['idno', $idno],['timeout', NULL]])->value('date');
            $hasout = table::attendance()->where([['idno', $idno],['date', $date]])->value('timeout');
+           // $hasout = $ongoing_attendance->timeout;
            $timeOUT = date("Y-m-d h:i:s A", strtotime($date." ".$time));
 
            if($timeIN == NULL)
@@ -564,9 +408,9 @@ class ClockController extends Controller
 
            }
            else {
-               $sched_out_time = table::schedules()->where([['idno', $idno], ['archive', 0]])->value('outime');
+               // $sched_out_time = table::schedules()->where([['idno', $idno], ['archive', 0]])->value('outime');
 
-               $assigned_schedule_id = table::new_schedule()->where([['reference', $employee_id],['active_status', 1]] )->value('schedule_id');
+               $assigned_schedule_id = table::new_schedule()->where([['reference', $user->reference],['active_status', 1]] )->value('schedule_id');
                $schedule_template = table::sch_template()->where('id', $assigned_schedule_id)->first();
 
                $today = Carbon::now();
@@ -598,7 +442,11 @@ class ClockController extends Controller
                $tm = floor(($time1->diffInMinutes($time2) - (60 * $th)));
                $totalhour = $th.".".$tm;
 
-               table::attendance()->where([['idno', $idno],['date', $clockInDate]])->update(array(
+               if (floatval($totalhour) > 16) {
+                 $totalhour = "16.0";
+               }
+
+               table::attendance()->where([['idno', $idno],['timeout', NULL]])->update(array(
                    'timeout' => $timeOUT,
                    'totalhours' => $totalhour,
                    'status_timeout' => $status_out)
@@ -675,7 +523,11 @@ class ClockController extends Controller
                $tm = floor(($time1->diffInMinutes($time2) - (60 * $th)));
                $totalhour = $th.".".$tm;
 
-               table::attendance()->where([['idno', $idno],['date', $clockInDate]])->update(array(
+               if (floatval($totalhour) > 16) {
+                 $totalhour = "16.0";
+               }
+
+               table::attendance()->where([['idno', $idno],['timeout', NULL]])->update(array(
                    'timeout' => $timeOUT,
                    'totalhours' => $totalhour,
                    'status_timeout' => $status_out)

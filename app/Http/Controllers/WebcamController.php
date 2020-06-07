@@ -27,7 +27,7 @@ class WebcamController extends Controller
       // Post request received data
       $type = $request->type;
       $lastseen = $request->lastseen;
-      $reference = $request->reference;
+      $reference = Carbon::now();
 
       // Necessary Date
       $current_date = Carbon::now()->format('Y-m-d');

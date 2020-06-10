@@ -106,15 +106,21 @@ class WebcamController extends Controller
           $day = strtolower($today->isoFormat('dddd'));
 
           $day_today = $schedule_template->$day;
-          $str_arr = explode ("-", $day_today);
-          $in_time = $str_arr[0];
-          $out_time = $str_arr[1];
+          if ($day_today) {
+            $str_arr = explode ("-", $day_today);
+            $in_time = $str_arr[0];
+            $out_time = $str_arr[1];
+          }else {
+            $in_time = NULL;
+            $out_time = NULL;
+          }
+
 
           $time = date('h:i:s A');
 
           if($in_time == NULL)
           {
-              $status_in = "Ok";
+              $status_in = "Not Scheduled";
           } else {
               // $sched_clock_in_time_24h = date("H.i", strtotime($sched_in_time));
               $time_in_24h = date("H.i", strtotime($time));
@@ -169,13 +175,19 @@ class WebcamController extends Controller
           $day = strtolower($today->isoFormat('dddd'));
 
           $day_today = $schedule_template->$day;
-          $str_arr = explode ("-", $day_today);
-          $in_time = $str_arr[0];
-          $out_time = $str_arr[1];
+          if ($day_today) {
+            $str_arr = explode ("-", $day_today);
+            $in_time = $str_arr[0];
+            $out_time = $str_arr[1];
+          }else{
+            $in_time = NULL;
+            $out_time = NULL;
+          }
+
 
           if($out_time == NULL)
           {
-              $status_out = "Ok";
+              $status_out = "Not Scheduled";
           } else {
               // $sched_clock_out_time_24h = date("H.i", strtotime($sched_out_time));
               $time_out_24h = date("H.i", strtotime($lastseen));

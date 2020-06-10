@@ -13,7 +13,6 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('/assets/vendor/semantic-ui/semantic.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('/assets/css/clock.css') }}">
 
-
     <link rel="stylesheet" type="text/css" href="{{ asset('/assets/vendor/DataTables/datatables.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('/assets/css/style.css') }}">
 

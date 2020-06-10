@@ -20,23 +20,21 @@
 
           <div class="field">
               <h4>Template Name</h4>
-              <input type="text" placeholder="Template Name" name="template_name"/>
+              <input type="text" placeholder="Template Name" name="template_name" required>
           </div>
 
           <div class="field">
               <h4>Saturday</h4>
               <div class="row">
-
                 <div class="col-6">
                   <label for="">Time In</label>
-                  <input type="time" id="appt" name="sat_time_in" required>
+                  <input type="time" id="appt" name="sat_time_in">
                 </div>
                 <div class="col-6">
                   <label for="">Time Out</label>
-                  <input type="time" id="appt" name="sat_time_out" required>
+                  <input type="time" id="appt" name="sat_time_out">
                 </div>
               </div>
-
           </div>
 
           <div class="field">
@@ -44,11 +42,11 @@
               <div class="row">
                 <div class="col-6">
                   <label for="">Time In</label>
-                  <input type="time" id="appt" name="sun_time_in" required>
+                  <input type="time" id="appt" name="sun_time_in">
                 </div>
                 <div class="col-6">
                   <label for="">Time Out</label>
-                  <input type="time" id="appt" name="sun_time_out" required>
+                  <input type="time" id="appt" name="sun_time_out">
                 </div>
               </div>
           </div>
@@ -58,11 +56,11 @@
               <div class="row">
                 <div class="col-6">
                   <label for="">Time In </label>
-                  <input type="time" id="appt" name="mon_time_in" required>
+                  <input type="time" id="appt" name="mon_time_in">
                 </div>
                 <div class="col-6">
                   <label for="">Time Out</label>
-                  <input type="time" id="appt" name="mon_time_out" required>
+                  <input type="time" id="appt" name="mon_time_out">
                 </div>
               </div>
           </div>
@@ -72,11 +70,11 @@
               <div class="row">
                 <div class="col-6">
                   <label for="">Time In</label>
-                  <input type="time" id="appt" name="tue_time_in" required>
+                  <input type="time" id="appt" name="tue_time_in">
                 </div>
                 <div class="col-6">
                   <label for="">Time Out</label>
-                  <input type="time" id="appt" name="tue_time_out" required>
+                  <input type="time" id="appt" name="tue_time_out">
                 </div>
               </div>
           </div>
@@ -86,11 +84,11 @@
               <div class="row">
                 <div class="col-6">
                   <label for="">Time In</label>
-                  <input type="time" id="appt" name="wed_time_in" required>
+                  <input type="time" id="appt" name="wed_time_in">
                 </div>
                 <div class="col-6">
                   <label for="">Time Out</label>
-                  <input type="time" id="appt" name="wed_time_out" required>
+                  <input type="time" id="appt" name="wed_time_out">
                 </div>
               </div>
           </div>
@@ -100,11 +98,11 @@
               <div class="row">
                 <div class="col-6">
                   <label for="">Time In</label>
-                  <input type="time" id="appt" name="thu_time_in" required>
+                  <input type="time" id="appt" name="thu_time_in">
                 </div>
                 <div class="col-6">
                   <label for="">Time Out</label>
-                  <input type="time" id="appt" name="thu_time_out" required>
+                  <input type="time" id="appt" name="thu_time_out">
                 </div>
               </div>
           </div>
@@ -114,11 +112,11 @@
               <div class="row">
                 <div class="col-6">
                   <label for="">Time In</label>
-                  <input type="time" id="appt" name="fri_time_in" required>
+                  <input type="time" id="appt" name="fri_time_in">
                 </div>
                 <div class="col-6">
                   <label for="">Time Out</label>
-                  <input type="time" id="appt" name="fri_time_out" required>
+                  <input type="time" id="appt" name="fri_time_out">
                 </div>
               </div>
           </div>
@@ -128,58 +126,6 @@
             <input type="number" id="appt" name="break_allowence" required>
           </div>
 
-          <div class="grouped fields field">
-               <h4>Choose Rest day(s)</h4>
-               <div class="field">
-                   <div class="ui checkbox sunday">
-                       <input type="checkbox" name="restday[]" value="Sunday">
-                       <label>Sunday</label>
-                   </div>
-               </div>
-               <div class="field">
-                   <div class="ui checkbox ">
-                       <input type="checkbox" name="restday[]" value="Monday">
-                       <label>Monday</label>
-                   </div>
-               </div>
-               <div class="field">
-                   <div class="ui checkbox ">
-                       <input type="checkbox" name="restday[]" value="Tuesday">
-                       <label>Tuesday</label>
-                   </div>
-               </div>
-               <div class="field">
-                   <div class="ui checkbox ">
-                       <input type="checkbox" name="restday[]" value="Wednesday">
-                       <label>Wednesday</label>
-                   </div>
-               </div>
-               <div class="field">
-                   <div class="ui checkbox ">
-                       <input type="checkbox" name="restday[]" value="Thursday">
-                       <label>Thursday</label>
-                   </div>
-               </div>
-               <div class="field">
-                   <div class="ui checkbox ">
-                       <input type="checkbox" name="restday[]" value="Friday">
-                       <label>Friday</label>
-                   </div>
-               </div>
-               <div class="field" style="padding:0">
-                   <div class="ui checkbox saturday">
-                       <input type="checkbox" name="restday[]" value="Saturday">
-                       <label>Saturday</label>
-                   </div>
-               </div>
-               <div class="ui error message">
-                   <i class="close icon"></i>
-                   <div class="header"></div>
-                   <ul class="list">
-                       <li class=""></li>
-                   </ul>
-               </div>
-           </div>
 
         <div class="field">
           <button class="ui button green" type="submit" value="submit">Create</button>

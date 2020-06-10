@@ -17,14 +17,13 @@ class CreateScheduleTemplateTable extends Migration
         Schema::create('schedule_template', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->string('saturday');
-            $table->string('sunday');
-            $table->string('monday');
-            $table->string('tuesday');
-            $table->string('wednesday');
-            $table->string('thursday');
-            $table->string('friday');
-            $table->string('restdays');
+            $table->string('saturday')->nullable();
+            $table->string('sunday')->nullable();
+            $table->string('monday')->nullable();
+            $table->string('tuesday')->nullable();
+            $table->string('wednesday')->nullable();
+            $table->string('thursday')->nullable();
+            $table->string('friday')->nullable();
             $table->string('break_allowence');
             $table->timestamps();
         });

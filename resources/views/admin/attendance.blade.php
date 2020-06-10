@@ -117,13 +117,17 @@
                                     <!-- </td> -->
                                     <td>
                                         @if($d->status_timein != null OR $d->status_timeout != null)
-                                            <span class="@if($d->status_timein == 'Late Arrival') orange @else blue @endif">{{ $d->status_timein }}</span>
-                                            /
-                                            @isset($d->status_timeout)
-                                                <span class="@if($d->status_timeout == 'Early Departure') red @else green @endif">
-                                                {{ $d->status_timeout }}
-                                            </span>
-                                            @endisset
+                                            @if($d->status_timein == 'Not Scheduled' && $d->status_timeout == 'Not Scheduled')
+                                            <span class="red">Not Scheduled</span>
+                                            @else
+                                              <span class="@if($d->status_timein == 'Late Arrival') orange @else blue @endif">{{ $d->status_timein }}</span>
+                                              /
+                                              @isset($d->status_timeout)
+                                                  <span class="@if($d->status_timeout == 'Early Departure') red @else green @endif">
+                                                  {{ $d->status_timeout }}
+                                              </span>
+                                              @endisset
+                                            @endif
                                         @else
                                             <span class="blue">{{ $d->status_timein }}</span>
                                         @endif
@@ -213,7 +217,7 @@
             pageLength: 15,
             lengthChange: false,
             searching: true,
-            ordering: true
+            ordering: false
         });
 
 

@@ -85,17 +85,17 @@ class SchedulesController extends Controller
       $templates = table::sch_template()->get();
 
 
-      foreach ($templates as $template) {
-        $today = Carbon::now();
-        $day = strtolower($today->isoFormat('dddd'));
-
-        $saturday = $template->$day;
-        $str_arr = explode ("-", $saturday);
-        $in_time = $str_arr[0];
-        $out_time = $str_arr[1];
-
-        // dd($in_time, $out_time, $day);
-      }
+      // foreach ($templates as $template) {
+      //   $today = Carbon::now();
+      //   $day = strtolower($today->isoFormat('dddd'));
+      //
+      //   $saturday = $template->$day;
+      //   $str_arr = explode ("-", $saturday);
+      //   $in_time = $str_arr[0];
+      //   $out_time = $str_arr[1];
+      //
+      //   // dd($in_time, $out_time, $day);
+      // }
 
       // dd($templates);
 
@@ -120,46 +120,70 @@ class SchedulesController extends Controller
 
       $sat_intime = $request->sat_time_in;
       $sat_outime = $request->sat_time_out;
+      if ($sat_intime && $sat_outime) {
+        $saturday = (string)$sat_intime . "-" . (string)$sat_outime;
+      }else{
+        $saturday = NULL;
+      }
 
-      $saturday = (string)$sat_intime . "-" . (string)$sat_outime;
 
       $sun_intime = $request->sun_time_in;
       $sun_outime = $request->sun_time_out;
+      if ($sun_intime && $sun_outime) {
+        $sunday = (string)$sun_intime . "-" . (string)$sun_outime;
+      }else{
+        $sunday = NULL;
+      }
 
-      $sunday = (string)$sun_intime . "-" . (string)$sun_outime;
 
       $mon_intime = $request->mon_time_in;
       $mon_outime = $request->mon_time_out;
+      if ($mon_intime && $mon_outime) {
+        $monday = (string)$mon_intime . "-" . (string)$mon_outime;
+      }else{
+        $monday = NULL;
+      }
 
-      $monday = (string)$mon_intime . "-" . (string)$mon_outime;
 
       $tue_intime = $request->tue_time_in;
       $tue_outime = $request->tue_time_out;
+      if ($tue_intime && $tue_outime) {
+        $tuesday = (string)$tue_intime . "-" . (string)$tue_outime;
+      }else {
+        $tuesday = NULL;
+      }
 
-      $tuesday = (string)$tue_intime . "-" . (string)$tue_outime;
 
       $wed_intime = $request->wed_time_in;
       $wed_outime = $request->wed_time_out;
+      if ($wed_intime && $wed_outime) {
+        $wednesday = (string)$wed_intime . "-" . (string)$wed_outime;
+      }else{
+        $wednesday = NULL;
+      }
 
-      $wednesday = (string)$wed_intime . "-" . (string)$wed_outime;
 
       $thu_intime =  $request->thu_time_in;
       $thu_outime =  $request->thu_time_out;
+      if ($thu_intime && $thu_outime) {
+        $thursday = (string)$thu_intime . "-" . (string)$thu_outime;
+      }else{
+        $thursday = NULL;
+      }
 
-      $thursday = (string)$thu_intime . "-" . (string)$thu_outime;
 
       $fri_intime = $request->fri_time_in;
       $fri_outime = $request->fri_time_out;
+      if ($fri_intime && $fri_outime) {
+        $friday = (string)$fri_intime . "-" . (string)$fri_outime;
+      }else{
+        $friday = NULL;
+      }
 
-      $friday = (string)$fri_intime . "-" . (string)$fri_outime;
 
       $break_allowence = $request->break_allowence;
 
-      $restday = ($request->restday != null) ? implode(', ', $request->restday) : null ;
-
-      // dd($name,$saturday,$sunday,$monday, $tuesday, $wednesday, $thursday, $friday, $break_allowence, $restday);
-
-      DB::table('schedule_template')->insert(['name' => $name,'saturday' => $saturday, 'sunday' => $sunday, 'monday' => $monday, 'tuesday' => $tuesday, 'wednesday' => $wednesday, 'thursday' => $thursday, 'friday' => $friday, 'break_allowence' => $break_allowence, 'restdays' => $restday, 'created_at' => Carbon::now() ]);;
+      DB::table('schedule_template')->insert(['name' => $name,'saturday' => $saturday, 'sunday' => $sunday, 'monday' => $monday, 'tuesday' => $tuesday, 'wednesday' => $wednesday, 'thursday' => $thursday, 'friday' => $friday, 'break_allowence' => $break_allowence, 'created_at' => Carbon::now() ]);;
 
       return redirect('/schedules/templates')->with('success', 'Schedule has been created Successfully!');
 

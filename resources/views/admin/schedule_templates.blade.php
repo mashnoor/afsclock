@@ -36,7 +36,7 @@
       <th>Thu</th>
       <th>Fri</th>
       <th>Break</th>
-      <th>Restday</th>
+      
     </tr>
   </thead>
   <tbody>
@@ -44,15 +44,57 @@
       @foreach ($templates as $t)
         <tr>
           <td>{{$t->name}}</td>
-          <td>{{$t->saturday}}</td>
-          <td>{{$t->sunday}}</td>
-          <td>{{$t->monday}}</td>
-          <td>{{$t->tuesday}}</td>
-          <td>{{$t->wednesday}}</td>
-          <td>{{$t->thursday}}</td>
-          <td>{{$t->friday}}</td>
+          <td>
+            @if($t->saturday)
+            {{$t->saturday}}
+            @else
+            N/A
+            @endif
+          </td>
+          <td>
+            @if($t->sunday)
+            {{$t->sunday}}
+            @else
+            N/A
+            @endif
+          </td>
+          <td>
+            @if($t->monday)
+            {{$t->monday}}
+            @else
+            N/A
+            @endif
+          </td>
+          <td>
+            @if($t->tuesday)
+            {{$t->tuesday}}
+            @else
+            N/A
+            @endif
+          </td>
+          <td>
+            @if($t->wednesday)
+            {{$t->wednesday}}
+            @else
+            N/A
+            @endif
+          </td>
+          <td>
+            @if($t->thursday)
+            {{$t->thursday}}
+            @else
+            N/A
+            @endif
+          </td>
+          <td>
+            @if($t->friday)
+            {{$t->friday}}
+            @else
+            N/A
+            @endif
+          </td>
           <td>{{$t->break_allowence}} Min</td>
-          <td>{{$t->restdays}}</td>
+
         </tr>
       @endforeach
     @endisset

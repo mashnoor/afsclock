@@ -140,85 +140,6 @@ class ClockController extends Controller
         if ($type == 'timein')
         {
 
-            // // ATTENDANCE TIME IN REQUEST HANDLING STARTS HERE
-            //
-            // // Checks if the following employee has attendance record today
-            // $isAttendanceToday = table::daily_attendance()->where([['idno', $idno ], ['reference', $employee_id]])->whereDate('created_at', $date)->exists();
-            //
-            // // If exist in attendance record today
-            // if($isAttendanceToday)
-            // {
-            //     // Finds ongoing entry
-            //     $isOngoingEntry = table::daily_entries()->where([['reference', $employee_id],['end_at', NULL]])->whereDate('start_at', $date)->exists();
-            //
-            //     if(!$isOngoingEntry)
-            //     {
-            //        // Creates attendance time in
-            //        DB::table('daily_entries')->insert(['reference' => $employee_id, 'start_at' => Carbon::now()]);
-            //
-            //        return response()->json([
-            //                               "type" => 'timein',
-            //                               "time" => $time,
-            //                               "date" => $date,
-            //                               "lastname" => $firstname,
-            //                               "firstname" => $lastname,
-            //                               "mi" => $mi,
-            //                               "success" => "Hello, " . $firstname . " " . $lastname . ". Time In is recorded at " . $time . " on " . $date,
-            //                           ]);
-            //     }
-            //     else{
-            //         return response()->json([
-            //             "employee" => $employee,
-            //             "error" => "You already Time In today.",
-            //         ]);
-            //     }
-            // }
-            // else{
-            //     // Creates attendance time in
-            //    $attendanceToday = DB::table('daily_attendance')->insert(['idno' => $idno, 'reference' => $employee_id, 'employee' => $employee, 'totalhours' => 0, 'total_break_hours' => 0,'created_at' => Carbon::now()]);
-            //
-            //     // Creates attendance time in
-            //     DB::table('daily_entries')->insert(['reference' => $employee_id, 'start_at' => Carbon::now()]);
-            //
-            //
-            //     $sched_in_time = table::schedules()->where([['idno', $idno], ['archive', 0]])->value('intime');
-            //
-            //         if($sched_in_time == NULL)
-            //         {
-            //             $status_in = "Ok";
-            //         } else {
-            //             $sched_clock_in_time_24h = date("H.i", strtotime($sched_in_time));
-            //             $time_in_24h = date("H.i", strtotime($time));
-            //
-            //             if ($time_in_24h <= $sched_clock_in_time_24h)
-            //             {
-            //                 $status_in = 'In Time';
-            //             } else {
-            //                 $status_in = 'Late Arrival';
-            //             }
-            //         }
-            //
-            //     DB::table('daily_attendance')
-            //         ->where('reference', $employee_id)
-            //         ->whereDate('created_at', $date)
-            //         ->update(['status_timein' => $status_in]);
-            //
-            //
-            //     return response()->json([
-            //                            "type" => 'timein',
-            //                            "time" => $time,
-            //                            "date" => $date,
-            //                            "lastname" => $firstname,
-            //                            "firstname" => $lastname,
-            //                            "mi" => $mi,
-            //                            "success" => "Hello, " . $firstname . " " . $lastname . ". Time In is recorded at " . $time . " on " . $date,
-            //                        ]);
-            //
-            //
-            // }
-            //
-            // // ATTENDANCE TIME IN REQUEST HANDLING ENDS HERE
-
            $has = table::attendance()->where([['idno', $idno],['date', $date]])->exists();
            if ($has == 1)
            {
@@ -250,13 +171,19 @@ class ClockController extends Controller
                    $day = strtolower($today->isoFormat('dddd'));
 
                    $day_today = $schedule_template->$day;
-                   $str_arr = explode ("-", $day_today);
-                   $in_time = $str_arr[0];
-                   $out_time = $str_arr[1];
+                   if ($day_today) {
+                     $str_arr = explode ("-", $day_today);
+                     $in_time = $str_arr[0];
+                     $out_time = $str_arr[1];
+                   }else{
+                     $in_time = NULL;
+                     $out_time = NULL;
+                   }
+
 
                    if($in_time == NULL)
                    {
-                       $status_in = "Ok";
+                       $status_in = "Not Scheduled";
                    } else {
                        // $sched_clock_in_time_24h = date("H.i", strtotime($sched_in_time));
                        $time_in_24h = date("H.i", strtotime($time));
@@ -268,6 +195,7 @@ class ClockController extends Controller
                            $status_in = 'Late Arrival';
                        }
                    }
+
 
                    if($clock_comment == 1 && $comment != NULL)
                    {
@@ -417,13 +345,19 @@ class ClockController extends Controller
                $day = strtolower($today->isoFormat('dddd'));
 
                $day_today = $schedule_template->$day;
-               $str_arr = explode ("-", $day_today);
-               $in_time = $str_arr[0];
-               $out_time = $str_arr[1];
+               if ($day_today) {
+                 $str_arr = explode ("-", $day_today);
+                 $in_time = $str_arr[0];
+                 $out_time = $str_arr[1];
+               }else{
+                 $in_time = NULL;
+                 $out_time = NULL;
+               }
+
 
                if($out_time == NULL)
                {
-                   $status_out = "Ok";
+                   $status_out = "Not Scheduled";
                } else {
                    // $sched_clock_out_time_24h = date("H.i", strtotime($sched_out_time));
                    $time_out_24h = date("H.i", strtotime($timeOUT));

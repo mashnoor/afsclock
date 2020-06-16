@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateTblPeopleAttendanceTable extends Migration {
+class CreateAttendanceTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,8 +12,8 @@ class CreateTblPeopleAttendanceTable extends Migration {
 	 */
 	public function up()
 	{
-        if(!Schema::hasTable('tbl_people_attendance')) {
-            Schema::create('tbl_people_attendance', function (Blueprint $table) {
+        if(!Schema::hasTable('attendance')) {
+            Schema::create('attendance', function (Blueprint $table) {
                 $table->increments('id');
                 $table->integer('reference')->nullable();
                 $table->string('idno', 11)->nullable()->default('');

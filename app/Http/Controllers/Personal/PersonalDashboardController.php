@@ -58,15 +58,15 @@ class PersonalDashboardController extends Controller
         $sm = date('m/01/Y');
         $em = date('m/31/Y');
 
-        $cs = table::schedules()->where([
-            ['reference', $id],
-            ['archive', '0']
-        ])->first();
+        // $cs = table::schedules()->where([
+        //     ['reference', $id],
+        //     ['archive', '0']
+        // ])->first();
 
-        $ps = table::schedules()->where([
-            ['reference', $id],
-            ['archive', '1'],
-        ])->take(8)->get();
+        // $ps = table::schedules()->where([
+        //     ['reference', $id],
+        //     ['archive', '1'],
+        // ])->take(8)->get();
 
         $al = table::leaves()->where([['reference', $id], ['status', 'Approved']])->count();
         $ald = table::leaves()->where([['reference', $id], ['status', 'Approved']])->take(8)->get();
@@ -134,7 +134,7 @@ class PersonalDashboardController extends Controller
 
         // dd($task_collection);
 
-        return view('personal.personal-dashboard', compact('cs', 'ps', 'al', 'pl', 'ald', 'a', 'la', 'ed', 'tz', 'no_of_pending_tasks', 'no_of_done_tasks', 'tasks', 'pending_tasks', 'sortedActivities','task_collection'));
+        return view('personal.personal-dashboard', compact('al', 'pl', 'ald', 'a', 'la', 'ed', 'tz', 'no_of_pending_tasks', 'no_of_done_tasks', 'tasks', 'pending_tasks', 'sortedActivities','task_collection'));
     }
 
 

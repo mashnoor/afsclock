@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateTblFormDepartmentTable extends Migration {
+class CreateDepartmentTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,8 +12,8 @@ class CreateTblFormDepartmentTable extends Migration {
 	 */
 	public function up()
 	{
-        if(!Schema::hasTable('tbl_form_department')) {
-            Schema::create('tbl_form_department', function (Blueprint $table) {
+        if(!Schema::hasTable('department')) {
+            Schema::create('department', function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('department', 250)->nullable()->default('');
             });

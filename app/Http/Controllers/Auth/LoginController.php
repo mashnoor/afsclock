@@ -27,18 +27,19 @@ class LoginController extends Controller
      * @var string
      */
     // protected $redirectTo = '/home';
-    protected function authenticated(Request $request) 
+    protected function authenticated(Request $request)
     {
         $type = \Auth::user()->acc_type;
-        if ($type == '1') 
+        if ($type == '1')
         {
             return redirect('personal/dashboard');
-        } 
-        if($type == '2') 
+        }
+        if($type == '2')
         {
             return redirect('dashboard');
-        } 
+        }
         if($type == null || $type == 0) {
+
             return redirect('login');
         }
     }
@@ -47,9 +48,9 @@ class LoginController extends Controller
      * Include status as credential.
      *
     */
-    protected function credentials(\Illuminate\Http\Request $request) 
+    protected function credentials(\Illuminate\Http\Request $request)
     {
-         return ['email' => $request->{$this->username()}, 'password' => $request->password, 'status' => 1];
+         return ['companyemail' => $request->{$this->username()}, 'password' => $request->password, 'status' => 1];
     }
 
     /**
@@ -66,9 +67,9 @@ class LoginController extends Controller
      * Auth logout user.
      *
      */
-    public function logout() 
+    public function logout()
     {
         Auth::logout();
-        return redirect('login'); 
+        return redirect('login');
     }
 }

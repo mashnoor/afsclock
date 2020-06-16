@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateTblCompanyDataTable extends Migration {
+class CreateCompanyDataTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,8 +12,8 @@ class CreateTblCompanyDataTable extends Migration {
 	 */
 	public function up()
 	{
-        if(!Schema::hasTable('tbl_company_data')) {
-            Schema::create('tbl_company_data', function (Blueprint $table) {
+        if(!Schema::hasTable('company_data')) {
+            Schema::create('company_data', function (Blueprint $table) {
                 $table->increments('id');
                 $table->integer('reference');
                 $table->string('company')->nullable()->default('');

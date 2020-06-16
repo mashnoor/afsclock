@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateTblEmployeeFacesTable extends Migration {
+class CreateEmployeeFacesTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,8 +12,8 @@ class CreateTblEmployeeFacesTable extends Migration {
 	 */
 	public function up()
 	{
-        if(!Schema::hasTable('tbl_employee_faces')) {
-            Schema::create('tbl_employee_faces', function (Blueprint $table) {
+        if(!Schema::hasTable('employee_faces')) {
+            Schema::create('employee_faces', function (Blueprint $table) {
                 $table->increments('id');
                 $table->integer('reference');
                 $table->string('image_name');
@@ -30,7 +30,7 @@ class CreateTblEmployeeFacesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('tbl_employee_faces');
+		Schema::drop('employee_faces');
 	}
 
 }

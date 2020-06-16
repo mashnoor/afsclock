@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateTblFormLeavetypeTable extends Migration {
+class CreateLeavetypeTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,8 +12,8 @@ class CreateTblFormLeavetypeTable extends Migration {
 	 */
 	public function up()
 	{
-        if(!Schema::hasTable('tbl_form_leavetype')) {
-            Schema::create('tbl_form_leavetype', function (Blueprint $table) {
+        if(!Schema::hasTable('leavetype')) {
+            Schema::create('leavetype', function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('leavetype')->nullable();
                 $table->string('limit')->nullable();
@@ -30,7 +30,7 @@ class CreateTblFormLeavetypeTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('tbl_form_leavetype');
+		Schema::drop('leavetype');
 	}
 
 }

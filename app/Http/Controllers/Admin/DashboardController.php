@@ -64,24 +64,24 @@ class DashboardController extends Controller
         $emp_ids_arr = json_decode(json_encode($emp_ids), true);
         $is_offline_now = count(array_diff($emp_ids_arr, $is_online_arr));
 
-		$emp_all_type = table::people()
-        ->join('tbl_company_data', 'tbl_people.id', '=', 'tbl_company_data.reference')
-        ->where('tbl_people.employmentstatus', 'Active')
-        ->orderBy('tbl_company_data.startdate', 'desc')
-        ->take(8)
-        ->get();
+		// $emp_all_type = table::people()
+    //     ->join('tbl_company_data', 'tbl_people.id', '=', 'tbl_company_data.reference')
+    //     ->where('tbl_people.employmentstatus', 'Active')
+    //     ->orderBy('tbl_company_data.startdate', 'desc')
+    //     ->take(8)
+    //     ->get();
 
-		$emp_typeR = table::people()
+		$emp_typeR = table::new_people()
         ->where('employmenttype', 'Regular')
         ->where('employmentstatus', 'Active')
         ->count();
 
-		$emp_typeT = table::people()
+		$emp_typeT = table::new_people()
         ->where('employmenttype', 'Trainee')
         ->where('employmentstatus', 'Active')
         ->count();
 
-		$emp_allActive = table::people()
+		$emp_allActive = table::new_people()
         ->where('employmentstatus', 'Active')
         ->count();
 
@@ -118,11 +118,11 @@ class DashboardController extends Controller
 
         if ($a) {
           foreach ($a as $r_e) {
-            $user = User::where('reference', $r_e->reference)->first();
-            if ($r_e->timein) {
+            $user = User::find($r_e->reference);
+            if ($r_e->timein && $user) {
               $activity_collection->push(new Activity($user->name, $r_e->timein, 'Clock In'));
             }
-            if ($r_e->timeout) {
+            if ($r_e->timeout && $user) {
               $activity_collection->push(new Activity($user->name ,$r_e->timeout, 'Clock Out'));
             }
           }
@@ -130,11 +130,11 @@ class DashboardController extends Controller
 
         if ($recent_breaks) {
           foreach ($recent_breaks as $r_b) {
-            $user = User::where('reference',$r_b->reference)->first();
-            if ($r_b->start_at) {
+            $user = User::find($r_b->reference);
+            if ($r_b->start_at && $user) {
               $activity_collection->push(new Activity($user->name, $r_b->start_at, 'Break In'));
             }
-            if ($r_b->end_at) {
+            if ($r_b->end_at && $user) {
               $activity_collection->push(new Activity($user->name, $r_b->end_at, 'Break Out'));
 
             }
@@ -156,9 +156,9 @@ class DashboardController extends Controller
           foreach($tasks as $task){
             $extended_task = table::task_extension()->where('task_id', $task->id)->latest('new_deadline')->first();
 
-            $user = User::where('reference', $task->reference)->first();
+            $user = User::find($task->reference);
 
-            if ($extended_task) {
+            if ($extended_task && $user) {
               $task_collection->push(new Tasks($task->id, $user->name, $extended_task->new_deadline, $task->deadline));
             }
           }
@@ -168,7 +168,7 @@ class DashboardController extends Controller
 
         // dd($task_collection);
 
-        return view('admin.dashboard', compact('emp_typeR', 'emp_typeT', 'emp_allActive', 'emp_leaves_pending', 'emp_leaves_approve', 'emp_leaves_all', 'emp_approved_leave', 'emp_all_type','a', 'is_online_now', 'is_offline_now', 'sortedActivities', 'task_collection'));
+        return view('admin.dashboard', compact('emp_typeR', 'emp_typeT', $emp_allActive,'emp_leaves_pending', 'emp_leaves_approve', 'emp_leaves_all', 'emp_approved_leave','a', 'is_online_now', 'is_offline_now', 'sortedActivities', 'task_collection'));
     }
 
 

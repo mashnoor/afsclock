@@ -124,7 +124,7 @@
                                     <option value="">Select Company</option>
                                     @isset($company)
                                         @foreach ($company as $data)
-                                            <option value="{{ $data->company }}"> {{ $data->company }}</option>
+                                            <option value="{{ $data->id }}"> {{ $data->company }}</option>
                                         @endforeach
                                     @endisset
                                 </select>
@@ -135,7 +135,7 @@
                                     <option value="">Select Department</option>
                                     @isset($department)
                                         @foreach ($department as $data)
-                                            <option value="{{ $data->department }}"> {{ $data->department }}</option>
+                                            <option value="{{ $data->id }}"> {{ $data->department }}</option>
                                         @endforeach
                                     @endisset
                                 </select>
@@ -152,8 +152,8 @@
                                                 @foreach ($jobtitle as $data)
                                                     @foreach ($department as $dept)
                                                         @if($dept->id == $data->dept_code)
-                                                            <div class="item" data-value="{{ $data->jobtitle }}"
-                                                                 data-dept="{{ $dept->department }}">{{ $data->jobtitle }}</div>
+                                                            <div class="item" data-value="{{ $data->id }}"
+                                                                 data-dept="{{ $dept->id }}">{{ $data->jobtitle }}</div>
                                                         @endif
                                                     @endforeach
                                                 @endforeach

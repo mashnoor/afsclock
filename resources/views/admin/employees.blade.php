@@ -20,8 +20,8 @@
                 <table width="100%" class="table table-striped table-hover" id="dataTables-example" data-order='[[ 0, "desc" ]]'>
                     <thead>
                         <tr>
-                            <th>ID</th> 
-                            <th>Employee</th> 
+                            <th>ID</th>
+                            <th>Employee</th>
                             <th>Company</th>
                             <th>Department</th>
                             <th>Position</th>
@@ -35,15 +35,15 @@
                             <tr class="">
                             <td>{{ $employee->idno }}</td>
                             <td>{{ $employee->lastname }}, {{ $employee->firstname }}</td>
-                            <td>{{ $employee->company }}</td>
-                            <td>{{ $employee->department }}</td>
-                            <td>{{ $employee->jobposition }}</td>
+                            <td>{{ $employee->company_id }}</td>
+                            <td>{{ $employee->department_id }}</td>
+                            <td>{{ $employee->job_title_id }}</td>
                             <td>@if($employee->employmentstatus == 'Active') Active @else Archived @endif</td>
                             <td class="align-right">
-                            <a href="{{ url('/profile/view/'.$employee->reference) }}" class="ui circular basic icon button tiny"><i class="file alternate outline icon"></i></a>
-                            <a href="{{ url('/profile/edit/'.$employee->reference) }}" class="ui circular basic icon button tiny"><i class="edit outline icon"></i></a>
-                            <a href="{{ url('/profile/delete/'.$employee->reference) }}" class="ui circular basic icon button tiny"><i class="trash alternate outline icon"></i></a>
-                            <a href="{{ url('/profile/archive/'.$employee->reference) }}" class="ui circular basic icon button tiny"><i class="archive icon"></i></a>
+                            <a href="{{ url('/profile/view/'.$employee->id) }}" class="ui circular basic icon button tiny"><i class="file alternate outline icon"></i></a>
+                            <a href="{{ url('/profile/edit/'.$employee->id) }}" class="ui circular basic icon button tiny"><i class="edit outline icon"></i></a>
+                            <a href="{{ url('/profile/delete/'.$employee->id) }}" class="ui circular basic icon button tiny"><i class="trash alternate outline icon"></i></a>
+                            <a href="{{ url('/profile/archive/'.$employee->id) }}" class="ui circular basic icon button tiny"><i class="archive icon"></i></a>
                             </td>
                             </tr>
                         @endforeach
@@ -53,7 +53,7 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
 
     @endsection

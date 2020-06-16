@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateTblPeopleLeavesTable extends Migration {
+class CreateLeavesTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,8 +12,8 @@ class CreateTblPeopleLeavesTable extends Migration {
 	 */
 	public function up()
 	{
-        if(!Schema::hasTable('tbl_people_leaves')) {
-            Schema::create('tbl_people_leaves', function (Blueprint $table) {
+        if(!Schema::hasTable('leaves')) {
+            Schema::create('leaves', function (Blueprint $table) {
                 $table->increments('id');
                 $table->integer('reference')->nullable();
                 $table->string('idno', 11)->nullable();
@@ -40,7 +40,7 @@ class CreateTblPeopleLeavesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('tbl_people_leaves');
+		Schema::drop('people_leaves');
 	}
 
 }

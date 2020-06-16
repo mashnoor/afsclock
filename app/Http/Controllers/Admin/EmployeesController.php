@@ -13,11 +13,11 @@ use App\Http\Controllers\Controller;
 class EmployeesController extends Controller
 {
 
-	public function index() 
+	public function index()
 	{
         if (permission::permitted('employees')=='fail'){ return redirect()->route('denied'); }
 
-		$emp_typeR = table::people()
+		$emp_typeR = table::new_people()
 		->where('employmenttype', 'Regular')
 		->where('employmentstatus', 'Active')
 		->count();
@@ -43,26 +43,28 @@ class EmployeesController extends Controller
 		->where('employmentstatus', 'Archive')
 		->count();
 
-		$data = table::people()
-		->join('tbl_company_data', 'tbl_people.id', '=', 'tbl_company_data.reference')
-		->get();
+		// $data = table::people()
+		// ->join('tbl_company_data', 'tbl_people.id', '=', 'tbl_company_data.reference')
+		// ->get();
+
+		$data = table::new_people()->get();
 
 		$emp_file = table::people()->count();
-		
+
 		if($emp_allArchive != null OR $emp_allActive != null OR $emp_allArchive >= 1 OR $emp_allActive >= 1)
 		{
 			$number1 = $emp_allArchive / $emp_allActive * 100;
 		} else {
 			$number1 = null;
 		}
-		
+
 	    return view('admin.employees', compact('data', 'emp_typeR', 'emp_typeT', 'emp_genderM', 'emp_genderR', 'emp_allActive', 'emp_file', 'emp_allArchive'));
 	}
 
-	public function new() 
+	public function new()
 	{
 		if (permission::permitted('employees-add')=='fail'){ return redirect()->route('denied'); }
-		
+
 		$employees = table::people()->get();
 		$company = table::company()->get();
 		$department = table::department()->get();
@@ -74,9 +76,7 @@ class EmployeesController extends Controller
 
 	public function faceregistration($id)
     {
-
         return view('admin.employee-face-registration', compact('id'));
-
     }
 
     function generateRandomString($length = 10) {
@@ -103,7 +103,7 @@ class EmployeesController extends Controller
 		$img_data = base64_decode($img_data);
 
 		//$imageContent = file_get_contents($img_data);
-		
+
         $destinationPath = public_path() . '/assets/faces/' . $image_name;
         file_put_contents($destinationPath, $img_data);
         $employeeFace = new EmployeeFace();
@@ -113,12 +113,12 @@ class EmployeesController extends Controller
         $msg = "This is a simple message.";
         return response()->json(array('msg'=> $msg), 200);
     }
-	
+
     public function add(Request $request)
     {
 		if (permission::permitted('employees-add')=='fail'){ return redirect()->route('denied'); }
 		//if($request->sh == 2){return redirect()->route('employees');}
-		
+
 		$v = $request->validate([
 			'lastname' => 'required|alpha_dash_space|max:155',
 			'firstname' => 'required|alpha_dash_space|max:155',
@@ -145,7 +145,7 @@ class EmployeesController extends Controller
 			// 'startdate' => 'required|date|max:155',
 			// 'dateregularized' => 'required|date|max:155'
 		]);
-	  
+
 		$lastname = mb_strtoupper($request->lastname);
 		$firstname = mb_strtoupper($request->firstname);
 		$mi = mb_strtoupper($request->mi);
@@ -171,16 +171,16 @@ class EmployeesController extends Controller
 		$startdate = date("Y-m-d", strtotime($request->startdate));
 		$dateregularized = date("Y-m-d", strtotime($request->dateregularized));
 
-		$is_idno_taken = table::companydata()->where('idno', $idno)->exists();
+		$is_idno_taken = table::new_people()->where('idno', $idno)->exists();
 
-		if ($is_idno_taken == 1) 
+		if ($is_idno_taken == 1)
 		{
 			return redirect('employees-new')->with('error', 'Whoops! the ID Number is already taken.');
 		}
 
 		$file = $request->file('image');
 
-		if($file != null) 
+		if($file != null)
 		{
 			$name = $request->file('image')->getClientOriginalName();
 			$destinationPath = public_path() . '/assets/faces/';
@@ -188,8 +188,30 @@ class EmployeesController extends Controller
 		} else {
 			$name = '';
 		}
-		
-    	table::people()->insert([
+
+    	// table::people()->insert([
+    	// 	[
+			// 	'lastname' => $lastname,
+			// 	'firstname' => $firstname,
+			// 	'mi' => $mi,
+			// 	'age' => $age,
+			// 	'gender' => $gender,
+			// 	'emailaddress' => $emailaddress,
+			// 	'civilstatus' => $civilstatus,
+			// 	'height' => $height,
+			// 	'weight' => $weight,
+			// 	'mobileno' => $mobileno,
+			// 	'birthday' => $birthday,
+			// 	'birthplace' => $birthplace,
+			// 	'nationalid' => $nationalid,
+			// 	'homeaddress' => $homeaddress,
+			// 	'employmenttype' => $employmenttype,
+			// 	'employmentstatus' => $employmentstatus,
+			// 	'avatar' => $name,
+      //       ],
+    	// ]);
+
+			table::new_people()->insert([
     		[
 				'lastname' => $lastname,
 				'firstname' => $firstname,
@@ -198,8 +220,6 @@ class EmployeesController extends Controller
 				'gender' => $gender,
 				'emailaddress' => $emailaddress,
 				'civilstatus' => $civilstatus,
-				'height' => $height,
-				'weight' => $weight,
 				'mobileno' => $mobileno,
 				'birthday' => $birthday,
 				'birthplace' => $birthplace,
@@ -208,17 +228,9 @@ class EmployeesController extends Controller
 				'employmenttype' => $employmenttype,
 				'employmentstatus' => $employmentstatus,
 				'avatar' => $name,
-            ],
-    	]);
-
-		$refId = DB::getPdo()->lastInsertId();
-		
-    	table::companydata()->insert([
-    		[
-    			'reference' => $refId,
-				'company' => $company,
-				'department' => $department,
-				'jobposition' => $jobposition,
+				'company_id' => $company,
+				'department_id' => $department,
+				'job_title_id' => $jobposition,
 				'companyemail' => $companyemail,
 				'leaveprivilege' => $leaveprivilege,
 				'idno' => $idno,
@@ -226,6 +238,22 @@ class EmployeesController extends Controller
 				'dateregularized' => $dateregularized,
             ],
     	]);
+
+		$refId = DB::getPdo()->lastInsertId();
+
+    	// table::companydata()->insert([
+    	// 	[
+    	// 		'reference' => $refId,
+			// 	'company' => $company,
+			// 	'department' => $department,
+			// 	'jobposition' => $jobposition,
+			// 	'companyemail' => $companyemail,
+			// 	'leaveprivilege' => $leaveprivilege,
+			// 	'idno' => $idno,
+			// 	'startdate' => $startdate,
+			// 	'dateregularized' => $dateregularized,
+      //       ],
+    	// ]);
 
     	return redirect('employees')->with('success','Employee has been added!');
     }

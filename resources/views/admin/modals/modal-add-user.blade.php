@@ -10,8 +10,8 @@
                     <option value="">Select Employee</option>
                     @isset($employees)
                         @foreach ($employees as $data)
-                            <option value="{{ $data->lastname }}, {{ $data->firstname }}"
-                                    data-e="{{ $data->emailaddress }}"
+                            <option value="{{ $data->id }}"
+                                    data-e="{{ $data->companyemail }}"
                                     data-ref="{{ $data->id }}">{{ $data->lastname }}, {{ $data->firstname }}</option>
                         @endforeach
                     @endisset
@@ -19,7 +19,7 @@
             </div>
             <div class="field">
                 <label>Email</label>
-                <input type="text" name="email" class="readonly lowercase" value="" readonly>
+                <input type="text" name="email" class="readonly" readonly>
             </div>
             <div class="grouped fields opt-radio">
                 <label>Choose Account type </label>
@@ -78,7 +78,7 @@
                     </ul>
                 </div>
             </div>
-            
+
     </div>
     <div class="actions">
         <input type="hidden" value="" name="ref">

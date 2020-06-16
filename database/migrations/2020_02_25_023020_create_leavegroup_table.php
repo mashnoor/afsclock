@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateTblFormLeavegroupTable extends Migration {
+class CreateLeavegroupTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,8 +12,8 @@ class CreateTblFormLeavegroupTable extends Migration {
 	 */
 	public function up()
 	{
-        if(!Schema::hasTable('tbl_form_leavegroup')) {
-            Schema::create('tbl_form_leavegroup', function (Blueprint $table) {
+        if(!Schema::hasTable('leavegroup')) {
+            Schema::create('leavegroup', function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('leavegroup')->nullable();
                 $table->string('description')->nullable();
@@ -31,7 +31,7 @@ class CreateTblFormLeavegroupTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('tbl_form_leavegroup');
+		Schema::drop('leavegroup');
 	}
 
 }

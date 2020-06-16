@@ -13,6 +13,7 @@ use App\Http\Controllers\Controller;
 
 class UsersController extends Controller
 {
+    //
     public function index()
     {
         if (permission::permitted('users')=='fail'){ return redirect()->route('denied'); }
@@ -20,7 +21,7 @@ class UsersController extends Controller
         $users_roles = table::users()->join('users_roles', 'users.role_id', '=', 'users_roles.id')->select('users.*', 'users_roles.role_name')->get();
         $users = table::users()->get();
         $roles = table::roles()->get();
-        $employees = table::people()->get();
+        $employees = table::new_people()->get();
 
         return view('admin.users', compact('users', 'roles', 'employees', 'users_roles'));
     }
@@ -28,18 +29,6 @@ class UsersController extends Controller
     public function register(Request $request)
     {
         if (permission::permitted('users-add')=='fail'){ return redirect()->route('denied'); }
-        //if($request->sh == 2){return redirect()->route('users');}
-
-        //$v = $request->validate([
-          //  'ref' => 'required|max:100',
-            //'name' => 'required|max:100',
-            //'email' => 'required|email|max:100',
-            //'role_id' => 'required|digits_between:1,99|max:2',
-            //'acc_type' => 'required|digits_between:1,99|max:2',
-            //'password' => 'required|min:8|max:100',
-            //'password_confirmation' => 'required|min:8|max:100',
-            //'status' => 'required|boolean|max:1',
-        //]);
 
         $this->validate($request,[
            'ref' => 'required|max:100',
@@ -66,27 +55,25 @@ class UsersController extends Controller
             return redirect('users')->with('error', 'Whoops! Password confirmation does not match!');
         }
 
-        $is_user_exist = table::users()->where('email', $email)->count();
+        // $is_user_exist = table::people()->where('email', $email)->count();
 
-        if($is_user_exist >= 1)
+        $is_user_exist =table::new_people()->where('companyemail', $email)->whereNotNull('password')->first();
+
+        if($is_user_exist)
         {
             return redirect('users')->with('error', 'Whoops! this user already exist');
         }
 
-        $idno = table::companydata()->where('reference', $ref)->value('idno');
+        // $idno = table::companydata()->where('reference', $ref)->value('idno');
 
-    	table::users()->insert([
-    		[
-                'reference' => $ref,
-                'idno' => $idno,
-				'name' => $name,
-				'email' => $email,
+
+
+    	table::new_people()->where('id', $ref)->update(array(
 				'role_id' => $role_id,
 				'acc_type' => $acc_type,
 				'password' => Hash::make($password),
 				'status' => $status,
-            ],
-    	]);
+    	));
 
     	return redirect('/users')->with('success','New User has been added.');
     }

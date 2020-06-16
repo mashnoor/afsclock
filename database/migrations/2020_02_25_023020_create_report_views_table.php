@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateTblReportViewsTable extends Migration {
+class CreateReportViewsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,8 +12,8 @@ class CreateTblReportViewsTable extends Migration {
 	 */
 	public function up()
 	{
-        if(!Schema::hasTable('tbl_report_views')) {
-            Schema::create('tbl_report_views', function (Blueprint $table) {
+        if(!Schema::hasTable('report_views')) {
+            Schema::create('report_views', function (Blueprint $table) {
                 $table->increments('id');
                 $table->integer('report_id')->nullable();
                 $table->string('last_viewed')->nullable();
@@ -30,7 +30,7 @@ class CreateTblReportViewsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('tbl_report_views');
+		Schema::drop('report_views');
 	}
 
 }

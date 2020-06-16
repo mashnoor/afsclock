@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateTblFormJobtitleTable extends Migration {
+class CreateJobtitleTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,8 +12,8 @@ class CreateTblFormJobtitleTable extends Migration {
 	 */
 	public function up()
 	{
-        if(!Schema::hasTable('tbl_form_jobtitle')) {
-            Schema::create('tbl_form_jobtitle', function (Blueprint $table) {
+        if(!Schema::hasTable('jobtitle')) {
+            Schema::create('jobtitle', function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('jobtitle', 250)->nullable()->default('');
                 $table->integer('dept_code')->nullable();
@@ -29,7 +29,7 @@ class CreateTblFormJobtitleTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('tbl_form_jobtitle');
+		Schema::drop('jobtitle');
 	}
 
 }

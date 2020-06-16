@@ -6,11 +6,10 @@ use DB;
 
 Class table {
 
-	public static function people()
-	{
-    	$people = DB::table('tbl_people');
-    	return $people;
-   	}
+		public static function people()
+		{
+			return DB::table('people');
+		}
 
 		public static function salary_types(){
 			return DB::table('salary_types');
@@ -38,7 +37,7 @@ Class table {
 			return DB::table('schedule_template');
 		}
 
-		public static function new_schedule(){
+		public static function schedules(){
 			return DB::table('schedules');
 		}
 
@@ -47,10 +46,6 @@ Class table {
         return DB::table('daily_breaks');
     }
 
-    public static function daily_attendance()
-    {
-        return DB::table('daily_attendance');
-    }
 
     public static function daily_entries()
     {
@@ -59,31 +54,24 @@ Class table {
 
 	public static function companydata()
 	{
-    	$companydata = DB::table('tbl_company_data');
-    	return $companydata;
+    	return DB::table('company_data');
    	}
 
 	public static function attendance()
 	{
-    	$attendance = DB::table('tbl_people_attendance');
-    	return $attendance;
+    	return DB::table('attendance');
    	}
 
 	public static function leaves()
 	{
-    	$leaves = DB::table('tbl_people_leaves');
+    	$leaves = DB::table('people_leaves');
     	return $leaves;
    	}
 
-	public static function schedules()
-	{
-    	$schedules = DB::table('tbl_people_schedules');
-    	return $schedules;
-   	}
 
 	public static function reportviews()
 	{
-    	$reportviews = DB::table('tbl_report_views');
+    	$reportviews = DB::table('report_views');
     	return $reportviews;
    	}
 
@@ -107,31 +95,31 @@ Class table {
 
 	public static function company()
 	{
-    	$company = DB::table('tbl_form_company');
+    	$company = DB::table('company');
     	return $company;
    	}
 
 	public static function department()
 	{
-    	$department = DB::table('tbl_form_department');
+    	$department = DB::table('department');
     	return $department;
    	}
 
 	public static function jobtitle()
 	{
-    	$jobtitle = DB::table('tbl_form_jobtitle');
+    	$jobtitle = DB::table('jobtitle');
     	return $jobtitle;
    	}
 
 	public static function leavetypes()
 	{
-    	$leavetypes = DB::table('tbl_form_leavetype');
+    	$leavetypes = DB::table('leavetype');
     	return $leavetypes;
 	}
 
 	public static function leavegroup()
 	{
-		$leavegroup = DB::table('tbl_form_leavegroup');
+		$leavegroup = DB::table('leavegroup');
 		return $leavegroup;
 	}
 
@@ -143,7 +131,7 @@ Class table {
 
    	public static function common_task()
     {
-        $common_tasks = DB::table('tbl_common_tasks');
+        $common_tasks = DB::table('common_tasks');
         return $common_tasks;
     }
 

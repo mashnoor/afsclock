@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateTblTasksTable extends Migration {
+class CreateTasksTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,8 +12,8 @@ class CreateTblTasksTable extends Migration {
 	 */
 	public function up()
 	{
-        if(!Schema::hasTable('tbl_tasks')) {
-            Schema::create('tbl_tasks', function (Blueprint $table) {
+        if(!Schema::hasTable('tasks')) {
+            Schema::create('tasks', function (Blueprint $table) {
                 $table->increments('id');
                 $table->integer('reference');
                 $table->integer('assigned_by');
@@ -36,7 +36,7 @@ class CreateTblTasksTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('tbl_tasks');
+		Schema::drop('tasks');
 	}
 
 }

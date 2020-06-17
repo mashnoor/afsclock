@@ -13,19 +13,19 @@ use App\Http\Controllers\Controller;
 
 class UsersController extends Controller
 {
-    //
+    // Finds all users and sends them to the view file
+    // which are only visible to admin.
     public function index()
     {
         if (permission::permitted('users')=='fail'){ return redirect()->route('denied'); }
 
-        $users_roles = table::users()->join('users_roles', 'users.role_id', '=', 'users_roles.id')->select('users.*', 'users_roles.role_name')->get();
-        $users = table::users()->get();
         $roles = table::roles()->get();
-        $employees = table::new_people()->get();
-
-        return view('admin.users', compact('users', 'roles', 'employees', 'users_roles'));
+        $employees = table::people()->get();
+        $users = table::people()->whereNotNull('password')->get();
+        return view('admin.users', compact('users','employees','roles'));
     }
 
+    // Register new user.
     public function register(Request $request)
     {
         if (permission::permitted('users-add')=='fail'){ return redirect()->route('denied'); }
@@ -55,20 +55,14 @@ class UsersController extends Controller
             return redirect('users')->with('error', 'Whoops! Password confirmation does not match!');
         }
 
-        // $is_user_exist = table::people()->where('email', $email)->count();
-
-        $is_user_exist =table::new_people()->where('companyemail', $email)->whereNotNull('password')->first();
+        $is_user_exist =table::people()->where('companyemail', $email)->whereNotNull('password')->first();
 
         if($is_user_exist)
         {
             return redirect('users')->with('error', 'Whoops! this user already exist');
         }
 
-        // $idno = table::companydata()->where('reference', $ref)->value('idno');
-
-
-
-    	table::new_people()->where('id', $ref)->update(array(
+    	table::people()->where('id', $ref)->update(array(
 				'role_id' => $role_id,
 				'acc_type' => $acc_type,
 				'password' => Hash::make($password),
@@ -77,6 +71,7 @@ class UsersController extends Controller
 
     	return redirect('/users')->with('success','New User has been added.');
     }
+
 
     public function edit($id)
     {
@@ -102,8 +97,8 @@ class UsersController extends Controller
         ]);
 
         $ref = Crypt::decryptString($request->ref);
-		$role_id = $request->role_id;
-		$acc_type = $request->acc_type;
+    		$role_id = $request->role_id;
+    		$acc_type = $request->acc_type;
         $password = $request->password;
         $password_confirmation = $request->password_confirmation;
         $status = $request->status;

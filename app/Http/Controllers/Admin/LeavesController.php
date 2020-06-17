@@ -11,18 +11,18 @@ use App\Http\Controllers\Controller;
 
 class LeavesController extends Controller
 {
-    public function index() 
+    public function index()
     {
         if (permission::permitted('leaves')=='fail'){ return redirect()->route('denied'); }
 
-        $employee = table::people()->join('tbl_company_data', 'tbl_people.id', '=', 'tbl_company_data.reference')->get();
+        $employee = table::people()->get();
         $leaves = table::leaves()->get();
         $leave_types = table::leavetypes()->get();
 
         return view('admin.leaves', compact('employee', 'leaves', 'leave_types'));
     }
 
-    public function edit($id, Request $request) 
+    public function edit($id, Request $request)
     {
         if (permission::permitted('leaves-edit')=='fail'){ return redirect()->route('denied'); }
 

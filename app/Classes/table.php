@@ -29,8 +29,7 @@ Class table {
 
 		public static function webcam_table()
 		{
-	    	$webcam_table = DB::table('webcam_data');
-	    	return $webcam_table;
+	    	return DB::table('webcam_data');
 	   	}
 
 		public static function sch_template(){
@@ -64,75 +63,59 @@ Class table {
 
 	public static function leaves()
 	{
-    	$leaves = DB::table('people_leaves');
-    	return $leaves;
+    	return DB::table('leaves');
    	}
 
 
 	public static function reportviews()
 	{
-    	$reportviews = DB::table('report_views');
-    	return $reportviews;
+    	return DB::table('report_views');
    	}
 
 	public static function permissions()
 	{
-    	$permissions = DB::table('users_permissions');
-    	return $permissions;
+    	return DB::table('users_permissions');
    	}
 
 	public static function roles()
 	{
-    	$roles = DB::table('users_roles');
-    	return $roles;
+    	return DB::table('users_roles');
    	}
 
-	public static function users()
-	{
-    	$users = DB::table('users')->select('id', 'reference', 'idno', 'name', 'email', 'role_id', 'acc_type', 'status');
-    	return $users;
-   	}
 
 	public static function company()
 	{
-    	$company = DB::table('company');
-    	return $company;
+    	return DB::table('company');
    	}
 
 	public static function department()
 	{
-    	$department = DB::table('department');
-    	return $department;
+    	return DB::table('department');
    	}
 
 	public static function jobtitle()
 	{
-    	$jobtitle = DB::table('jobtitle');
-    	return $jobtitle;
+    	return DB::table('jobtitle');
    	}
 
 	public static function leavetypes()
 	{
-    	$leavetypes = DB::table('leavetype');
-    	return $leavetypes;
+    	return DB::table('leavetype');
 	}
 
 	public static function leavegroup()
 	{
-		$leavegroup = DB::table('leavegroup');
-		return $leavegroup;
+		return DB::table('leavegroup');
 	}
 
 	public static function settings()
 	{
-    	$settings = DB::table('settings');
-    	return $settings;
+    	return DB::table('settings');
    	}
 
    	public static function common_task()
     {
-        $common_tasks = DB::table('common_tasks');
-        return $common_tasks;
+        return DB::table('common_tasks');
     }
 
 }

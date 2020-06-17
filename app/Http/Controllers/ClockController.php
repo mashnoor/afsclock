@@ -310,7 +310,6 @@ class ClockController extends Controller
             }
 
 
-
            $timeIN = table::attendance()->where([['idno', $idno], ['timeout', NULL]])->value('timein');
            // $timeIN = $ongoing_attendance->timein;
            $clockInDate = table::attendance()->where([['idno', $idno],['timeout', NULL]])->value('date');

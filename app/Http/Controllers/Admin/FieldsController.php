@@ -18,6 +18,9 @@ class FieldsController extends Controller
     | Company
     |--------------------------------------------------------------------------
     */
+
+    // Finds all the companies and displays them in the view file.
+    // This controller and view file is only accessible by the admin.
     public function company()
     {
         if (permission::permitted('company') == 'fail') {
@@ -28,12 +31,12 @@ class FieldsController extends Controller
         return view('admin.fields.company', compact('data'));
     }
 
+    // Allows admin to add new company.
     public function addCompany(Request $request)
     {
         if (permission::permitted('company-add') == 'fail') {
             return redirect()->route('denied');
         }
-        //if($request->sh == 2){return redirect()->route('company');}
 
         $v = $request->validate([
             'company' => 'required|alpha_dash_space|max:100',
@@ -48,6 +51,7 @@ class FieldsController extends Controller
         return redirect('fields/company')->with('success', 'New Company has been saved.');
     }
 
+    // Allows admin to delete company from the database.
     public function deleteCompany($id, Request $request)
     {
         if (permission::permitted('company-delete') == 'fail') {

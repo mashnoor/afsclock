@@ -17,12 +17,12 @@ class ProfileController extends Controller
     public function view($id, Request $request)
     {
 		if (permission::permitted('employees-view')=='fail'){ return redirect()->route('denied'); }
-		
-		$p = table::people()->where('id', $id)->first();
-		$c = table::companydata()->where('reference', $id)->first();
-		$i = table::people()->select('avatar')->where('id', $id)->value('avatar');
-		$leavetype = table::leavetypes()->get();
-		$leavegroup = table::leavegroup()->get();
+
+    		$p = table::people()->where('id', $id)->first();
+    		$c = table::companydata()->where('reference', $id)->first();
+    		$i = table::people()->select('avatar')->where('id', $id)->value('avatar');
+    		$leavetype = table::leavetypes()->get();
+    		$leavegroup = table::leavegroup()->get();
 
         return view('admin.profile-view', compact('p', 'c', 'i', 'leavetype', 'leavegroup'));
     }
@@ -34,11 +34,11 @@ class ProfileController extends Controller
 		return view('admin.delete-employee', compact('id'));
    	}
 
-	public function clear(Request $request) 
+	public function clear(Request $request)
 	{
 		if (permission::permitted('employees-delete')=='fail'){ return redirect()->route('denied'); }
 		//if($request->sh == 2){return redirect()->route('employees');}
-		
+
 		$id = $request->id;
 		table::people()->where('id', $id)->delete();
 		table::companydata()->where('reference', $id)->delete();
@@ -66,13 +66,13 @@ class ProfileController extends Controller
     {
 		if (permission::permitted('employees-edit')=='fail'){ return redirect()->route('denied'); }
 
-		$company_details = table::companydata()->where('id', $id)->first();
-		$person_details = table::people()->where('id', $id)->first();
-		$company = table::company()->get();
-		$department = table::department()->get();
-		$jobtitle = table::jobtitle()->get();
-		$leavegroup = table::leavegroup()->get();
-		$e_id = ($person_details->id == null) ? 0 : Crypt::encryptString($person_details->id) ;
+    		$company_details = table::companydata()->where('id', $id)->first();
+    		$person_details = table::people()->where('id', $id)->first();
+    		$company = table::company()->get();
+    		$department = table::department()->get();
+    		$jobtitle = table::jobtitle()->get();
+    		$leavegroup = table::leavegroup()->get();
+    		$e_id = ($person_details->id == null) ? 0 : Crypt::encryptString($person_details->id) ;
 
         return view('admin.edits.edit-personal-info', compact('company_details', 'person_details', 'company', 'department', 'jobtitle', 'leavegroup', 'e_id'));
     }
@@ -137,7 +137,7 @@ class ProfileController extends Controller
 		$dateregularized = date("Y-m-d", strtotime($request->dateregularized));
 
 		$file = $request->file('image');
-		if ($file != null) 
+		if ($file != null)
 		{
 			$name = $request->file('image')->getClientOriginalName();
 			$destinationPath = public_path() . '/assets/faces/';
@@ -145,7 +145,7 @@ class ProfileController extends Controller
 		} else {
 			$name = table::people()->where('id', $id)->value('avatar');
 		}
-		
+
 		table::people()->where('id', $id)->update([
 			'lastname' => $lastname,
 			'firstname' => $firstname,
@@ -176,11 +176,11 @@ class ProfileController extends Controller
 			'startdate' => $startdate,
 			'dateregularized' => $dateregularized,
 		]);
-		
+
     	return redirect('profile/edit/'.$id)->with('success','Employee information has been updated!');
    	}
 
-	public function viewProfile(Request $request) 
+	public function viewProfile(Request $request)
 	{
 		$id = \Auth::user()->id;
 		$myuser = table::users()->where('id', $id)->first();
@@ -189,12 +189,12 @@ class ProfileController extends Controller
 		return view('admin.update-profile', compact('myuser', 'myrole'));
 	}
 
-	public function viewPassword() 
+	public function viewPassword()
 	{
 		return view('admin.update-password');
 	}
 
-	public function updateUser(Request $request) 
+	public function updateUser(Request $request)
 	{
 		//if($request->sh == 2){return redirect()->route('updateProfile');}
 
@@ -202,16 +202,16 @@ class ProfileController extends Controller
             'name' => 'required|max:100',
             'email' => 'required|email|max:100',
 		]);
-		
+
 		$id = \Auth::id();
 		$name = mb_strtoupper($request->name);
 		$email = mb_strtolower($request->email);
 
-		if($id == null) 
+		if($id == null)
         {
             return redirect('personal/update-user')->with('error', 'Whoops! Please fill the form completely.');
 		}
-		
+
 		table::users()->where('id', $id)->update([
 			'name' => $name,
 			'email' => $email,
@@ -220,7 +220,7 @@ class ProfileController extends Controller
 		return redirect('update-profile')->with('success', 'Updated!');
 	}
 
-	public function updatePassword(Request $request) 
+	public function updatePassword(Request $request)
 	{
 		//if($request->sh == 2){return redirect()->route('updatePassword');}
 
@@ -236,17 +236,17 @@ class ProfileController extends Controller
 		$n_password = $request->newpassword;
 		$c_p_password = $request->confirmpassword;
 
-		if($id == null) 
+		if($id == null)
         {
             return redirect('personal/update-user')->with('error', 'Whoops! Please fill the form completely.');
 		}
 
-		if($n_password != $c_p_password) 
+		if($n_password != $c_p_password)
 		{
 			return redirect('update-password')->with('error', 'New password does not match!');
 		}
 
-		if(Hash::check($c_password, $p)) 
+		if(Hash::check($c_password, $p))
 		{
 			table::users()->where('id', $id)->update([
 				'password' => Hash::make($n_password),
@@ -259,4 +259,4 @@ class ProfileController extends Controller
 	}
 
 
-} 
+}

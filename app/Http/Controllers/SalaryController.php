@@ -346,7 +346,6 @@ class SalaryController extends Controller
                   $converted_break_minutes = ($total_break_hour * 60) + $total_actual_break_minutes;
                   $converted_office_hour_minutes = ($total_office_calculated_hours * 60) + $total_office_calculated_minutes;
 
-                  // dd($total_break_duration);
 
                   // If the break is less than 30 Minutes, it considers as 30 Minutes
                   if ($converted_break_minutes <= 30)
@@ -360,7 +359,6 @@ class SalaryController extends Controller
                     $total_office_minutes = $converted_office_hour_minutes - $converted_break_minutes;
                   }
 
-                  // dd($total_break_duration, $total_hours);
                 }
               }
               if ($total_office_minutes > 8) {
@@ -368,15 +366,11 @@ class SalaryController extends Controller
               }
 
               $truely_total_office_minutes += $total_office_minutes;
-              // dd($truely_total_office_minutes);
             }
 
             $converted_paid_office_hours = (int)($truely_total_office_minutes / 60);
             $converted_paid_office_minutes = $truely_total_office_minutes - (int)($converted_paid_office_hours * 60);
-
             $total_paid_office_hours = $converted_paid_office_hours .".".$converted_paid_office_minutes;
-
-            // dd($total_paid_office_hours);
 
             $calculated_salary = ($converted_paid_office_hours * $salary_amount) + ($converted_paid_office_minutes * ($salary_amount/60));
             $absent_days = $days_in_this_month - $total_attendance;

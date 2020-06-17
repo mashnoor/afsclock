@@ -10,14 +10,38 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 
+class Employee{
+
+		public $id = '';
+    public $idno = '';
+    public $name ='';
+    public $company = '';
+    public $department = '';
+		public $jobtitle = '';
+		public $status = '';
+
+    public function __construct($id,$idno, $name, $company, $department, $jobtitle, $status)
+    {
+				$this->id = $id;
+        $this->idno = $idno;
+        $this->name = $name;
+        $this->company = $company;
+        $this->department = $department;
+				$this->jobtitle = $jobtitle;
+				$this->status = $status;
+    }
+
+}
+
 class EmployeesController extends Controller
 {
 
+	// Finds all employee data and displays them in the view file.
 	public function index()
 	{
-        if (permission::permitted('employees')=='fail'){ return redirect()->route('denied'); }
+    if (permission::permitted('employees')=='fail'){ return redirect()->route('denied'); }
 
-		$emp_typeR = table::new_people()
+		$emp_typeR = table::people()
 		->where('employmenttype', 'Regular')
 		->where('employmentstatus', 'Active')
 		->count();
@@ -43,11 +67,19 @@ class EmployeesController extends Controller
 		->where('employmentstatus', 'Archive')
 		->count();
 
-		// $data = table::people()
-		// ->join('tbl_company_data', 'tbl_people.id', '=', 'tbl_company_data.reference')
-		// ->get();
+		$data = table::people()->get();
 
-		$data = table::new_people()->get();
+		$employee_collection = collect([]);
+
+		if ($data) {
+			foreach ($data as $employee) {
+				$employee_company = table::company()->where('id', $employee->company_id)->value('company');
+				$employee_department = table::department()->where('id', $employee->department_id)->value('department');
+				$employee_jobtitle = table::jobtitle()->where('id', $employee->job_title_id)->value('jobtitle');
+				$employee_name = $employee->firstname ." , " .$employee->lastname;
+				$employee_collection->push(new Employee($employee->id, $employee->idno, $employee_name, $employee_company, $employee_department, $employee_jobtitle, $employee->employmentstatus));
+			}
+		}
 
 		$emp_file = table::people()->count();
 
@@ -57,10 +89,11 @@ class EmployeesController extends Controller
 		} else {
 			$number1 = null;
 		}
-
-	    return view('admin.employees', compact('data', 'emp_typeR', 'emp_typeT', 'emp_genderM', 'emp_genderR', 'emp_allActive', 'emp_file', 'emp_allArchive'));
+	    return view('admin.employees', compact('data', 'emp_typeR', 'emp_typeT', 'emp_genderM', 'emp_genderR', 'emp_allActive', 'emp_file', 'emp_allArchive', 'employee_collection'));
 	}
 
+	// Following controller function prepare company employee related information
+	// and send them to the view to be displayed in the add new employee form.
 	public function new()
 	{
 		if (permission::permitted('employees-add')=='fail'){ return redirect()->route('denied'); }
@@ -74,6 +107,7 @@ class EmployeesController extends Controller
 	    return view('admin.new-employee', compact('company', 'department', 'jobtitle', 'employees', 'leavegroup'));
 	}
 
+	//
 	public function faceregistration($id)
     {
         return view('admin.employee-face-registration', compact('id'));
@@ -88,21 +122,17 @@ class EmployeesController extends Controller
         }
         return $randomString;
     }
+
+		// Face Registration Controller Function.
     public function registerface($id, Request $request)
     {
 
-		//$name = $request->file('image')->getClientOriginalName();
-		//$destinationPath = public_path() . '/assets/faces/';
-		//$file->move($destinationPath, $name);
+	      $image_name = $this->generateRandomString() . ".jpg";
+				$img_data = $request->img_data;
+				$img_data = str_replace('data:image/jpeg;base64,', '', $img_data);
+				$img_data = str_replace(' ', '+', $img_data);
 
-        $image_name = $this->generateRandomString() . ".jpg";
-		$img_data = $request->img_data;
-		$img_data = str_replace('data:image/jpeg;base64,', '', $img_data);
-		$img_data = str_replace(' ', '+', $img_data);
-
-		$img_data = base64_decode($img_data);
-
-		//$imageContent = file_get_contents($img_data);
+				$img_data = base64_decode($img_data);
 
         $destinationPath = public_path() . '/assets/faces/' . $image_name;
         file_put_contents($destinationPath, $img_data);
@@ -114,6 +144,9 @@ class EmployeesController extends Controller
         return response()->json(array('msg'=> $msg), 200);
     }
 
+		// Add the employee to the database.
+		// Data received from the add employee table and
+		// validates them before storing in the database.
     public function add(Request $request)
     {
 		if (permission::permitted('employees-add')=='fail'){ return redirect()->route('denied'); }
@@ -171,7 +204,7 @@ class EmployeesController extends Controller
 		$startdate = date("Y-m-d", strtotime($request->startdate));
 		$dateregularized = date("Y-m-d", strtotime($request->dateregularized));
 
-		$is_idno_taken = table::new_people()->where('idno', $idno)->exists();
+		$is_idno_taken = table::people()->where('idno', $idno)->exists();
 
 		if ($is_idno_taken == 1)
 		{
@@ -189,29 +222,7 @@ class EmployeesController extends Controller
 			$name = '';
 		}
 
-    	// table::people()->insert([
-    	// 	[
-			// 	'lastname' => $lastname,
-			// 	'firstname' => $firstname,
-			// 	'mi' => $mi,
-			// 	'age' => $age,
-			// 	'gender' => $gender,
-			// 	'emailaddress' => $emailaddress,
-			// 	'civilstatus' => $civilstatus,
-			// 	'height' => $height,
-			// 	'weight' => $weight,
-			// 	'mobileno' => $mobileno,
-			// 	'birthday' => $birthday,
-			// 	'birthplace' => $birthplace,
-			// 	'nationalid' => $nationalid,
-			// 	'homeaddress' => $homeaddress,
-			// 	'employmenttype' => $employmenttype,
-			// 	'employmentstatus' => $employmentstatus,
-			// 	'avatar' => $name,
-      //       ],
-    	// ]);
-
-			table::new_people()->insert([
+			table::people()->insert([
     		[
 				'lastname' => $lastname,
 				'firstname' => $firstname,
@@ -240,20 +251,6 @@ class EmployeesController extends Controller
     	]);
 
 		$refId = DB::getPdo()->lastInsertId();
-
-    	// table::companydata()->insert([
-    	// 	[
-    	// 		'reference' => $refId,
-			// 	'company' => $company,
-			// 	'department' => $department,
-			// 	'jobposition' => $jobposition,
-			// 	'companyemail' => $companyemail,
-			// 	'leaveprivilege' => $leaveprivilege,
-			// 	'idno' => $idno,
-			// 	'startdate' => $startdate,
-			// 	'dateregularized' => $dateregularized,
-      //       ],
-    	// ]);
 
     	return redirect('employees')->with('success','Employee has been added!');
     }

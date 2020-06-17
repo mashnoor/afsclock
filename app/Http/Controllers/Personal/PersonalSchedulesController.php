@@ -11,20 +11,20 @@ use App\Http\Controllers\Controller;
 
 class PersonalSchedulesController extends Controller
 {
-    public function index() 
+    public function index()
     {
-        $i = \Auth::user()->idno;
-        $s = table::schedules()->where('idno', $i)->get();
+        $i = \Auth::user()->id;
+        $s = table::schedules()->where('reference', $i)->get();
         return view('personal.personal-schedules-view', compact('s'));
     }
 
-    public function getPS(Request $request) 
+    public function getPS(Request $request)
     {
         $id = \Auth::user()->idno;
         $datefrom = $request->datefrom;
 		$dateto = $request->dateto;
-		
-        if($datefrom == null || $dateto == null ) 
+
+        if($datefrom == null || $dateto == null )
         {
             $data = table::schedules()
             ->select('intime', 'outime', 'datefrom', 'dateto', 'hours', 'restday', 'archive')
@@ -39,7 +39,6 @@ class PersonalSchedulesController extends Controller
             ->whereBetween('datefrom', [$datefrom, $dateto])
             ->get();
             return response()->json($data);
-        } 
+        }
     }
 }
-

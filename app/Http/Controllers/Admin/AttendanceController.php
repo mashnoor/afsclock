@@ -12,7 +12,8 @@ use App\Http\Controllers\Controller;
 
 class AttendanceController extends Controller
 {
-
+    // The following controller function
+    // queries employee attendace information and sends to the view file.
     public function index()
     {
         if (permission::permitted('attendance')=='fail'){ return redirect()->route('denied'); }
@@ -23,13 +24,16 @@ class AttendanceController extends Controller
         return view('admin.attendance', compact('data', 'cc'));
     }
 
+    // Clock in / out view file represented
+    // by this controller function.
     public function clock()
     {
         return view('clock');
     }
 
 
-
+    // The following controller fucntion allows
+    // admin to edit attendace information of any employee.
     public function edit($id, Request $request)
     {
         if (permission::permitted('attendance-edit')=='fail'){ return redirect()->route('denied'); }
@@ -40,6 +44,9 @@ class AttendanceController extends Controller
         return view('admin.edits.edit-attendance', compact('a', 'e_id'));
     }
 
+    // The delete function allows admin to delete
+    // attendace information for any specific employee.
+    // Takes an attendace id as an argument.
     public function delete($id, Request $request)
     {
         if (permission::permitted('attendance-delete')=='fail'){ return redirect()->route('denied'); }
@@ -51,6 +58,7 @@ class AttendanceController extends Controller
         return redirect('attendance')->with('success', 'Deleted!');
     }
 
+    // Allow admin to update attendace information.
     public function update(Request $request)
     {
         if (permission::permitted('attendance-edit')=='fail') { return redirect()->route('denied'); }
@@ -128,6 +136,8 @@ class AttendanceController extends Controller
         return redirect('attendance')->with('success','Employee Attendance has been updated!');
     }
 
+    // The following controller function allow admin to view the attendance
+    // information in details on a modal.
     public function details(Request $request){
 
         if (permission::permitted('attendance-edit')=='fail') { return redirect()->route('denied'); }

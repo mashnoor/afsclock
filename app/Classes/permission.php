@@ -4,6 +4,7 @@ namespace App\Classes;
 
 use App\Permissions;
 use Auth;
+use App\Classes\table;
 
 Class permission {
 
@@ -59,22 +60,24 @@ Class permission {
             153 => 'leavegroup-delete',
     ];
 
-    public static function permitted($page) 
+    public static function permitted($page)
     {
         $role = \Auth::user()->role_id;
-        $perms=self::$perms;
-        $permid = array_search($page, $perms);
+        $perm_id = table::permissions()->where('id', \Auth::user()->id)->value('perm_id');
 
-        $permcheck = Permissions::where('role_id', $role)->where('perm_id', $permid)->first();
+        // $perms=self::$perms;
+        // $permid = array_search($page, $perms);
 
-        if ($permcheck==NULL) 
+        $permcheck = Permissions::where('role_id', $role)->where('perm_id', $perm_id)->first();
+
+        if ($permcheck==NULL)
         {
             return "fail";
         } else {
-            if ($permcheck->perm_id<0) 
+            if ($permcheck->perm_id<0)
             {
                 return "fail";
-            } else { 
+            } else {
                 return "success";
             }
         }

@@ -29,16 +29,15 @@ class AssignedSchedule {
 
 class SchedulesController extends Controller
 {
+    // Finds all schedules which are assigned to employees and send them to view file.
+    // Both controller and view files are only accessible by the admin.
     public function index()
     {
         if (permission::permitted('schedules')=='fail'){ return redirect()->route('denied'); }
 
         $employee = table::people()->get();
-        $schedules = table::schedules()->get();
         $sch_templates = table::sch_template()->get();
-
-        $active_schedules = table::new_schedule()->where('active_status', 1 )->get();
-
+        $active_schedules = table::schedules()->where('active_status', 1 )->get();
         $active_schedule_collection = collect([]);
 
         foreach ($active_schedules as $a_shcedule) {
@@ -47,7 +46,7 @@ class SchedulesController extends Controller
           $active_schedule_collection->push(new AssignedSchedule($user->name, $template->name, $a_shcedule->created_at));
         }
 
-        return view('admin.schedules', compact('employee', 'schedules', 'sch_templates','active_schedule_collection'));
+        return view('admin.schedules', compact('employee','sch_templates','active_schedule_collection'));
     }
 
     // Assign Template to Employee
@@ -84,21 +83,6 @@ class SchedulesController extends Controller
 
       $templates = table::sch_template()->get();
 
-
-      // foreach ($templates as $template) {
-      //   $today = Carbon::now();
-      //   $day = strtolower($today->isoFormat('dddd'));
-      //
-      //   $saturday = $template->$day;
-      //   $str_arr = explode ("-", $saturday);
-      //   $in_time = $str_arr[0];
-      //   $out_time = $str_arr[1];
-      //
-      //   // dd($in_time, $out_time, $day);
-      // }
-
-      // dd($templates);
-
       return view('admin.schedule_templates', compact('templates'));
 
     }
@@ -126,7 +110,6 @@ class SchedulesController extends Controller
         $saturday = NULL;
       }
 
-
       $sun_intime = $request->sun_time_in;
       $sun_outime = $request->sun_time_out;
       if ($sun_intime && $sun_outime) {
@@ -134,7 +117,6 @@ class SchedulesController extends Controller
       }else{
         $sunday = NULL;
       }
-
 
       $mon_intime = $request->mon_time_in;
       $mon_outime = $request->mon_time_out;
@@ -179,7 +161,6 @@ class SchedulesController extends Controller
       }else{
         $friday = NULL;
       }
-
 
       $break_allowence = $request->break_allowence;
 

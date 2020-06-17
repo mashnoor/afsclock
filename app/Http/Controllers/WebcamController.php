@@ -4,24 +4,29 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\User;
 use App\Classes\table;
+use App\Classes\permission;
 use DB;
 
 use Illuminate\Http\Request;
 
 class WebcamController extends Controller
 {
-
+  // Webcam Data Feed.
+  // Real time camera data stored in the database table called 'webcam_table'.
+  // Following controller function queries the data from the table and
+  // sends to the view file.
   public function realtime_webcam_data(Request $request){
     if (permission::permitted('dashboard')=='fail'){ return redirect()->route('denied'); }
 
-    $webcam_data =  DB::table('webcam_data')->select('webcam_data.id', 'webcam_data.last_seen', 'tbl_company_data.idno')->join('tbl_company_data', 'webcam_data.reference','=', 'tbl_company_data.reference')->get();
-
+    // $webcam_data =  DB::table('webcam_data')->select('webcam_data.id', 'webcam_data.last_seen', 'tbl_company_data.idno')->join('tbl_company_data', 'webcam_data.reference','=', 'tbl_company_data.reference')->get();
+    $webcam_data = table::webcam_table()->get();
     return view('admin.webcam_data', compact('webcam_data'));
-
   }
 
 
-
+    // Attendace using the Mobile App / CCTV Camera.
+    // The remote camera devices are connected with this controller function
+    // through an API. This function is the controller fuction of that mentioned API.
     public function webcam_attendance(Request $request)
     {
       // Post request received data

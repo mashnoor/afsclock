@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Task extends Model
 {
     //
-    protected $table="tbl_tasks";
+    protected $table="tasks";
 
     function assignedTo()
     {

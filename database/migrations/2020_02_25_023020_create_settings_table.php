@@ -20,6 +20,7 @@ class CreateSettingsTable extends Migration {
                 $table->integer('clock_comment')->nullable();
                 $table->string('iprestriction', 500)->nullable();
                 $table->string('opt', 800)->nullable();
+								$table->string('company_name')->nullable();
             });
         }
 	}

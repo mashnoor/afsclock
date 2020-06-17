@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class People extends Model
 {
     //
-    protected $table="tbl_people";
+    protected $table="people";
 
     function tasks()
     {

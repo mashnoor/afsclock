@@ -42,12 +42,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                           @isset($users_roles)
-                            @foreach ($users_roles as $val)
+                           @isset($users)
+                            @foreach ($users as $val)
                             <tr>
-                                <td>{{ $val->name }}</td>
-                                <td>{{ $val->email }}</td>
-                                <td>{{ $val->role_name }}</td>
+                                <td>{{ $val->firstname }}, {{ $val->lastname }}</td>
+                                <td>{{ $val->companyemail }}</td>
+                                <td>{{ $val->role_id }}</td>
                                 <td> @if($val->acc_type == 2) Admin @else Employee @endif </td>
                                 <td>
                                     <span>

@@ -30,15 +30,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @isset($data)
-                        @foreach ($data as $employee)
+                        @isset($employee_collection)
+                        @foreach ($employee_collection as $employee)
                             <tr class="">
                             <td>{{ $employee->idno }}</td>
-                            <td>{{ $employee->lastname }}, {{ $employee->firstname }}</td>
-                            <td>{{ $employee->company_id }}</td>
-                            <td>{{ $employee->department_id }}</td>
-                            <td>{{ $employee->job_title_id }}</td>
-                            <td>@if($employee->employmentstatus == 'Active') Active @else Archived @endif</td>
+                            <td>{{ $employee->name }}</td>
+                            <td>{{ $employee->company }}</td>
+                            <td>{{ $employee->department }}</td>
+                            <td>{{ $employee->jobtitle }}</td>
+                            <td>@if($employee->status == 'Active') Active @else Archived @endif</td>
                             <td class="align-right">
                             <a href="{{ url('/profile/view/'.$employee->id) }}" class="ui circular basic icon button tiny"><i class="file alternate outline icon"></i></a>
                             <a href="{{ url('/profile/edit/'.$employee->id) }}" class="ui circular basic icon button tiny"><i class="edit outline icon"></i></a>

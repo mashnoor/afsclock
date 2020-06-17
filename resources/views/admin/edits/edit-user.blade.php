@@ -3,7 +3,7 @@
     @section('meta')
         <title>Edit User | Attendance Keeper</title>
         <meta name="description" content="Attendance Keeper edit user.">
-    @endsection 
+    @endsection
 
     @section('content')
 
@@ -95,7 +95,7 @@
                                 </div>
                             </div>
                             <div class="field">
-                                <a href="{{ url('employee/faceregistration') }}/{{ $u->reference }}" class="ui negative small button" name="submit">Register Faces</a>
+                                <a href="{{ url('employee/faceregistration') }}/{{ $u->id }}" class="ui negative small button" name="submit">Register Faces</a>
                             </div>
                     </div>
 

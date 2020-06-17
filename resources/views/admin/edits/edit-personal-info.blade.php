@@ -1,9 +1,9 @@
 @extends('layouts.default')
-    
+
     @section('meta')
         <title>Edit Employee Profile | Attendance Keeper</title>
         <meta name="description" content="Attendance Keeper edit employee profile.">
-    @endsection 
+    @endsection
 
     @section('styles')
         <link href="{{ asset('/assets/vendor/air-datepicker/dist/css/datepicker.min.css') }}" rel="stylesheet">
@@ -17,7 +17,7 @@
                 <h2 class="page-title">Edit Employee Profile
                     <a href="{{ url('employees') }}" class="ui basic blue button mini offsettop5 float-right"><i class="ui icon chevron left"></i>Return</a>
                 </h2>
-            </div>    
+            </div>
         </div>
 
         <div class="col-md-12">
@@ -136,7 +136,7 @@
                                         <option value="">Select Company</option>
                                         @isset($company)
                                             @foreach ($company as $data)
-                                                <option value="{{ $data->company }}" @if($data->company == $company_details->company) selected @endif> {{ $data->company }}</option>
+                                                <option value="{{ $data->company }}" @if($data->id == $person_details->company_id) selected @endif> {{ $data->company }}</option>
                                             @endforeach
                                         @endisset
                                     </select>
@@ -147,7 +147,7 @@
                                         <option value="">Select Department</option>
                                         @isset($department)
                                             @foreach ($department as $data)
-                                                <option value="{{ $data->department }}" @if($data->department == $company_details->department) selected @endif> {{ $data->department }}</option>
+                                                <option value="{{ $data->department }}" @if($data->id == $person_details->department_id) selected @endif> {{ $data->department }}</option>
                                             @endforeach
                                         @endisset
                                     </select>
@@ -155,16 +155,16 @@
                                 <div class="field">
                                     <label>Job Title / Position</label>
                                     <div class="ui search dropdown selection uppercase jobposition">
-                                        <input type="hidden" name="jobposition" value="{{$company_details->jobposition}}">
+                                        <input type="hidden" name="jobposition" value="{{$person_details->job_title_id}}">
                                         <i class="dropdown icon"></i>
-                                        <div class="text">{{$company_details->jobposition}}</div>
+                                        <div class="text">{{$person_details->job_title_id}}</div>
                                         <div class="menu">
                                         @isset($jobtitle)
                                             @isset($department)
                                                 @foreach ($jobtitle as $data)
                                                     @foreach ($department as $dept)
                                                         @if($dept->id == $data->dept_code)
-                                                            <div class="item" data-value="{{ $data->jobtitle }}" data-dept="{{ $dept->department }}" @if($data->jobtitle == $company_details->jobposition) selected @endif>{{ $data->jobtitle }}</div>
+                                                            <div class="item" data-value="{{ $data->jobtitle }}" data-dept="{{ $dept->department }}" @if($data->id == $person_details->job_title_id) selected @endif>{{ $data->jobtitle }}</div>
                                                         @endif
                                                     @endforeach
                                                 @endforeach
@@ -175,19 +175,19 @@
                                 </div>
                                 <div class="field">
                                     <label>ID Number</label>
-                                    <input type="text" class="uppercase" name="idno" value="@isset($company_details->idno){{ $company_details->idno }}@endisset">
+                                    <input type="text" class="uppercase" name="idno" value="@isset($person_details->idno){{ $person_details->idno }}@endisset">
                                 </div>
                                 <div class="field">
                                     <label>Email Address (Company)</label>
-                                    <input type="email" name="companyemail" value="@isset($company_details->companyemail){{ $company_details->companyemail }}@endisset" class="lowercase">
+                                    <input type="email" name="companyemail" value="@isset($person_details->companyemail){{ $person_details->companyemail }}@endisset" class="lowercase">
                                 </div>
                                 <div class="field">
                                     <label>Leave Privilege</label>
                                     <select name="leaveprivilege" class="ui dropdown uppercase">
                                         <option value="">Select Leave Privilege</option>
-                                        @isset($leavegroup) 
+                                        @isset($leavegroup)
                                             @foreach($leavegroup as $lg)
-                                                <option value="{{ $lg->id }}" @isset($company_details->leaveprivilege) @if($lg->id == $company_details->leaveprivilege) selected @endif @endisset>{{ $lg->leavegroup }}</option>
+                                                <option value="{{ $lg->id }}" @isset($person_details->leaveprivilege) @if($lg->id == $person_details->leaveprivilege) selected @endif @endisset>{{ $lg->leavegroup }}</option>
                                             @endforeach
                                         @endisset
                                     </select>
@@ -211,11 +211,11 @@
                                 </div>
                                 <div class="field">
                                     <label>Official Start Date</label>
-                                    <input type="text" name="startdate" value="@isset($company_details->startdate){{ $company_details->startdate }}@endisset" class="airdatepicker" placeholder="Date">
+                                    <input type="text" name="startdate" value="@isset($person_details->startdate){{ $person_details->startdate }}@endisset" class="airdatepicker" placeholder="Date">
                                 </div>
                                 <div class="field">
                                     <label>Date Regularized</label>
-                                    <input type="text" name="dateregularized" value="@isset($company_details->dateregularized){{ $company_details->dateregularized }}@endisset" class="airdatepicker" placeholder="Date">
+                                    <input type="text" name="dateregularized" value="@isset($person_details->dateregularized){{ $person_details->dateregularized }}@endisset" class="airdatepicker" placeholder="Date">
                                 </div>
                                 <br>
                             </div>
@@ -246,7 +246,7 @@
     @section('scripts')
     <script src="{{ asset('/assets/vendor/air-datepicker/dist/js/datepicker.min.js') }}"></script>
     <script src="{{ asset('/assets/vendor/air-datepicker/dist/js/i18n/datepicker.en.js') }}"></script>
-    
+
     <script type="text/javascript">
         $('.airdatepicker').datepicker({ language: 'en', dateFormat: 'yyyy-mm-dd' });
         $('.ui.dropdown.department').dropdown({ onChange: function(value, text, $selectedItem) {
@@ -272,7 +272,7 @@
             }
         }
 
-        var selected = "@isset($company_details->leaveprivilege){{ $company_details->leaveprivilege }}@endisset";
+        var selected = "@isset($person_details->leaveprivilege){{ $person_details->leaveprivilege }}@endisset";
         var items = selected.split(',');
         $('.ui.dropdown.multiple.leaves').dropdown('set selected', items);
     </script>

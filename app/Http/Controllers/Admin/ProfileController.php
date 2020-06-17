@@ -66,7 +66,6 @@ class ProfileController extends Controller
     {
 		if (permission::permitted('employees-edit')=='fail'){ return redirect()->route('denied'); }
 
-    		$company_details = table::companydata()->where('id', $id)->first();
     		$person_details = table::people()->where('id', $id)->first();
     		$company = table::company()->get();
     		$department = table::department()->get();
@@ -74,7 +73,7 @@ class ProfileController extends Controller
     		$leavegroup = table::leavegroup()->get();
     		$e_id = ($person_details->id == null) ? 0 : Crypt::encryptString($person_details->id) ;
 
-        return view('admin.edits.edit-personal-info', compact('company_details', 'person_details', 'company', 'department', 'jobtitle', 'leavegroup', 'e_id'));
+        return view('admin.edits.edit-personal-info', compact('person_details', 'company', 'department', 'jobtitle', 'leavegroup', 'e_id'));
     }
 
     public function updatePerson(Request $request)

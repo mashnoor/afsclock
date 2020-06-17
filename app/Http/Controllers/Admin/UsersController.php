@@ -77,9 +77,9 @@ class UsersController extends Controller
     {
         if (permission::permitted('users-edit')=='fail'){ return redirect()->route('denied'); }
 
-        $u = table::users()->where('id', $id)->first();
+        $u = table::people()->where('id', $id)->first();
         $r = table::roles()->get();
-        $e_id = ($u->reference == null) ? 0 : Crypt::encryptString($u->reference) ;
+        $e_id = ($u->id == null) ? 0 : Crypt::encryptString($u->id) ;
 
         return view('admin.edits.edit-user', compact('u', 'r', 'e_id'));
     }

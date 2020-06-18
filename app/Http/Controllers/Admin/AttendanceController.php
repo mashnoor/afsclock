@@ -13,7 +13,7 @@ use App\Http\Controllers\Controller;
 class AttendanceController extends Controller
 {
     // The following controller function
-    // queries employee attendace information and sends to the view file.
+    // queries employee attendance information and sends to the view file.
     public function index()
     {
         if (permission::permitted('attendance')=='fail'){ return redirect()->route('denied'); }

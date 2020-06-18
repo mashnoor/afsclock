@@ -80,7 +80,7 @@
                                     <td>@isset($v->timein) @php echo e(date('d-m-Y', strtotime($v->timein))) @endphp @endisset</td>
                                     <td>{{ $v->employee }}</td>
                                     <td>@isset($v->timein)  @php echo e(date('h:i:s A', strtotime($v->timein))) @endphp @endisset</td>
-                                    <td>@isset($v->timein) @php echo e(date('h:i:s A', strtotime($v->timein))) @endphp @endisset</td>
+                                    <td>@isset($v->timeout) @php echo e(date('h:i:s A', strtotime($v->timeout))) @endphp @endisset</td>
                                     <td>@isset($v->totalhours)
                                         @if($v->totalhours != null)
                                             @php

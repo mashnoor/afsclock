@@ -2,10 +2,10 @@
     @section('meta')
         <title>Reports | Attendance Keeper</title>
         <meta name="description" content="Attendance Keeper reports, view reports, and export or download reports.">
-    @endsection 
+    @endsection
 
     @section('content')
-    
+
     <div class="container-fluid">
         <div class="row">
             <h2 class="page-title">Reports</h2>
@@ -114,9 +114,9 @@
     </div>
 
     @endsection
-    
+
     @section('scripts')
     <script type="text/javascript">
     $('#dataTables-example').DataTable({responsive: true,pageLength: 15,lengthChange: false,searching: false,ordering: true});
     </script>
-    @endsection 
+    @endsection

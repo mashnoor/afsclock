@@ -51,6 +51,26 @@ class CreatePeopleTable extends Migration
             $table->timestamps();
         });
       }
+
+
+
+      // Insert some stuff
+      DB::table('people')->insert(
+          array(
+              'firstname' => 'Demo',
+              'lastname' => 'Manager',
+              'gender' => 'Male',
+              'role_id' => 2,
+              'acc_type' => 2,
+              'status' => 1,
+              'employmentstatus' => 'Active',
+              'companyemail' => 'manager@example.com',
+              'password' => '$2y$10$mDAH.R8JG5ThPelt4zRXc.8sxizt.tqXQfndx5s/W/3j0Sq6xS3LG',
+
+          )
+      );
+
+
     }
 
 

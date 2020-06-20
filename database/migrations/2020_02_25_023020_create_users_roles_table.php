@@ -19,6 +19,17 @@ class CreateUsersRolesTable extends Migration {
                 $table->string('state', 100)->nullable();
             });
         }
+
+
+				// Insert some stuff
+	      DB::table('users_roles')->insert(
+	          array(
+	              'role_name' => 'MANAGER',
+	              'state' => 'Active',
+	          )
+	      );
+
+
 	}
 
 

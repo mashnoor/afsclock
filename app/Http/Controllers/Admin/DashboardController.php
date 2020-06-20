@@ -62,7 +62,7 @@ class DashboardController extends Controller
         $is_online_arr = json_decode(json_encode($is_online), true);
         $is_online_now = count($is_online);
 
-        $emp_ids = table::companydata()->pluck('idno');
+        $emp_ids = table::people()->pluck('idno');
         $emp_ids_arr = json_decode(json_encode($emp_ids), true);
         $is_offline_now = count(array_diff($emp_ids_arr, $is_online_arr));
 

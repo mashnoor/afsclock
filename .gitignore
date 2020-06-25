@@ -14,7 +14,10 @@ yarn-error.log
 .idea/vcs.xml
 .idea/afsclock.iml
 public/assets/images/faces/*
-
+public/assets/faces/*
+public/assets/login_faces/*
+!public/assets/faces/blank.txt
+!public/assets/login_faces/blank.txt
 .idea/application.iml
 .idea/php.xml
 .idea/*

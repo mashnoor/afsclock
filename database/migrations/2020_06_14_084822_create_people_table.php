@@ -55,6 +55,7 @@ class CreatePeopleTable extends Migration
 
 
       // Insert some stuff
+      /*** 
       DB::table('people')->insert(
           array(
               'firstname' => 'Demo',
@@ -69,6 +70,7 @@ class CreatePeopleTable extends Migration
 
           )
       );
+      ***/
 
 
     }

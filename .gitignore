@@ -9,8 +9,6 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 ../.idea/
-public/assets/faces/*
-public/assets/login_faces/*
 .idea/workspace.xml
 .env
 .idea/vcs.xml

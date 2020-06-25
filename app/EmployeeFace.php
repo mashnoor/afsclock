@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class EmployeeFace extends Model
 {
     //
-    protected $table="tbl_employee_faces";
+    protected $table="employee_faces";
 }

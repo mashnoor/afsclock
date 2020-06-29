@@ -42,8 +42,9 @@ class SchedulesController extends Controller
 
         foreach ($active_schedules as $a_shcedule) {
           $user = User::find($a_shcedule->reference);
+          // $user = table::people()->where('id',$a_shcedule->reference)->first();
           $template = table::sch_template()->where('id', $a_shcedule->schedule_id)->first();
-          $active_schedule_collection->push(new AssignedSchedule($user->name, $template->name, $a_shcedule->created_at));
+          $active_schedule_collection->push(new AssignedSchedule($user->firstname." ".$user->lastname, $template->name, $a_shcedule->created_at));
         }
 
         return view('admin.schedules', compact('employee','sch_templates','active_schedule_collection'));
@@ -58,15 +59,15 @@ class SchedulesController extends Controller
 
       $template = $request->template;
 
-      $existing_schedule = table::new_schedule()->where([['reference', $reference],['schedule_id', $template], ['active_status', 1]])->first();
+      $existing_schedule = table::schedules()->where([['reference', $reference],['schedule_id', $template], ['active_status', 1]])->first();
 
       if ($existing_schedule) {
         return redirect('/schedules')->with('error', 'This schedule is already assigned.');
       }
       else {
-        $current_schedule = table::new_schedule()->where([['reference', $reference],['active_status', 1]])->first();
+        $current_schedule = table::schedules()->where([['reference', $reference],['active_status', 1]])->first();
         if ($current_schedule) {
-          table::new_schedule()->where('id', $current_schedule->id)->update(['active_status' => 0,]);
+          table::schedules()->where('id', $current_schedule->id)->update(['active_status' => 0,]);
         }
 
         DB::table('schedules')->insert(['reference' => $reference, 'schedule_id' => $template, 'active_status' => 1,'created_at' => Carbon::now() ]);;

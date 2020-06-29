@@ -32,6 +32,7 @@
                     <tbody>
                         @isset($employee_collection)
                         @foreach ($employee_collection as $employee)
+                          @isset($employee->company)
                             <tr class="">
                             <td>{{ $employee->idno }}</td>
                             <td>{{ $employee->name }}</td>
@@ -46,6 +47,7 @@
                             <a href="{{ url('/profile/archive/'.$employee->id) }}" class="ui circular basic icon button tiny"><i class="archive icon"></i></a>
                             </td>
                             </tr>
+                          @endisset
                         @endforeach
                         @endisset
                     </tbody>

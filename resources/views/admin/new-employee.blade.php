@@ -118,7 +118,7 @@
                         <div class="box-header with-border">Employee Details</div>
                         <div class="box-body">
                             <h4 class="ui dividing header">Designation</h4>
-                            <div class="field">
+                            <!-- <div class="field">
                                 <label>Company</label>
                                 <select name="company" class="ui search dropdown uppercase">
                                     <option value="">Select Company</option>
@@ -128,10 +128,10 @@
                                         @endforeach
                                     @endisset
                                 </select>
-                            </div>
-                            <div class="field">
+                            </div> -->
+                            <!-- <div class="field">
                                 <label>Department*</label>
-                                <select name="department" required class="ui search dropdown uppercase department">
+                                <select type="text" name="department" required class="ui search dropdown uppercase department">
                                     <option value="">Select Department</option>
                                     @isset($department)
                                         @foreach ($department as $data)
@@ -139,8 +139,21 @@
                                         @endforeach
                                     @endisset
                                 </select>
+                            </div> -->
+                            <div class="field">
+                              <label>Company</label>
+                              <input type="text" list="company" name="company" class="ui search uppercase department required"/>
                             </div>
                             <div class="field">
+                              <label>Department*</label>
+                              <input type="text" list="department" name="department" class="ui search uppercase department" required/>
+                            </div>
+                            <div class="field">
+                              <label>Job Title / Position*</label>
+                              <input type="text" list="jobtitle" name="jobtitle" class="ui search uppercase department" required/>
+
+                            </div>
+                            <!-- <div class="field">
                                 <label>Job Title / Position*</label>
                                 <div class="ui search dropdown selection uppercase jobposition">
                                     <input type="hidden" name="jobposition">
@@ -161,7 +174,7 @@
                                         @endisset
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="field">
                                 <label>ID Number</label>
                                 <input type="text" class="uppercase" name="idno" value="">

@@ -33,11 +33,11 @@
                             @csrf
                             <div class="field">
                                 <label>Employee</label>
-                                <input type="text" name="employee" value="@isset($u->name){{ $u->name }}@endisset" class="readonly uppercase" readonly>
+                                <input type="text" name="employee" value="@isset($u->firstname){{ $u->firstname}} {{ $u->lastname }}@endisset" class="readonly uppercase" readonly>
                             </div>
                             <div class="field">
                                 <label>Email</label>
-                                <input type="text" name="email" value="@isset($u->email){{ $u->email }}@endisset" class="readonly lowercase" readonly>
+                                <input type="text" name="email" value="@isset($u->companyemail){{ $u->companyemail }}@endisset" class="readonly lowercase" readonly>
                             </div>
                             <div class="grouped fields opt-radio">
                                 <label class="">Choose Account type</label>

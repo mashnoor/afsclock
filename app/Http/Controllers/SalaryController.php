@@ -144,7 +144,7 @@ class SalaryController extends Controller
         if ($employee_salary) {
           $user = User::find($employee_salary->reference);
           $salary_type = table::salary_types()->where('id', $employee_salary->salary_type)->first();
-          $salary_collection->push(new Salary($employee_salary->id, $user->name, $salary_type->type, $employee_salary->gross_salary, $employee_salary->currency));
+          $salary_collection->push(new Salary($employee_salary->id, $user->firstname." ".$user->lastname, $salary_type->type, $employee_salary->gross_salary, $employee_salary->currency));
         }
       }
       return view('admin.employee_salary', compact('salary_collection','employee','salary_types'));

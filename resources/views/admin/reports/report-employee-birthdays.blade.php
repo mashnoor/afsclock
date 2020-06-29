@@ -4,15 +4,15 @@
         <title>Reports | Attendance Keeper</title>
         <meta name="description" content="Attendance Keeper reports, view reports, and export or download reports.">
     @endsection
-    
+
     @section('content')
-    
+
     <div class="container-fluid">
         <div class="row">
             <h2 class="page-title">Employee Birthdays
                 <a href="{{ url('export/report/birthdays') }}" class="ui basic button mini offsettop5 btn-export float-right"><i class="ui icon download"></i>Export to CSV</a>
                 <a href="{{ url('reports') }}" class="ui basic blue button mini offsettop5 float-right"><i class="ui icon chevron left"></i>Return</a>
-            </h2>   
+            </h2>
         </div>
 
         <div class="row">
@@ -33,8 +33,8 @@
                             @foreach ($empBday as $v)
                                 <tr>
                                     <td>{{ $v->lastname }}, {{ $v->firstname }} {{ $v->mi }}</td>
-                                    <td>{{ $v->department }}</td>
-                                    <td>{{ $v->jobposition }}</td>
+                                    <td>{{ $v->department_id }}</td>
+                                    <td>{{ $v->job_title_id }}</td>
                                     <td>
                                     @php $bdaydate = date("D, M d Y", strtotime($v->birthday)); @endphp
                                     @if($v->birthday != null)
@@ -54,9 +54,9 @@
     </div>
 
     @endsection
-    
+
     @section('scripts')
     <script type="text/javascript">
     $('#dataTables-example').DataTable({responsive: true,pageLength: 15,lengthChange: false,searching: false,ordering: true});
     </script>
-    @endsection 
+    @endsection

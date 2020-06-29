@@ -1,4 +1,4 @@
-@extends('layouts.clock')
+@extends('layouts.default')
 
 @section('content')
 

@@ -158,7 +158,7 @@ class EmployeesController extends Controller
 			// 'mi' => 'required|alpha_dash_space|max:155',
 			// 'age' => 'required|digits_between:0,199|max:3',
 			// 'gender' => 'required|alpha|max:155',
-			//'emailaddress' => 'required|email|max:155',
+			'emailaddress' => ['required', 'unique:people'],
 			// 'civilstatus' => 'required|alpha|max:155',
 			// 'height' => 'required|digits_between:0,299|max:3',
 			// 'weight' => 'required|digits_between:0,999|max:3',
@@ -170,7 +170,7 @@ class EmployeesController extends Controller
 			// 'company' => 'required|alpha_dash_space|max:100',
 			// 'department' => 'required|alpha_dash_space|max:100',
 			// 'jobposition' => 'required|alpha_dash_space|max:100',
-			// 'companyemail' => 'required|email|max:155',
+			'companyemail' => ['required', 'unique:people'],
 			// 'leaveprivilege' => 'required|max:155',
 			'idno' => 'required|max:155',
 			// 'employmenttype' => 'required|alpha_dash_space|max:155',
@@ -195,7 +195,7 @@ class EmployeesController extends Controller
 		$homeaddress = mb_strtoupper($request->homeaddress);
 		$company = mb_strtoupper($request->company);
 		$department = mb_strtoupper($request->department);
-		$jobposition = mb_strtoupper($request->jobposition);
+		$jobposition = mb_strtoupper($request->jobtitle);
 		$companyemail = mb_strtolower($request->companyemail);
 		$leaveprivilege = $request->leaveprivilege;
 		$idno = mb_strtoupper($request->idno);
@@ -203,6 +203,40 @@ class EmployeesController extends Controller
 		$employmentstatus = $request->employmentstatus;
 		$startdate = date("Y-m-d", strtotime($request->startdate));
 		$dateregularized = date("Y-m-d", strtotime($request->dateregularized));
+
+
+		// Creates department dynamically if does not exist in database.
+		$existing_department = table::department()->where('department', $department)->first();
+		if ($existing_department) {
+			$department = $existing_department->id;
+		}else{
+			table::department()->insert(['department'=>$department]);
+			$new_department = table::department()->where('department', $department)->first();
+			$department = $new_department->id;
+		}
+
+
+		// Creates company dynamically if does not exist in database.
+		$existing_company = table::company()->where('company', $company)->first();
+		if ($existing_company) {
+			$company = $existing_company->id;
+		}else{
+			table::company()->insert(['company' => $company]);
+			$new_company = table::company()->where('company', $company)->first();
+			$company = $new_company->id;
+		}
+
+
+		// Creates jobtittle dynamically if does not exist in database.
+		$existing_jobtitle = table::jobtitle()->where('jobtitle', $jobposition)->first();
+		if ($existing_jobtitle) {
+			$jobposition = $existing_jobtitle->id;
+		}else{
+			table::jobtitle()->insert(['jobtitle' => $jobposition, 'dept_code' => $department]);
+			$new_jobtittle = table::jobtitle()->where('jobtitle', $jobposition)->first();
+			$jobposition = $new_jobtittle->id;
+		}
+
 
 		$is_idno_taken = table::people()->where('idno', $idno)->exists();
 

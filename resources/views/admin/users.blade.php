@@ -42,21 +42,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                           @isset($users)
-                            @foreach ($users as $val)
+                           @isset($users_collection)
+                            @foreach ($users_collection as $val)
                             <tr>
-                                <td>{{ $val->firstname }}, {{ $val->lastname }}</td>
-                                <td>{{ $val->companyemail }}</td>
-                                <td>{{ $val->role_id }}</td>
-                                <td> @if($val->acc_type == 2) Admin @else Employee @endif </td>
+                                <td>{{ $val->name }}</td>
+                                <td>{{ $val->email }}</td>
+                                <td>{{ $val->role }}</td>
+                                <td> {{$val->type}}</td>
                                 <td>
-                                    <span>
-                                    @if($val->status == '1')
-                                        Enabled
-                                    @else
-                                        Disabled
-                                    @endif
-                                    </span>
+                                    {{$val->status}}
                                 </td>
                                 <td class="align-right">
                                     <a href="{{ url('/users/edit/'.$val->id) }}" class="ui circular basic icon button tiny"><i class="icon edit outline"></i></a>

@@ -336,7 +336,7 @@
                 <i class="checkmark icon"></i>
             </div>
         </div>
-    </div></td>
+    </div>
 
 
 @endsection

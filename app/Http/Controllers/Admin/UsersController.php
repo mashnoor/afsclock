@@ -10,6 +10,26 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 
+class Users {
+    public $id = '';
+    public $name = '';
+    public $email = '';
+    public $role = '';
+    public $type = '';
+    public $status = '';
+
+    public function __construct($id,$name, $email, $role, $type, $status)
+    {
+        $this->id = $id;
+        $this->name = $name;
+        $this->email = $email;
+        $this->role = $role;
+        $this->type = $type;
+        $this->status = $status;
+    }
+
+}
+
 
 class UsersController extends Controller
 {
@@ -22,7 +42,31 @@ class UsersController extends Controller
         $roles = table::roles()->get();
         $employees = table::people()->get();
         $users = table::people()->whereNotNull('password')->get();
-        return view('admin.users', compact('users','employees','roles'));
+
+        $users_collection = collect([]);
+        foreach ($users as $user) {
+          $role = table::roles()->where('id', $user->role_id)->first();
+          if($user->acc_type == 2)
+           $type = 'Admin';
+          else
+           $type = 'Employee';
+
+
+          if($user->status == '1'){
+            $status = 'Enabled';
+          }
+          else
+          {
+            $status = 'Disabled';
+          }
+
+          $users_collection->push(new Users($user->id,$user->firstname." ".$user->lastname, $user->companyemail, $role->role_name, $type, $status));
+        }
+
+        return view('admin.users', compact('users','employees','roles','users_collection'));
+
+
+
     }
 
     // Register new user.
@@ -115,14 +159,14 @@ class UsersController extends Controller
                 return redirect('users')->with('error', 'Whoops! Password confirmation does not match!');
             }
 
-            table::users()->where('reference', $ref)->update([
+            table::people()->where('id', $ref)->update([
                 'role_id' => $role_id,
                 'acc_type' => $acc_type,
                 'status' => $status,
                 'password' => Hash::make($password),
             ]);
         } else {
-            table::users()->where('reference', $ref)->update([
+            table::people()->where('id', $ref)->update([
                 'role_id' => $role_id,
                 'acc_type' => $acc_type,
                 'status' => $status,

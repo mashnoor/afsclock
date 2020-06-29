@@ -85,6 +85,9 @@ class DashboardController extends Controller
             ->take(4)
             ->get();
 
+        $all_company = table::company()->count();
+        $all_department = table::department()->count();
+
         $emp_approved_leave = table::leaves()
         ->where('status', 'Approved')
         ->orderBy('leavefrom', 'desc')
@@ -150,7 +153,7 @@ class DashboardController extends Controller
             }
           }
         }
-        return view('admin.dashboard', compact('emp_typeR', 'emp_typeT', $emp_allActive,'emp_leaves_pending', 'emp_leaves_approve', 'emp_leaves_all', 'emp_approved_leave','a', 'is_online_now', 'is_offline_now', 'sortedActivities', 'task_collection'));
+        return view('admin.dashboard', compact('emp_typeR', 'emp_typeT', $emp_allActive,'emp_leaves_pending', 'emp_leaves_approve', 'emp_leaves_all', 'emp_approved_leave','a', 'is_online_now', 'is_offline_now', 'sortedActivities', 'task_collection', 'all_company', 'all_department'));
     }
 
     // Attendance Details (Break history and Duration)

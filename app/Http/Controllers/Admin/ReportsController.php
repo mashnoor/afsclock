@@ -69,7 +69,7 @@ class ReportsController extends Controller
 		$today = date('M, d Y');
 		// $empAtten = table::attendance()->get();
 		$employeeAttendance = table::attendance()->get();
-		$employee = table::people()->join('tbl_company_data', 'tbl_people.id', '=', 'tbl_company_data.reference')->where('tbl_people.employmentstatus', 'Active')->get();
+		$employee = table::people()->where('employmentstatus', 'Active')->get();
 		table::reportviews()->where('report_id', 2)->update(array('last_viewed' => $today));
 
 		return view('admin.reports.report-employee-attendance', compact('employeeAttendance', 'employee'));
@@ -80,7 +80,7 @@ class ReportsController extends Controller
 		if (permission::permitted('reports')=='fail'){ return redirect()->route('denied'); }
 		//if($request->sh == 2){return redirect()->route('reports');}
 		$today = date('M, d Y');
-		$employee = table::people()->join('tbl_company_data', 'tbl_people.id', '=', 'tbl_company_data.reference')->where('tbl_people.employmentstatus', 'Active')->get();
+		$employee = table::people()->where('employmentstatus', 'Active')->get();
 		$empLeaves = table::leaves()->get();
 		table::reportviews()->where('report_id', 3)->update(array('last_viewed' => $today));
 
@@ -93,7 +93,7 @@ class ReportsController extends Controller
 		//if($request->sh == 2){return redirect()->route('reports');}
 		$today = date('M, d Y');
 		$empSched = table::schedules()->orderBy('archive', 'ASC')->get();
-		$employee = table::people()->join('tbl_company_data', 'tbl_people.id', '=', 'tbl_company_data.reference')->where('tbl_people.employmentstatus', 'Active')->get();
+		$employee = table::people()->where('employmentstatus', 'Active')->get();
 		table::reportviews()->where('report_id', 4)->update(array('last_viewed' => $today));
 
 		return view('admin.reports.report-employee-schedule', compact('empSched', 'employee'));
@@ -104,7 +104,7 @@ class ReportsController extends Controller
 		if (permission::permitted('reports')=='fail'){ return redirect()->route('denied'); }
 		//if($request->sh == 2){return redirect()->route('reports');}
 		$today = date('M, d Y');
-		$ed = table::people()->join('tbl_company_data', 'tbl_people.id', '=', 'tbl_company_data.reference')->where('tbl_people.employmentstatus', 'Active')->get();
+		$ed = table::people()->where('employmentstatus', 'Active')->get();
 
 		$age_18_24 = table::people()->where([['age', '>=', '18'], ['age', '<=', '24']])->count();
 		$age_25_31 = table::people()->where([['age', '>=', '25'], ['age', '<=', '31']])->count();
@@ -155,7 +155,7 @@ class ReportsController extends Controller
 		if (permission::permitted('reports')=='fail'){ return redirect()->route('denied'); }
 		//if($request->sh == 2){return redirect()->route('reports');}
 		$today = date('M, d Y');
-		$empBday = table::people()->join('tbl_company_data', 'tbl_people.id', '=', 'tbl_company_data.reference')->get();
+		$empBday = table::people()->get();
 		table::reportviews()->where('report_id', 7)->update(['last_viewed' => $today]);
 
 		return view('admin.reports.report-employee-birthdays', compact('empBday'));

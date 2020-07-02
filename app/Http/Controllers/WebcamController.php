@@ -44,14 +44,14 @@ class WebcamController extends Controller
       // For entry camera
       if ($type == 0) {
 
-        $user = User::where('reference', $reference)->first();
+        $user = User::where('id', $reference)->first();
 
         if (!$user) {
           return 'User not found with the given reference id';
         }
 
         // $existing_attendance = table::attendance()->where('reference', $reference)->whereDate('timein', $lastseen_date)->whereNull('timeout')->exists();
-        $existing_attendance = table::attendance()->where('reference', $user->reference)->whereNotNull('timein')->whereNull('timeout')->orderBy('id', 'desc')->first();
+        $existing_attendance = table::attendance()->where('reference', $user->id)->whereNotNull('timein')->whereNull('timeout')->orderBy('id', 'desc')->first();
 
         // If the person still infront of the entry camera before going out.
         if ($existing_attendance)
@@ -104,7 +104,7 @@ class WebcamController extends Controller
         if(!$fresh_attendance){
 
 
-          $assigned_schedule_id = table::new_schedule()->where([['reference', $reference],['active_status', 1]] )->value('schedule_id');
+          $assigned_schedule_id = table::schedules()->where([['reference', $reference],['active_status', 1]] )->value('schedule_id');
           $schedule_template = table::sch_template()->where('id', $assigned_schedule_id)->first();
 
           $today = Carbon::now();
@@ -143,7 +143,7 @@ class WebcamController extends Controller
                   'idno' => $user->idno,
                   'reference' => $reference,
                   'date' => $current_date,
-                  'employee' => $user->name,
+                  'employee' => $user->firstname." ".$user->lastname,
                   'timein' => $lastseen,
                   'status_timein' => $status_in,
                   'comment' => "",
@@ -163,7 +163,7 @@ class WebcamController extends Controller
       // For Exit camera
       elseif ($type == 1) {
         // $existing_attendance = table::attendance()->where('reference', $reference)->whereDate('timein', $lastseen_date)->whereNull('timeout')->exists();
-        $user = User::where('reference',$reference)->first();
+        $user = User::where('id',$reference)->first();
         if ($user) {
           $existing_attendance = table::attendance()->where('reference', $reference)->whereNotNull('timein')->orderBy('id', 'desc')->first();
         }else {
@@ -173,7 +173,7 @@ class WebcamController extends Controller
         // If there exist ongoing attendace
         if ($existing_attendance)
         {
-          $assigned_schedule_id = table::new_schedule()->where([['reference', $reference],['active_status', 1]] )->value('schedule_id');
+          $assigned_schedule_id = table::schedules()->where([['reference', $reference],['active_status', 1]] )->value('schedule_id');
           $schedule_template = table::sch_template()->where('id', $assigned_schedule_id)->first();
 
           $today = Carbon::now();

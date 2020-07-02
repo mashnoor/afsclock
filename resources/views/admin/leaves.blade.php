@@ -3,7 +3,7 @@
     @section('meta')
         <title>Leave of Absence | Attendance Keeper</title>
         <meta name="description" content="Attendance Keeper leave of absence, view all employee leaves of absence, edit, comment, and approve or deny leave requests.">
-    @endsection 
+    @endsection
 
     @section('content')
 
@@ -28,8 +28,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @isset($leaves)
-                                @foreach ($leaves as $data)
+                            @isset($leaves_collection)
+                                @foreach ($leaves_collection as $data)
                                 <tr>
                                     <td>{{ $data->employee }}</td>
                                     <td>{{ $data->type }}</td>
@@ -40,7 +40,7 @@
                                     <td class="align-right">
                                         <a href="{{ url('leaves/edit/'.$data->id) }}" class="ui circular basic icon button tiny"><i class="icon edit outline"></i></a>
                                         <a href="{{ url('leaves/delete/'.$data->id) }}" class="ui circular basic icon button tiny"><i class="icon trash alternate outlin"></i></a>
-                                    
+
                                         @isset($data->comment)
                                             @if($data->comment != null)
                                                 <button class="ui circular basic icon button tiny uppercase" data-tooltip='{{ $data->comment }}' data-variation='wide' data-position='top right'><i class="ui icon comment alternate"></i></button>

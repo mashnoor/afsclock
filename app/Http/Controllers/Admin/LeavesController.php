@@ -8,6 +8,34 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use App\Http\Controllers\Controller;
+use App\User;
+
+
+class Leaves{
+
+    public $id = '';
+    public $employee ='';
+    public $type = '';
+    public $leavefrom = '';
+    public $leaveto = '';
+    public $returndate = '';
+    public $comment = '';
+    public $status = '';
+
+
+    public function __construct($id, $employee, $type, $leavefrom,$leaveto,$returndate, $comment,$status )
+    {
+        $this->id = $id;
+        $this->employee = $employee;
+        $this->type = $type;
+        $this->leavefrom = $leavefrom;
+        $this->leaveto = $leaveto;
+        $this->returndate = $returndate;
+        $this->comment = $comment;
+        $this->status = $status;
+    }
+
+}
 
 class LeavesController extends Controller
 {
@@ -15,11 +43,20 @@ class LeavesController extends Controller
     {
         if (permission::permitted('leaves')=='fail'){ return redirect()->route('denied'); }
 
+        $leaves_collection = collect([]);
+
+
         $employee = table::people()->get();
         $leaves = table::leaves()->get();
+
+        foreach($leaves as $leave){
+          $the_employee = User::find($leave->reference);
+          $leaves_collection->push(new Leaves($leave->id, $the_employee->firstname." ".$the_employee->lastname, $leave->type, $leave->leavefrom, $leave->leaveto, $leave->returndate, $leave->comment,$leave->status));
+        }
+
         $leave_types = table::leavetypes()->get();
 
-        return view('admin.leaves', compact('employee', 'leaves', 'leave_types'));
+        return view('admin.leaves', compact('employee', 'leaves', 'leave_types', 'leaves_collection'));
     }
 
     public function edit($id, Request $request)

@@ -297,7 +297,7 @@ class ClockController extends Controller
         if ($type == 'timeout')
         {
             // Finds current logged in user
-            $user = User::where('idno', $idno)->first();
+            $user = User::find('idno', $idno)->first();
             $current_date = Carbon::now()->format('Y-m-d');
 
             // Finds pending tasks which has deadline today
@@ -338,13 +338,14 @@ class ClockController extends Controller
            else {
                // $sched_out_time = table::schedules()->where([['idno', $idno], ['archive', 0]])->value('outime');
 
-               $assigned_schedule_id = table::schedules()->where([['reference', $user->reference],['active_status', 1]] )->value('schedule_id');
+               $assigned_schedule_id = table::schedules()->where([['reference', $user->id],['active_status', 1]] )->value('schedule_id');
                $schedule_template = table::sch_template()->where('id', $assigned_schedule_id)->first();
 
                $today = Carbon::now();
                $day = strtolower($today->isoFormat('dddd'));
 
                $day_today = $schedule_template->$day;
+
                if ($day_today) {
                  $str_arr = explode ("-", $day_today);
                  $in_time = $str_arr[0];

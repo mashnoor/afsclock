@@ -12,6 +12,22 @@ use Illuminate\Support\Arr;
 use App\User;
 use App\Task;
 
+class Leaves{
+
+
+    public $employee ='';
+    public $leavefrom = '';
+
+
+
+    public function __construct($employee, $leavefrom )
+    {
+        $this->employee = $employee;
+        $this->leavefrom = $leavefrom;
+    }
+
+}
+
 class Tasks{
 
     public $id = '';
@@ -94,6 +110,13 @@ class DashboardController extends Controller
         ->take(8)
         ->get();
 
+        $recent_leaves = collect([]);
+
+        foreach($emp_approved_leave as $l){
+          $the_emp = User::find($l->reference);
+          $recent_leaves->push(new Leaves($the_emp->firstname." ".$the_emp->lastname, $l->leavefrom));
+        }
+
     		$emp_leaves_approve = table::leaves()
             ->where('status', 'Approved')
             ->count();
@@ -153,7 +176,7 @@ class DashboardController extends Controller
             }
           }
         }
-        return view('admin.dashboard', compact('emp_typeR', 'emp_typeT', $emp_allActive,'emp_leaves_pending', 'emp_leaves_approve', 'emp_leaves_all', 'emp_approved_leave','a', 'is_online_now', 'is_offline_now', 'sortedActivities', 'task_collection', 'all_company', 'all_department'));
+        return view('admin.dashboard', compact('emp_typeR', 'emp_typeT', $emp_allActive,'emp_leaves_pending', 'emp_leaves_approve', 'emp_leaves_all', 'emp_approved_leave','a', 'is_online_now', 'is_offline_now', 'sortedActivities', 'task_collection', 'all_company', 'all_department', 'recent_leaves'));
     }
 
     // Attendance Details (Break history and Duration)

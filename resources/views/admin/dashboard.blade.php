@@ -221,8 +221,8 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @isset($emp_approved_leave)
-                                @foreach ($emp_approved_leave as $leaves)
+                            @isset($recent_leaves)
+                                @foreach ($recent_leaves as $leaves)
                                     <tr>
                                         <td class="text-left name-title">{{ $leaves->employee }}</td>
                                         <td class="text-left">@php echo e(date('M d, Y', strtotime($leaves->leavefrom))) @endphp</td>

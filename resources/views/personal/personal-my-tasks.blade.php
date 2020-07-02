@@ -45,14 +45,14 @@
                                         <td>{{ $task->assigned_by }}</td>
                                         <td>{{ $task->title }}</td>
                                         <td>{{ $task->deadline }}</td>
-                                        <td>@isset($task->finishdate){{ $task->finishdate }}@endisset</td>
+                                        <td>@isset($task->finish_date){{ $task->finish_date }}@endisset</td>
                                         @php
                                             $color = "red";
                                             $done_status = "Pending";
-                                            if(isset($task->finishdate))
+                                            if(isset($task->finish_date))
                                                 {
 
-                                                     if($task->finishdate>$task->deadline)
+                                                     if($task->finish_date>$task->deadline)
                                                      {
                                                          $done_status = "Done (Delayed)";
                                                          $color = "red";
@@ -65,7 +65,7 @@
                                                 }
 
                                         @endphp
-                                        
+
                                         <td><span class="{{ $color }}">{{ $done_status }}</span></td>
                                         <td>{{ $task->comment }}</td>
                                         <td class="align-right">

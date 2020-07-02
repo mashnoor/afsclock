@@ -48,14 +48,10 @@ class PersonalLeavesController extends Controller
         $leaveto = date("Y-m-d", strtotime($request->leaveto));
         $returndate = date("Y-m-d", strtotime($request->returndate));
 
-        $id = \Auth::user()->reference;
-        $idno = \Auth::user()->idno;
-        $q = table::people()->where('id', $id)->select('firstname', 'mi', 'lastname')->first();
+        $id = \Auth::user()->id;
 
         table::leaves()->insert([
             'reference' => $id,
-            'idno' => $idno,
-            'employee' => $q->lastname.', '.$q->firstname,
             'type' => $type,
             'typeid' => $typeid,
             'leavefrom' => $leavefrom,

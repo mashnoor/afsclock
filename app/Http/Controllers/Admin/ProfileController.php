@@ -109,7 +109,8 @@ class ProfileController extends Controller
 		$department = mb_strtoupper($request->department);
 
     $existing_department = table::department()->where('department', $department)->first();
-		$jobposition = mb_strtoupper($request->jobposition);
+
+    $jobposition = mb_strtoupper($request->jobposition);
 
     $existing_jobtitle = table::jobtitle()->where('jobtitle', $jobposition)->first();
 

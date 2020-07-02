@@ -13,11 +13,10 @@ class PersonalLeavesController extends Controller
 {
     public function index()
     {
-        $i = \Auth::user()->idno;
-        $ref = \Auth::user()->reference;
+        $i = \Auth::user()->id;
 
-        $l = table::leaves()->where('idno', $i)->get();
-        $lp = table::company()->where('id', $ref)->value('leaveprivilege');
+        $l = table::leaves()->where('reference', $i)->get();
+        $lp = table::people()->where('id', $i)->value('leaveprivilege');
         $r = table::leavegroup()->where('id', $lp)->value('leaveprivileges');
         $rights = explode(",", $r);
 

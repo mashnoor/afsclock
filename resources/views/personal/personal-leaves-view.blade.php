@@ -88,7 +88,7 @@
                                         @isset($data->comment)
                                             <button data-id="{{ $data->id }}" class="ui grey icon mini basic button uppercase" data-tooltip='{{ $data->comment }}' data-variation='wide' data-position='top right'><i class="ui icon comment alternate"></i></button>
                                         @endisset
-                                    @endif 
+                                    @endif
                                 </td>
                             </tr>
                             @endforeach
@@ -98,7 +98,7 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
 
     @endsection
@@ -110,13 +110,13 @@
     <script type="text/javascript">
     $('#dataTables-example').DataTable({responsive: true,pageLength: 15,lengthChange: false,searching: false,ordering: true});
     $('.airdatepicker').datepicker({ language: 'en', dateFormat: 'yyyy-mm-dd' });
-    
+
     $('.ui.dropdown.getid').dropdown({ onChange: function(value, text, $selectedItem) {
         $('select[name="type"] option').each(function() {
             if($(this).val()==value) { var id = $(this).attr('data-id'); $('input[name="typeid"]').val(id); };
         });
     }});
-    
+
     $('#filterform').submit(function(event) {
         event.preventDefault();
         var date_from = $('#datefrom').val();
@@ -127,7 +127,7 @@
             url: url + '/get/personal/leaves/',type: 'get',dataType: 'json',data: {datefrom: date_from, dateto: date_to},headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') },
             success: function(response) {
                 console.log(response);
-                
+
                 showdata(response);
                 function showdata(jsonresponse) {
                     var leave = jsonresponse;
@@ -154,29 +154,29 @@
                                 }
                             }
                         }
-                        tbody.append("<tr>"+ 
-                                        "<td>"+leave[i].type+"</td>" + 
-                                        "<td>"+leave[i].leavefrom+"</td>" + 
-                                        "<td>"+leave[i].leaveto+"</td>" + 
-                                        "<td>"+leave[i].reason+"</td>" + 
-                                        "<td>"+leave[i].returndate+"</td>" + 
-                                        "<td>"+leave[i].status+"</td>" + 
-                                        "<td>"+ actions(ls) +"</td>" + 
+                        tbody.append("<tr>"+
+                                        "<td>"+leave[i].type+"</td>" +
+                                        "<td>"+leave[i].leavefrom+"</td>" +
+                                        "<td>"+leave[i].leaveto+"</td>" +
+                                        "<td>"+leave[i].reason+"</td>" +
+                                        "<td>"+leave[i].returndate+"</td>" +
+                                        "<td>"+leave[i].status+"</td>" +
+                                        "<td>"+ actions(ls) +"</td>" +
                                     "</tr>");
                     }
 
                     // initialize datatable
                     $('#dataTables-example').DataTable({responsive: true,pageLength: 15,lengthChange: false,searching: false,ordering: true});
-                }            
+                }
             }
         })
     });
 
     $(".delegation").on("click", ".view", function () {
-        // parent delegation 
-        var id = $(this).attr('data-id'); 
+        // parent delegation
+        var id = $(this).attr('data-id');
         var url = $("#_url").val();
-        
+
         $.ajax({
             url: url + '/view/personal/leave/',type: 'get',dataType: 'json',data: {id: id},headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') },
             success: function(response) {

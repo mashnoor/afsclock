@@ -69,8 +69,9 @@ class LeavesController extends Controller
         $l->returndate = date('M d, Y', strtotime($l->returndate));
         $leave_types = table::leavetypes()->get();
         $e_id = ($l->id == null) ? 0 : Crypt::encryptString($l->id) ;
-
-        return view('admin.edits.edit-leaves', compact('l', 'leave_types', 'e_id'));
+        $employee = User::find($l->reference);
+        $emp_name = $employee->firstname." ".$employee->lastname;
+        return view('admin.edits.edit-leaves', compact('l', 'leave_types', 'e_id','emp_name'));
     }
 
     public function update(Request $request)

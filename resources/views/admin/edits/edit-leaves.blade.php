@@ -1,9 +1,9 @@
 @extends('layouts.default')
-    
+
     @section('meta')
         <title>Edit Leave of Absence | Attendance Keeper</title>
         <meta name="description" content="Attendance Keeper edit employee leave of absence.">
-    @endsection 
+    @endsection
 
     @section('content')
 
@@ -11,7 +11,7 @@
         <div class="row">
             <div class="col-md-12">
                 <h2 class="page-title">Edit Leave</h2>
-            </div>    
+            </div>
         </div>
 
         <div class="row">
@@ -33,7 +33,7 @@
                 {{ csrf_field() }}
                     <div class="field">
                         <label>Employee</label>
-                        <input type="text" class="readonly" readonly="" value="@isset($l->employee){{ $l->employee }}@endisset">
+                        <input type="text" class="readonly" readonly="" value="@isset($emp_name){{ $emp_name }}@endisset">
                     </div>
                     <div class="field">
                         <label>Leave Type</label>
@@ -43,7 +43,7 @@
                         <div class="field">
                             <label for="">Leave From</label>
                             <input type="text" class="readonly" readonly="" value="@isset($l->leavefrom){{ $l->leavefrom }}@endisset"/>
-                            
+
                         </div>
                         <div class="field">
                             <label for="">Leave To</label>
@@ -87,7 +87,7 @@
                     <a href="{{ url('leaves') }}" class="ui black grey small button"><i class="ui times icon"></i> Cancel</a>
                 </div>
                 </form>
-                
+
                 </div>
             </div>
         </div>

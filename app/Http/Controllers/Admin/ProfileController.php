@@ -107,7 +107,13 @@ class ProfileController extends Controller
     $existing_company = table::company()->where('company', $company)->first();
 
 		$department = mb_strtoupper($request->department);
+
+    $existing_department = table::department()->where('department', $department)->first();
 		$jobposition = mb_strtoupper($request->jobposition);
+
+    $existing_jobtitle = table::jobtitle()->where('jobtitle', $jobposition)->first();
+
+
 		$companyemail = mb_strtolower($request->companyemail);
 		$leaveprivilege = $request->leaveprivilege;
 		$idno = mb_strtoupper($request->idno);
@@ -144,8 +150,8 @@ class ProfileController extends Controller
 			'employmentstatus' => $employmentstatus,
 			'avatar' => $name,
       'company_id' => $existing_company->id,
-			'department' => $department,
-			'jobposition' => $jobposition,
+			'department_id' => $existing_department->id,
+			'jobposition' => $existing_jobtitle->id,
 			'companyemail' => $companyemail,
 			'leaveprivilege' => $leaveprivilege,
 			'idno' => $idno,

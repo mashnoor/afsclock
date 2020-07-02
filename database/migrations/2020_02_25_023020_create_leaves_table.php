@@ -16,8 +16,6 @@ class CreateLeavesTable extends Migration {
             Schema::create('leaves', function (Blueprint $table) {
                 $table->increments('id');
                 $table->integer('reference')->nullable();
-                $table->string('idno', 11)->nullable();
-                $table->string('employee')->nullable()->default('');
                 $table->integer('typeid')->nullable();
                 $table->string('type')->nullable()->default('');
 								$table->timestamp('leavefrom')->nullable();

@@ -17,7 +17,7 @@ class PersonalLeavesController extends Controller
         $ref = \Auth::user()->reference;
 
         $l = table::leaves()->where('idno', $i)->get();
-        $lp = table::companydata()->where('reference', $ref)->value('leaveprivilege');
+        $lp = table::company()->where('id', $ref)->value('leaveprivilege');
         $r = table::leavegroup()->where('id', $lp)->value('leaveprivileges');
         $rights = explode(",", $r);
 

@@ -113,12 +113,10 @@ class ProfileController extends Controller
 		$lastname = mb_strtoupper($request->lastname);
 		$firstname = mb_strtoupper($request->firstname);
 		$mi = mb_strtoupper($request->mi);
-		$age = $request->age;
 		$gender = mb_strtoupper($request->gender);
 		$emailaddress =  mb_strtolower($request->emailaddress);
 		$civilstatus = mb_strtoupper($request->civilstatus);
-		$height = $request->height;
-		$weight = $request->weight;
+
 		$mobileno = $request->mobileno;
 		$birthday = date("Y-m-d", strtotime($request->birthday));
 		$nationalid = mb_strtoupper($request->nationalid);

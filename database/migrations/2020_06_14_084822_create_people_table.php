@@ -19,7 +19,6 @@ class CreatePeopleTable extends Migration
             $table->string('firstname')->nullable();
             $table->string('mi')->nullable()->default('');
             $table->string('lastname')->nullable();
-            $table->integer('age')->nullable();
             $table->string('gender')->nullable()->default('');
             $table->string('emailaddress')->nullable()->default('');
             $table->string('civilstatus')->nullable()->default('');

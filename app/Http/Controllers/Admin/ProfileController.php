@@ -147,12 +147,11 @@ class ProfileController extends Controller
 			'lastname' => $lastname,
 			'firstname' => $firstname,
 			'mi' => $mi,
-			'age' => $age,
+
 			'gender' => $gender,
 			'emailaddress' => $emailaddress,
 			'civilstatus' => $civilstatus,
-			'height' => $height,
-			'weight' => $weight,
+
 			'mobileno' => $mobileno,
 			'birthday' => $birthday,
 			'birthplace' => $birthplace,

@@ -123,7 +123,7 @@ class ClockController extends Controller
             }
         }
 
-        $employee_id = table::companydata()->where('idno', $idno)->value('reference');
+        $employee_id = table::people()->where('idno', $idno)->value('id');
 
         if($employee_id == null) {
             return response()->json([

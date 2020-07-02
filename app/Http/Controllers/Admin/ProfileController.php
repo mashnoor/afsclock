@@ -160,10 +160,7 @@ class ProfileController extends Controller
 			'employmenttype' => $employmenttype,
 			'employmentstatus' => $employmentstatus,
 			'avatar' => $name,
-		]);
-
-		table::companydata()->where('reference', $id)->update([
-			'company' => $company,
+      'company' => $company,
 			'department' => $department,
 			'jobposition' => $jobposition,
 			'companyemail' => $companyemail,

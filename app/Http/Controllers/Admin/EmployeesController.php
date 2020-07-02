@@ -260,7 +260,6 @@ class EmployeesController extends Controller
 				'lastname' => $lastname,
 				'firstname' => $firstname,
 				'mi' => $mi,
-				'age' => $age,
 				'gender' => $gender,
 				'emailaddress' => $emailaddress,
 				'civilstatus' => $civilstatus,

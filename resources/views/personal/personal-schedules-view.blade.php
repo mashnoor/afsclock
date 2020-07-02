@@ -39,53 +39,8 @@
                         </div>
                     </form>
 
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Start Time</th>
-                                <th>Off Time</th>
-                                <th>Total Hours</th>
-                                <th>Rest Day<span class="help">(s)</span></th>
-                                <th>From <span class="help">(Date)</span></th>
-                                <th>To <span class="help">(Date)</span></th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @isset($s)
-                            @foreach ($s as $sched)
-                            <tr>
-                                <td>{{ $sched->intime }}</td>
-                                <td>{{ $sched->outime }}</td>
-                                <td>{{ $sched->hours }} hours</td>
-                                <td>{{ $sched->restday }}</td>
-                                <td>
-                                    @php
-                                        $datefrom = $sched->datefrom;
-                                        $datefrom=date('l, F j, Y',strtotime($datefrom));
-                                        {{ echo $datefrom; }}
-                                    @endphp
-                                </td>
-                                <td>
-                                    @php
-                                        $dateto = $sched->dateto;
-                                        $dateto=date('l, F j, Y',strtotime($dateto));
-                                        {{ echo $dateto; }}
-                                    @endphp
-                                </td>
-                                <td>
-                                    @if($sched->archive == '0')
-                                        <span class="green">Present Schedule</span>
-                                    @else
-                                        <span class="teal">Past Schedule</span>
-                                    @endif
-                                </td>
-                            </tr>
-                            @endforeach
-                            @endisset
-                        </tbody>
-                    </table>
-                    <table class="ui table">
+                    
+            <table class="ui table">
                 <thead>
                   <tr>
                     <th>Name</th>

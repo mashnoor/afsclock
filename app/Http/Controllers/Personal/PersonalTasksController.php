@@ -225,7 +225,7 @@ class PersonalTasksController extends Controller
 
         $task->comment = $request->comment;
         $task->finishdate = date('Y-m-d');
-
+        $task->done_status = 1;
         $task->save();
 
         return redirect('personal/tasks/mytasks')->with('success','Task has been updated!');

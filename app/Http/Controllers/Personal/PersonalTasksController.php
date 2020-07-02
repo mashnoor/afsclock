@@ -58,7 +58,7 @@ class PersonalTasksController extends Controller
 {
     public function index()
     {
-        $tasks = Task::where('reference', Auth::user()->reference)->get();
+        $tasks = Task::where('reference', Auth::user()->id)->get();
         return view('personal.personal-tasks-view', compact('tasks'));
     }
 
@@ -76,7 +76,7 @@ class PersonalTasksController extends Controller
 
     public function myTasks()
     {
-        $tasks = Task::where('reference', Auth::user()->reference)->get();
+        $tasks = Task::where('reference', Auth::user()->id)->get();
 
         $task_collection = collect([]);
 

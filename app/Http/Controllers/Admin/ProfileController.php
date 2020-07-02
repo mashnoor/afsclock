@@ -143,7 +143,7 @@ class ProfileController extends Controller
 			'employmenttype' => $employmenttype,
 			'employmentstatus' => $employmentstatus,
 			'avatar' => $name,
-      'company' => $existing_company->id,
+      'company_id' => $existing_company->id,
 			'department' => $department,
 			'jobposition' => $jobposition,
 			'companyemail' => $companyemail,

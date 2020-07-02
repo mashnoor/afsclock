@@ -138,10 +138,10 @@ class DashboardController extends Controller
           foreach ($a as $r_e) {
             $user = User::find($r_e->reference);
             if ($r_e->timein && $user) {
-              $activity_collection->push(new Activity($user->name, $r_e->timein, 'Clock In'));
+              $activity_collection->push(new Activity($user->firstname." ".$user->lastname, $r_e->timein, 'Clock In'));
             }
             if ($r_e->timeout && $user) {
-              $activity_collection->push(new Activity($user->name ,$r_e->timeout, 'Clock Out'));
+              $activity_collection->push(new Activity($user->firstname." ".$user->lastname ,$r_e->timeout, 'Clock Out'));
             }
           }
         }
@@ -150,10 +150,10 @@ class DashboardController extends Controller
           foreach ($recent_breaks as $r_b) {
             $user = User::find($r_b->reference);
             if ($r_b->start_at && $user) {
-              $activity_collection->push(new Activity($user->name, $r_b->start_at, 'Break In'));
+              $activity_collection->push(new Activity($user->firstname." ".$user->lastname, $r_b->start_at, 'Break In'));
             }
             if ($r_b->end_at && $user) {
-              $activity_collection->push(new Activity($user->name, $r_b->end_at, 'Break Out'));
+              $activity_collection->push(new Activity($user->firstname." ".$user->lastname, $r_b->end_at, 'Break Out'));
             }
           }
         }
@@ -172,7 +172,7 @@ class DashboardController extends Controller
             $user = User::find($task->reference);
 
             if ($extended_task && $user) {
-              $task_collection->push(new Tasks($task->id, $user->name, $extended_task->new_deadline, $task->deadline));
+              $task_collection->push(new Tasks($task->id, $user->firstname." ".$user->lastname, $extended_task->new_deadline, $task->deadline));
             }
           }
         }

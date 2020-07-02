@@ -424,7 +424,7 @@ class ClockController extends Controller
 
            }
            else {
-               $sched_out_time = table::schedules()->where([['idno', $idno], ['archive', 0]])->value('outime');
+               // $sched_out_time = table::schedules()->where([['idno', $idno], ['archive', 0]])->value('updated_at');
 
                $assigned_schedule_id = table::schedules()->where([['reference', $employee_id],['active_status', 1]] )->value('schedule_id');
                $schedule_template = table::sch_template()->where('id', $assigned_schedule_id)->first();

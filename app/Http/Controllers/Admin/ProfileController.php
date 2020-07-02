@@ -151,7 +151,7 @@ class ProfileController extends Controller
 			'avatar' => $name,
       'company_id' => $existing_company->id,
 			'department_id' => $existing_department->id,
-			'jobposition' => $existing_jobtitle->id,
+			'job_title_id' => $existing_jobtitle->id,
 			'companyemail' => $companyemail,
 			'leaveprivilege' => $leaveprivilege,
 			'idno' => $idno,

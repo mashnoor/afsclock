@@ -28,6 +28,7 @@ class ClockController extends Controller
 
         return view('clock_cam', compact('cc', 'tz', 'company_name'));
     }
+
     public function test_clock()
     {
         $data = table::settings()->where('id', 1)->first();
@@ -164,7 +165,7 @@ class ClockController extends Controller
 
                    // $sched_in_time = table::schedules()->where([['idno', $idno], ['archive', 0]])->value('intime');
 
-                   $assigned_schedule_id = table::new_schedule()->where([['reference', $employee_id],['active_status', 1]] )->value('schedule_id');
+                   $assigned_schedule_id = table::schedules()->where([['reference', $employee_id],['active_status', 1]] )->value('schedule_id');
                    $schedule_template = table::sch_template()->where('id', $assigned_schedule_id)->first();
 
                    $today = Carbon::now();
@@ -337,7 +338,7 @@ class ClockController extends Controller
            else {
                // $sched_out_time = table::schedules()->where([['idno', $idno], ['archive', 0]])->value('outime');
 
-               $assigned_schedule_id = table::new_schedule()->where([['reference', $user->reference],['active_status', 1]] )->value('schedule_id');
+               $assigned_schedule_id = table::schedules()->where([['reference', $user->reference],['active_status', 1]] )->value('schedule_id');
                $schedule_template = table::sch_template()->where('id', $assigned_schedule_id)->first();
 
                $today = Carbon::now();
@@ -424,7 +425,7 @@ class ClockController extends Controller
            else {
                $sched_out_time = table::schedules()->where([['idno', $idno], ['archive', 0]])->value('outime');
 
-               $assigned_schedule_id = table::new_schedule()->where([['reference', $employee_id],['active_status', 1]] )->value('schedule_id');
+               $assigned_schedule_id = table::schedules()->where([['reference', $employee_id],['active_status', 1]] )->value('schedule_id');
                $schedule_template = table::sch_template()->where('id', $assigned_schedule_id)->first();
 
                $today = Carbon::now();

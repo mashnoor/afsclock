@@ -14,8 +14,10 @@ class PersonalSchedulesController extends Controller
     public function index()
     {
         $i = \Auth::user()->id;
-        $s = table::schedules()->where('reference', $i)->get();
-        return view('personal.personal-schedules-view', compact('s'));
+        $s = table::schedules()->where([['reference', $i],['active_status', 1]])->first();
+        $schedule_template = table::sch_template()->where('id', $s->schedule_id)->first();
+
+        return view('personal.personal-schedules-view', compact('schedule_template'));
     }
 
     public function getPS(Request $request)

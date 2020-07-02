@@ -10,12 +10,12 @@
     @endsection
 
     @section('content')
-    
+
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
             <h2 class="page-title">My Schedules</h2>
-            </div>    
+            </div>
         </div>
 
         <div class="row">
@@ -39,7 +39,7 @@
                         </div>
                     </form>
 
-                    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example" data-order='[[ 6, "desc" ]]'>
+                    <table>
                         <thead>
                             <tr>
                                 <th>Start Time</th>
@@ -60,21 +60,21 @@
                                 <td>{{ $sched->hours }} hours</td>
                                 <td>{{ $sched->restday }}</td>
                                 <td>
-                                    @php 
+                                    @php
                                         $datefrom = $sched->datefrom;
                                         $datefrom=date('l, F j, Y',strtotime($datefrom));
                                         {{ echo $datefrom; }}
-                                    @endphp 
+                                    @endphp
                                 </td>
                                 <td>
-                                    @php 
+                                    @php
                                         $dateto = $sched->dateto;
                                         $dateto=date('l, F j, Y',strtotime($dateto));
                                         {{ echo $dateto; }}
                                     @endphp
                                 </td>
                                 <td>
-                                    @if($sched->archive == '0') 
+                                    @if($sched->archive == '0')
                                         <span class="green">Present Schedule</span>
                                     @else
                                         <span class="teal">Past Schedule</span>
@@ -85,14 +85,90 @@
                             @endisset
                         </tbody>
                     </table>
+                    <table class="ui table">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Sat</th>
+                    <th>Sun</th>
+                    <th>Mon</th>
+                    <th>Tue</th>
+                    <th>Wed</th>
+                    <th>Thu</th>
+                    <th>Fri</th>
+                    <th>Break</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  @isset($schedule_template)
+
+                      <tr>
+                        <td>{{$schedule_template->name}}</td>
+                        <td>
+                          @if($schedule_template->saturday)
+                          {{$schedule_template->saturday}}
+                          @else
+                          N/A
+                          @endif
+                        </td>
+                        <td>
+                          @if($schedule_template->sunday)
+                          {{$schedule_template->sunday}}
+                          @else
+                          N/A
+                          @endif
+                        </td>
+                        <td>
+                          @if($schedule_template->monday)
+                          {{$schedule_template->monday}}
+                          @else
+                          N/A
+                          @endif
+                        </td>
+                        <td>
+                          @if($schedule_template->tuesday)
+                          {{$schedule_template->tuesday}}
+                          @else
+                          N/A
+                          @endif
+                        </td>
+                        <td>
+                          @if($schedule_template->wednesday)
+                          {{$schedule_template->wednesday}}
+                          @else
+                          N/A
+                          @endif
+                        </td>
+                        <td>
+                          @if($schedule_template->thursday)
+                          {{$schedule_template->thursday}}
+                          @else
+                          N/A
+                          @endif
+                        </td>
+                        <td>
+                          @if($schedule_template->friday)
+                          {{$schedule_template->friday}}
+                          @else
+                          N/A
+                          @endif
+                        </td>
+                        <td>{{$schedule_template->break_allowence}} Min</td>
+
+                      </tr>
+
+                  @endisset
+                </tbody>
+              </table>
                 </div>
             </div>
-            </div>  
+            </div>
         </div>
     </div>
 
     @endsection
-    
+
     @section('scripts')
     <script src="{{ asset('/assets/vendor/air-datepicker/dist/js/datepicker.min.js') }}"></script>
     <script src="{{ asset('/assets/vendor/air-datepicker/dist/js/i18n/datepicker.en.js') }}"></script>
@@ -115,7 +191,7 @@
                 function showdata(jsonresponse) {
                     var employee = jsonresponse;
                     var tbody = $('#dataTables-example tbody');
-                    
+
                     // clear data and destroy datatable
                     $('#dataTables-example').DataTable().destroy();
                     tbody.children('tr').remove();
@@ -151,28 +227,28 @@
                                 d = date.getDate();
                                 day = date.getDay();
                                 days = new Array('Sunday,', 'Monday,', 'Tuesday,', 'Wednesday,', 'Thursday,', 'Friday,', 'Saturday,');
-                                
+
                                 n_date = days[day]+' '+months[month]+' '+d+', '+year;
                                 return n_date; // Friday, May 11, 2018
                         }
-                            
-                        tbody.append("<tr>"+ 
-                                        "<td>"+employee[i].intime+"</td>" + 
-                                        "<td>"+employee[i].outime+"</td>" + 
-                                        "<td>"+employee[i].hours+" hours </td>" + 
-                                        "<td>"+employee[i].restday+"</td>" + 
-                                        "<td>"+ f_date(datefrom) +"</td>" + 
-                                        "<td>"+ f_date(dateto) +"</td>" + 
-                                        "<td>"+ "<span class=' "+ ss_color(archive) +"'>" + s_s(archive) + "</span>" +"</td>" + 
+
+                        tbody.append("<tr>"+
+                                        "<td>"+employee[i].intime+"</td>" +
+                                        "<td>"+employee[i].outime+"</td>" +
+                                        "<td>"+employee[i].hours+" hours </td>" +
+                                        "<td>"+employee[i].restday+"</td>" +
+                                        "<td>"+ f_date(datefrom) +"</td>" +
+                                        "<td>"+ f_date(dateto) +"</td>" +
+                                        "<td>"+ "<span class=' "+ ss_color(archive) +"'>" + s_s(archive) + "</span>" +"</td>" +
                                     "</tr>");
                     }
 
                     // initialize datatable
                     $('#dataTables-example').DataTable({responsive: true,pageLength: 15,lengthChange: false,searching: false,ordering: true});
 
-                }            
+                }
             }
         })
     });
     </script>
-    @endsection 
+    @endsection

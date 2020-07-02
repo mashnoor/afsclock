@@ -46,11 +46,17 @@ class UsersController extends Controller
         $users_collection = collect([]);
         foreach ($users as $user) {
           $role = table::roles()->where('id', $user->role_id)->first();
+
+          if ($role) {
+            $role_name = $role->role_name;
+          }else {
+            $role_name = 'N/A';
+          }
+
           if($user->acc_type == 2)
            $type = 'Admin';
           else
            $type = 'Employee';
-
 
           if($user->status == '1'){
             $status = 'Enabled';
@@ -60,7 +66,7 @@ class UsersController extends Controller
             $status = 'Disabled';
           }
 
-          $users_collection->push(new Users($user->id,$user->firstname." ".$user->lastname, $user->companyemail, $role->role_name, $type, $status));
+          $users_collection->push(new Users($user->id,$user->firstname." ".$user->lastname, $user->companyemail, $role_name, $type, $status));
         }
 
         return view('admin.users', compact('users','employees','roles','users_collection'));

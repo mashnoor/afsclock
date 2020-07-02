@@ -20,7 +20,6 @@ class CreateUsersRolesTable extends Migration {
             });
         }
 
-
 				// Insert some stuff
 	      DB::table('users_roles')->insert(
 	          array(

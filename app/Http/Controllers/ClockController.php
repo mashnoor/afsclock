@@ -297,11 +297,11 @@ class ClockController extends Controller
         if ($type == 'timeout')
         {
             // Finds current logged in user
-            $user = User::find('idno', $idno)->first();
+            $user = User::where('idno', $idno)->first();
             $current_date = Carbon::now()->format('Y-m-d');
 
             // Finds pending tasks which has deadline today
-            $tasks = Task::where([['reference', $user->reference ],['done_status', 0]])->whereDate('deadline', $current_date)->first();
+            $tasks = Task::where([['reference', $user->id ],['done_status', 0]])->whereDate('deadline', $current_date)->first();
 
             // If there exists pending tasks, shows error message
             if ($tasks) {

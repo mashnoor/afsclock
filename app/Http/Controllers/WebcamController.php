@@ -31,11 +31,8 @@ class WebcamController extends Controller
     {
       // Post request received data
       $type = $request->type;
-      $lastseen = Carbon::now()->format('Y-m-d h:i:s A');
-
-      // return $lastseen;
-
       $reference = $request->reference;
+      $lastseen = Carbon::now()->format('Y-m-d h:i:s A');
 
       // Necessary Date
       $current_date = Carbon::now()->format('Y-m-d');
@@ -50,7 +47,7 @@ class WebcamController extends Controller
           return 'User not found with the given reference id';
         }
 
-        // $existing_attendance = table::attendance()->where('reference', $reference)->whereDate('timein', $lastseen_date)->whereNull('timeout')->exists();
+        // Finds existing attendance information from database.
         $existing_attendance = table::attendance()->where('reference', $user->id)->whereNotNull('timein')->whereNull('timeout')->orderBy('id', 'desc')->first();
 
         // If the person still infront of the entry camera before going out.
@@ -60,27 +57,26 @@ class WebcamController extends Controller
         }
 
         // If the person come back from outside from break.
-
         $ongoing_closed_attendance = table::attendance()->where('reference', $reference)->whereNotNull('timeout')->orderBy('id', 'desc')->first();
 
         if ($ongoing_closed_attendance) {
-          $time1 = Carbon::createFromFormat("Y-m-d h:i:s A", $ongoing_closed_attendance->timein);
+          $time1 = Carbon::createFromFormat("Y-m-d h:i:s A", $ongoing_closed_attendance->timeout);
           $time2 = $lastseen;
           $th = $time1->diffInHours($time2);
         }
 
-
+        // There exist ongoing attendance and last timeout in less than 4 hours.
         if ($ongoing_closed_attendance && ($th <= 4))
         {
-
-          $start_at = Carbon::createFromFormat("Y-m-d h:i:s A", $ongoing_closed_attendance->timein);
+          $start_at = Carbon::createFromFormat("Y-m-d h:i:s A", $ongoing_closed_attendance->timeout);
           $end_at = Carbon::createFromFormat("Y-m-d h:i:s A", $lastseen);
 
           $break = DB::table('daily_breaks')->insert(
               ['reference' => $reference, 'attendance_id' => $ongoing_closed_attendance->id , 'start_at' => $start_at, 'end_at' => $end_at]
           );
-          if ($break) {
 
+          // If the break is successfully created, timout become null again.
+          if ($break) {
             $attendance = table::attendance()->where('id', $ongoing_closed_attendance->id)->update(array(
                 'timeout' => NULL,
                 'totalhours' => NULL,
@@ -99,11 +95,10 @@ class WebcamController extends Controller
 
         }
 
+        // If there exist no ongoing attendance or timeout more than 4 hours ago.
         $fresh_attendance = table::attendance()->where('reference', $reference)->whereDate('timein', $lastseen_date)->exists();
 
         if(!$fresh_attendance){
-
-
           $assigned_schedule_id = table::schedules()->where([['reference', $reference],['active_status', 1]] )->value('schedule_id');
           $schedule_template = table::sch_template()->where('id', $assigned_schedule_id)->first();
 

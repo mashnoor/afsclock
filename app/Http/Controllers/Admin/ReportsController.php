@@ -9,6 +9,7 @@ use App\Classes\permission;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 
 class ReportsController extends Controller
 {
@@ -42,6 +43,9 @@ class ReportsController extends Controller
 		$searchContent = request()->searchContent;
 		$datefrom = request()->datefrom;
 		$dateto = request()->dateto;
+		$date_from = Carbon::parse($datefrom);
+		$date_to = Carbon::parse($dateto);
+		$date_to = $date_to->addDays(1);
 
 		// If there exist search content data only.
 		// Date range data are not available.
@@ -50,7 +54,7 @@ class ReportsController extends Controller
 		}
 		// When all the variable values available, executes this block.
 		elseif ($searchContent !== "" && $datefrom !== "" && $dateto !== "") {
-			$searchResults = table::attendance()->where('employee','LIKE','%'.$searchContent.'%')->whereBetween('timein', [$datefrom, $dateto])->orWhere('idno','LIKE','%'.$searchContent.'%')->whereBetween('timein', [$datefrom, $dateto])->get();
+			$searchResults = table::attendance()->where('employee','LIKE','%'.$searchContent.'%')->whereBetween('timein', [$date_from, $date_to])->orWhere('idno','LIKE','%'.$searchContent.'%')->whereBetween('timein', [$datefrom, $dateto])->get();
 		}
 		// Else performs this block.
 		else{
@@ -82,6 +86,14 @@ class ReportsController extends Controller
 		$today = date('M, d Y');
 		$employee = table::people()->where('employmentstatus', 'Active')->get();
 		$empLeaves = table::leaves()->get();
+		$i = 0;
+		for($i = 0 ; $i< count($empLeaves); $i++)
+		{
+			$emp = table::people()->where('id', $empLeaves[$i]->reference)->first();
+			$empLeaves[$i]->employee =  $emp->firstname . " " . $emp->lastname;
+		}
+
+
 		table::reportviews()->where('report_id', 3)->update(array('last_viewed' => $today));
 
 		return view('admin.reports.report-employee-leaves', compact('empLeaves', 'employee'));
@@ -106,11 +118,64 @@ class ReportsController extends Controller
 		$today = date('M, d Y');
 		$ed = table::people()->where('employmentstatus', 'Active')->get();
 
-		$age_18_24 = table::people()->where([['age', '>=', '18'], ['age', '<=', '24']])->count();
-		$age_25_31 = table::people()->where([['age', '>=', '25'], ['age', '<=', '31']])->count();
-		$age_32_38 = table::people()->where([['age', '>=', '32'], ['age', '<=', '38']])->count();
-		$age_39_45 = table::people()->where([['age', '>=', '39'], ['age', '<=', '45']])->count();
-		$age_46_100 = table::people()->where('age', '>=', '46')->count();
+
+
+		// $age_18_24 = table::people()->where([['age', '>=', '18'], ['age', '<=', '24']])->count();
+		// $age_25_31 = table::people()->where([['age', '>=', '25'], ['age', '<=', '31']])->count();
+		// $age_32_38 = table::people()->where([['age', '>=', '32'], ['age', '<=', '38']])->count();
+		// $age_39_45 = table::people()->where([['age', '>=', '39'], ['age', '<=', '45']])->count();
+		// $age_46_100 = table::people()->where('age', '>=', '46')->count();
+
+		$age_18_24 = 0;
+		$age_25_31 = 0;
+		$age_32_38 = 0;
+		$age_39_45 = 0;
+		$age_46_100 = 0;
+
+
+
+		for($i = 0; $i < count($ed); $i ++)
+		{
+			$now = new DateTime();
+			$bday = new DateTime($ed[$i]->birthday);
+
+			$difference = $now->diff($bday);
+
+			$age = $difference->format("%y");
+
+			if($age >= '18' && $age <= '24') $age_18_24++;
+			else if($age >= '25' && $age <= '31') $age_25_31++;
+			else if($age >= '32' && $age <= '38') $age_32_38++;
+			else if($age >= '39' && $age <= '45') $age_39_45++;
+			else if($age >= '46' && $age <= '100') $age_46_100++;
+
+			//Set the company name for the employee
+			if($ed[$i]->company_id != NULL)
+			{
+				$curr_comp = table::company()->where('id', $ed[$i]->company_id)->first();
+
+				$ed[$i]->company = $curr_comp->company;
+			}
+			else
+			{
+				$ed[$i]->company = "NULL";
+			}
+
+			if($ed[$i]->department_id != NULL)
+			{
+				$curr_dept = table::department()->where('id', $ed[$i]->department_id)->first();
+
+				$ed[$i]->department = $curr_dept->department;
+			}
+			else
+			{
+				$ed[$i]->department = "NULL";
+			}
+
+
+
+		}
+
 
 		if($age_18_24 == null) {$age_18_24 = 0;};
 		if($age_25_31 == null) {$age_25_31 = 0;};
@@ -144,7 +209,7 @@ class ReportsController extends Controller
 		}
 		$yc = ($yhc == null) ? null : implode(', ', $yhc) . ',' ;
 
-		$orgProfile = table::companydata()->get();
+		$orgProfile = table::people()->get();
 		table::reportviews()->where('report_id', 5)->update(array('last_viewed' => $today));
 
 		return view('admin.reports.report-organization-profile', compact('orgProfile', 'age_group', 'gc', 'dgc', 'cg', 'csc', 'yc', 'yhc', 'dc', 'dpc', 'dcc', 'cc'));
@@ -166,7 +231,7 @@ class ReportsController extends Controller
 		if (permission::permitted('reports')=='fail'){ return redirect()->route('denied'); }
 		//if($request->sh == 2){return redirect()->route('reports');}
 		$today = date('M, d Y');
-		$userAccs = table::users()->get();
+		$userAccs = table::people()->get();
 		table::reportviews()->where('report_id', 6)->update(['last_viewed' => $today]);
 
 		return view('admin.reports.report-user-accounts', compact('userAccs'));

@@ -58,7 +58,7 @@
                                 @endisset
                             </td>
                         </tr>
-                        <tr>
+                        <!-- <tr>
                             <td><a href="{{ url('reports/employee-schedule') }}"><i class="ui icon calendar alternate outline"></i> Employee Schedule Report</a></td>
                             <td class="odd">
                                 @isset($lastviews)
@@ -69,7 +69,7 @@
                                     @endforeach
                                 @endisset
                             </td>
-                        </tr>
+                        </tr> -->
                         <tr>
                             <td><a href="{{ url('reports/organization-profile') }}"><i class="ui icon chart pie"></i> Organization's Profile</a></td>
                             <td class="odd">

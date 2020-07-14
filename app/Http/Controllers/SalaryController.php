@@ -228,21 +228,27 @@ class SalaryController extends Controller
     // Salary Calculation
     public function calculate_salary(Request $request)
     {
-      $month = $request->month;
-      $year = $request->year;
-      // dd($month, $year);
+      $datefrom = $request->datefrom;
+      $dateto = $request->dateto;
+
+      $month = Carbon::parse($datefrom)->format('m');
+      $year = Carbon::parse($dateto)->format('Y');
 
       $days_in_this_month = cal_days_in_month(CAL_GREGORIAN,$month,$year);
 
       $all_employee = table::people()->get();
 
-      $all_holidays = table::holidays()->where('month', $month)->first();
-      if ($all_holidays) {
-        $holidays = explode(",", $all_holidays->dates);
-        $total_holidays = sizeof($holidays);
-      }else {
-        $total_holidays = 0;
-      }
+      // $all_holidays = table::holidays()->where('month', $month)->first();
+      //
+      // if ($all_holidays) {
+      //   $holidays = explode(",", $all_holidays->dates);
+      //   dd($holidays[0]);
+      //   $total_holidays = sizeof($holidays);
+      // }else {
+      //   $total_holidays = 0;
+      // }
+
+      $total_holidays = 0;
 
       $salary_collection = collect([]);
       $hourly_salary_collection = collect([]);
@@ -256,7 +262,7 @@ class SalaryController extends Controller
         $total_paid_office_hours = 0.0;
 
         // Checks all attendance
-        $all_attendance = table::attendance()->where('reference',$employee->id)->whereMonth('timein', $month)->whereYear('timein', $year)->get();
+        $all_attendance = table::attendance()->where('reference',$employee->id)->whereBetween('timein', [$datefrom, $dateto])->get();
 
         if (sizeof($all_attendance) > 0) {
           $employee_salary = table::employee_salary()->where('reference', $employee->id)->first();
@@ -265,7 +271,12 @@ class SalaryController extends Controller
           $total_attendance = sizeof($all_attendance);
 
           // Checks all leaves
-          $all_leaves = table::leaves()->where('reference', $employee->id)->where('status', 'Approved')->whereMonth('leavefrom', $month)->whereYear('leavefrom', $year)->get();
+          $all_leaves = table::leaves()->where('reference', $employee->id)->where('status', 'Approved')->whereBetween('created_at', [$datefrom, $dateto])->get();
+          if ($all_leaves->count()) {
+            dd($all_leaves);
+          }else{
+
+          }
 
           if (sizeof($all_leaves) > 0) {
             $total_leaves = sizeof($all_leaves);

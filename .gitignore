@@ -22,3 +22,4 @@ public/assets/login_faces/*
 .idea/php.xml
 .idea/*
 westacebd/*
+detector/knn.pkl

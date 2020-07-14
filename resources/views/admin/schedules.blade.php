@@ -17,7 +17,7 @@
 
     @section('content')
     @include('admin.modals.modal-add-schedule')
-
+    
     <div class="container-fluid">
         <div class="row">
             <h2 class="page-title">Schedules
@@ -32,6 +32,7 @@
               <tr><th>Employee</th>
               <th>Schedule</th>
               <th>Assigned Date</th>
+              <th>Actions</th>
             </tr></thead>
             <tbody>
               @isset($active_schedule_collection)
@@ -40,6 +41,10 @@
                     <td data-label="Name">{{$sched->employee}}</td>
                     <td data-label="Age">{{$sched->template}}</td>
                     <td data-label="Job">{{$sched->created_at}}</td>
+                    <td>
+                        <a href="{{ url('/schedules/details/'.$sched->employee_id) }}" class="ui icon button">
+                          <i class="align justify icon"></i>
+                        </a></td>
                   </tr>
                 @endforeach
               @endisset

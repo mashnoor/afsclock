@@ -28,32 +28,52 @@ class PersonalAttendanceController extends Controller
 
         $attendanceID = request()->attendanceID;
 
+        // return $attendanceID;
+
         if ($attendanceID) {
           $all_breaks = table::daily_breaks()->where('attendance_id', $attendanceID)->get();
 
-          $total_working_hour = 0;
-          $total_hours = 0;
-          $toal_working_minute_new = 0;
+          // return count($all_breaks);
 
-          foreach ($all_breaks as $break) {
-            $time1 = Carbon::parse($break->start_at);
-            $time2 = Carbon::parse($break->end_at);
+          if (count($all_breaks) > 0) {
 
-            $th = $time1->diffInHours($time2);
-            $tm = floor(($time1->diffInMinutes($time2) - (60 * $th)));
-            // $totalhour = $th.".".$tm;
 
-            $total_hours += $th;
-            $toal_working_minute_new += $tm;
 
+            $total_break_minute = 0;
+
+            foreach ($all_breaks as $break) {
+              $time1 = Carbon::parse($break->start_at);
+              $time2 = Carbon::parse($break->end_at);
+
+              // $th = $time1->diffInHours($time2);
+              $tm = ($time1->diffInMinutes($time2));
+              // $totalhour = $th.".".$tm;
+
+              // $total_hours += $th;
+              $total_break_minute += $tm;
+            }
+
+            if ($total_break_minute >= 60 ) {
+
+              $converted_hour_from_minute = (int)($total_break_minute / 60);
+              $remaining_minutes = $total_break_minute - ($converted_hour_from_minute * 60);
+              $total_break = "Total ".$converted_hour_from_minute." Hour and ".$remaining_minutes." Minutes";
+              return response()->json([$all_breaks, $total_break]);
+            }else {
+              $total_break = "Total ".$total_break_minute." Minutes";
+              return response()->json([$all_breaks, $total_break]);
+            }
+
+
+            return $converted_hour_from_minute;
+
+            return response()->json([$all_breaks, $total_working_hour]);
+          }else {
+            return response()->json(NULL);
           }
 
-          $total_working_hour = $total_hours.".".$toal_working_minute_new;
-
-
-          return response()->json([$all_breaks, $total_working_hour]);
         }else {
-          return response()->json();
+          return response()->json(NULL);
         }
     }
 

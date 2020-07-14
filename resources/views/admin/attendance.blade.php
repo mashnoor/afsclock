@@ -248,51 +248,60 @@
 
 
             $.get(url + '/personal/attendance/details', { attendanceID: attendanceID }, function(data){
+                // console.log(data);
+                // If there exist break informations
+                if (data) {
+                  BreakTbody.innerHTML = "";
 
-                BreakTbody.innerHTML = "";
+                  var breaks = data[0];
+                  var break_hour = data[1];
 
-                var breaks = data[0];
-                var break_hour = data[1];
+                  var break_hour_element = document.getElementById("breakHour"+attendanceID);
+                  break_hour_element.innerHTML = "";
+                  if (break_hour) {
+                    break_hour_element.innerHTML += ""+ break_hour + "";
 
-                var break_hour_element = document.getElementById("breakHour"+attendanceID);
-                break_hour_element.innerHTML = "";
+                  }else {
+                    break_hour_element.innerHTML += "Did not take a break";
 
-                if (break_hour > 0) {
-                  var res_hr = break_hour.split(".");
-                  break_hour_element.innerHTML += ""+ res_hr[0] +" hour "+ res_hr[1] + " minutes";
-                }else{
-                  break_hour_element.innerHTML += "Did not take a break.";
-                }
-
-                if (breaks) {
-
-                  for(i = 0; i <= breaks.length; i++){
-                      if(breaks[i]){
-
-                        var end_time = "";
-                        if (breaks[i].end_at) {
-                          end_time = breaks[i].end_at;
-                          var res = end_time.split(" ");
-                          end_time = res[1];
-                        }
-                        else {
-                          end_time = "Ongoing";
-                        }
-
-                        var start_time = breaks[i].start_at;
-                        var res = start_time.split(" ");
-                        start_time = res[1];
-
-                          BreakTbody.innerHTML += "<tr>" +
-                              "<td>"+ start_time +"</td>" +
-                              "<td>" + end_time + "</td>"
-                              +"</tr>";
-                      }
                   }
-                }else{
+
+                  if (breaks) {
+
+                    for(i = 0; i <= breaks.length; i++){
+                        if(breaks[i]){
+
+                          var end_time = "";
+                          if (breaks[i].end_at) {
+                            end_time = breaks[i].end_at;
+                            var res = end_time.split(" ");
+                            end_time = res[1];
+                          }
+                          else {
+                            end_time = "Ongoing";
+                          }
+
+                          var start_time = breaks[i].start_at;
+                          var res = start_time.split(" ");
+                          start_time = res[1];
+
+                            BreakTbody.innerHTML += "<tr>" +
+                                "<td>"+ start_time +"</td>" +
+                                "<td>" + end_time + "</td>"
+                                +"</tr>";
+                        }
+                    }
+                  }else{
+
+                  }
+                }
+                // If there exist no break records
+                else{
+                  BreakTbody.innerHTML = "<h1>No break Data found</h1>";
 
                 }
-            })
+                // console.log(data);
+          })
 
           }
 

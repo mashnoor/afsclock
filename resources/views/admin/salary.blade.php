@@ -5,6 +5,9 @@
     <meta name="description"
           content="Attendance Keeper attendance, view all employee attendances, clock-in, edit, and delete attendances.">
 @endsection
+@section('styles')
+    <link href="{{ asset('/assets/vendor/air-datepicker/dist/css/datepicker.min.css') }}" rel="stylesheet">
+@endsection
 
 @section('content')
 
@@ -24,30 +27,19 @@
       <div class="col-6 py-5">
         <form class="ui form" method="post" action="{{ url('admin/calculate_salary')}}">
           @csrf
+
+
           <div class="field">
-            <h4>Month</h4>
-            <select class="ui search dropdown getid uppercase" name="month">
-                <option value="1" data-id="JAN">January</option>
-                <option value="2" data-id="FEB">February</option>
-                <option value="3" data-id="MAR">March</option>
-                <option value="4" data-id="JAN">April</option>
-                <option value="5" data-id="JAN">May</option>
-                <option value="6" data-id="JUN">June</option>
-                <option value="7" data-id="JUL">July</option>
-                <option value="8" data-id="AUG">August</option>
-                <option value="9" data-id="SEP">September</option>
-                <option value="10" data-id="OCT">October</option>
-                <option value="11" data-id="NOV">November</option>
-                <option value="12" data-id="DEC">December</option>
-            </select>
+              <input id="datefrom" type="text" name="datefrom" value="" placeholder="Start Date" class="airdatepicker" autocomplete="off">
+              <i class="ui icon calendar alternate outline calendar-icon"></i>
           </div>
 
           <div class="field">
-            <h4>Year</h4>
-            <select class="ui search dropdown getid uppercase" name="year">
-                <option value="2020" data-id="2020">2020</option>
-            </select>
+              <input id="dateto" type="text" name="dateto" value="" placeholder="End Date" class="airdatepicker" autocomplete="off">
+              <i class="ui icon calendar alternate outline calendar-icon"></i>
           </div>
+
+
 
 
           <button class="ui button blue ml-2" type="submit"><i class="calculator icon"></i> Calculate Salary</button>
@@ -61,5 +53,11 @@
 @endsection
 
 @section('scripts')
+<script src="{{ asset('/assets/vendor/air-datepicker/dist/js/datepicker.min.js') }}"></script>
+<script src="{{ asset('/assets/vendor/air-datepicker/dist/js/i18n/datepicker.en.js') }}"></script>
+
+<script type="text/javascript">
+  $('.airdatepicker').datepicker({ language: 'en', dateFormat: 'yyyy-mm-dd' });
+</script>
 
 @endsection

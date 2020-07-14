@@ -13,13 +13,14 @@ use App\User;
 
 
 class AssignedSchedule {
-
+    public $employee_id = '';
     public $employee = '';
     public $template = '';
     public $created_at = '';
 
-    public function __construct($employee, $template, $created_at)
+    public function __construct($employee_id,$employee, $template, $created_at)
     {
+        $this->employee_id = $employee_id;
         $this->employee = $employee;
         $this->template = $template;
         $this->created_at = $created_at;
@@ -44,7 +45,7 @@ class SchedulesController extends Controller
           $user = User::find($a_shcedule->reference);
           // $user = table::people()->where('id',$a_shcedule->reference)->first();
           $template = table::sch_template()->where('id', $a_shcedule->schedule_id)->first();
-          $active_schedule_collection->push(new AssignedSchedule($user->firstname." ".$user->lastname, $template->name, $a_shcedule->created_at));
+          $active_schedule_collection->push(new AssignedSchedule($user->id,$user->firstname." ".$user->lastname, $template->name, $a_shcedule->created_at));
         }
 
         return view('admin.schedules', compact('employee','sch_templates','active_schedule_collection'));
@@ -293,5 +294,19 @@ class SchedulesController extends Controller
 
     	return redirect('schedules')->with('success','Schedule has been archived.');
    	}
+
+    public function details($id)
+    {
+      $employee = table::people()->where('id', $id)->first();
+      if ($employee) {
+        $current_schedule = table::schedules()->where([['reference', $employee->id],['active_status', 1]])->first();
+        $sch_template = table::sch_template()->where('id', $current_schedule->id)->first();
+
+        return view('admin.schedule-details', compact('sch_template','employee'));
+      }
+      else{
+        return redirect('schedules')->with('error','Sorry! Did not find anything to show');
+      }
+    }
 
 }

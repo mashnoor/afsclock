@@ -22,7 +22,7 @@
                         <thead>
                             <tr>
                                 <th>Employee Name</th>
-                                <th>Email</th>
+                                <th>Company Email</th>
                                 <th>Account Type</th>
                                 <th>Status</th>
                             </tr>
@@ -31,8 +31,8 @@
                             @isset($userAccs)
                             @foreach ($userAccs as $v)
                                 <tr>
-                                    <td>{{ $v->name }}</td>
-                                    <td>{{ $v->email }}</td>
+                                    <td>{{ $v->firstname }} {{ $v->lastname }}</td>
+                                    <td>{{ $v->companyemail }}</td>
                                     <td>@if( $v->acc_type == 2) Admin @else Employee @endif</td>
                                     <td>@if($v->status == 1) Active @endif @if($v->status == 0) Disabled @endif</td>
                                 </tr>

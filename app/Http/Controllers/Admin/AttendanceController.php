@@ -143,17 +143,20 @@ class AttendanceController extends Controller
         if (permission::permitted('attendance-edit')=='fail') { return redirect()->route('denied'); }
 
         $attendanceID = request()->attendanceID;
-
-        return response()->json($attendanceID);
-
         $theAttendance = table::attendance()->where('id', $attendanceID)->first();
 
         if ($theAttendance) {
           $all_breaks = table::daily_breaks()->where([['reference', $theAttendance->reference],['attendance_id', $theAttendance->id]])->get();
-
+          if (empty($all_breaks)) {
+            return response()-json(NULL);
+          }else {
+            return response()->json( $all_breaks);
+          }
+        }else {
+          return response()->json(NULL);
         }
 
-        return response()->json( $all_breaks);
+
 
     }
 

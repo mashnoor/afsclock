@@ -130,7 +130,7 @@ Route::group(['middleware' => 'auth'], function () {
 			Route::post('schedules/update', 'Admin\SchedulesController@update');
 			Route::get('schedules/delete/{id}', 'Admin\SchedulesController@delete');
 			Route::get('schedules/archive/{id}', 'Admin\SchedulesController@archive');
-
+			Route::get('schedules/details/{id}', 'Admin\SchedulesController@details');
             /*
             |--------------------------------------------------------------------------
             | Employee Task Manager

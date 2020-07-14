@@ -36,6 +36,15 @@
                             @foreach ($empList as $et)
                                 <tr>
                                     <td>{{ $et->lastname }}, {{ $et->firstname }} {{ $et->mi }}</td>
+                                    @php
+                                    $now = new DateTime();
+                                    $bday = new DateTime($et->birthday);
+
+                                    $difference = $now->diff($bday);
+
+                                    $et->age = $difference->format("%y years");
+
+                                    @endphp
                                     <td>{{ $et->age }}</td>
                                     <td>{{ $et->gender }}</td>
                                     <td>{{ $et->civilstatus }}</td>

@@ -212,7 +212,10 @@
 
 
           for (var i = 0; i < data.length; i++) {
-            report_tbody.innerHTML += "<tr><td>"+ data[0].timein +"</td><td>"+ data[0].employee +"</td><td>"+ data[0].timein +"</td><td>"+ data[0].timein +"</td><td>"+ data[0].totalhours +"</td></tr>";
+            var total_working_hour = data[0].totalhours;
+            var hr_array = total_working_hour.split(".");
+
+            report_tbody.innerHTML += "<tr><td>"+ data[0].timein +"</td><td>"+ data[0].employee +"</td><td>"+ data[0].timein +"</td><td>"+ data[0].timein +"</td><td>"+hr_array[0]+" hr " + hr_array[1]+ "mins" + "</td></tr>";
           }
 
         })

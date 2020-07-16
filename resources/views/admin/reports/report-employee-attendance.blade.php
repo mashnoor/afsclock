@@ -38,18 +38,18 @@
                             <input id="EmployeeIDhiddenField" type="hidden" name="emp_id">
 
                             <div class="seven wide field">
-                                <input id="smartsearch" type="text" name="smartsearch" value="" placeholder="Search anything" onkeyup="getEmployeeAttendance()">
+                                <input id="smartsearch" type="text" name="smartsearch" value="" placeholder="Search anything" onkeyup="getEmployeeAttendance()" autocomplete="off">
                             </div>
 
 
 
                             <div class="two wide field">
-                                <input id="datefrom" type="text" name="datefrom" value="" placeholder="Start Date" class="airdatepicker">
+                                <input id="datefrom" type="text" name="datefrom" value="" placeholder="Start Date" class="airdatepicker" autocomplete="off">
                                 <i class="ui icon calendar alternate outline calendar-icon"></i>
                             </div>
 
                             <div class="two wide field">
-                                <input id="dateto" type="text" name="dateto" value="" placeholder="End Date" class="airdatepicker">
+                                <input id="dateto" type="text" name="dateto" value="" placeholder="End Date" class="airdatepicker" autocomplete="off">
                                 <i class="ui icon calendar alternate outline calendar-icon"></i>
                             </div>
 
@@ -121,6 +121,8 @@
     <script src="{{ asset('/assets/vendor/air-datepicker/dist/js/i18n/datepicker.en.js') }}"></script>
 
     <script type="text/javascript">
+
+
     $('#dataTables-example').DataTable({responsive: true,pageLength: 15,lengthChange: false,searching: false,ordering: true});
 
     $('.airdatepicker').datepicker({ language: 'en', dateFormat: 'yyyy-mm-dd' });
@@ -210,12 +212,13 @@
 
           }
 
+          console.log(data);
 
           for (var i = 0; i < data.length; i++) {
-            var total_working_hour = data[0].totalhours;
+            var total_working_hour = data[i].totalhours;
             var hr_array = total_working_hour.split(".");
 
-            report_tbody.innerHTML += "<tr><td>"+ data[0].timein +"</td><td>"+ data[0].employee +"</td><td>"+ data[0].timein +"</td><td>"+ data[0].timein +"</td><td>"+hr_array[0]+" hr " + hr_array[1]+ "mins" + "</td></tr>";
+            report_tbody.innerHTML += "<tr><td>"+ data[i].timein +"</td><td>"+ data[i].employee +"</td><td>"+ data[i].timein +"</td><td>"+ data[i].timein +"</td><td>"+hr_array[0]+" hr " + hr_array[1]+ "mins" + "</td></tr>";
           }
 
         })

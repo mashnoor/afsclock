@@ -241,11 +241,8 @@
             $("div[name="+"md"+attendanceID+"]").modal('show');
           });
 
-
             var BreakTbody = document.getElementById("break_tbody"+attendanceID);
-
             var url = document.getElementById('_url').textContent;
-
 
             $.get(url + '/personal/attendance/details', { attendanceID: attendanceID }, function(data){
                 // console.log(data);
@@ -260,10 +257,8 @@
                   break_hour_element.innerHTML = "";
                   if (break_hour) {
                     break_hour_element.innerHTML += ""+ break_hour + "";
-
                   }else {
                     break_hour_element.innerHTML += "Did not take a break";
-
                   }
 
                   if (breaks) {

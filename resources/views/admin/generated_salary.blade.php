@@ -26,7 +26,7 @@
     <th>Name</th>
     <th>Salary Type</th>
     <th>Monthly Salary</th>
-    <th>Absent Days</th>
+    <th>Working Days</th>
     <th>Calculated Salary</th>
   </tr></thead>
   <tbody>
@@ -37,7 +37,7 @@
       <td data-label="Age">{{ $salary->employee }}</td>
       <td data-label="Job">Monthly</td>
       <td data-label="id">{{ $salary->gross_salary }}</td>
-      <td data-label="Age">{{ $salary->absent_days }}</td>
+      <td data-label="Age">{{ $salary->office_days }}</td>
       <td data-label="Job">{{ $salary->calculated_salary}} <span class="text-uppercase">{{ $salary->currency}}</span></td>
     </tr>
     @endforeach
@@ -57,7 +57,7 @@
     <th>Salary Type</th>
     <th>Total Hours</th>
     <th>Hourly Salary</th>
-    <th>Absent Days</th>
+    <th>Working Days</th>
     <th>Calculated Salary</th>
   </tr></thead>
   <tbody>
@@ -91,7 +91,7 @@
 
       </td>
       <td data-label="id">{{ $salary->gross_salary }}</td>
-      <td data-label="Age">{{ $salary->absent_days }}</td>
+      <td data-label="Age">{{ $salary->office_days }}</td>
       <td data-label="Job">{{ $salary->calculated_salary}} <span class="text-uppercase">{{ $salary->currency}}</span></td>
     </tr>
     @endforeach

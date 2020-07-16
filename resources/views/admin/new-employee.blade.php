@@ -76,11 +76,11 @@
                             <div class="two fields">
                                 <div class="field">
                                     <label>Email Address (Personal)</label>
-                                    <input type="email" name="emailaddress" value="" class="lowercase">
+                                    <input type="email" name="emailaddress" value="" class="lowercase" autocomplete="off">
                                 </div>
                                 <div class="field">
                                     <label>Mobile Number*</label>
-                                    <input type="text" required class="" name="mobileno" value="">
+                                    <input type="text" required class="" name="mobileno" value="" autocomplete="off">
                                 </div>
                             </div>
                             <div class="field">
@@ -142,16 +142,36 @@
                             </div> -->
                             <div class="field">
                               <label>Company</label>
-                              <input type="text" list="company" name="company" class="ui search uppercase department required"/>
+                              <input type="text" list="company" name="company" class="ui search uppercase department required" autocomplete="off">
+                              @isset($company)
+                              <datalist id="company">
+                                @foreach($company as $data)
+                                <option>{{$data->company}}</option>
+                                @endforeach
+                              </datalist>
+                              @endisset
                             </div>
                             <div class="field">
                               <label>Department*</label>
-                              <input type="text" list="department" name="department" class="ui search uppercase department" required/>
+                              <input type="text" list="department" name="department" class="ui search uppercase department" required autocomplete="off">
+                              @isset($department)
+                              <datalist id="department">
+                                @foreach($department as $data)
+                                <option>{{$data->department}}</option>
+                                @endforeach
+                              </datalist>
+                              @endisset
                             </div>
                             <div class="field">
                               <label>Job Title / Position*</label>
-                              <input type="text" list="jobtitle" name="jobtitle" class="ui search uppercase department" required/>
-
+                              <input type="text" list="jobtitle" name="jobtitle" class="ui search uppercase department" required autocomplete="off">
+                              @isset($jobtitle)
+                              <datalist id="jobtitle">
+                                @foreach($jobtitle as $data)
+                                <option>{{$data->jobtitle}}</option>
+                                @endforeach
+                              </datalist>
+                              @endisset
                             </div>
                             <!-- <div class="field">
                                 <label>Job Title / Position*</label>
@@ -177,11 +197,11 @@
                             </div> -->
                             <div class="field">
                                 <label>ID Number</label>
-                                <input type="text" class="uppercase" name="idno" value="">
+                                <input type="text" class="uppercase" name="idno" value="" autocomplete="off">
                             </div>
                             <div class="field">
                                 <label>Email Address (Company)</label>
-                                <input type="email" name="companyemail" value="" class="lowercase">
+                                <input type="email" name="companyemail" value="" class="lowercase" autocomplete="off">
                             </div>
                             <h4 class="ui dividing header">Employment Information</h4>
                             <div class="field">

@@ -19,7 +19,7 @@
 
             <div class="field">
                 <label for="">Title</label>
-                <input type="text" placeholder="Task Title" name="title"/>
+                <input type="text" placeholder="Task Title" name="title" autocomplete="off">
             </div>
 
 
@@ -34,7 +34,7 @@
 
                 <div class="form-group">
 
-                    <input type='text' id="datetimepicker" name="deadline" class="form-control" />
+                    <input type='text' id="datetimepicker" name="deadline" class="form-control" autocomplete="off">
 
                 </div>
             </div>

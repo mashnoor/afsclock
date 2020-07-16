@@ -10,7 +10,6 @@
 
 <table class="ui celled table">
   <thead>
-    <tr><th>ID</th>
     <th>User ID</th>
     <th>Last Seen</th>
   </tr></thead>
@@ -18,7 +17,6 @@
     @isset($webcam_data)
         @foreach ($webcam_data as $d)
           <tr>
-            <td>{{$d->id}}</td>
             <td>{{$d->idno}}</td>
             <td>{{$d->last_seen}}</td>
           </tr>

@@ -130,13 +130,18 @@ class ExportsController extends Controller
 	function attendanceReport(Request $request)
 	{
 		if (permission::permitted('reports')=='fail'){ return redirect()->route('denied'); }
-		$id =(int)$request->emp_id;
+		// $id =(int)$request->emp_id;
+		$name = $request->smartsearch;
 		$datefrom = $request->datefrom;
 		$dateto = $request->dateto;
 
-		if ($id == null AND $datefrom == null AND $dateto == null)
+		// dd($name);
+
+
+
+		if ($name == null AND $datefrom == null AND $dateto == null)
 		{
-			$data = table::daily_attendance()->get();
+			$data = table::attendance()->get();
 
 			$date = date('Y-m-d');
 			$time = date('h-i-sa');
@@ -146,8 +151,7 @@ class ExportsController extends Controller
 
 			foreach ($data as $d)
 			{
-
-				Storage::prepend($file, $d->id .','. $d->idno .','. date('d-m-Y', strtotime($d->created_at)) .','. $d->employee .','. date('H:i:s', strtotime($d->created_at)) .','. date('H:i:s', strtotime($d->updated_at)) .','. $d->totalhours .','. $d->status_timein .','. $d->status_timeout);
+				Storage::prepend($file, $d->id .','. $d->idno .','. date('d-m-Y', strtotime($d->timein)) .','. $d->employee .','. date('H:i:s', strtotime($d->timein)) .','. date('H:i:s', strtotime($d->timeout)) .','. $d->totalhours .','. $d->status_timein .','. $d->status_timeout);
 			}
 
 			Storage::prepend($file, '"ID"' .','. 'IDNO' .','. 'DATE' .','. 'EMPLOYEE' .','. 'TIME IN' .','. 'TIME OUT' .','. 'TOTAL HOURS' .','. 'STATUS-IN' .','. 'STATUS-OUT');
@@ -155,9 +159,13 @@ class ExportsController extends Controller
 			return Storage::download($file);
 		}
 
-		if ($id !== null AND $datefrom !== null AND $dateto !== null)
+		if ($name !== null AND $datefrom !== null AND $dateto !== null)
 		{
-			$data = table::daily_attendance()->where('reference', $id)->whereBetween('created_at', [$datefrom, $dateto])->get();
+			// $data = table::attendance()->where('reference', $id)->whereBetween('created_at', [$datefrom, $dateto])->get();
+
+			$data = table::attendance()->where('employee','LIKE','%'.$name.'%')->whereBetween('timein', [$datefrom, $dateto])->orWhere('idno','LIKE','%'.$name.'%')->whereBetween('timein', [$datefrom, $dateto])->get();
+
+
 			$date = date('Y-m-d');
 			$time = date('h-i-sa');
 			$file = 'attendance-reports-'.$date.'T'.$time.'.csv';
@@ -166,7 +174,7 @@ class ExportsController extends Controller
 
 			foreach ($data as $d)
 			{
-				Storage::prepend($file, $d->id .','. $d->idno .','. date('d-m-Y', strtotime($d->created_at)) .','. $d->employee .','. date('H:i:s', strtotime($d->created_at)) .','. date('H:i:s', strtotime($d->updated_at)) .','. $d->totalhours .','. $d->status_timein .','. $d->status_timeout);
+				Storage::prepend($file, $d->id .','. $d->idno .','. date('d-m-Y', strtotime($d->timein)) .','. $d->employee .','. date('H:i:s', strtotime($d->timein)) .','. date('H:i:s', strtotime($d->timeout)) .','. $d->totalhours .','. $d->status_timein .','. $d->status_timeout);
 
 				// Storage::prepend($file, $d->id .','. $d->idno .','. $d->created_at .','. '"'.$d->employee.'"' .','. $d->timein .','. $d->timeout .','. $d->totalhours .','. $d->status_timein .','. $d->status_timeout);
 			}
@@ -176,9 +184,9 @@ class ExportsController extends Controller
 			return Storage::download($file);
 		}
 
-		if($id !== null AND $datefrom == null AND $dateto == null )
+		if($name !== null AND $datefrom == null AND $dateto == null )
 		{
-			$data = table::daily_attendance()->where('reference', $id)->get();
+			$data = table::attendance()->where('employee','LIKE','%'.$name.'%')->get();
 			$date = date('Y-m-d');
 			$time = date('h-i-sa');
 			$file = 'attendance-reports-'.$date.'T'.$time.'.csv';
@@ -187,7 +195,7 @@ class ExportsController extends Controller
 
 			foreach ($data as $d)
 			{
-				Storage::prepend($file, $d->id .','. $d->idno .','. date('d-m-Y', strtotime($d->created_at)) .','. $d->employee .','. date('H:i:s', strtotime($d->created_at)) .','. date('H:i:s', strtotime($d->updated_at)) .','. $d->totalhours .','. $d->status_timein .','. $d->status_timeout);
+				Storage::prepend($file, $d->id .','. $d->idno .','. date('d-m-Y', strtotime($d->timein)) .','. $d->employee .','. date('H:i:s', strtotime($d->timein)) .','. date('H:i:s', strtotime($d->timeout)) .','. $d->totalhours .','. $d->status_timein .','. $d->status_timeout);
 
 				// Storage::prepend($file, $d->id .','. $d->idno .','. $d->created_at .','. '"'.$d->employee.'"' .','. $d->timein .','. $d->timeout .','. $d->totalhours .','. $d->status_timein .','. $d->status_timeout);
 			}
@@ -197,9 +205,9 @@ class ExportsController extends Controller
 			return Storage::download($file);
 		}
 
-		if ($id == null AND $datefrom !== null AND $dateto !== null)
+		if ($name == null AND $datefrom !== null AND $dateto !== null)
 		{
-			$data = table::daily_attendance()->whereBetween('created_at', [$datefrom, $dateto])->get();
+			$data = table::attendance()->whereBetween('timein', [$datefrom, $dateto])->get();
 			$date = date('Y-m-d');
 			$time = date('h-i-sa');
 			$file = 'attendance-reports-'.$date.'T'.$time.'.csv';
@@ -208,7 +216,7 @@ class ExportsController extends Controller
 
 			foreach ($data as $d)
 			{
-				Storage::prepend($file, $d->id .','. $d->idno .','. date('d-m-Y', strtotime($d->created_at)) .','. $d->employee .','. date('H:i:s', strtotime($d->created_at)) .','. date('H:i:s', strtotime($d->updated_at)) .','. $d->totalhours .','. $d->status_timein .','. $d->status_timeout);
+				Storage::prepend($file, $d->id .','. $d->idno .','. date('d-m-Y', strtotime($d->timein)) .','. $d->employee .','. date('H:i:s', strtotime($d->timein)) .','. date('H:i:s', strtotime($d->timeout)) .','. $d->totalhours .','. $d->status_timein .','. $d->status_timeout);
 
 				// Storage::prepend($file, $d->id .','. $d->idno .','. $d->created_at .','. '"'.$d->employee.'"' .','. $d->timein .','. $d->timeout .','. $d->totalhours .','. $d->status_timein .','. $d->status_timeout);
 			}

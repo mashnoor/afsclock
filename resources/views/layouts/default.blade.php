@@ -98,12 +98,12 @@
                     <p>Settings</p>
                 </a>
             </li>
-            <li>
+            <!-- <li>
               <a href="{{ url('webcam_feed') }}">
                 <i class="ui icon video"></i>
                 <p>Webcam Data</p>
               </a>
-            </li>
+            </li> -->
             <li>
               <a href="{{ url('admin/salary') }}">
                 <i class="ui icon dollar sign"></i>

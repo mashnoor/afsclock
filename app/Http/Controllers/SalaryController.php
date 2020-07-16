@@ -33,17 +33,17 @@ class MonthlySalary{
     public $salary_type = '';
     public $calculated_salary = '';
     public $currency = '';
-    public $absent_days = '';
+    public $office_days = '';
     public $gross_salary = '';
 
-    public function __construct($id, $employee, $salary_type, $calculated_salary, $currency, $absent_days, $gross_salary)
+    public function __construct($id, $employee, $salary_type, $calculated_salary, $currency, $office_days, $gross_salary)
     {
         $this->id = $id;
         $this->employee = $employee;
         $this->salary_type = $salary_type;
         $this->calculated_salary = $calculated_salary;
         $this->currency = $currency;
-        $this->absent_days = $absent_days;
+        $this->office_days = $office_days;
         $this->gross_salary = $gross_salary;
     }
 }
@@ -56,10 +56,10 @@ class HourlySalary{
     public $total_hours = '';
     public $calculated_salary = '';
     public $currency = '';
-    public $absent_days = '';
+    public $office_days = '';
     public $gross_salary = '';
 
-    public function __construct($id, $employee, $salary_type, $total_hours,$calculated_salary, $currency, $absent_days, $gross_salary)
+    public function __construct($id, $employee, $salary_type, $total_hours,$calculated_salary, $currency, $office_days, $gross_salary)
     {
         $this->id = $id;
         $this->employee = $employee;
@@ -67,7 +67,7 @@ class HourlySalary{
         $this->total_hours = $total_hours;
         $this->calculated_salary = $calculated_salary;
         $this->currency = $currency;
-        $this->absent_days = $absent_days;
+        $this->office_days = $office_days;
         $this->gross_salary = $gross_salary;
     }
 }
@@ -264,28 +264,30 @@ class SalaryController extends Controller
         // Checks all attendance
         $all_attendance = table::attendance()->where('reference',$employee->id)->whereBetween('timein', [$datefrom, $dateto])->get();
 
-        if (sizeof($all_attendance) > 0) {
+        if ($all_attendance->count() > 0) {
           $employee_salary = table::employee_salary()->where('reference', $employee->id)->first();
           if ($employee_salary) {
 
           $total_attendance = sizeof($all_attendance);
 
-          // Checks all leaves
-          $all_leaves = table::leaves()->where('reference', $employee->id)->where('status', 'Approved')->whereBetween('created_at', [$datefrom, $dateto])->get();
-          if ($all_leaves->count()) {
-            dd($all_leaves);
-          }else{
+          // // Checks all leaves
+          // $all_leaves = table::leaves()->where('reference', $employee->id)->where('status', 'Approved')->whereBetween('created_at', [$datefrom, $dateto])->get();
+          // if ($all_leaves->count()) {
+          //   dd($all_leaves);
+          // }else{
+          //
+          // }
+          //
+          // if (sizeof($all_leaves) > 0) {
+          //   $total_leaves = sizeof($all_leaves);
+          // }
+          // else {
+          //   $total_leaves = 0;
+          // }
 
-          }
+          $total_leaves = 0;
 
-          if (sizeof($all_leaves) > 0) {
-            $total_leaves = sizeof($all_leaves);
-          }
-          else {
-            $total_leaves = 0;
-          }
-
-          $employee_salary = table::employee_salary()->where('reference', $employee->id)->first();
+          // $employee_salary = table::employee_salary()->where('reference', $employee->id)->first();
           $salary_amount = $employee_salary->gross_salary;
           $salary_currency = $employee_salary->currency;
           $salary_type = (int)$employee_salary->salary_type;
@@ -297,13 +299,12 @@ class SalaryController extends Controller
             $daily_salary = $salary_amount / $days_in_this_month;
             $this_month_salary = $total_paid_office_days * $daily_salary;
             $absent_days = $days_in_this_month - $total_paid_office_days;
-            $salary_collection->push(new MonthlySalary($employee_salary->id, $employee->lastname, $salary_type, (int)$this_month_salary, $employee_salary->currency, $absent_days, $salary_amount));
+            $salary_collection->push(new MonthlySalary($employee_salary->id, $employee->lastname, $salary_type, (int)$this_month_salary, $employee_salary->currency, $total_paid_office_days, $salary_amount));
           }
           // If salary type is Hourly
           elseif($salary_type == 2){
             $total_schedule_id_found = 0;
             $truely_total_office_minutes = 0;
-
 
             foreach($all_attendance as $attendance)
             {
@@ -324,6 +325,8 @@ class SalaryController extends Controller
                 $total_office_calculated_hours += $hours;
                 $total_office_calculated_minutes += $minutes;
 
+                // dd($total_office_calculated_minutes);
+
                 // Break Taken
                 $all_breaks = table::daily_breaks()->where([['reference', $employee->id],['attendance_id', $attendance->id]])->get();
                 // dd($all_breaks);
@@ -338,16 +341,24 @@ class SalaryController extends Controller
                       $end_at = date("Y-m-d h:i:s A", strtotime($break->end_at));
                       $time1 = Carbon::createFromFormat("Y-m-d h:i:s A", $start_at);
                       $time2 = Carbon::createFromFormat("Y-m-d h:i:s A", $end_at);
-                      $th = $time1->diffInHours($time2);
-                      $tm = floor(($time1->diffInMinutes($time2) - (60 * $th)));
-                      $break_duration = floatval($th.".".$tm);
-                      $total_break_hour += $th;
+                      // $th = $time1->diffInHours($time2);
+                      $tm = $time1->diffInMinutes($time2);
+
+                      // $break_duration = floatval($th.".".$tm);
+
+                      // dd($tm);
+                      // $total_break_hour += $th;
                       $total_break_minutes += $tm;
                       // $total_break_duration += $break_duration;
                     }
                   }
 
-                  // Converts break minutes into hour
+                  // dd($total_break_minutes);
+                  // $the_break_duration = 0;
+                  // // Converts break minutes into hour
+                  // if ($total_break_minutes >= 60) {
+                  //   $the_break_duration = $total_break_minutes / 60;
+                  // }
                   $convert_hour = $total_break_minutes / 60;
                   $total_break_hour += (int)$convert_hour;
                   $total_actual_break_minutes = $total_break_minutes - ((int)$convert_hour * 60);
@@ -386,7 +397,7 @@ class SalaryController extends Controller
             $calculated_salary = ($converted_paid_office_hours * $salary_amount) + ($converted_paid_office_minutes * ($salary_amount/60));
             $absent_days = $days_in_this_month - $total_attendance;
 
-            $hourly_salary_collection->push(new HourlySalary($employee_salary->id, $employee->lastname, $salary_type, $total_paid_office_hours ,(int)$calculated_salary, $employee_salary->currency, $absent_days, $salary_amount));
+            $hourly_salary_collection->push(new HourlySalary($employee_salary->id, $employee->lastname, $salary_type, $total_paid_office_hours ,(int)$calculated_salary, $employee_salary->currency, $total_attendance, $salary_amount));
 
           }
 

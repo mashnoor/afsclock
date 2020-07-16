@@ -49,7 +49,10 @@ class ReportsController extends Controller
 
 		// If there exist search content data only.
 		// Date range data are not available.
-		if($searchContent != "" && $datefrom == "" && $dateto == ""){
+		if($searchContent == "" && $datefrom == "" && $dateto == ""){
+			$searchResults = table::attendance()->get();
+		}
+		elseif($searchContent != "" && $datefrom == "" && $dateto == ""){
 			$searchResults = table::attendance()->where('employee','LIKE','%'.$searchContent.'%')->orWhere('idno','LIKE','%'.$searchContent.'%')->get();
 		}
 		// When all the variable values available, executes this block.
@@ -58,7 +61,7 @@ class ReportsController extends Controller
 		}
 		// Else performs this block.
 		else{
-			$searchResults = table::attendance()->all();
+			$searchResults = table::attendance()->get();
 		}
 
 		return response()->json($searchResults);
